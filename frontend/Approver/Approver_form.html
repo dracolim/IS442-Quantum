@@ -12,7 +12,6 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
 
     <title>Quantum</title>
-
 </head>
 
 <body>
@@ -21,11 +20,11 @@
     <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
         <div class="container flex flex-wrap items-center justify-between mx-auto"
             style="width: 100%; overflow: hidden;">
-            <img src="Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
+            <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
                 style="height: 80px ; width: 200px;" />
 
             <div class="flex md:order-2">
-                <a href="homepage.html" style="margin-right: 10px;">
+                <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
                     <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
                 </a>
 
@@ -89,34 +88,33 @@
             <ul
                 class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                 <li>
-                    <a href="C:\wamp64\www\IS442-Quantum\frontend\Approver_home.html"
+                    <a href="../Approver/Approver_home.html"
                         class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
                         aria-current="page">Home</a>
-                </li>                
+                </li>   
                 <li>
-                    <a href="C:\wamp64\www\IS442-Quantum\frontend\Approver_workflow.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
+                    <a href="../Approver/Approver_workflow.html"
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
                         aria-current="page">Workflows</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="../Approver/Approver_accounts.html"
                         class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                         Accounts</a>
                 </li>
                 <li>
-                    <a href="C:\wamp64\www\IS442-Quantum\frontend\Approver_form.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
+                    <a href="../Approver/Approver_form.html"
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white">
                         Forms</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="../Approver/Approver_approvals.html"
                         class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                         Approvals</a>
                 </li>
             </ul>
         </div>
     </nav>
-
     <!-- Orange Divider -->
     <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
@@ -124,49 +122,93 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
         <table class="w-full text-sm text-left text-gray-500">
             <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                Workflows
+                Forms
                 <p class="mt-1 text-sm font-normal text-gray-500">
-                    <span onclick="document.location = 'Approver_home.html'" class = 'text-sky-600'>Home</span> > Workflows
+                    <span onclick="document.location = 'Approver_home.html'">Home > </span> <span class = 'text-sky-600'>Forms</span>
                 </p>
             </caption>
             <thead class="text-xs text-white uppercase bg-sky-600">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Workflow ID
+                        Form ID
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Workflow Name
+                        Form Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Is Validated
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Date Submitted
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Last Edited
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr onclick="document.location = 'Individual_workflow.html'" class="bg-white border-b ">
+                <tr onclick="document.location = 'Individual_form.html'" class="bg-white border-b ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        WF111
+                        00001
                     </th>
                     <td class="px-6 py-4">
-                        Subcontractors Safety 1
+                        New Vendor Assessment Form
+                    </td>
+                    <td class="px-6 py-4">
+                        Yes
+                    </td>
+                    <td class="px-6 py-4">
+                        1/30/23
+                    </td>
+                    <td class="px-6 py-4">
+                        1/30/23
                     </td>
                 </tr>
                 <tr class="bg-white border-b ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        WF123
+                        00002
                     </th>
                     <td class="px-6 py-4">
-                        Subcontractors Safety 2
+                        New Vendor Assessment Form
+                    </td>
+                    <td class="px-6 py-4">
+                        Yes
+                    </td>
+                    <td class="px-6 py-4">
+                        1/30/23
+                    </td>
+                    <td class="px-6 py-4">
+                        1/30/23
                     </td>
                 </tr>
                 <tr class="bg-white">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        WF112
+                        00003
                     </th>
                     <td class="px-6 py-4">
-                        Subcontractors Safety 3
+                        Health Pre-Evaluation
+                    </td>
+                    <td class="px-6 py-4">
+                        Yes
+                    </td>
+                    <td class="px-6 py-4">
+                        1/1/23
+                    </td>
+                    <td class="px-6 py-4">
+                        1/1/23
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
+    <!-- Button for Creating Form -->
+    <div class="mx-8 mt-3">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Create Form
+        </button>
+    </div>
+
 
 </body>
 
