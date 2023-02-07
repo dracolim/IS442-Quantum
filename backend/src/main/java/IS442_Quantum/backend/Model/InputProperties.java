@@ -12,7 +12,7 @@ public class InputProperties {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer input_id;
+    private Long input_id;
     private String input_type;
     private String attribute_type;
     private String input_label;
