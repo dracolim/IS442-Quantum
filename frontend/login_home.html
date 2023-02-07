@@ -24,13 +24,17 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
+
 </head>
 
 <body>
     <div id="app">
         <div class="text-center mt-24">
             <div class="flex items-center justify-center">
-                <svg fill="none" viewBox="0 0 24 24" class="w-12 h-12 text-blue-500" stroke="currentColor">
+                <img src="Images/Quantum_Logo.jpg" style="height: 80px ; width: 200px;">
+            </div>
+            <div class="flex items-center justify-center">
+                <svg fill="none" viewBox="0 0 24 24" class="w-12 h-12 text-sky-500" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -38,7 +42,7 @@
             <h2 class="text-4xl tracking-tight">
                 Sign in into your account
             </h2>
-            <span class="text-sm">or <a href="#" class="text-blue-500">
+            <span class="text-sm">or <a href="#" class="text-sky-500">
                     register a new account
                 </a>
             </span>
@@ -66,15 +70,19 @@
                             for='Password'>Password</label>
                         <label v-else class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for='Password'>Password</label>
-                        <input v-if="password_error != ''"
-                            class="border-red-500 text-red-900 placeholder-red-200 appearance-none block w-full bg-red-50 text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                            type='email' v-model="email" placeholder="Enter Password" required>
-                        <input v-else
-                            class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                            type='password' v-model="password" placeholder="Enter Password" required>
+                        <div class="relative">
+                            <input v-if="password_error != ''"
+                                class="border-red-500 text-red-900 placeholder-red-200 appearance-none block w-full bg-red-50 text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
+                                type='email' v-model="password" placeholder="Enter Password" required>
+                            <input v-else
+                                class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
+                                type='password' v-model="password" placeholder="Enter Password" required>
+                            
+                        </div>
+
                     </div>
                     <div class="w-full md:w-full px-3 mb-6">
-                        <button @click="checkUser()"
+                        <button @click="checkUser()" style="background-color: #0284c7;"
                             class="appearance-none block w-full bg-blue-600 text-gray-100 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-blue-500 focus:outline-none focus:bg-white focus:border-gray-500">Sign
                             in</button>
                     </div>
@@ -90,7 +98,7 @@
             email: "",
             password: "",
             email_error: "",
-            password_error: "",
+            password_error: ""
         },
         methods: {
             checkUser() {
@@ -104,9 +112,23 @@
                     this.password_error = 'Password is required';
                 }
 
-                if (this.email && this.password){
+                if (this.email && this.password) {
                     // check for user type
-                    
+                    if (this.email.toLowerCase().includes('admin')) {
+                        window.location.assign('http://localhost/IS442-Quantum/frontend/Admin/Admin_home.html');
+                        this.email = "";
+                        this.password = "";
+                    } else if (this.email.toLowerCase().includes('approver')) {
+                        window.location.assign(
+                            'http://localhost/IS442-Quantum/frontend/Approver/Approver_home.html');
+                        this.email = "";
+                        this.password = "";
+                    } else if (this.email.toLowerCase().includes('vendor')) {
+                        window.location.assign(
+                            'http://localhost/IS442-Quantum/frontend/Vendor/Vendor_home.html');
+                        this.email = "";
+                        this.password = "";
+                    }
                 }
             }
         }
