@@ -1,31 +1,29 @@
 package IS442_Quantum.backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
-@AllArgsConstructor
 @Data
 public class InputProperties {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long input_id;
-    private String input_type;
-    private String attribute_type;
-    private String input_label;
-    private Boolean is_required;
+    private Long inputId;
+    private String inputType;
+    private String attribute;
+    private String inputLabel;
+    private Boolean isRequired;
 
     @OneToMany(mappedBy = "inputProperty", cascade = CascadeType.ALL)
-    private ArrayList<FormInput> formInputs;
+    @JsonIgnore
+    private Collection<FormInput> formInputs = new ArrayList<>();
 
-    public InputProperties(String input_type, String attribute_type, String input_label, Boolean is_required, ArrayList<FormInput> formInputs) {
-        this.input_type = input_type;
-        this.attribute_type = attribute_type;
-        this.input_label = input_label;
-        this.is_required = is_required;
-        this.formInputs = formInputs;
-    }
+
+
+
 }

@@ -1,27 +1,27 @@
 package IS442_Quantum.backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @Entity
+@Data
 public class FormInput {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private FormInputId formInputId  = new FormInputId();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
+    @MapsId("formId")
     @JoinColumn(name="form_id")
+    @JsonIgnore
     private Form form;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne
+    @MapsId("inputId")
     @JoinColumn(name="input_id")
     private InputProperties inputProperty;
 
-    private String input_value;
-
+    private String inputValue;
 
 }

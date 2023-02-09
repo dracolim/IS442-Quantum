@@ -3,9 +3,7 @@ package IS442_Quantum.backend.Controller;
 
 import IS442_Quantum.backend.Model.InputProperties;
 import IS442_Quantum.backend.Repository.InputPropertiesRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -24,7 +22,12 @@ public class InputPropertiesController {
     }
 
     @GetMapping("/input_properties/{id}")
-    public Optional<InputProperties> getInputProperties(@PathVariable Long id){
-        return inputPropertiesRepository.findById(id);
+    public InputProperties getInputProperties(@PathVariable Long id){
+        return inputPropertiesRepository.findById(id).orElse(null);
+    }
+
+    @PostMapping(value = "/input_properties")
+    public InputProperties newInputProperties(@RequestBody InputProperties newInputProperties){
+        return inputPropertiesRepository.save(newInputProperties);
     }
 }
