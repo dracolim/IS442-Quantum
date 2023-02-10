@@ -22,218 +22,347 @@
 </head>
 
 <body>
+    <div id="app">
 
-    <!-- header -->
-    <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
-        <div class="container flex flex-wrap items-center justify-between mx-auto"
-            style="width: 100%; overflow: hidden;">
-            <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
-                style="height: 80px ; width: 200px;" />
+        <!-- header -->
+        <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
+            <div class="container flex flex-wrap items-center justify-between mx-auto"
+                style="width: 100%; overflow: hidden;">
+                <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
+                    style="height: 80px ; width: 200px;" />
 
-            <div class="flex md:order-2">
-                <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
-                    <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
-                </a>
-
-                <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
-                    class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-sky-600  md:mr-0"
-                    type="button">
-                    <span class="sr-only">Open user menu</span>
-                    <a class='mr-2'>
-                        <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40" height="40">
+                <div class="flex md:order-2">
+                    <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
+                        <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
                         </iconify-icon>
                     </a>
-                    Tim Klemmer
-                    <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
 
-                <!-- Dropdown menu -->
-                <div id="dropdownAvatarName"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
-                    <div class="px-4 py-3 text-sm text-gray-900 ">
-                        <div class="font-bold">Approver</div>
-                        <div class="truncate">Tim.Klemmer@quantum.com</div>
+                    <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
+                        class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-sky-600  md:mr-0"
+                        type="button">
+                        <span class="sr-only">Open user menu</span>
+                        <a class='mr-2'>
+                            <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40"
+                                height="40">
+                            </iconify-icon>
+                        </a>
+                        Tim Klemmer
+                        <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdownAvatarName"
+                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
+                        <div class="px-4 py-3 text-sm text-gray-900 ">
+                            <div class="font-bold">Approver</div>
+                            <div class="truncate">Tim.Klemmer@quantum.com</div>
+                        </div>
+                        <ul class="py-2 text-sm text-gray-700 "
+                            aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
+                            </li>
+                        </ul>
+                        <div class="py-2">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                                out</a>
+                        </div>
                     </div>
-                    <ul class="py-2 text-sm text-gray-700 "
-                        aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
-                        </li>
-                    </ul>
-                    <div class="py-2">
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
-                            out</a>
+
+                    <button data-collapse-toggle="navbar-sticky" type="button"
+                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+                        aria-controls="navbar-cta" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="bg-gray-100">
+            <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
+                style="width: 100%; overflow: hidden;">
+                <ul
+                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
+                    <li>
+                        <a href="../Approver/Approver_home.html"
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
+                            aria-current="page">Home</a>
+                    </li>
+                    <a href="../Approver/Approver_workflow.html"
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
+                        aria-current="page">Workflows</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_accounts.html"
+                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
+                            aria-current="page">Accounts</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_form.html"
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
+                            Forms</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_approvals.html"
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
+                            Approvals</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Orange Divider -->
+        <div class='row' style='height: 8px; background-color: #0284c7'></div>
+
+        <!-- Table -->
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
+            <table class="w-full text-sm text-left text-gray-500">
+                <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
+                    Accounts
+                    <p class="mt-1 text-sm font-normal text-gray-500">
+                        <span onclick="document.location = 'Approver_home.html'">Home > </span> <span
+                            class='text-sky-600'>Accounts</span>
+                    </p>
+                </caption>
+                <thead class="text-xs text-white uppercase bg-sky-600">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Vendor ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Workflow ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Workflow Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Workflow Completion
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Last Submitted
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Workflow Deadline
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-b ">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            V001
+                        </th>
+                        <td class="px-6 py-4">
+                            WF111
+                        </td>
+                        <td class="px-6 py-4">
+                            Subcontractors Safety
+                        </td>
+                        <td class="px-6 py-4">
+                            1/2
+                        </td>
+                        <td class="px-6 py-4">
+                            1/30/23
+                        </td>
+                        <td class="px-6 py-4">
+                            2/2/23
+                        </td>
+                        <td class="px-6 py-4 text-red-600">
+                            Incomplete
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b ">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            V002
+                        </th>
+                        <td class="px-6 py-4">
+                            WF123
+                        </td>
+                        <td class="px-6 py-4">
+                            Subcontractors Safety
+                        </td>
+                        <td class="px-6 py-4">
+                            1/2
+                        </td>
+                        <td class="px-6 py-4">
+                            1/2/23
+                        </td>
+                        <td class="px-6 py-4">
+                            2/2/23
+                        </td>
+                        <td class="px-6 py-4 text-red-600">
+                            Incomplete
+                        </td>
+                    </tr>
+                    <tr class="bg-white">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            V003
+                        </th>
+                        <td class="px-6 py-4">
+                            WF112
+                        </td>
+                        <td class="px-6 py-4">
+                            Subcontractors Safety
+                        </td>
+                        <td class="px-6 py-4">
+                            2/2
+                        </td>
+                        <td class="px-6 py-4">
+                            1/1/23
+                        </td>
+                        <td class="px-6 py-4">
+                            2/2/23
+                        </td>
+                        <td class="px-6 py-4 text-green-600">
+                            Completed
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Button for Creating Form -->
+        <div class="mx-8 mt-3">
+            <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                class="text-white bg-sky-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Create
+                Account</button>
+        </div>
+
+        <!-- Main modal -->
+        <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+            <div class="relative w-full h-full max-w-md md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                        data-modal-hide="authentication-modal">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="px-6 py-6 lg:px-8">
+                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create an Account</h3>
+                        <form class="space-y-6" action="#">
+                            <div>
+                                <label for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company's
+                                    Name</label>
+                                <input type="name" name="name" id="name" v-model = "name"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="registration"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company's
+                                    Registration No</label>
+                                <input type="registration" name="registration" id="registration" v-model = "registration"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="office_address"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Office Address</label>
+                                <input type="office_address" name="office_address" id="office_address" v-model = "office_address"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="office_address"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tel</label>
+                                <input type="office_address" name="office_address" id="office_address" v-model = "office_address"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="office_address"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fax</label>
+                                <input type="office_address" name="office_address" id="office_address" v-model = "office_address"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    required>
+                            </div>
+                            <button id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                type="button">GST Registered<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none"
+                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7"></path>
+                                </svg></button>
+                            <!-- DROPDOWN for GST Registered -->
+                            <div id="dropdownDefaultRadio"
+                                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
+                                <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
+                                    aria-labelledby="dropdownRadioButton">
+                                    <li>
+                                        <div class="flex items-center">
+                                            <input id="default-radio-1" type="radio" value="Yes" name="default-radio"
+                                                v-model="gstRegistered" 
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="default-radio-1"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="flex items-center">
+                                            <input checked id="default-radio-2" type="radio" value="No" v-model = "gstRegistered"
+                                                name="default-radio"
+                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                            <label for="default-radio-2"
+                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <button type="submit" @click ="createAcc"
+                                class="w-80 text-white bg-sky-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Done</button>
+
+                        </form>
                     </div>
                 </div>
-
-                <button data-collapse-toggle="navbar-sticky" type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
-                    aria-controls="navbar-cta" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
             </div>
         </div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="bg-gray-100">
-        <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
-            style="width: 100%; overflow: hidden;">
-            <ul
-                class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
-                <li>
-                    <a href="../Approver/Approver_home.html"
-                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
-                    aria-current="page">Home</a>
-                </li>               
-                    <a href="../Approver/Approver_workflow.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
-                        aria-current="page">Workflows</a>
-                </li>
-                <li>
-                    <a href="../Approver/Approver_accounts.html"
-                    class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
-                    aria-current="page">Accounts</a>
-                </li>
-                <li>
-                    <a href="../Approver/Approver_form.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Forms</a>
-                </li>
-                <li>
-                    <a href="../Approver/Approver_approvals.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Approvals</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Orange Divider -->
-    <div class='row' style='height: 8px; background-color: #0284c7'></div>
-
-    <!-- Table -->
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
-        <table class="w-full text-sm text-left text-gray-500">
-            <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                Accounts
-                <p class="mt-1 text-sm font-normal text-gray-500">
-                    <span onclick="document.location = 'Approver_home.html'">Home > </span> <span class = 'text-sky-600'>Accounts</span>
-                </p>
-            </caption>
-            <thead class="text-xs text-white uppercase bg-sky-600">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Vendor ID
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Workflow ID
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Workflow Name
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Workflow Completion
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Last Submitted
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Workflow Deadline
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Status
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-white border-b ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        V001
-                    </th>
-                    <td class="px-6 py-4">
-                        WF111
-                    </td>
-                    <td class="px-6 py-4">
-                        Subcontractors Safety
-                    </td>
-                    <td class="px-6 py-4">
-                        1/2
-                    </td>
-                    <td class="px-6 py-4">
-                        1/30/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2/23
-                    </td>
-                    <td class="px-6 py-4 text-red-600">
-                        Incomplete
-                    </td>
-                </tr>
-                <tr class="bg-white border-b ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        V002
-                    </th>
-                    <td class="px-6 py-4">
-                        WF123
-                    </td>
-                    <td class="px-6 py-4">
-                        Subcontractors Safety
-                    </td>
-                    <td class="px-6 py-4">
-                        1/2
-                    </td>
-                    <td class="px-6 py-4">
-                        1/2/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2/23
-                    </td>
-                    <td class="px-6 py-4 text-red-600">
-                        Incomplete
-                    </td>
-                </tr>
-                <tr class="bg-white">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        V003
-                    </th>
-                    <td class="px-6 py-4">
-                        WF112
-                    </td>
-                    <td class="px-6 py-4">
-                        Subcontractors Safety
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2
-                    </td>
-                    <td class="px-6 py-4">
-                        1/1/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2/23
-                    </td>
-                    <td class="px-6 py-4 text-green-600">
-                        Completed
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
 </body>
+
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            gstRegistered: '',
+            office_address: '',
+            registration: '',
+            name: '',
+            tel: "",
+            fax: "",
+        },
+        methods: {
+            createAcc(){
+                console.log(this.gstRegistered);
+            }
+        }
+    })
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
