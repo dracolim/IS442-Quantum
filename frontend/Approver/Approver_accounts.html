@@ -267,7 +267,7 @@
                                 <label for="name"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company's
                                     Name</label>
-                                <input type="name" name="name" id="name" v-model = "name"
+                                <input type="name" name="name" id="name" v-model="name"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     required>
                             </div>
@@ -275,30 +275,36 @@
                                 <label for="registration"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company's
                                     Registration No</label>
-                                <input type="registration" name="registration" id="registration" v-model = "registration"
+                                <input type="registration" name="registration" id="registration" v-model="registration"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     required>
                             </div>
                             <div>
                                 <label for="office_address"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Office Address</label>
-                                <input type="office_address" name="office_address" id="office_address" v-model = "office_address"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Office
+                                    Address</label>
+                                <input type="office_address" name="office_address" id="office_address"
+                                    v-model="office_address"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                                     required>
                             </div>
-                            <div>
-                                <label for="office_address"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tel</label>
-                                <input type="office_address" name="office_address" id="office_address" v-model = "office_address"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="office_address"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fax</label>
-                                <input type="office_address" name="office_address" id="office_address" v-model = "office_address"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    required>
+                            <div class="row">
+                                <div>
+                                    <label for="office_address"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tel</label>
+                                    <input type="office_address" name="office_address" id="office_address"
+                                        v-model="office_address"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                        required>
+                                </div>
+                                <div>
+                                    <label for="office_address"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fax</label>
+                                    <input type="office_address" name="office_address" id="office_address"
+                                        v-model="office_address"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                        required>
+                                </div>
                             </div>
                             <button id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -315,7 +321,7 @@
                                     <li>
                                         <div class="flex items-center">
                                             <input id="default-radio-1" type="radio" value="Yes" name="default-radio"
-                                                v-model="gstRegistered" 
+                                                v-model="gstRegistered"
                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                             <label for="default-radio-1"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
@@ -323,8 +329,8 @@
                                     </li>
                                     <li>
                                         <div class="flex items-center">
-                                            <input checked id="default-radio-2" type="radio" value="No" v-model = "gstRegistered"
-                                                name="default-radio"
+                                            <input checked id="default-radio-2" type="radio" value="No"
+                                                v-model="gstRegistered" name="default-radio"
                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                             <label for="default-radio-2"
                                                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
@@ -333,7 +339,7 @@
                                 </ul>
                             </div>
 
-                            <button type="submit" @click ="createAcc"
+                            <button type="submit" @click="createAcc"
                                 class="w-80 text-white bg-sky-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Done</button>
 
                         </form>
@@ -357,7 +363,7 @@
             fax: "",
         },
         methods: {
-            createAcc(){
+            createAcc() {
                 console.log(this.gstRegistered);
             }
         }
