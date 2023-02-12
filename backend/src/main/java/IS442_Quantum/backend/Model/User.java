@@ -3,11 +3,13 @@ import IS442_Quantum.backend.Enums.UserTypes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @AllArgsConstructor
+@NoArgsConstructor
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,15 +18,4 @@ public abstract class User {
     private String userName;
     private String emailAddress;
     private String password;
-
-    public User(){
-    }
-
-    public User(UserTypes userType, String userName, String emailAddress, String password) {
-        this.userType = userType;
-        this.userName = userName;
-        this.emailAddress = emailAddress;
-        this.password = password;
-    }
-
 }
