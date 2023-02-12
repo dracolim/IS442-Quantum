@@ -1,9 +1,7 @@
 package IS442_Quantum.backend.Repository;
 
 import IS442_Quantum.backend.Model.User;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@NoRepositoryBean
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends JpaRepository<User, Long> {
 }
