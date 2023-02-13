@@ -6,8 +6,10 @@ import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Repository.FormRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class FormService {
@@ -38,5 +40,10 @@ public class FormService {
     public Collection<Form> getAllForm(){
         return formRepository.findAll();
     }
+
+    public Optional<Form> getFormById(Long id){
+        return formRepository.findById(id);
+    }
+
 
 }

@@ -20,9 +20,6 @@ public class FormController {
     @Autowired
     private final FormService formService;
 
-    @Autowired
-    private final FormRepository formRepository;
-
     @GetMapping("/forms")
     public ResponseEntity<?> getAll() {
         return new ResponseEntity<>(formService.getAllForm(), HttpStatus.OK);
@@ -30,7 +27,7 @@ public class FormController {
 
     @GetMapping("/form/{id}")
     public Optional<Form>getForm(@PathVariable Long id){
-        return formRepository.findById(id);
+        return formService.getFormById(id);
     }
 
     @PostMapping(value = "/form")
