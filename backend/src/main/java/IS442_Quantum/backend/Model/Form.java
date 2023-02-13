@@ -1,15 +1,16 @@
 package IS442_Quantum.backend.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 import lombok.*;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Form {
 
     @Id
@@ -20,6 +21,10 @@ public class Form {
     private Date lastEdited;
 
     @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
-    private Collection<FormInput> formInputs = new ArrayList<>();
+    private Collection<FormQuestionnaire> formQuestionnaires = new ArrayList<>();
 
+    public void addFormQuestionnaire(FormQuestionnaire fq){
+        formQuestionnaires.add(fq);
+        fq.setForm(this);
+    }
 }

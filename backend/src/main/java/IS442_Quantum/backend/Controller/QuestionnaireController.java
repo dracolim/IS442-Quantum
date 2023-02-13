@@ -1,33 +1,31 @@
 package IS442_Quantum.backend.Controller;
 
 
-import IS442_Quantum.backend.Model.Questionnaires;
-import IS442_Quantum.backend.Repository.QuestionnairesRepository;
-import IS442_Quantum.backend.Service.QuestionnairesService;
-import org.springframework.beans.factory.annotation.Autowired;
+import IS442_Quantum.backend.Model.Questionnaire;
+import IS442_Quantum.backend.Service.QuestionnaireService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class QuestionnairesController {
+public class QuestionnaireController {
 
-    private final QuestionnairesService questionnairesService;
+    private final QuestionnaireService questionnaireService;
 
-    public QuestionnairesController(QuestionnairesService questionnairesService){
-        this.questionnairesService = questionnairesService;
+    public QuestionnaireController(QuestionnaireService questionnaireService){
+        this.questionnaireService = questionnaireService;
     }
 
     @GetMapping("/questionnaires")
-    public Iterable<Questionnaires>getAllQuestionnaires() {
-        return questionnairesService.getAllQuestionnaires();
+    public Iterable<Questionnaire>getAllQuestionnaires() {
+        return questionnaireService.getAllQuestionnaires();
     }
 
-    @GetMapping("/questionnaires/{id}")
-    public Questionnaires findByInputId(@PathVariable Long id){
-        return questionnairesService.findByQId(id);
+    @GetMapping("/questionnaire/{id}")
+    public Questionnaire findByInputId(@PathVariable Long id){
+        return questionnaireService.findByQuestionnaireId(id);
     }
 
-    @PostMapping(value = "/questionnaires")
-    public Questionnaires newInputProperties(@RequestBody Questionnaires newQuestionnaires){
-        return questionnairesService.createNewQuestionnaires(newQuestionnaires);
+    @PostMapping(value = "/questionnaire")
+    public Questionnaire newInputProperties(@RequestBody Questionnaire newQuestionnaire){
+        return questionnaireService.createNewQuestionnaires(newQuestionnaire);
     }
 }
