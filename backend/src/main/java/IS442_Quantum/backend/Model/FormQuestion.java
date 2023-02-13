@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @Data
 @NoArgsConstructor
-public class FormQuestionnaire {
+public class FormQuestion {
 
     @EmbeddedId
     private FormQId formQId = new FormQId();
@@ -19,14 +19,14 @@ public class FormQuestionnaire {
     private Form form;
 
     @ManyToOne
-    @MapsId("questionnaireId")
-    @JoinColumn(name="questionnaire_id")
-    private Questionnaire questionnaire;
+    @MapsId("questionId")
+    @JoinColumn(name="question_id")
+    private Question question;
 
     private String inputValue;
 
-    public FormQuestionnaire(Questionnaire questionnaire) {
-        this.questionnaire = questionnaire;
+    public FormQuestion(Question question) {
+        this.question = question;
     }
 
 

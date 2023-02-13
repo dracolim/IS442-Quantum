@@ -21,10 +21,10 @@ public class Form {
     private Date lastEdited;
 
     @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
-    private Collection<FormQuestionnaire> formQuestionnaires = new ArrayList<>();
+    private Collection<FormQuestion> formQuestions = new ArrayList<>();
 
-    public void addFormQuestionnaire(FormQuestionnaire fq){
-        formQuestionnaires.add(fq);
+    public void addFormQuestionnaire(FormQuestion fq){
+        formQuestions.add(fq);
         fq.setForm(this);
     }
 }

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class QuestionnaireList {
+public class QuestionProperty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,20 +17,20 @@ public class QuestionnaireList {
     private String label;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="questionnaire_id")
+    @JoinColumn(name="question_id")
     @JsonIgnore
-    private Questionnaire questionnaire;
+    private Question question;
 
 
-    public QuestionnaireList(String label) {
+    public QuestionProperty(String label) {
         this.label = label;
     }
 
     @Override
     public boolean equals(Object o){
         if (this == o) return true;
-        if (!(o instanceof QuestionnaireList)) return false;
-        return id != null && id.equals(((QuestionnaireList) o).getId());
+        if (!(o instanceof QuestionProperty)) return false;
+        return id != null && id.equals(((QuestionProperty) o).getId());
     }
 
     @Override
