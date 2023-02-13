@@ -8,7 +8,7 @@ import java.util.Objects;
 
 @Data
 @Embeddable
-public class FormInputId implements Serializable {
+public class FormQuestionnairesId implements Serializable {
 
     private Long formId;
     private Long inputId;
@@ -16,8 +16,8 @@ public class FormInputId implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FormInputId)) return false;
-        FormInputId that = (FormInputId) o;
+        if (!(o instanceof FormQuestionnairesId)) return false;
+        FormQuestionnairesId that = (FormQuestionnairesId) o;
         return getFormId().equals(that.getFormId()) && getInputId().equals(that.getInputId());
     }
 

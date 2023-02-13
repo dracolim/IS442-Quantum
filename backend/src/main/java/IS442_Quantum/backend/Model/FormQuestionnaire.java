@@ -6,10 +6,10 @@ import lombok.*;
 
 @Entity
 @Data
-public class FormInput {
+public class FormQuestionnaires {
 
     @EmbeddedId
-    private FormInputId formInputId  = new FormInputId();
+    private FormQId formQId = new FormQId();
 
     @ManyToOne
     @MapsId("formId")
@@ -18,9 +18,9 @@ public class FormInput {
     private Form form;
 
     @ManyToOne
-    @MapsId("inputId")
-    @JoinColumn(name="input_id")
-    private InputProperties inputProperty;
+    @MapsId("qId")
+    @JoinColumn(name="questionnaires_id")
+    private Questionnaires questionnaires;
 
     private String inputValue;
 

@@ -9,19 +9,19 @@ import java.util.Collection;
 
 @Entity
 @Data
-public class InputProperties {
+public class Questionnaires {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long inputId;
+    private Long questionnairesId;
     private String inputType;
     private String attribute;
     private String inputLabel;
     private Boolean isRequired;
 
-    @OneToMany(mappedBy = "inputProperty", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "questionnaires", cascade = CascadeType.ALL)
     @JsonIgnore
-    private Collection<FormInput> formInputs = new ArrayList<>();
+    private Collection<FormQuestionnaires> formQuestionnaires = new ArrayList<>();
 
 
 
