@@ -1,4 +1,5 @@
-delete from user;
+DELETE FROM USER;
+
 -- insert Vendor rows
 insert into user (user_id, user_type, email_address, password, user_name, business_type, company_name, evaluation_id, office_address, office_fax, office_tel, registration_no)
     values ("1","VENDOR", "john.doe@gmail.com", "1234567", "johnDoe", "private", "Apple", "654321", "1 Infinite Loop ", "12345678", "12345678", "2");

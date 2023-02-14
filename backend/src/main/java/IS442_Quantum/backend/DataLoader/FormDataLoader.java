@@ -25,6 +25,11 @@ public class FormDataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) {
 
+
+        // clear table
+        formRepository.deleteAll();
+        questionRepository.deleteAll();
+
         Question q1 = new Question();
         q1.setInputLabel("Company's Name");
         q1.setInputType("text");
@@ -70,7 +75,6 @@ public class FormDataLoader implements ApplicationRunner {
         q7.addList(new QuestionProperty("Distributor"));
         q7.addList(new QuestionProperty("Others"));
 
-
         Question q7a = new Question();
         q7a.setInputLabel("Nature of Business (others)");
         q7a.setInputType("text");
@@ -87,8 +91,6 @@ public class FormDataLoader implements ApplicationRunner {
         q9.setIsRequired(true);
         q9.addList(new QuestionProperty("Yes"));
         q9.addList(new QuestionProperty("No"));
-
-
 
         Question q9a = new Question();
         q9a.setInputLabel("Certification Body");

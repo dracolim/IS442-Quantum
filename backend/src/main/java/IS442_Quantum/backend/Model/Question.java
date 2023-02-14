@@ -21,7 +21,7 @@ public class Question {
     private String inputLabel;
     private Boolean isRequired;
 
-    @OneToMany(mappedBy ="question", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy ="question", cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<QuestionProperty> questionProperties = new ArrayList<>();
 
