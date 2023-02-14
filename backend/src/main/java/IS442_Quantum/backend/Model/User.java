@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="userType")
-//@NamedQuery(name = "User.findByUserType", query = "SELECT * FROM User u WHERE u.userType = :userType")
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "userId")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "userType", insertable = false, updatable = false)
     private UserTypes userType;

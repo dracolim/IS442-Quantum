@@ -2,6 +2,7 @@ package IS442_Quantum.backend.Controller;
 
 import IS442_Quantum.backend.Enums.UserTypes;
 import IS442_Quantum.backend.Model.User;
+import IS442_Quantum.backend.Model.Vendor;
 import IS442_Quantum.backend.Service.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,8 +46,8 @@ public class UserController {
         }
     }
 
-    @PostMapping("/")
-    public User createUser(@RequestBody User user){
-        return userService.createUser(user);
+    @PostMapping("/vendor")
+    public Vendor createVendor(@RequestBody Vendor vendor){
+        return userService.createVendor(vendor);
     }
 }

@@ -2,6 +2,7 @@ package IS442_Quantum.backend.Service.Implementation;
 
 import IS442_Quantum.backend.Enums.UserTypes;
 import IS442_Quantum.backend.Model.User;
+import IS442_Quantum.backend.Model.Vendor;
 import IS442_Quantum.backend.Repository.UserRepository;
 import IS442_Quantum.backend.Service.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +17,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public User createUser(User user){
-        return userRepository.save(user);
+    public Vendor createVendor(Vendor vendor){
+        return userRepository.save(vendor);
     }
 
     @Override
