@@ -89,29 +89,24 @@
             <ul
                 class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                 <li>
-                    <a href="C:\wamp64\www\IS442-Quantum\frontend\Approver_home.html"
+                    <a href="Approver\Approver_home.html"
                         class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
                         aria-current="page">Home</a>
                 </li>                
                 <li>
-                    <a href="C:\wamp64\www\IS442-Quantum\frontend\Approver_workflow.html"
+                    <a href="Approver\Approver_workflow.html"
                         class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
                         aria-current="page">Workflows</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="Approver\Approver_accounts.html"
                         class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                         Accounts</a>
                 </li>
                 <li>
-                    <a href="C:\wamp64\www\IS442-Quantum\frontend\Approval_form.html"
+                    <a href="Approver\Approver_form.html"
                         class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                         Forms</a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Approvals</a>
                 </li>
             </ul>
         </div>
@@ -124,90 +119,63 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
         <table class="w-full text-sm text-left text-gray-500">
             <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                Individual Workflow
+                Forms Belonging to Workflow [ID]
                 <p class="mt-1 text-sm font-normal text-gray-500">
-                    <span onclick="document.location = 'Approver_workflow.html'" class = 'text-sky-600'>Workflows</span> > Individual Workflow
+                    <span onclick="document.location = 'approver/Approver_workflow.html'" class = 'text-sky-600'>Workflows</span> > Forms Belonging to Workflow [ID]
                 </p>
             </caption>
             <thead class="text-xs text-white uppercase bg-sky-600">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Workflow ID
+                        Form ID
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Admin ID
+                        Form Name
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Vendor ID
+                        Is Validated
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Workflow Name
+                        Date Submitted
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Date Assigned
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Deadline
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Last Submitted
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Is Validated?
+                        Last Edited
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="bg-white border-b ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        WF111
+                        00001
                     </th>
                     <td class="px-6 py-4">
-                        A0001
-                    </td>
-                    <td class="px-6 py-4">
-                        V0001
-                    </td>
-                    <td class="px-6 py-4">
-                        Subcontractors Safety 1
-                    </td>
-                    <td class="px-6 py-4">
-                        1/30/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2/23
-                    </td>
-                    <td class="px-6 py-4">
-                        1/30/23
+                        New Vendor Assessment Form
                     </td>
                     <td class="px-6 py-4">
                         Yes
+                    </td>
+                    <td class="px-6 py-4">
+                        1/30/23
+                    </td>
+                    <td class="px-6 py-4">
+                        1/30/23
                     </td>
                 </tr>
                 <tr class="bg-white border-b ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        WF111
+                        00002
                     </th>
                     <td class="px-6 py-4">
-                        A0002
-                    </td>
-                    <td class="px-6 py-4">
-                        V0002
-                    </td>
-                    <td class="px-6 py-4">
-                        Subcontractors Safety 1
-                    </td>
-                    <td class="px-6 py-4">
-                        2/10/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/28/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/10/23
+                        Health Pre-Evaluation Form
                     </td>
                     <td class="px-6 py-4">
                         Yes
+                    </td>
+                    <td class="px-6 py-4">
+                        1/1/23
+                    </td>
+                    <td class="px-6 py-4">
+                        1/1/23
                     </td>
                 </tr>
             </tbody>
