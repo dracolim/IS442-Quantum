@@ -1,5 +1,6 @@
 package IS442_Quantum.backend.Service.Implementation;
 
+import IS442_Quantum.backend.Enums.UserTypes;
 import IS442_Quantum.backend.Model.User;
 import IS442_Quantum.backend.Repository.UserRepository;
 import IS442_Quantum.backend.Service.services.UserService;
@@ -34,9 +35,15 @@ public class UserServiceImpl implements UserService {
        return userRepository.findById(id);
     }
 
+
     @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<User> findByUserType(UserTypes userType) {
+        return userRepository.findByUserType(userType);
     }
 
 }

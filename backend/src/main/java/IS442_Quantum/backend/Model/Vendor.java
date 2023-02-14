@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@DiscriminatorValue("VENDOR")
 public class Vendor extends User{
     private String companyName;
     private String officeAddress;

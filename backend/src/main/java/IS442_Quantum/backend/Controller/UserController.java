@@ -1,7 +1,7 @@
 package IS442_Quantum.backend.Controller;
 
+import IS442_Quantum.backend.Enums.UserTypes;
 import IS442_Quantum.backend.Model.User;
-import IS442_Quantum.backend.Model.Vendor;
 import IS442_Quantum.backend.Service.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +31,17 @@ public class UserController {
             return new ResponseEntity<>(user.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Write a GetMapping to get all users by user type
+    @GetMapping("/userType/{userType}")
+    public ResponseEntity<List<User>> getAllUsersByUserType(@PathVariable UserTypes userType){
+        List<User> users = userService.findByUserType(userType);
+        if (users.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(users, HttpStatus.OK);
         }
     }
 
