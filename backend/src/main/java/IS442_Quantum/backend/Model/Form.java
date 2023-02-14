@@ -20,7 +20,7 @@ public class Form {
     private Date dateSubmitted;
     private Date lastEdited;
 
-    @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
+    @OneToMany(mappedBy="form", cascade={CascadeType.ALL}, orphanRemoval = true)
     private Collection<FormQuestion> formQuestions = new ArrayList<>();
 
     public void addFormQuestionnaire(FormQuestion fq){

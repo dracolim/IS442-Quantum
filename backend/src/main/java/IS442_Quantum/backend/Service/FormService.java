@@ -4,7 +4,6 @@ import IS442_Quantum.backend.Model.Form;
 import IS442_Quantum.backend.Model.FormQuestion;
 import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Repository.FormRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -13,11 +12,14 @@ import java.util.Optional;
 @Service
 public class FormService {
 
-    @Autowired
     private FormRepository formRepository;
 
-    @Autowired
     private QuestionService questionService;
+
+    public FormService(FormRepository formRepository, QuestionService questionService) {
+        this.formRepository = formRepository;
+        this.questionService = questionService;
+    }
 
     public Form createNewForm(Form form){
         Form newForm = new Form();
@@ -25,14 +27,16 @@ public class FormService {
         newForm.setDateSubmitted(form.getDateSubmitted());
         newForm.setLastEdited(form.getLastEdited());
         newForm.getFormQuestions().addAll(form.getFormQuestions().stream().map(formQuestion -> {
-            Question question = questionService.findByQuestionnaireId(formQuestion.getQuestion().getQuestionId());
-            FormQuestion newFormQuestion = new FormQuestion();
-            newFormQuestion.setForm(newForm);
-            newFormQuestion.setQuestion(question);
-            newFormQuestion.setInputValue(formQuestion.getInputValue());
-            return newFormQuestion;
-        }).toList()
-        );
+            if (formQuestion.getQuestion().getQuestionId()==null){
+                questionService.createNewQuestion(formQuestion.getQuestion());
+            }
+                Question question = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
+                FormQuestion newFormQuestion = new FormQuestion();
+                newFormQuestion.setForm(newForm);
+                newFormQuestion.setQuestion(question);
+                newFormQuestion.setInputValue(formQuestion.getInputValue());
+                return newFormQuestion;
+        }).toList());
         return formRepository.save(newForm);
     }
 
@@ -42,6 +46,14 @@ public class FormService {
 
     public Optional<Form> getFormById(Long id){
         return formRepository.findById(id);
+    }
+
+    public void deleteFormById(Long id){
+        formRepository.deleteById(id);
+    }
+
+    public boolean checkFormById(Long id){
+        return formRepository.existsById(id);
     }
 
 
