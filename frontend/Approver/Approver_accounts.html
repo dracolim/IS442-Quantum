@@ -16,6 +16,23 @@
     <!-- VUE 2 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- tailwind elements -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
 
     <title>Quantum</title>
 
@@ -92,29 +109,29 @@
         <!-- Navbar -->
         <nav class="bg-gray-100">
             <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
-            style="width: 100%; overflow: hidden;">
-            <ul
-                class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
-                <li>
-                    <a href="../Approver/Approver_home.html"
-                        class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                        aria-current="page">Home</a>
-                </li>   
-                <li>
-                    <a href="../Approver/Approver_workflow.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                        aria-current="page">Workflows</a>
-                </li>
-                <li>
-                    <a href="../Approver/Approver_accounts.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white">
-                        Accounts</a>
-                </li>
-                <li>
-                    <a href="../Approver/Approver_form.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Forms</a>
-                </li>
+                style="width: 100%; overflow: hidden;">
+                <ul
+                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
+                    <li>
+                        <a href="../Approver/Approver_home.html"
+                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
+                            aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_workflow.html"
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
+                            aria-current="page">Workflows</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_accounts.html"
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white">
+                            Accounts</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_form.html"
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
+                            Forms</a>
+                    </li>
         </nav>
 
         <!-- Orange Divider -->
@@ -126,7 +143,8 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Accounts
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span class='text-sky-600' onclick="document.location = 'Approver_home.html'">Home > </span> <span>Accounts</span>
+                        <span class='text-sky-600' onclick="document.location = 'Approver_home.html'">Home > </span>
+                        <span>Accounts</span>
                     </p>
                 </caption>
                 <thead class="text-xs text-white uppercase bg-sky-600">
@@ -232,11 +250,187 @@
         <!-- Button for Creating Form -->
         <div class="mx-8 mt-3">
             <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                class="text-white bg-sky-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Create
+                class="text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Create
                 Account</button>
+            <button type="button"
+                class="inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                data-bs-toggle="modal" data-bs-target="#exampleModalScrollable">
+                Create Account
+            </button>
         </div>
 
-        <!-- Main modal -->
+        <!-- Modal -->
+        <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
+            id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-scrollable relative w-auto pointer-events-none">
+                <div
+                    class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
+                    <div
+                        class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
+                        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
+                            Create Account
+                        </h5>
+                        <button type="button" data-bs-dismiss="modal"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
+                            <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body relative p-4">
+                        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
+                                <div class="lg:col-span-2">
+                                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                        <div class="md:col-span-5">
+                                            <label for="full_name">Full Name</label>
+                                            <input type="text" name="full_name" id="full_name"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                        </div>
+
+                                        <div class="md:col-span-5">
+                                            <label for="email">Email Address</label>
+                                            <input type="text" name="email" id="email"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                placeholder="email@domain.com" />
+                                        </div>
+
+                                        <div class="md:col-span-3">
+                                            <label for="address">Address / Street</label>
+                                            <input type="text" name="address" id="address"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                placeholder="" />
+                                        </div>
+
+                                        <div class="md:col-span-2">
+                                            <label for="city">City</label>
+                                            <input type="text" name="city" id="city"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                placeholder="" />
+                                        </div>
+
+                                        <div class="md:col-span-2">
+                                            <label for="country">Country / region</label>
+                                            <div
+                                                class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                                <input name="country" id="country" placeholder="Country"
+                                                    class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                                                    value="" />
+                                                <button tabindex="-1"
+                                                    class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                                    <svg class="w-4 h-4 mx-2 fill-current"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                    </svg>
+                                                </button>
+                                                <button tabindex="-1" for="show_more"
+                                                    class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                                    <svg class="w-4 h-4 mx-2 fill-current"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <polyline points="18 15 12 9 6 15"></polyline>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="md:col-span-2">
+                                            <label for="state">State / province</label>
+                                            <div
+                                                class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                                <input name="state" id="state" placeholder="State"
+                                                    class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                                                    value="" />
+                                                <button tabindex="-1"
+                                                    class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                                    <svg class="w-4 h-4 mx-2 fill-current"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                                    </svg>
+                                                </button>
+                                                <button tabindex="-1" for="show_more"
+                                                    class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                                    <svg class="w-4 h-4 mx-2 fill-current"
+                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round">
+                                                        <polyline points="18 15 12 9 6 15"></polyline>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="md:col-span-1">
+                                            <label for="zipcode">Zipcode</label>
+                                            <input type="text" name="zipcode" id="zipcode"
+                                                class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                placeholder="" value="" />
+                                        </div>
+
+                                        <div class="md:col-span-5">
+                                            <div class="inline-flex items-center">
+                                                <input type="checkbox" name="billing_same" id="billing_same"
+                                                    class="form-checkbox" />
+                                                <label for="billing_same" class="ml-2">My billing address is different
+                                                    than above.</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="md:col-span-2">
+                                            <label for="soda">How many soda pops?</label>
+                                            <div
+                                                class="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                                <button tabindex="-1" for="show_more"
+                                                    class="cursor-pointer outline-none focus:outline-none border-r border-gray-200 transition-all text-gray-500 hover:text-blue-600">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2"
+                                                        viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </button>
+                                                <input name="soda" id="soda" placeholder="0"
+                                                    class="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent"
+                                                    value="0" />
+                                                <button tabindex="-1" for="show_more"
+                                                    class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-500 hover:text-blue-600">
+                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                        class="h-4 w-4 mx-2 fill-current" viewBox="0 0 20 20"
+                                                        fill="currentColor">
+                                                        <path fill-rule="evenodd"
+                                                            d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                        <button type="button" data-bs-dismiss="modal"
+                            class="inline-block px-6 py-2.5 bg-sky-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- old modal -->
         <div id="authentication-modal" tabindex="-1" aria-hidden="true"
             class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
             <div class="relative w-full h-full max-w-md md:h-auto">
@@ -366,6 +560,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 
 
 </html>
