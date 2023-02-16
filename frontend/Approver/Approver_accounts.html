@@ -143,8 +143,9 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Accounts
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span class='text-sky-600' onclick="document.location = 'Approver_home.html'">Home > </span>
-                        <span>Accounts</span>
+                        <span onclick="document.location = 'Approver_home.html'">Home</span>
+                        <span class='text-sky-600'>> Accounts</span>
+
                     </p>
                 </caption>
                 <thead class="text-xs text-white uppercase bg-sky-600">
@@ -166,9 +167,6 @@
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Workflow Deadline
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Status
                         </th>
                     </tr>
                 </thead>
@@ -192,9 +190,6 @@
                         <td class="px-6 py-4">
                             2/2/23
                         </td>
-                        <td class="px-6 py-4 text-red-600">
-                            Incomplete
-                        </td>
                     </tr>
                     <tr class="bg-white border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
@@ -214,9 +209,6 @@
                         </td>
                         <td class="px-6 py-4">
                             2/2/23
-                        </td>
-                        <td class="px-6 py-4 text-red-600">
-                            Incomplete
                         </td>
                     </tr>
                     <tr class="bg-white">
@@ -238,9 +230,6 @@
                         <td class="px-6 py-4">
                             2/2/23
                         </td>
-                        <td class="px-6 py-4 text-green-600">
-                            Completed
-                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -248,12 +237,9 @@
 
 
         <!-- Button for Creating Form -->
-        <div class="mx-8 mt-3">
-            <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                class="text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Create
-                Account</button>
-            <button type="button"
-                class="inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+        <div class="mx-8 mt-5">
+            <button type="button" 
+                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
                 data-bs-toggle="modal" data-bs-target="#exampleModalScrollable">
                 Create Account
             </button>
@@ -284,136 +270,276 @@
                         <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
                             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
                                 <div class="lg:col-span-2">
-                                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                    <!-- COMPANY -->
+                                    <span class="text-lg font-bold"
+                                        class="block text-sm font-medium text-gray-900 ">Company</span>
+                                    <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                         <div class="md:col-span-5">
-                                            <label for="full_name">Full Name</label>
-                                            <input type="text" name="full_name" id="full_name"
+                                            <label for="company_name">Company's Name</label>
+                                            <input type="text" name="company_name" id="company_name"
                                                 class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
                                         </div>
 
                                         <div class="md:col-span-5">
-                                            <label for="email">Email Address</label>
-                                            <input type="text" name="email" id="email"
+                                            <label for="Registration_no"
+                                                class="block text-sm font-medium text-gray-900 ">Company Registration
+                                                No</label>
+                                            <input type="text" name="Registration_no" id="Registration_no"
                                                 class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                placeholder="email@domain.com" />
+                                                placeholder="" />
                                         </div>
 
-                                        <div class="md:col-span-3">
-                                            <label for="address">Address / Street</label>
+                                        <div class="md:col-span-5">
+                                            <label for="address" class="block text-sm font-medium text-gray-900 ">Office
+                                                Address</label>
                                             <input type="text" name="address" id="address"
                                                 class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                 placeholder="" />
                                         </div>
 
+                                        <div class="md:col-span-1">
+                                            <label for="gst" class="block text-sm font-medium text-gray-900 ">GST
+                                                Registered</label>
+                                            <div
+                                                class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                                <span
+                                                    class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{gst_value}}</span>
+                                                <button tabindex="-1" for="show_more" id="dropdownRadioBgHoverButton"
+                                                    data-dropdown-toggle="dropdownRadioBgHover"
+                                                    class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                                    <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- GST DROPDOWN menu -->
+                                        <div id="dropdownRadioBgHover"
+                                            class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
+                                            <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                                                aria-labelledby="dropdownRadioBgHoverButton">
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio" value="Yes"
+                                                            name="default-radio" v-model="gst_value"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Yes</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio" value="No"
+                                                            name="default-radio" v-model="gst_value"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">No</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+
                                         <div class="md:col-span-2">
-                                            <label for="city">City</label>
-                                            <input type="text" name="city" id="city"
+                                            <label for="tel"
+                                                class="block text-sm font-medium text-gray-900 ">Tel</label>
+                                            <input type="text" name="tel" id="tel"
                                                 class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                 placeholder="" />
                                         </div>
 
                                         <div class="md:col-span-2">
-                                            <label for="country">Country / region</label>
-                                            <div
-                                                class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                                <input name="country" id="country" placeholder="Country"
-                                                    class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                                    value="" />
-                                                <button tabindex="-1"
-                                                    class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                    <svg class="w-4 h-4 mx-2 fill-current"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </button>
-                                                <button tabindex="-1" for="show_more"
-                                                    class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                    <svg class="w-4 h-4 mx-2 fill-current"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <polyline points="18 15 12 9 6 15"></polyline>
-                                                    </svg>
-                                                </button>
-                                            </div>
+                                            <label for="fax"
+                                                class="block text-sm font-medium text-gray-900 ">Fax</label>
+                                            <input type="text" name="fax" id="fax"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                placeholder="" />
                                         </div>
 
                                         <div class="md:col-span-2">
-                                            <label for="state">State / province</label>
+                                            <label class="block text-sm font-medium text-gray-900 ">Type
+                                                of business License / Registration</label>
                                             <div
                                                 class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                                <input name="state" id="state" placeholder="State"
-                                                    class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                                    value="" />
-                                                <button tabindex="-1"
-                                                    class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                    <svg class="w-4 h-4 mx-2 fill-current"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                    </svg>
-                                                </button>
-                                                <button tabindex="-1" for="show_more"
+                                                <span
+                                                    class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{type_of_business_license}}</span>
+                                                <button tabindex="-1" for="show_more" id="dropdownRadioBgHoverButton"
+                                                    data-dropdown-toggle="dropdownRadioBgHover2"
                                                     class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                    <svg class="w-4 h-4 mx-2 fill-current"
-                                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round">
-                                                        <polyline points="18 15 12 9 6 15"></polyline>
+                                                    <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                                     </svg>
                                                 </button>
                                             </div>
                                         </div>
 
-                                        <div class="md:col-span-1">
-                                            <label for="zipcode">Zipcode</label>
-                                            <input type="text" name="zipcode" id="zipcode"
-                                                class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                                                placeholder="" value="" />
+                                        <div v-if="type_of_business_license == 'Others'" class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-900 ">Please
+                                                Specify</label>
+                                            <input type="text" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                value="" v-model="type_of_business_license_others" placeholder="" />
+                                        </div>
+
+                                        <!-- TYPE OF BUSINESS LICENSE menu -->
+                                        <div id="dropdownRadioBgHover2"
+                                            class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
+                                            <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                                                aria-labelledby="dropdownRadioBgHoverButton">
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio"
+                                                            value="Solo Proprietorship" name="default-radio"
+                                                            v-model="type_of_business_license"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Solo
+                                                            Proprietorship</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio"
+                                                            value="Partnership Agreement" name="default-radio"
+                                                            v-model="type_of_business_license"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Partnership
+                                                            Agreement</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio" value="Limited Company"
+                                                            name="default-radio" v-model="type_of_business_license"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Limited
+                                                            Company</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio" value="Others"
+                                                            name="default-radio" v-model="type_of_business_license"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Others</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <!-- CONTACT PERSON -->
+                                    <h3 class='text-lg font-bold mt-4 mb-2'>Contact Person</h3>
+
+                                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                        <div class="md:col-span-5">
+                                            <label for="name"
+                                                class="block text-sm font-medium text-gray-900 ">Name</label>
+                                            <input type="text" name="name" id="name"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                        </div>
+
+                                        <div class="md:col-span-2">
+                                            <label for="person_tel"
+                                                class="block text-sm font-medium text-gray-900 ">Tel</label>
+                                            <input type="text" name="person_tel" id="person_tel"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                placeholder="" />
+                                        </div>
+
+                                        <div class="md:col-span-3">
+                                            <label for="Designation"
+                                                class="block text-sm font-medium text-gray-900 ">Designation</label>
+                                            <input type="text" name="Designation" id="Designation"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                placeholder="" />
+                                        </div>
+
+                                        <div class="md:col-span-2">
+                                            <label class="block text-sm font-medium text-gray-900 ">Nature of
+                                                Business</label>
+                                            <div
+                                                class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                                <span
+                                                    class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{nature_of_business}}</span>
+                                                <button tabindex="-1" for="show_more" id="dropdownRadioBgHoverButton"
+                                                    data-dropdown-toggle="dropdownRadioBgHover3"
+                                                    class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                                    <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
+                                                        stroke="currentColor" viewBox="0 0 24 24"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div v-if="nature_of_business == 'Others'" class="md:col-span-3">
+                                            <label class="block text-sm font-medium text-gray-900 ">Please
+                                                Specify</label>
+                                            <input type="text" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                value="" v-model="nature_of_business_others" placeholder="" />
+                                        </div>
+
+                                        <!-- BUSINESS NATURE menu -->
+                                        <div id="dropdownRadioBgHover3"
+                                            class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
+                                            <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                                                aria-labelledby="dropdownRadioBgHoverButton">
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio" value="Manufacturing"
+                                                            name="default-radio" v-model="nature_of_business"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Manufacturing</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio" value="Agent/Dealer"
+                                                            name="default-radio" v-model="nature_of_business"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Agent/Dealer</label>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                        <input id="default-radio-4" type="radio" value="Others"
+                                                            name="default-radio" v-model="nature_of_business"
+                                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                        <label for="default-radio-4"
+                                                            class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Others</label>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
 
                                         <div class="md:col-span-5">
-                                            <div class="inline-flex items-center">
-                                                <input type="checkbox" name="billing_same" id="billing_same"
-                                                    class="form-checkbox" />
-                                                <label for="billing_same" class="ml-2">My billing address is different
-                                                    than above.</label>
-                                            </div>
+                                            <label for="product_service"
+                                                class="block text-sm font-medium text-gray-900 ">Product/Service</label>
+                                            <input type="text" name="product_service" id="product_service"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
                                         </div>
 
-                                        <div class="md:col-span-2">
-                                            <label for="soda">How many soda pops?</label>
-                                            <div
-                                                class="h-10 w-28 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                                <button tabindex="-1" for="show_more"
-                                                    class="cursor-pointer outline-none focus:outline-none border-r border-gray-200 transition-all text-gray-500 hover:text-blue-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mx-2"
-                                                        viewBox="0 0 20 20" fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                </button>
-                                                <input name="soda" id="soda" placeholder="0"
-                                                    class="px-2 text-center appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                                    value="0" />
-                                                <button tabindex="-1" for="show_more"
-                                                    class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-500 hover:text-blue-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="h-4 w-4 mx-2 fill-current" viewBox="0 0 20 20"
-                                                        fill="currentColor">
-                                                        <path fill-rule="evenodd"
-                                                            d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-                                                </button>
-                                            </div>
+                                        <div class="md:col-span-5">
+                                            <label class="block mb-1 text-sm font-medium text-gray-900 "
+                                                for="default_size">Company's Profile</label>
+                                            <input
+                                                class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
+                                                id="default_size" type="file">
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -421,115 +547,20 @@
                     </div>
                     <div
                         class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                        <button type="button" data-bs-dismiss="modal"
-                            class="inline-block px-6 py-2.5 bg-sky-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
-                            Save
+                        <button type="button"  data-bs-dismiss="modal"
+                            class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                                fill="#FFFFFF">
+                                <path d="M0 0h24v24H0V0z" fill="none"></path>
+                                <path
+                                    d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z"
+                                    opacity=".3"></path>
+                                <path
+                                    d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z">
+                                </path>
+                            </svg>
+                            <span class="pl-2 mx-1">Save</span>
                         </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- old modal -->
-        <div id="authentication-modal" tabindex="-1" aria-hidden="true"
-            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-            <div class="relative w-full h-full max-w-md md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                    <button type="button"
-                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
-                        data-modal-hide="authentication-modal">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create an Account</h3>
-                        <form class="space-y-6" action="#">
-                            <div>
-                                <label for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company's
-                                    Name</label>
-                                <input type="name" name="name" id="name" v-model="name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="registration"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company's
-                                    Registration No</label>
-                                <input type="registration" name="registration" id="registration" v-model="registration"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="office_address"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Office
-                                    Address</label>
-                                <input type="office_address" name="office_address" id="office_address"
-                                    v-model="office_address"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                    required>
-                            </div>
-                            <div class="row">
-                                <div>
-                                    <label for="office_address"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tel</label>
-                                    <input type="office_address" name="office_address" id="office_address"
-                                        v-model="office_address"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                        required>
-                                </div>
-                                <div>
-                                    <label for="office_address"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Fax</label>
-                                    <input type="office_address" name="office_address" id="office_address"
-                                        v-model="office_address"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
-                                        required>
-                                </div>
-                            </div>
-                            <button id="dropdownRadioButton" data-dropdown-toggle="dropdownDefaultRadio"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                type="button">GST Registered<svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none"
-                                    stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M19 9l-7 7-7-7"></path>
-                                </svg></button>
-                            <!-- DROPDOWN for GST Registered -->
-                            <div id="dropdownDefaultRadio"
-                                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600">
-                                <ul class="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
-                                    aria-labelledby="dropdownRadioButton">
-                                    <li>
-                                        <div class="flex items-center">
-                                            <input id="default-radio-1" type="radio" value="Yes" name="default-radio"
-                                                v-model="gstRegistered"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label for="default-radio-1"
-                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Yes</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="flex items-center">
-                                            <input checked id="default-radio-2" type="radio" value="No"
-                                                v-model="gstRegistered" name="default-radio"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
-                                            <label for="default-radio-2"
-                                                class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <button type="submit" @click="createAcc"
-                                class="w-80 text-white bg-sky-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Done</button>
-
-                        </form>
                     </div>
                 </div>
             </div>
@@ -542,12 +573,11 @@
     const vm = new Vue({
         el: '#app',
         data: {
-            gstRegistered: '',
-            office_address: '',
-            registration: '',
-            name: '',
-            tel: "",
-            fax: "",
+            gst_value: "Yes",
+            type_of_business_license: "",
+            type_of_business_license_others: "",
+            nature_of_business: "",
+            nature_of_business_others: "",
         },
         methods: {
             createAcc() {
