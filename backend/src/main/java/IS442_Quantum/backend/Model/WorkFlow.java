@@ -1,12 +1,11 @@
 package IS442_Quantum.backend.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 @Data
 @Entity
@@ -20,11 +19,37 @@ public class WorkFlow {
     private Date wfLastSubmit;
     private boolean isValidated;
 
+    @OneToMany(mappedBy="workFlow", cascade={CascadeType.ALL})
+    private Collection<FormSequence> formSequences = new ArrayList<>();
+
+    public void addFormSequence(FormSequence fs){
+        formSequences.add(fs);
+        fs.setWorkFlow(this);
+    }
+
     public WorkFlow(){
 
     };
 
+    public Date getWfDateline() {
+        return wfDateline;
+    }
 
+    public int getWfid() {
+        return wfid;
+    }
+
+    public Date getWfLastSubmit() {
+        return wfLastSubmit;
+    }
+
+    public String getWfName() {
+        return wfName;
+    }
+
+    public boolean isValidated() {
+        return isValidated;
+    }
 
 
 
