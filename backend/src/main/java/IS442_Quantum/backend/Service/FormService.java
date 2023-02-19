@@ -6,46 +6,41 @@ import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Repository.FormRepository;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
 @Service
 public class FormService {
 
-    private FormRepository formRepository;
+    private final FormRepository formRepository;
 
-    private QuestionService questionService;
+    private final QuestionService questionService;
 
     public FormService(FormRepository formRepository, QuestionService questionService) {
         this.formRepository = formRepository;
         this.questionService = questionService;
     }
 
+    // creating new form
     public Form createNewForm(Form form){
         Form newForm = new Form();
-        newForm.setFormName(form.getFormName());
-        newForm.setDateSubmitted(form.getDateSubmitted());
-        newForm.setLastEdited(form.getLastEdited());
-        newForm.getFormQuestions().addAll(form.getFormQuestions().stream().map(formQuestion -> {
-            if (formQuestion.getQuestion().getQuestionId()==null){
-                questionService.createNewQuestion(formQuestion.getQuestion());
-            }
-                Question question = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
-                FormQuestion newFormQuestion = new FormQuestion();
-                newFormQuestion.setForm(newForm);
-                newFormQuestion.setQuestion(question);
-                newFormQuestion.setInputValue(formQuestion.getInputValue());
-                return newFormQuestion;
-        }).toList());
-        return formRepository.save(newForm);
+        return updateFormMapping(form, newForm, 1);
+    }
+
+    // to edit existing form
+    public Form editForm(Form form){
+        Form eForm = getFormById(form.getFormId());
+        return updateFormMapping(form, eForm, 2);
     }
 
     public Collection<Form> getAllForm(){
         return formRepository.findAll();
     }
 
-    public Optional<Form> getFormById(Long id){
-        return formRepository.findById(id);
+    public Form getFormById(Long id){
+        return formRepository.findByFormId(id);
     }
 
     public void deleteFormById(Long id){
@@ -56,5 +51,49 @@ public class FormService {
         return formRepository.existsById(id);
     }
 
+    // mapping update for forms
+    // Type 1 == create || Type 2 == Edit
+    public Form updateFormMapping(Form form, Form eForm, Integer type){
+        eForm.setFormName(form.getFormName());
+        eForm.setDateSubmitted(form.getDateSubmitted());
+        eForm.setLastEdited(form.getLastEdited());
+        if (type == 1){
+            eForm.getFormQuestions().addAll(form.getFormQuestions().stream().map(formQuestion -> {
+                if (formQuestion.getQuestion().getQuestionId()==null){
+                    questionService.createNewQuestion(formQuestion.getQuestion());
+                }
+                Question question = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
+                FormQuestion newFormQuestion = new FormQuestion();
+                newFormQuestion.setForm(eForm);
+                newFormQuestion.setQuestion(question);
+                newFormQuestion.setInputValue(formQuestion.getInputValue());
+                return newFormQuestion;
+            }).toList());
+        } else {
+            ArrayList<FormQuestion> updatedFormQuestions = new ArrayList<>();
+            for (FormQuestion formQuestion : form.getFormQuestions()) {
+                if (formQuestion.getQuestion().getQuestionId() == null) {
+                    questionService.createNewQuestion(formQuestion.getQuestion());
+                }
+                Question question = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
+                FormQuestion existingFormQuestion = eForm.getFormQuestions().stream()
+                        .filter(fq -> fq.getFormQId().equals(formQuestion.getFormQId()))
+                        .findFirst().orElse(null);
+                if (existingFormQuestion == null) {
+                    FormQuestion newFormQuestion = new FormQuestion();
+                    newFormQuestion.setForm(eForm);
+                    newFormQuestion.setQuestion(question);
+                    newFormQuestion.setInputValue(formQuestion.getInputValue());
+                    updatedFormQuestions.add(newFormQuestion);
+                } else {
+                    existingFormQuestion.setQuestion(question);
+                    existingFormQuestion.setInputValue(formQuestion.getInputValue());
+                    updatedFormQuestions.add(existingFormQuestion);
+                }
+            }
+            eForm.setFormQuestions(updatedFormQuestions);
+        }
+        return formRepository.save(eForm);
+    }
 
 }

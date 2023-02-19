@@ -6,7 +6,10 @@ import IS442_Quantum.backend.Model.QuestionProperty;
 import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Repository.FormRepository;
 import IS442_Quantum.backend.Repository.QuestionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.PreDestroy;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -16,20 +19,33 @@ import java.util.Arrays;
 @Component
 public class FormDataLoader implements ApplicationRunner {
 
-    @Autowired
-    private FormRepository formRepository;
+    private final FormRepository formRepository;
 
-    @Autowired
-    private QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    public FormDataLoader(FormRepository formRepository, QuestionRepository questionRepository) {
+        this.formRepository = formRepository;
+        this.questionRepository = questionRepository;
+    }
+
 
     @Override
+    @Transactional
     public void run(ApplicationArguments args) {
 
-
-        // clear table
+        // Reset the auto-increment value of the form and question table
         formRepository.deleteAll();
         questionRepository.deleteAll();
+        String resetFormRepositoryQuery = "ALTER TABLE form AUTO_INCREMENT = 1";
+        String resetQuestionRepositoryQuery = "ALTER TABLE question AUTO_INCREMENT = 1";
+        entityManager.createNativeQuery(resetFormRepositoryQuery).executeUpdate();
+        entityManager.createNativeQuery(resetQuestionRepositoryQuery).executeUpdate();
 
+
+        // insert data
         Question q1 = new Question();
         q1.setInputLabel("Company's Name");
         q1.setInputType("text");
@@ -133,6 +149,5 @@ public class FormDataLoader implements ApplicationRunner {
         formRepository.save(newVendorAssessmentForm);
 
     }
-
 
 }

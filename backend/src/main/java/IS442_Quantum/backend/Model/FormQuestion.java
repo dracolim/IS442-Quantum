@@ -12,7 +12,7 @@ public class FormQuestion {
     @EmbeddedId
     private FormQId formQId = new FormQId();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @MapsId("formId")
     @JoinColumn(name="form_id")
     @JsonIgnore

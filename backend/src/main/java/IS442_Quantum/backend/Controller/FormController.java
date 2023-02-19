@@ -3,7 +3,6 @@ package IS442_Quantum.backend.Controller;
 import IS442_Quantum.backend.Model.Form;
 import IS442_Quantum.backend.Service.FormService;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +35,26 @@ public class FormController {
         return new ResponseEntity<>(formService.createNewForm(newForm), HttpStatus.CREATED);
     }
 
+    @PostMapping(value = "/form/clone/{id}")
+    public ResponseEntity<?> cloneForm(@PathVariable Long id){
+        return new ResponseEntity<>(formService.createNewForm(formService.getFormById(id)), HttpStatus.CREATED);
+    }
+
+    @PutMapping(value = "/form")
+    public ResponseEntity<?> editForm(@RequestBody Form eForm){
+        if(eForm == null || !formService.checkFormById(eForm.getFormId())){
+            return new ResponseEntity<>("Update failed, please provide a valid form ID", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(formService.editForm(eForm), HttpStatus.OK);
+        }
+    }
+
     @DeleteMapping("/form/{id}")
     public ResponseEntity<?> deleteFormById(@PathVariable Long id){
-        if(id == 0 || id == null || !formService.checkFormById(id)){
-            return new ResponseEntity<>("Delete failed, please provide a valid form ID", HttpStatus.BAD_REQUEST);
+        if(id == 0 || !formService.checkFormById(id)){
+            return new ResponseEntity<>("Delete failed, please provide a valid form ID", HttpStatus.NOT_FOUND);
         } else {
-            Optional<Form> tempForm = formService.getFormById(id);
+            Form tempForm = formService.getFormById(id);
             formService.deleteFormById(id);
             return new ResponseEntity<>(tempForm, HttpStatus.OK);
         }

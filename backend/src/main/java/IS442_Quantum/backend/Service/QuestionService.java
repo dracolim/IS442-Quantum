@@ -1,13 +1,18 @@
 package IS442_Quantum.backend.Service;
 
+import IS442_Quantum.backend.Model.FormQuestion;
 import IS442_Quantum.backend.Model.Question;
+import IS442_Quantum.backend.Model.QuestionProperty;
 import IS442_Quantum.backend.Repository.QuestionRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class QuestionService {
 
-    private QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository;
 
     public QuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
@@ -33,18 +38,33 @@ public class QuestionService {
         return questionRepository.existsById(id);
     }
 
-    public Question editQuestionById(Long id, Question newQuestion){
-        return questionRepository.findById(id).map(question -> {
-            question.setInputLabel(newQuestion.getInputLabel());
-            question.setInputType(newQuestion.getInputType());
-            question.setAttribute(newQuestion.getAttribute());
-//            question.setQuestionProperties(newQuestion.getQuestionProperties());
-            return questionRepository.save(question);
+    public Question editQuestionById(Long id, Question question){
+        Question eQuestion = questionRepository.findByQuestionId(id);
+        eQuestion.setInputLabel(question.getInputLabel());
+        eQuestion.setInputType(question.getInputType());
+        eQuestion.setAttribute(question.getAttribute());
 
-        }).orElseGet(()->{
-            newQuestion.setQuestionId(id);
-            return questionRepository.save(newQuestion);
-        });
+        // update question properties if there is any question properties
+        if (question.getQuestionProperties() != null) {
+
+            // Add new question properties
+            List<QuestionProperty> updatedQuestionProperty = new ArrayList<>();
+            for (QuestionProperty questionProperty : question.getQuestionProperties()){
+                if (questionProperty.getId() != null) {
+                    questionProperty.setQuestion(eQuestion);
+                    questionProperty.setLabel(questionProperty.getLabel());
+                    updatedQuestionProperty.add(questionProperty);
+                } else {
+                    QuestionProperty newQuestionProperty = new QuestionProperty();
+                    newQuestionProperty.setQuestion(eQuestion);
+                    newQuestionProperty.setLabel(questionProperty.getLabel());
+                    updatedQuestionProperty.add(newQuestionProperty);
+                }
+            }
+            eQuestion.setQuestionProperties(updatedQuestionProperty);
+        }
+
+        return questionRepository.save(eQuestion);
     }
 
 }
