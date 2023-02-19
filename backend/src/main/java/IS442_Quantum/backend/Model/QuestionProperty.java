@@ -21,7 +21,6 @@ public class QuestionProperty {
     @JsonIgnore
     private Question question;
 
-
     public QuestionProperty(String label) {
         this.label = label;
     }

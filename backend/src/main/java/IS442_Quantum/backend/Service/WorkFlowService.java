@@ -21,8 +21,8 @@ public class WorkFlowService {
     @Autowired
     private WorkFlowRepository workFlowRepository;
 
+    @Autowired
     private FormService formService;
-
 
     public WorkFlow createWorkFlow(WorkFlow workFlow){
         WorkFlow newWorkFlow = new WorkFlow();
@@ -30,7 +30,7 @@ public class WorkFlowService {
         newWorkFlow.setWfName(workFlow.getWfName());
         newWorkFlow.setWfDateline(workFlow.getWfDateline());
         newWorkFlow.setWfLastSubmit(workFlow.getWfLastSubmit());
-        ArrayList<FormSequence> formSequences = new ArrayList<>();
+        Collection<FormSequence> formSequences = new ArrayList<>();
         for(FormSequence fs : workFlow.getFormSequences()){
             FormSequence newFormSequence = new FormSequence();
             newFormSequence.setWorkFlow(newWorkFlow);
