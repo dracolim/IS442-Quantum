@@ -26,7 +26,7 @@ public class WorkFlowController {
 
     @GetMapping("/workflows")
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(workFlowService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(workFlowRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/workflows/{id}")

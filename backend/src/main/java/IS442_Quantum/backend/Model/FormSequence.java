@@ -3,10 +3,12 @@ package IS442_Quantum.backend.Model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @AllArgsConstructor
+@NoArgsConstructor
 public class FormSequence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +26,4 @@ public class FormSequence {
     private boolean isApproved;
     private int approvalId;
 
-    public FormSequence(){
-
-    }
 }
