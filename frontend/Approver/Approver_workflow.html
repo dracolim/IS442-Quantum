@@ -12,6 +12,7 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
 
     <title>Quantum</title>
+
 </head>
 
 <body>
@@ -20,11 +21,11 @@
     <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
         <div class="container flex flex-wrap items-center justify-between mx-auto"
             style="width: 100%; overflow: hidden;">
-            <img src="Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
+            <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
                 style="height: 80px ; width: 200px;" />
 
             <div class="flex md:order-2">
-                <a href="homepage.html" style="margin-right: 10px;">
+                <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
                     <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
                 </a>
 
@@ -36,7 +37,7 @@
                         <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40" height="40">
                         </iconify-icon>
                     </a>
-                    Draco Green
+                    Tim Klemmer
                     <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
@@ -49,8 +50,8 @@
                 <div id="dropdownAvatarName"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                     <div class="px-4 py-3 text-sm text-gray-900 ">
-                        <div class="font-bold">Admin</div>
-                        <div class="truncate">Draco.green@quantum.com</div>
+                        <div class="font-bold">Approver</div>
+                        <div class="truncate">Tim.Klemmer@quantum.com</div>
                     </div>
                     <ul class="py-2 text-sm text-gray-700 "
                         aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
@@ -88,28 +89,29 @@
             <ul
                 class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                 <li>
-                    <a href="#"
-                        class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 "
+                    <a href="Approver_home.html"
+                        class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
                         aria-current="page">Home</a>
+                </li>                
+                <li>
+                    <a href="Approver_workflow.html"
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
+                        aria-current="page">Workflows</a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Workflows</a>
-                </li>
-                <li>
-                    <a href="#"
+                    <a href="Approver_accounts.html"
                         class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                         Accounts</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="Approver_form.html"
                         class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                         Forms</a>
                 </li>
             </ul>
         </div>
     </nav>
+
     <!-- Orange Divider -->
     <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
@@ -117,110 +119,56 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
         <table class="w-full text-sm text-left text-gray-500">
             <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                Pending Worklows
+                Workflows
                 <p class="mt-1 text-sm font-normal text-gray-500">
-                    <span class = 'text-sky-600'>Pending Workflows</span> > Workflow ID
+                    <span class='text-sky-600' onclick="document.location = 'Approver_home.html'" >Home > </span> <span>Workflows</span>
                 </p>
             </caption>
             <thead class="text-xs text-white uppercase bg-sky-600">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Vendor Name
-                    </th>
                     <th scope="col" class="px-6 py-3">
                         Workflow ID
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Workflow Name
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Workflow Completion
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Last Submitted
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Workflow Deadline
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Status
-                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b ">
+                <tr onclick="document.location = '../Workflow_forms.html'" class="bg-white border-b ">
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        Bright Vision Hospital
-                    </th>
-                    <td class="px-6 py-4">
                         WF111
-                    </td>
-                    <td class="px-6 py-4">
-                        Subcontractors Safety
-                    </td>
-                    <td class="px-6 py-4">
-                        1/2
-                    </td>
-                    <td class="px-6 py-4">
-                        1/30/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2/23
-                    </td>
-                    <td class="px-6 py-4 text-right text-red-600">
-                        Incomplete
-                    </td>
-                </tr>
-                <tr class="bg-white border-b ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        Alexandra Hospital
                     </th>
                     <td class="px-6 py-4">
+                        Generic Workflow 1
+                    </td>
+                </tr>
+                <tr onclick="document.location = '../Workflow_forms.html'" class="bg-white border-b ">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                         WF123
-                    </td>
-                    <td class="px-6 py-4">
-                        Subcontractors Safety
-                    </td>
-                    <td class="px-6 py-4">
-                        1/2
-                    </td>
-                    <td class="px-6 py-4">
-                        1/2/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2/23
-                    </td>
-                    <td class="px-6 py-4 text-right text-red-600">
-                        Incomplete
-                    </td>
-                </tr>
-                <tr class="bg-white">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        SingHealth
                     </th>
                     <td class="px-6 py-4">
+                        Generic Workflow 2
+                    </td>
+                </tr>
+                <tr onclick="document.location = '../Workflow_forms.html'" class="bg-white">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                         WF112
-                    </td>
+                    </th>
                     <td class="px-6 py-4">
-                        Subcontractors Safety
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2
-                    </td>
-                    <td class="px-6 py-4">
-                        1/1/23
-                    </td>
-                    <td class="px-6 py-4">
-                        2/2/23
-                    </td>
-                    <td class="px-6 py-4 text-right text-green-600">
-                        Completed
+                        Generic Workflow 3
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 
+    <!-- Button for Creating Workflow -->
+    <div class="mx-8 mt-3">
+        <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+            class="text-white bg-sky-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Create
+            Workflow</button>
+    </div>
 
 </body>
 
