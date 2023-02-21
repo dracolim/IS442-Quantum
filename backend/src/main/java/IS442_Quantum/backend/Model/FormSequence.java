@@ -17,13 +17,11 @@ public class FormSequence {
     private int formSequenceId;
 
     @ManyToOne
-    @MapsId("workFlowId")
-    @JoinColumn(name="workFlow_id")
+    @JoinColumn(name="work_flow_id")
     @JsonIgnore
     private WorkFlow workFlow;
 
     @ManyToOne
-    @MapsId("formId")
     @JoinColumn(name="form_id")
     private Form form;
 
