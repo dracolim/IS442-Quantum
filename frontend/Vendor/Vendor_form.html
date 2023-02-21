@@ -14,7 +14,7 @@
     <title>Quantum</title>
 </head>
 
-<body>
+<body onload="getFormDetails()">
 
     <!-- header -->
     <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
@@ -115,5 +115,19 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+<script>
+  function getFormDetails(){
+
+      axios.get("http://localhost:5000/forms")
+      .then(response => {
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.log("fail")
+      });
+  }
+
+</script>
 </html>
