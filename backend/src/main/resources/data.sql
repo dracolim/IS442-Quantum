@@ -1,3 +1,4 @@
+DELETE FROM WORK_FLOW;
 DELETE FROM USER;
 
 -- insert Vendor rows

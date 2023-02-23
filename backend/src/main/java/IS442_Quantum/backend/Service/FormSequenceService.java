@@ -19,8 +19,6 @@ public class FormSequenceService {
         return formSequenceRepository.findAll();
     }
 
-    public FormSequence createFormSequence(){
-        return FormSequence;
-    }
+
 
 }

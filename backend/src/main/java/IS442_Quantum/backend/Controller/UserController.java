@@ -3,6 +3,7 @@ package IS442_Quantum.backend.Controller;
 import IS442_Quantum.backend.Enums.UserTypes;
 import IS442_Quantum.backend.Model.User;
 import IS442_Quantum.backend.Model.Vendor;
+import IS442_Quantum.backend.Model.WorkFlow;
 import IS442_Quantum.backend.Service.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,5 +50,15 @@ public class UserController {
     @PostMapping("/vendor")
     public Vendor createVendor(@RequestBody Vendor vendor){
         return userService.createVendor(vendor);
+    }
+
+    @PostMapping("/vendor/{userId}")
+    public ResponseEntity<User> addWorkflowToVendor(@PathVariable Long userId, @RequestBody WorkFlow workflow){
+        try {
+            userService.addWorkflowToVendor(userId, workflow);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -26,7 +26,7 @@ public class WorkFlowController {
 
     @GetMapping("/workflows")
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(workFlowService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(workFlowRepository.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/workflows/{id}")
@@ -49,11 +49,12 @@ public class WorkFlowController {
             return new ResponseEntity<>(tempWorkFlow, HttpStatus.OK);
         }
     }
-
     @PutMapping("/workflows/{id}")
-    public  ResponseEntity<?> updateWorkFlowById(@RequestBody WorkFlow newWorkFlow ,@PathVariable Long id ){
-        return new ResponseEntity<>(workFlowService.createWorkFlow(newWorkFlow), HttpStatus.OK);
+    public ResponseEntity<?> newWorkFlow(@RequestBody WorkFlow newWorkFlow,@PathVariable Long id){
+        return new ResponseEntity<>(workFlowService.updateWorkFlowById(id,newWorkFlow), HttpStatus.OK);
     }
+
+
 
 
 

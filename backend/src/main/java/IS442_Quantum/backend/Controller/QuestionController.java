@@ -35,13 +35,13 @@ public class QuestionController {
         ){
             return new ResponseEntity<>(questionService.createNewQuestion(newQuestion), HttpStatus.OK);
         }
-        return new ResponseEntity<>("creation failed", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("creation failed", HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/question/{id}")
     public ResponseEntity<?> deleteQuestionById(@PathVariable Long id){
-        if(id == 0 || id == null || !questionService.checkQuestionById(id)){
-            return new ResponseEntity<>("Delete failed, please provide a valid question ID", HttpStatus.BAD_REQUEST);
+        if(id == 0 || !questionService.checkQuestionById(id)){
+            return new ResponseEntity<>("Delete failed, please provide a valid question ID", HttpStatus.NOT_FOUND);
         } else {
             Question tempQn = questionService.findByQuestion(id);
             questionService.deleteQuestionById(id);
@@ -54,7 +54,7 @@ public class QuestionController {
         if(questionService.checkQuestionById(id) || id != null){
             return new ResponseEntity<>(questionService.editQuestionById(id, newQuestion), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Edit failed, please provide a valid question and ID", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Edit failed, please provide a valid question and ID", HttpStatus.NOT_FOUND);
         }
     }
 }
