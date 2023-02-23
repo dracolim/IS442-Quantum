@@ -203,97 +203,37 @@
                             {{value.question.questionId}}
                         </th>
                         <td class="px-6 py-4">
-                            {{value.question.inputLabel}}
-                        </td>
-                        <td class="px-6 py-4">
-                            <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                <span
-                                    class="ml-3 text-gray-600 appearance-none outline-none w-full bg-transparent">{{value.question.inputType}}</span>
-                                <button tabindex="-1" for="show_more" id="dropdownRadioBgHoverButton"
-                                data-dropdown-toggle="dropdownRadioBgHover"
-                                    class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                    <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M19 9l-7 7-7-7"></path>
-                                    </svg>
-                                </button>
-                            </div>
-                            <!-- DROPDOWN menu -->
-                            <div id="dropdownRadioBgHover"
-                                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow">
-                                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                                    aria-labelledby="dropdownRadioBgHoverButton">
-                                    <li>
-                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                            <input id="default-radio-4" type="radio" value="Yes" name="default-radio"
-                                                aria-selected="true"
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                            <label for="default-radio-4"
-                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Yes</label>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                            <input id="default-radio-4" type="radio" value="No" name="default-radio"
-                                                
-                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                            <label for="default-radio-4"
-                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">No</label>
-                                        </div>
-                                    </li>
-                                </ul>
+                            <div id = "label">
+                                <span @click="spanSwitch(this)">{{value.question.inputLabel}}</span>
                             </div>
                         </td>
                         <td class="px-6 py-4">
-                            {{value.question.isRequired}}
+                            <select id="inputType"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected value="value.question.inputType">{{value.question.inputType}}</option>
+                                <option v-if="value.question.inputType != 'checkbox'" value="checkbox">checkbox</option>
+                                <option v-if="value.question.inputType != 'radio'" value="radio">radio</option>
+                                <option v-if="value.question.inputType != 'date'" value="date">date</option>
+                                <option v-if="value.question.inputType != 'text'" value="text">short answer</option>
+                                <option v-if="value.question.inputType != 'textarea'" value="textarea">paragraph
+                                </option>
+                                <option v-if="value.question.inputType != 'email'" value="textarea">email</option>
+                                <option v-if="value.question.inputType != 'file'" value="textarea">file</option>
+                            </select>
+                        </td>
+                        <td class="px-6 py-4">
+                            <select id="isRequired"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected value="value.question.isRequired">{{value.question.isRequired}}
+                                </option>
+                                <option v-if="value.question.isRequired != false" value="false">false</option>
+                                <option v-if="value.question.isRequired != true" value="true">true</option>
+                            </select>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <!-- main modal -->
-            <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"
-                id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable relative w-auto pointer-events-none">
-                    <div
-                        class="modal-content border-none shadow-lg relative flex flex-col w-full pointer-events-auto bg-white bg-clip-padding rounded-md outline-none text-current">
-                        <div
-                            class="modal-header flex flex-shrink-0 items-center justify-between p-4 border-b border-gray-200 rounded-t-md">
-                            <h5 class="text-xl font-medium leading-normal text-gray-800"
-                                id="exampleModalScrollableLabel">
-                                New Vendor Assessment Form
-                            </h5>
-                            <button type="button" data-bs-dismiss="modal"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="modal-body relative p-4">
-                            <!-- Modal body -->
-                            <div class="p-6 space-y-6">
-                                <div class="flex flex-wrap justify-center">
-                                    <img src="../Images/New Vendor Assessment Form.PNG"
-                                        class="p-1 bg-white border rounded max-w-md" alt="..." />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                            <button type="button" data-bs-dismiss="modal"
-                                class="inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out ml-1">
-                                Close
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -321,6 +261,23 @@
                 .catch(error => {
                     console.error(error);
                 })
+        },
+        methods: {
+            spanSwitch(e) {
+                let txt = e.innerText;
+                console.log(e)
+                console.log(txt)
+                let element = document.getElementById('label');
+
+                element.innerHTML = `<input @blur='spanReset(this)' value='${txt}' />`;
+                document.getElementsByTagName('input')[0].focus();
+            },
+            spanReset(e) {
+                let txt = e.value;
+                let element = document.getElementById('label');
+
+                element.innerHTML = `<span @click='spanSwitch(this)'> ${txt} </span>`;
+            }
         }
     })
 </script>
