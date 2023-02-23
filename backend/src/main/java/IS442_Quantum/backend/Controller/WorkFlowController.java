@@ -49,11 +49,12 @@ public class WorkFlowController {
             return new ResponseEntity<>(tempWorkFlow, HttpStatus.OK);
         }
     }
-
     @PutMapping("/workflows/{id}")
-    public  ResponseEntity<?> updateWorkFlowById(@RequestBody WorkFlow newWorkFlow ,@PathVariable Long id ){
-        return new ResponseEntity<>(workFlowService.createWorkFlow(newWorkFlow), HttpStatus.OK);
+    public ResponseEntity<?> newWorkFlow(@RequestBody WorkFlow newWorkFlow,@PathVariable Long id){
+        return new ResponseEntity<>(workFlowService.updateWorkFlowById(id,newWorkFlow), HttpStatus.OK);
     }
+
+
 
 
 
