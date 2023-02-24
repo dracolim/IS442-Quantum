@@ -234,7 +234,8 @@
                                     {{eachValue.label}}
                                 </li>
                             </ul>
-                            <div class ="inline-flex items-center">
+
+                            <div v-if ="value.question.inputType == 'radio' || value.question.inputType == 'checkbox'" class ="inline-flex items-center">
                                 <iconify-icon icon="material-symbols:add"></iconify-icon>
                                 Add Option
                             </div>
@@ -274,6 +275,7 @@
             varFieldNames: [],
             varFieldTypes: [],
             varFeidlRequired: [],
+            needOptions: ['radio' , 'checkbox']
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
