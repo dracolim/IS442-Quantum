@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="springbootjdbc@localhost" uuid="9e1e9e3f-2c85-49d9-879d-611c801c329a">
+    <data-source source="LOCAL" name="qlvmsdb@localhost" uuid="e19e3c22-acfe-481e-8ed5-97d1b722173b">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/springbootjdbc</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/qlvmsdb</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
