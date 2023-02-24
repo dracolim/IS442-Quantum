@@ -170,7 +170,51 @@
 
         <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
-        
+        <!-- FORM START -->
+        <div style="background-color: #b4d1df">
+            <!-- back button -->
+
+            <button type="button" v-on:click="goToSinglepage()"
+                class=" ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Back
+            </button>
+            <div class="flex justify-center pb-4">
+                <!-- Form Title -->
+                <div class="w-7/12 p-6 bg-white border border-gray-200 rounded-lg shadow">
+                    <div class='row' style='height: 8px; background-color: #0284c7'></div>
+                    <h5 class="mt-2 mb-2 text-xl font-bold tracking-tight text-gray-900">{{form_name}}</h5>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Form ID: {{form_id}}</p>
+                </div>
+            </div>
+
+            <div v-for="(value,key) in form_questions">
+                <div class="flex justify-center mt-2 pb-4">
+                    <!-- Forms -->
+                    <div class="w-7/12 p-6 bg-white border border-gray-200 rounded-lg shadow">
+                        <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900">
+                            {{value.question.inputLabel}}</h5>
+                        <!-- options -->
+                        <!-- text -->
+                        <input
+                            v-if="value.question.inputType == 'text' || value.question.inputType == 'textarea' || value.question.inputType == 'date' || value.question.inputType == 'email'"
+                            class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                            :type="value.question.inputType" :required="value.question.isRequired">
+                            
+                        <!-- NON text -->
+                        <div v-else v-for="value3 in question_options[value.question.questionId]">
+                            <div class="flex items-center mb-4">
+                                <input :id ="value3.id" class="bg-gray-50 border border-gray-300" :type="value.question.inputType" :name="value.question.questionId" :required="value.question.isRequired" value = "value3.label">
+                                <label for="value3.id" :id ="value3.id"
+                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" :name="value.question.questionId">{{value3.label}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="pb-12"></div>
+        </div>
+
 
     </div>
 
@@ -185,6 +229,8 @@
             form_id: null,
             form_questions: "",
             varFieldName: "",
+            form_name: "",
+            question_options: {},
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
@@ -194,34 +240,37 @@
             axios.get(API_URL)
                 .then(response => {
                     this.form_questions = response.data.formQuestions
+                    this.form_name = response.data.formName
+                    // console.log(response.data)
                     console.log(this.form_questions)
+
+                    for (i in this.form_questions) {
+                        // console.log(this.form_questions[i])
+                        // console.log(i)
+                        
+                        var question_id = this.form_questions[i].question.questionId
+                        // console.log(question_id)
+                        if (!(question_id in this.question_options)) {
+                            if (this.form_questions[i].question.inputType == "text" || this
+                                .form_questions[i].question.inputType == "textarea") {
+                                this.question_options[question_id] = ""
+                            } else {
+                                this.question_options[question_id] = this.form_questions[i].question
+                                    .questionProperties
+                            }
+                        }
+                    }
+                    console.log(this.question_options)
                 })
                 .catch(error => {
                     console.error(error);
                 })
+
         },
         methods: {
-            UpdateField(question_id){
-                rolesURL = this.localhost + '/question/' + question_id
-                    //console.log(rolesURL)
-                    fetch(rolesURL, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            'input_lavel': this.varFieldName,
-                        })
-                    }).then(response => {
-                        console.log(response.data)
-
-                        this.varFieldName = null
-                        return response.json()
-                    }).then(data =>
-                        // this is the data we get after putting our data,
-                        console.log(data)
-                    )
-            }
+            goToSinglepage: function () {
+                window.location.assign("./Approver_individual_form.html?id=" + this.form_id)
+            },
         }
     })
 </script>
