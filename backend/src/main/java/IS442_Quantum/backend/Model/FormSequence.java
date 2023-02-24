@@ -1,5 +1,6 @@
 package IS442_Quantum.backend.Model;
 
+import IS442_Quantum.backend.Enums.Status;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class FormSequence {
     private Form form;
 
     private int seqNo;
-    private boolean isApproved;
+    private Status status;
     private int approvalId;
 
 }

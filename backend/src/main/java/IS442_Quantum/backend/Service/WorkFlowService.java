@@ -35,7 +35,7 @@ public class WorkFlowService {
             FormSequence newFormSequence = new FormSequence();
             newFormSequence.setWorkFlow(newWorkFlow);
             newFormSequence.setForm(formService.getFormById(fs.getForm().getFormId()));
-            newFormSequence.setApproved(fs.isApproved());
+            newFormSequence.setStatus(fs.getStatus());
             formSequences.add(newFormSequence);
         }
         newWorkFlow.setFormSequences(formSequences);
@@ -46,18 +46,37 @@ public class WorkFlowService {
         workFlowRepository.deleteById(id);
     }
 
-    public boolean checkWorkFlowById(Long id){
+    public boolean checkWorkFlowById(long id){
         return workFlowRepository.existsById(id);
     }
 
-    public Optional<WorkFlow> getWorkFlowById(Long id){
+    public Optional<WorkFlow> getWorkFlowById(long id){
         return workFlowRepository.findById(id);
     }
 
-    public WorkFlow updateWorkFlow(Long id,WorkFlow workFlow){
-        if(checkWorkFlowById(id)){
-            return workFlowRepository.save(workFlow);
-        }else {return workFlow;}
+    public WorkFlow updateWorkFlowById(Long id,WorkFlow newWorkFlow){
+        Optional<WorkFlow> optionalWorkFlow = workFlowRepository.findById(id);
+        if(checkWorkFlowById(id)) {
+            WorkFlow eWorkFlow = optionalWorkFlow.get();
+            eWorkFlow.setWfName(newWorkFlow.getWfName());
+            eWorkFlow.setValidated(newWorkFlow.isValidated());
+            eWorkFlow.setWfDateline(newWorkFlow.getWfDateline());
+            eWorkFlow.setWfLastSubmit(newWorkFlow.getWfLastSubmit());
+            eWorkFlow.getFormSequences().clear();
+            Collection<FormSequence> formSequences = new ArrayList<>();
+            for (FormSequence fs : newWorkFlow.getFormSequences()) {
+                FormSequence newFormSequence = new FormSequence();
+                newFormSequence.setWorkFlow(eWorkFlow);
+                newFormSequence.setForm(formService.getFormById(fs.getForm().getFormId()));
+                newFormSequence.setStatus(fs.getStatus());
+                formSequences.add(newFormSequence);
+            }
+            eWorkFlow.setFormSequences(formSequences);
+            return workFlowRepository.save(eWorkFlow);
+        }else {
+            return null;
+        }
+
 
 
     }
