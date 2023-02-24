@@ -131,12 +131,12 @@
                         aria-current="page">Home</a>
                     </li>               
                         <a href="../Admin/Admin_workflow.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
+                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
                             aria-current="page">Workflows</a>
                     </li>
                     <li>
                         <a href="../Admin/Admin_accounts.html"
-                        class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
                         aria-current="page">Accounts</a>
                     </li>
                     <li>
@@ -156,40 +156,29 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
             <table class="w-full text-sm text-left text-gray-500">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                    Assigned Workflows
+                    Workflows
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Admin_home.html'">Home > </span><span onclick="document.location = 'Admin_accounts.html'">Accounts ></span> <span class = 'text-sky-600'>Assigned Workflows</span>
+                        <span onclick="document.location = 'Admin_home.html'">Home > </span><span onclick="document.location = 'Admin_workflow.html'" class = 'text-sky-600'>Workflow </span> 
                     </p>
                 </caption>
                 <thead class="text-xs text-white uppercase bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Date Assigned
+                           ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Admin ID
+                            Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Vendor ID
+                            Date Submitted
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Workflow ID
+                            Last Edited
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Workflow Name
+                            Validated
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Deadline
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Last Submission
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Validation
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Sequences
-                        </th>
+
 
                     </tr>
                 </thead>
@@ -203,13 +192,13 @@
                             {{value.wfName}}
                         </td>
                         <td class="px-6 py-4">
-                            Yes
+                            {{value.wfDateline}}
                         </td>
                         <td class="px-6 py-4">
-                            {{value.dateSubmitted}}
+                            {{value.wfLastSubmit}}
                         </td>
                         <td class="px-6 py-4">
-                            {{value.lastEdited}}
+                            {{value.validated}}
                         </td>
                         <td style="text-align: center;">
                             <button v-on:click="goToSinglepage(value.formId)" type="button">
@@ -234,9 +223,6 @@
                 </button>
             </div>
         
-
-        <div class="mx-8 mt-7">{{test}}</div>
-        <div class="mx-8 mt-8">{{AllWorkflow}}</div>
     </div>
     
 </body>
@@ -247,11 +233,10 @@
         data: {
             localhost: "http://localhost:5000",
             AllWorkflow:"",
-            test : "",
         },
         mounted: async function () {
             const API_URL = this.localhost + "/workflows";
-            this.test = API_URL;
+
             axios.get(API_URL)
                 .then(response => {
                     this.AllWorkflow = response.data;
