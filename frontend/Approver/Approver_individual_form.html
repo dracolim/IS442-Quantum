@@ -183,6 +183,7 @@
         <!-- Table -->
         <div class="relative overflow-x- shadow-md sm:rounded-lg mx-8 mt-3">
             <table class="w-full text-sm text-left text-gray-500">
+                
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Form ID: {{form_id}}
                     <p class="mt-1 text-sm font-normal text-gray-500">
@@ -190,6 +191,7 @@
                         <span class='text-sky-600'>> Form ID: {{form_id}}</span>
                     </p>
                 </caption>
+
                 <thead class="text-xs text-white uppercase bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
@@ -207,7 +209,7 @@
                         <th scope="col" class="px-6 py-3">
                             Required
                         </th>
-                        <th>Remove</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -360,6 +362,7 @@
                     .catch(error => {
                         console.log(error.message)
                     })
+                document.location.reload();
             },
             updateFieldType: function (question_id) {
                 console.log(question_id)
@@ -407,11 +410,11 @@
                 axios.delete(URL)
                 .then(response => {
                     alert("Deletion is successful!")
+                    document.location.reload();
                 })
                 .catch(error => {
                     console.log(error.message)
                 })
-                // document.location.reload();
             },
             addMore(){
                 var button = document.getElementById('inputValues')
