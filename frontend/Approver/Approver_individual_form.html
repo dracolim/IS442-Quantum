@@ -67,6 +67,16 @@
         tr:last-child {
             border-bottom: none;
         }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: opacity 0.5s ease;
+        }
+
+        .v-enter-from,
+        .v-leave-to {
+            opacity: 0;
+        }
     </style>
     <title>Quantum</title>
 </head>
@@ -171,7 +181,7 @@
         <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
         <!-- Table -->
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
+        <div class="relative overflow-x- shadow-md sm:rounded-lg mx-8 mt-3">
             <table class="w-full text-sm text-left text-gray-500">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Form ID: {{form_id}}
@@ -197,27 +207,29 @@
                         <th scope="col" class="px-6 py-3">
                             Required
                         </th>
+                        <th>Remove</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
                         v-for="(value,key) in form_questions">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        <td class="px-6 py-4 font-medium text-gray-900 ">
                             {{value.question.questionId}}
-                        </th>
+                        </td>
                         <!-- field label-->
                         <td class="px-6 py-4">
                             <input
                                 class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
-                                type="text" :placeholder="value.question.inputLabel" v-model="varFieldNames[value.question.questionId]"
-                                :name="value.question.questionId"
+                                type="text" :placeholder="value.question.inputLabel"
+                                v-model="varFieldNames[value.question.questionId]" :name="value.question.questionId"
                                 @change="updateFieldName(value.question.questionId)">
                         </td>
                         <!-- field type -->
                         <td class="px-6 py-4">
-                            <select id="inputType" @change = "updateFieldType(value.question.questionId)" v-model="varFieldTypes[value.question.questionId]"
+                            <select id="inputType" @change="updateFieldType(value.question.questionId)" 
+                                v-model="varFieldTypes[value.question.questionId]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                <option selected value="value.question.inputType">{{value.question.inputType}}</option>
+                                <option :value="value.question.inputType" disabled selected>{{value.question.inputType}}</option>
                                 <option v-if="value.question.inputType != 'checkbox'" value="checkbox">checkbox</option>
                                 <option v-if="value.question.inputType != 'radio'" value="radio">radio</option>
                                 <option v-if="value.question.inputType != 'date'" value="date">date</option>
@@ -230,25 +242,47 @@
                         <!-- input values -->
                         <td class="px-6 py-4">
                             <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 mb-2">
-                                <li v-for ="eachValue in value.question.questionProperties">
+                                <li v-for="eachValue in value.question.questionProperties">
                                     {{eachValue.label}}
                                 </li>
                             </ul>
 
-                            <div v-if ="value.question.inputType == 'radio' || value.question.inputType == 'checkbox'" class ="inline-flex items-center">
+                            <button type="button" class="py-2.5 px-3 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-gray-50 border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 focus:z-10 focus:ring-4 focus:ring-gray-200 gray-600">
+                                <div class ="inline-flex items-center">
+                                    <iconify-icon icon="material-symbols:add"></iconify-icon> Add Options
+                                </div>
+                            </button>
+
+                            <!-- <button id  = "inputValues" v-if="value.question.inputType == 'radio' || value.question.inputType == 'checkbox'"
+                                class="inline-flex items-center" @click="addMore()">
                                 <iconify-icon icon="material-symbols:add"></iconify-icon>
-                                Add Option
-                            </div>
+                                <div class="relative z-0 w-full group">
+                                    <input type="text" name="value.question.questionId" 
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=" " />
+                                    <label for="value.question.questionId"
+                                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Add Option</label>
+                                </div>
+                            </button>
+                            <div id ="more">
+
+                            </div> -->
+
                         </td>
                         <!--required -->
                         <td class="px-6 py-4">
-                            <select id="isRequired"
+                            <select id="isRequired" @change="updateFieldRequired(value.question.questionId)" v-model="varFieldRequired[value.question.questionId]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                <option selected value="value.question.isRequired">{{value.question.isRequired}}
-                                </option>
-                                <option v-if="value.question.isRequired != false" value="false">false</option>
-                                <option v-if="value.question.isRequired != true" value="true">true</option>
+                                <option disabled selected :value="value.question.isRequired">{{value.question.isRequired}}</option>
+                                <option v-if="value.question.isRequired != false" value=false>false</option>
+                                <option v-if="value.question.isRequired != true" value=true>true</option>
                             </select>
+                        </td>
+                        <!-- delete question -->
+                        <td class="px-6 py-4" style ="text-align: center;">
+                            <button @click ="deleteQuestion(value.question.questionId)">
+                                <iconify-icon icon="mdi:trashcan-outline" class ="hover:text-red-500" width="28" height="28"></iconify-icon>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -273,9 +307,10 @@
             form_id: null,
             form_questions: "",
             varFieldNames: [],
-            varFieldTypes: [],
-            varFeidlRequired: [],
-            needOptions: ['radio' , 'checkbox']
+            varFieldTypes: {},
+            varFieldRequired: {},
+            needOptions: ['radio', 'checkbox'],
+            show: false,
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
@@ -287,15 +322,19 @@
             const requestOne = axios.get(API_URL);
             const requestTwo = axios.get(API_URL2);
 
-            axios.all([requestOne , requestTwo])
+            axios.all([requestOne, requestTwo])
                 .then(axios.spread((...responses) => {
                     const responseOne = responses[0].data
                     const responseTwo = responses[1].data
 
                     this.form_questions = responseOne.formQuestions
                     console.log(this.form_questions)
-                    this.all_questions =  responseTwo
+                    this.all_questions = responseTwo
 
+                    for (each of this.all_questions){
+                        this.varFieldTypes[each.questionId] = each.inputType;
+                        this.varFieldRequired[each.questionId] = each.isRequired;
+                    }
                 })).catch(errors => {
                     console.log(errors)
                 })
@@ -307,8 +346,8 @@
             updateFieldName: function (question_id) {
                 console.log(question_id)
                 console.log(this.varFieldNames)
-                for(each of this.all_questions){
-                    if (each.questionId == question_id){
+                for (each of this.all_questions) {
+                    if (each.questionId == question_id) {
                         each['inputLabel'] = this.varFieldNames[question_id]
                         var data = each;
                     }
@@ -322,11 +361,11 @@
                         console.log(error.message)
                     })
             },
-            updateFieldType: function(question_id){
+            updateFieldType: function (question_id) {
                 console.log(question_id)
                 console.log(this.varFieldTypes)
-                for(each of this.all_questions){
-                    if (each.questionId == question_id){
+                for (each of this.all_questions) {
+                    if (each.questionId == question_id) {
                         each['inputType'] = this.varFieldTypes[question_id]
                         var data = each;
                     }
@@ -339,6 +378,44 @@
                     .catch(error => {
                         console.log(error.message)
                     })
+                document.location.reload();
+            },
+            updateFieldRequired: function (question_id) {
+                console.log(question_id)
+                console.log(this.varFieldRequired)
+                for (each of this.all_questions) {
+                    if (each.questionId == question_id) {
+                        var isTrueSet = (this.varFieldRequired[question_id]?.toLowerCase?.() === 'true');
+                        console.log(isTrueSet)
+                        each['isRequired'] = isTrueSet
+                        var data2 = each;
+                        console.log(data2)
+                    }
+                }
+                var URL = this.localhost + '/question/' + question_id
+                axios.put(URL, data2)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+                // document.location.reload();
+            },
+            deleteQuestion: function(question_id){
+                var URL = this.localhost + '/question/' + question_id
+                axios.delete(URL)
+                .then(response => {
+                    alert("Deletion is successful!")
+                })
+                .catch(error => {
+                    console.log(error.message)
+                })
+                // document.location.reload();
+            },
+            addMore(){
+                var button = document.getElementById('inputValues')
+                document.getElementById('more').innerHTML = button
             }
         }
     })
