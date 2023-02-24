@@ -202,8 +202,12 @@
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.question.questionId}}
                         </th>
-                        <td class="px-6 py-4"> 
-                            <input class = "rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full" type = "text"  :placeholder="value.question.inputLabel"  v-model = "varFieldName" @click = "updateFieldName(value.question.questionId)">
+                        <td class="px-6 py-4">
+                            <input
+                                class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                                type="text" :placeholder="value.question.inputLabel" v-model="varFieldName"
+                                :name="value.question.questionId"
+                                v-on:change="updateFieldName(value.question.questionId)">
                         </td>
                         <td class="px-6 py-4">
                             <select id="inputType"
@@ -234,7 +238,8 @@
         </div>
         <div class="mx-8 mt-5 mb-12 py-5">
             <button type="button" v-on:click="goToSinglepage()"
-                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Create Form</button>
+                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Create
+                Form</button>
         </div>
     </div>
 
@@ -249,52 +254,86 @@
             form_id: null,
             form_questions: "",
             varFieldName: "",
+            all_questions: ""
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
             this.form_id = query;
-            const API_URL = this.localhost + "/form/" + this.form_id;
 
+            const API_URL = this.localhost + "/form/" + this.form_id;
+            
             axios.get(API_URL)
-                .then(response => {
-                    this.form_questions = response.data.formQuestions
-                    console.log(this.form_questions)
-                })
-                .catch(error => {
-                    console.error(error);
-                })
+            .then(response => {
+                console.log(response.data)
+                this.form_questions = response.data.formQuestions
+            })
+            .catch(error => {
+                console.log(error)
+            })
+
+            // const API_URL = this.localhost + "/form/" + this.form_id;
+            // const API_URL2 = this.localhost + "/questions"
+
+            // const requestOne = axios.get(API_URL);
+            // const requestTwo = axios.get(API_URL2, {
+            //     dataType: 'jsonp',
+            // });
+
+            // axios.all(requestOne)
+            //     .then(axios.spread((...responses) => {
+            //         const responseOne = responses[0].data
+            //         const responseTwo = responses[1].data
+
+            //         this.form_questions = responseOne.formQuestions
+            //         this.all_questions =  responseTwo
+            //     })).catch(errors => {
+            //         console.log(errors)
+            //     })
         },
         methods: {
             goToSinglepage: function () {
                 window.location.assign("./Approver_overview_form.html?id=" + this.form_id)
             },
-            UpdateField(question_id){
-                rolesURL = this.localhost + '/question/' + question_id
-                    //console.log(rolesURL)
-                    fetch(rolesURL, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            'input_lavel': this.varFieldName,
-                        })
-                    }).then(response => {
+            updateFieldName: function (question_id) {
+                console.log(question_id)
+                var URL = this.localhost + '/question/' + question_id
+                //console.log(rolesURL)
+
+                const data = {
+                    input_label: this.varFieldName
+                };
+                axios.put(URL, data)
+                    .then(response => {
                         console.log(response.data)
-                        // for (i in this.roles) {
-                        //     if (this.roles[i].job_role_id == roleID) {
-                        //         this.roles[i].job_role_name = this.varName
-                        //         this.roles[i].job_role_description = this.varDesc
-                        //     }
-                        // }
-                        //console.log(this.roles)
-                        // this.varObj
-                        this.varFieldName = null
-                        return response.json()
-                    }).then(data =>
-                        // this is the data we get after putting our data,
-                        console.log(data)
-                    )
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+
+                // fetch(rolesURL, {
+                //     method: 'PUT',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({
+                //         'input_label': this.varFieldName,
+                //     })
+                // }).then(response => {
+                //     console.log(response.data)
+                //     // for (i in this.roles) {
+                //     //     if (this.roles[i].job_role_id == roleID) {
+                //     //         this.roles[i].job_role_name = this.varName
+                //     //         this.roles[i].job_role_description = this.varDesc
+                //     //     }
+                //     // }
+                //     //console.log(this.roles)
+                //     // this.varObj
+                //     this.varFieldName = null
+                //     return response.json()
+                // }).then(data =>
+                //     // this is the data we get after putting our data,
+                //     console.log(data)
+                // )
             }
         }
     })
