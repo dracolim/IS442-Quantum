@@ -136,6 +136,9 @@
                 </caption>
                 <thead class="text-xs text-white uppercase bg-sky-600">
                     <tr>
+                        <th style="display:none;" scope="col" class="px-6 py-3">
+                            Row ID
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             User ID
                         </th>
@@ -160,10 +163,17 @@
                         <th scope="col" class="px-6 py-3">
                             Office Fax
                         </th>
+                        <th scope="col" class="px-6 py-3">
+                            Action
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b" v-for="(value,key) in userList">
+                    <!-- check if this works, having index in there to getr v-for index -->
+                    <tr class="bg-white border-b" v-for="(value,key,index) in userList"> 
+                        <th style="display:none;" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            {{index}} 
+                        </th>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.userId}}
                         </th>
@@ -184,6 +194,9 @@
                         </td>
                         <td class="px-6 py-4">
                             {{value.officeFax}}
+                        </td>
+                        <td @click= "DeleteAcc(value.userId, index)" class="px-6 py-4">
+                            Delete
                         </td>
                     </tr>
                 </tbody>
@@ -568,6 +581,17 @@
         methods: {
             createAcc() {
                 console.log(this.gstRegistered);
+            },
+            DeleteAcc(userI, index) {
+                console.log("reached here");
+                console.log(API_URL + userId); //need check if this is correct link first
+                axios.get(API_URL + userId) //need check if this is correct link first
+                .then(response => {
+                    // do something here with index to remove the entire row
+                })
+                .catch(error => {
+                    console.error(error);
+                })
             }
         }
     })
