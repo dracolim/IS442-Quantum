@@ -195,7 +195,7 @@
                         <!-- options -->
                         <!-- text -->
                         <input
-                            v-if="value.question.inputType == 'text' || value.question.inputType == 'textarea' || value.question.inputType == 'date' || value.question.inputType == 'email' || value.question.inputType == 'file'" 
+                            v-if="value.question.inputType == 'text' || value.question.inputType == 'textarea' || value.question.inputType == 'date' || value.question.inputType == 'email' || value.question.inputType == 'file' || value.question.inputType == 'number' " 
                             class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
                             :type="value.question.inputType" :required="value.question.isRequired">
                             
@@ -254,7 +254,8 @@
                                 .form_questions[i].question.inputType == "textarea" || this
                                 .form_questions[i].question.inputType == "email" || this
                                 .form_questions[i].question.inputType == "date" || this
-                                .form_questions[i].question.inputType == "file"  ) {
+                                .form_questions[i].question.inputType == "file"  ||
+                                this.form_questions[i].question.inputType == "number" ) {
                                 this.question_options[question_id] = ""
                             } else {
                                 this.question_options[question_id] = this.form_questions[i].question
