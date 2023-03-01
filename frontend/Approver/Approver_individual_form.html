@@ -187,7 +187,8 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Form ID: {{form_id}}
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <a href="../Approver/Approver_home.html"><span>Forms </span></a>
+                        <a href="../Approver/Approver_home.html"><span>Home ></span></a>
+                        <a href="../Approver/Approver_form.html"><span> Forms </span></a>
                         <span class='text-sky-600'>> Form ID: {{form_id}}</span>
                     </p>
                 </caption>
@@ -239,6 +240,7 @@
                                 <option v-if="value.question.inputType != 'textarea'" value="textarea">textarea</option>
                                 <option v-if="value.question.inputType != 'email'" value="email">email</option>
                                 <option v-if="value.question.inputType != 'file'" value="file">file</option>
+                                <option v-if="value.question.inputType != 'number'" value="number">number</option>
                             </select>
                         </td>
                         <!-- input values -->
