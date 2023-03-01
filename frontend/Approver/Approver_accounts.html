@@ -136,9 +136,6 @@
                 </caption>
                 <thead class="text-xs text-white uppercase bg-sky-600">
                     <tr>
-                        <th style="display:none;" scope="col" class="px-6 py-3">
-                            Row ID
-                        </th>
                         <th scope="col" class="px-6 py-3">
                             User ID
                         </th>
@@ -171,9 +168,6 @@
                 <tbody>
                     <!-- check if this works, having index in there to getr v-for index -->
                     <tr class="bg-white border-b" v-for="(value,key,index) in userList"> 
-                        <th style="display:none;" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            {{index}} 
-                        </th>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.userId}}
                         </th>
@@ -199,7 +193,7 @@
                             {{value.officeFax}}
                         </td>
                         <td class="px-6 py-4" style ="text-align: center;">
-                            <button @click ="deleteAcc(value.userId, index)">
+                            <button @click ="deleteAcc(value.userId)">
                                 <iconify-icon icon="mdi:trashcan-outline" class ="hover:text-red-500" width="28" height="28"></iconify-icon>
                             </button>
                         </td>
@@ -483,7 +477,8 @@
         data: {
             localhost: "http://localhost:5000",
             userList: "",
-            
+            highestUserID: 0,
+
             companyName: "",
             companyRegistrationNo: "",
             companyEmail: "",
@@ -499,7 +494,7 @@
             
         },
         mounted: async function () {
-            const API_URL = this.localhost + "/users/";
+            const API_URL = this.localhost + "/users/"
 
             axios.get(API_URL)
                 .then(response => {
@@ -507,58 +502,47 @@
                     // console.log(this.userList)
                 })
                 .catch(error => {
-                    console.error(error);
+                    console.error(error)
                 })
         },
         methods: {
             createAcc() {
-                console.log("Company Name")
-                console.log(this.companyName);
+                const CREATE_ACC_API_URL = this.localhost + "/users/vendor" 
 
-                console.log("Company Registration Number")
-                console.log(this.companyRegistrationNo);
-                
-                console.log("Company Email")
-                console.log(this.companyEmail);
-
-                console.log("Company Address")
-                console.log(this.companyOfficeAddress);
-
-                console.log("Company GST")
-                console.log(this.gstValue);
-
-                console.log("Company Tel")
-                console.log(this.companyTel);
-
-                console.log("Company Fax")
-                console.log(this.companyFax);
-
-                console.log("User Name")
-                console.log(this.userName);
-
-                console.log("Password")
-                console.log(this.password);
-
-                console.log("Company Business Type")
-                console.log(this.businessType);
-
-                console.log("IF Other Company Business Type")
-                console.log(this.businessTypeOthers);
-
+                axios.post(CREATE_ACC_API_URL, {
+                    "userType": 'VENDOR',
+                    "userName": this.userName,
+                    "emailAddress": this.companyEmail,
+                    "password": this.password,
+                    "companyName": this.companyName,
+                    "officeAddress": this.companyOfficeAddress,
+                    "officeTel": this.companyTel,
+                    "officeFax": this.companyFax,
+                    "registrationNo": this.companyRegistrationNo,
+                    "businessType": this.businessType,
+                    "evaluationId": '123456789test'
+                })
+                .then(function (response) {
+                    console.log("reached here")
+                    alert("Account has been successfully created")
+                    document.location.reload();       
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
 
             },
-            deleteAcc(userId, index) {
-                const DELETE_API_URL = this.localhost + "/users/" + userId;
+            deleteAcc(userId) {
+                const DELETE_ACC_API_URL = this.localhost + "/users/" + userId
 
-                console.log("reached here");
-                console.log(DELETE_API_URL); //need check if this is correct link first
-                // axios.get(API_URL + userId) //need check if this is correct link first
-                // .then(response => {
-                //     // do something here with index to remove the entire row
-                // })
-                // .catch(error => {
-                //     console.error(error);
-                // })
+                axios.delete(DELETE_ACC_API_URL) //need check if this is correct link first
+                .then(response => {
+                    alert("Account has been successfully deleted")
+                    document.location.reload();                
+                })
+                .catch(error => {
+                    console.error(error);
+                })
             }
         }
     })
