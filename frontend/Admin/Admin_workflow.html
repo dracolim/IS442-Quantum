@@ -201,7 +201,7 @@
                             {{value.validated}}
                         </td>
                         <td style="text-align: center;">
-                            <button v-on:click="goToSinglepage(value.formId)" type="button">
+                            <button v-on:click="goToSequencePage(value.formId)" type="button">
                                 <iconify-icon icon="mdi:file-document" width="28" height="28"></iconify-icon>
                             </button>
                         </td>
@@ -218,7 +218,8 @@
                     data-te-toggle="modal"
                     data-te-target="#exampleModalScrollable"
                     data-te-ripple-init
-                    data-te-ripple-color="light">
+                    data-te-ripple-color="light"
+                    v-on:click="goToSinglepage(value.formId)">
                     Assign New Workflow
                 </button>
             </div>
@@ -249,9 +250,10 @@
                 })
         },
         methods: {
-            createAcc() {
-                console.log(this.gstRegistered);
-            }
+            goToSequencePage: function (id) {
+                console.log(id)
+                window.location.assign("./Admin_workflow_sequences.html?id=" + id)
+            },
         }
     })
 </script>
