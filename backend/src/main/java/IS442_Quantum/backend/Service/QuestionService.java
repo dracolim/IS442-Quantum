@@ -43,6 +43,7 @@ public class QuestionService {
         eQuestion.setInputLabel(question.getInputLabel());
         eQuestion.setInputType(question.getInputType());
         eQuestion.setAttribute(question.getAttribute());
+        eQuestion.setIsRequired(question.getIsRequired());
 
         // update question properties if there is any question properties
         if (question.getQuestionProperties() != null) {
