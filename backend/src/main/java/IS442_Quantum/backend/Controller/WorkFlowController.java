@@ -55,6 +55,11 @@ public class WorkFlowController {
         return new ResponseEntity<>(workFlowService.updateWorkFlowById(id,newWorkFlow), HttpStatus.OK);
     }
 
+    @GetMapping("/workflows/pending")
+    public ResponseEntity<?> getPendingWorkFlows() {
+        return new ResponseEntity<>(workFlowRepository.findPendingWorkFlow(), HttpStatus.OK);
+    }
+
 
 
 

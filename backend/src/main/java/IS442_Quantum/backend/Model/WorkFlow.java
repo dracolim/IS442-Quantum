@@ -19,6 +19,7 @@ import java.util.Date;
 public class WorkFlow {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long workFlowId;
     private String wfName;
     @JsonFormat(pattern="yyyy-MM-dd")
