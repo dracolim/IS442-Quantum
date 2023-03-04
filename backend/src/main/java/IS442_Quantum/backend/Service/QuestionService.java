@@ -47,6 +47,11 @@ public class QuestionService {
         // update question properties if there is any question properties
         if (question.getQuestionProperties() != null) {
 
+            List<QuestionProperty> questionProperties = question.getQuestionProperties();
+
+            // Remove all question properties
+            eQuestion.getQuestionProperties().clear();
+
             // Add new question properties
             List<QuestionProperty> updatedQuestionProperty = new ArrayList<>();
             for (QuestionProperty questionProperty : question.getQuestionProperties()){
@@ -61,7 +66,9 @@ public class QuestionService {
                     updatedQuestionProperty.add(newQuestionProperty);
                 }
             }
-            eQuestion.setQuestionProperties(updatedQuestionProperty);
+
+            // set new question properties
+            eQuestion.getQuestionProperties().addAll(updatedQuestionProperty);
         }
 
         return questionRepository.save(eQuestion);
