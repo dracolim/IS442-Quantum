@@ -1,6 +1,7 @@
 package IS442_Quantum.backend.Model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class WorkFlow {
     private Date wfDateline;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date wfLastSubmit;
+    @JsonProperty
     private boolean isValidated;
 
     @OneToMany(mappedBy="workFlow", cascade={CascadeType.ALL})
@@ -34,7 +36,7 @@ public class WorkFlow {
     @JoinColumn(name="userId")
     private Vendor vendor;
 
-    public boolean isValidated() {
-        return isValidated;
-    }
+//    public boolean isValidated() {
+//        return isValidated;
+//    }
 }
