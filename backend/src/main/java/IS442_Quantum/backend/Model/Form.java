@@ -23,7 +23,7 @@ public class Form {
     @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
     private Collection<FormQuestion> formQuestions = new ArrayList<>();
 
-    public void addFormQuestionnaire(FormQuestion fq){
+    public void addFormQuestion(FormQuestion fq){
         formQuestions.add(fq);
         fq.setForm(this);
     }

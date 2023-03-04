@@ -6,7 +6,6 @@ import IS442_Quantum.backend.Model.QuestionProperty;
 import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Repository.FormRepository;
 import IS442_Quantum.backend.Repository.QuestionRepository;
-import jakarta.annotation.PreDestroy;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -144,7 +143,7 @@ public class FormDataLoader implements ApplicationRunner {
             FormQuestion newFq = new FormQuestion();
             newFq.setForm(newVendorAssessmentForm);
             newFq.setQuestion(q);
-            newVendorAssessmentForm.addFormQuestionnaire(newFq);
+            newVendorAssessmentForm.addFormQuestion(newFq);
         }
 
         formRepository.save(newVendorAssessmentForm);
@@ -267,7 +266,7 @@ public class FormDataLoader implements ApplicationRunner {
             FormQuestion newFq = new FormQuestion();
             newFq.setForm(subcontractorSafetyHealthEvaluationForm);
             newFq.setQuestion(q);
-            subcontractorSafetyHealthEvaluationForm.addFormQuestionnaire(newFq);
+            subcontractorSafetyHealthEvaluationForm.addFormQuestion(newFq);
         }
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
