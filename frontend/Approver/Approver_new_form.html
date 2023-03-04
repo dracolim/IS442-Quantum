@@ -191,13 +191,11 @@
             <table class="w-full text-sm text-left text-gray-500">
 
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                    Form ID: {{form_id}} <br>
-                    <span>Form Name: <input type = "text" class="ml-2 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-sky-500 w-9/12" v-model = "form_name" @change = "updateFormName()"></span>
-                    <!-- <span id="form_name">Form Name: {{form_name}}</span> -->
+                    New Form
                     <p class="mt-1 text-sm font-normal text-gray-500">
                         <a href="../Approver/Approver_home.html"><span>Home ></span></a>
                         <a href="../Approver/Approver_form.html"><span> Forms </span></a>
-                        <span class='text-sky-600'>> Form ID: {{form_id}}</span>
+                        <span class='text-sky-600'>> New Form</span>
                     </p>
                 </caption>
 
@@ -261,9 +259,7 @@
                                 </li>
                             </ul>
                             <!-- TO ADD INPUT LABELS -->
-                            <button
-                                v-if="value.question.inputType.toLowerCase() == 'radio' || value.question.inputType.toLowerCase() == 'checkbox'"
-                                type="button" v-on:click="openUpdateModal(value.question.questionId)"
+                            <button v-if = "value.question.inputType.toLowerCase() == 'radio' || value.question.inputType.toLowerCase() == 'checkbox'"  type="button" v-on:click="openUpdateModal(value.question.questionId)"
                                 class="underline border-none py-2.5 mb-2 text-sm font-medium text-gray-900 focus:outline-none rounded-lg hover:text-gray-600 focus:z-10 focus:ring-4 focus:ring-gray-200 gray-600">
                                 <div class="inline-flex items-center">
                                     <iconify-icon icon="material-symbols:add"></iconify-icon> Add Options
@@ -315,12 +311,10 @@
 
                         <div class="px-6 py-6 lg:px-8">
                             <h3 class="mb-4 text-xl font-medium text-gray-900">Add Input Labels</h3>
-                            <h3 class="mb-4 text-md font-medium text-gray-900 underline">
-                                {{all_question_labels[updateID]}}</h3>
+                            <h3 class="mb-4 text-md font-medium text-gray-900 underline">{{all_question_labels[updateID]}}</h3>
                             <form class="space-y-6">
                                 <div>
-                                    <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number
-                                        of
+                                    <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number of
                                         Input
                                         Options</label>
                                     <input type="number" name="optionsNum" id="optionsNum" v-model="totalOptions"
@@ -339,18 +333,17 @@
                                 </div>
 
                                 <div v-if="show == true">
-                                    <label for="text"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Options</label>
+                                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Options</label>
 
                                     <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="varLabels[n]"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
+                                        <input type="text" name="text" id="text" v-model = "varLabels[n]"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
                                             required>
                                     </div>
                                 </div>
-
-                                <button type="button" @click="updateLabel()"
-                                    class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+                                
+                                    <button type="button" @click = "updateLabel()"
+                                        class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -373,9 +366,8 @@
                 localhost: "http://localhost:5000",
                 all_forms: "",
                 all_questions: "",
-                all_question_labels: {},
+                all_question_labels : {},
                 form_id: null,
-                form_name: "",
                 form_questions: "",
                 varFieldNames: [],
                 varFieldTypes: {},
@@ -395,36 +387,26 @@
 
                 const API_URL = this.localhost + "/form/" + this.form_id;
                 const API_URL2 = this.localhost + "/questions"
-                const API_URL3 = this.localhost + "/forms";
 
                 const requestOne = axios.get(API_URL);
                 const requestTwo = axios.get(API_URL2);
-                const requestThree = axios.get(API_URL3)
 
-                axios.all([requestOne, requestTwo, requestThree])
+                axios.all([requestOne, requestTwo])
                     .then(axios.spread((...responses) => {
                         const responseOne = responses[0].data
                         const responseTwo = responses[1].data
-                        const responseThree = responses[2].data
 
                         this.form_questions = responseOne.formQuestions
                         console.log(this.form_questions)
                         this.all_questions = responseTwo
                         console.log(this.all_questions)
-                        this.all_forms = responseThree
-                        for (each of responseThree) {
-                            if (each.formId == this.form_id) {
-                                this.form_name = each.formName
-                            }
-                        }
 
                         for (each of this.all_questions) {
                             this.varFieldTypes[each.questionId] = each.inputType;
                             this.varFieldRequired[each.questionId] = each.isRequired;
                         }
-                        for (each of this.form_questions) {
-                            this.all_question_labels[each.question.questionId] = each.question
-                                .inputLabel
+                        for (each of this.form_questions){
+                            this.all_question_labels[each.question.questionId] = each.question.inputLabel
                         }
                     })).catch(errors => {
                         console.log(errors)
@@ -433,9 +415,6 @@
             methods: {
                 goToSinglepage: function () {
                     window.location.assign("./Approver_overview_form.html?id=" + this.form_id)
-                },
-                updateFormName(){
-                    
                 },
                 updateFieldName: function (question_id) {
                     console.log(question_id)
@@ -463,12 +442,12 @@
                         if (each.questionId == question_id) {
                             each['inputType'] = this.varFieldTypes[question_id]
                             //delete the input labels
-                            if (this.varFieldTypes[question_id] == 'text') {
+                            if (this.varFieldTypes[question_id] == 'text'){
                                 each['questionProperties'] = []
                             }
                             var data = each
                         }
-
+                        
                     }
                     var URL = this.localhost + '/question/' + question_id
                     axios.put(URL, data)
@@ -486,8 +465,7 @@
                     for (each of this.all_questions) {
                         if (each.questionId == question_id) {
                             var thisvalStr = ('' + this.varFieldRequired[question_id]).toLowerCase();
-                            var isTrueSet = thisvalStr === 'true' ? true : (thisvalStr === 'false') ?
-                                false : thisval;
+                            var isTrueSet = thisvalStr === 'true' ? true : (thisvalStr === 'false') ? false : thisval;
                             // var isTrueSet = (this.varFieldRequired[question_id] ? .toLowerCase ? .() ==='true');
                             each['isRequired'] = isTrueSet
                             var data = each;
@@ -539,30 +517,30 @@
                     this.show = false;
                     this.totalOptions = 0
                     this.labelOptions = [],
-                        this.varLabels = []
+                    this.varLabels = []
                 },
                 showOptions() {
                     this.show = true;
                 },
-                updateLabel() {
+                updateLabel(){
                     for (each of this.all_questions) {
                         if (each.questionId == this.updateID) {
                             var all_new_labels = []
-                            for (i in this.varLabels) {
+                            for (i in this.varLabels){
                                 all_new_labels.push(this.varLabels[i].toLowerCase())
                             }
                             // already have options
-                            if ("questionProperties" in each) {
+                            if ("questionProperties" in each){
                                 var all_existing_labels = []
-                                for (each_label of each.questionProperties) {
+                                for (each_label of each.questionProperties){
                                     all_existing_labels.push(each_label.label.toLowerCase())
                                 }
 
                                 var all_labels = each.questionProperties
                                 // the number of input options is lesser than the usual 
-                                if (all_labels.length > Object.keys(this.varLabels).length) {
-                                    for (i in this.varLabels) {
-                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))) {
+                                if (all_labels.length > Object.keys(this.varLabels).length){
+                                    for (i in this.varLabels){
+                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))){
                                             var label_list = {}
                                             label_list['label'] = this.varLabels[i]
                                             all_labels.push(label_list)
@@ -570,14 +548,13 @@
                                     }
                                     console.log(all_labels)
                                     // remove all the extra from original that is not in the new 
-                                    for (i in all_labels) {
+                                    for (i in all_labels){
                                         console.log(all_labels[i].label.toLowerCase())
                                         console.log(all_new_labels)
-                                        if (!(all_new_labels.includes(all_labels[i].label.toLowerCase()))) {
-                                            for (i2 in all_labels) {
-                                                if (all_labels[i2].label.toLowerCase() == all_labels[i].label
-                                                    .toLowerCase()) {
-                                                    all_labels.splice(i2, 1);
+                                        if (!(all_new_labels.includes(all_labels[i].label.toLowerCase()))){
+                                            for (i2 in all_labels){
+                                                if (all_labels[i2].label.toLowerCase() == all_labels[i].label.toLowerCase()){
+                                                    all_labels.splice(i2,1);
                                                     break
                                                 }
                                             }
@@ -585,9 +562,10 @@
                                         }
                                     }
                                     each['questionProperties'] = all_labels
-                                } else {
-                                    for (i in this.varLabels) {
-                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))) {
+                                }
+                                else{
+                                    for (i in this.varLabels){
+                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))){
                                             var label_list = {}
                                             label_list['label'] = this.varLabels[i]
                                             all_labels.push(label_list)
@@ -597,9 +575,9 @@
                                 }
                             }
                             // no options at all
-                            else {
+                            else{
                                 var all_labels = []
-                                for (i in this.varLabels) {
+                                for (i in this.varLabels){
                                     var label_list = {}
                                     label_list['label'] = this.varLabels[i]
                                     all_labels.push(label_list)
@@ -619,7 +597,7 @@
                         })
                         .catch(error => {
                             console.log(error.message)
-                        })
+                    })
                     // this.closeUpdateModal();
                     // document.location.reload();
                 }
