@@ -136,9 +136,6 @@
                 </caption>
                 <thead class="text-xs text-white uppercase bg-sky-600">
                     <tr>
-                        <th style="display:none;" scope="col" class="px-6 py-3">
-                            Row ID
-                        </th>
                         <th scope="col" class="px-6 py-3">
                             User ID
                         </th>
@@ -171,9 +168,6 @@
                 <tbody>
                     <!-- check if this works, having index in there to getr v-for index -->
                     <tr class="bg-white border-b" v-for="(value,key,index) in userList"> 
-                        <th style="display:none;" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            {{index}} 
-                        </th>
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.userId}}
                         </th>
@@ -187,6 +181,9 @@
                             {{value.emailAddress}}
                         </td>
                         <td class="px-6 py-4">
+                            {{value.companyName}}
+                        </td>
+                        <td class="px-6 py-4">
                             {{value.officeAddress}}
                         </td>
                         <td class="px-6 py-4">
@@ -195,8 +192,10 @@
                         <td class="px-6 py-4">
                             {{value.officeFax}}
                         </td>
-                        <td @click= "DeleteAcc(value.userId, index)" class="px-6 py-4">
-                            Delete
+                        <td class="px-6 py-4" style ="text-align: center;">
+                            <button @click ="deleteAcc(value.userId)">
+                                <iconify-icon icon="mdi:trashcan-outline" class ="hover:text-red-500" width="28" height="28"></iconify-icon>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -220,7 +219,7 @@
             <div data-te-modal-dialog-ref
                 class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
                 <div
-                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none light:bg-neutral-600">
                     <div
                         class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                         <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
@@ -240,13 +239,33 @@
                             <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
                                 <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
                                     <div class="lg:col-span-2">
-                                        <!-- COMPANY -->
+                                        <!-- ACCOUNT INFORMATION -->
                                         <span class="text-lg font-bold"
-                                            class="block text-sm font-medium text-gray-900 ">Company</span>
+                                            class="block text-sm font-medium text-gray-900 ">Account Information</span>
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
-                                                <label for="company_name">Company's Name</label>
-                                                <input type="text" name="company_name" id="company_name"
+                                                <label for="user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
+                                                <input v-model="userName" type="text" name="user_name" id="user_name"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                            </div>
+
+                                        <div class="md:col-span-5">
+                                            <label for="password"
+                                                class="block text-sm font-medium text-gray-900 ">Password</label>
+                                            <input v-model="password" type="password" name="password" id="password"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                placeholder="">
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+                                        <!-- COMPANY -->
+                                        <h3 class='text-lg font-bold mt-4 mb-2'>Company</h3>
+                                        <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-5">
+                                                <label for="company_name" class="block text-sm font-medium text-gray-900 ">Company's Name</label>
+                                                <input v-model="companyName" type="text" name="company_name" id="company_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
                                             </div>
 
@@ -255,7 +274,15 @@
                                                     class="block text-sm font-medium text-gray-900 ">Company
                                                     Registration
                                                     No</label>
-                                                <input type="text" name="Registration_no" id="Registration_no"
+                                                <input v-model="companyRegistrationNo" type="text" name="Registration_no" id="Registration_no"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Company_email"
+                                                    class="block text-sm font-medium text-gray-900 ">Company Email</label>
+                                                <input v-model="companyEmail" type="text" name="Company_email" id="Company_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
                                             </div>
@@ -264,7 +291,7 @@
                                                 <label for="address"
                                                     class="block text-sm font-medium text-gray-900 ">Office
                                                     Address</label>
-                                                <input type="text" name="address" id="address"
+                                                <input v-model="companyOfficeAddress" type="text" name="address" id="address"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
                                             </div>
@@ -275,7 +302,7 @@
                                                 <div
                                                     class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                                                     <span
-                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{gst_value}}</span>
+                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{gstValue}}</span>
                                                     <button tabindex="-1" for="show_more"
                                                         id="dropdownRadioBgHoverButton"
                                                         data-dropdown-toggle="dropdownRadioBgHover"
@@ -297,7 +324,7 @@
                                                     <li>
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio" value="Yes"
-                                                                name="default-radio" v-model="gst_value"
+                                                                name="default-radio" v-model="gstValue"
                                                                 aria-selected="true"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
@@ -307,7 +334,7 @@
                                                     <li>
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio" value="No"
-                                                                name="default-radio" v-model="gst_value"
+                                                                name="default-radio" v-model="gstValue"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">No</label>
@@ -319,7 +346,7 @@
                                             <div class="md:col-span-2">
                                                 <label for="tel"
                                                     class="block text-sm font-medium text-gray-900 ">Tel</label>
-                                                <input type="text" name="tel" id="tel"
+                                                <input v-model = "companyTel" type="text" name="tel" id="tel"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
                                             </div>
@@ -327,18 +354,18 @@
                                             <div class="md:col-span-2">
                                                 <label for="fax"
                                                     class="block text-sm font-medium text-gray-900 ">Fax</label>
-                                                <input type="text" name="fax" id="fax"
+                                                <input v-model = "companyFax" type="text" name="fax" id="fax"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label class="block text-sm font-medium text-gray-900 ">Type
-                                                    of business License / Registration</label>
+                                                    of Business</label>
                                                 <div
                                                     class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                                                     <span
-                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{type_of_business_license}}</span>
+                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{businessType}}</span>
                                                     <button tabindex="-1" for="show_more"
                                                         id="dropdownRadioBgHoverButton"
                                                         data-dropdown-toggle="dropdownRadioBgHover2"
@@ -353,12 +380,12 @@
                                                 </div>
                                             </div>
 
-                                            <div v-if="type_of_business_license == 'Others'" class="md:col-span-3">
+                                            <div v-if="businessType == 'Others'" class="md:col-span-3">
                                                 <label class="block text-sm font-medium text-gray-900 ">Please
                                                     Specify</label>
                                                 <input type="text"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    v-model="type_of_business_license_others" placeholder="" />
+                                                    v-model="businessTypeOthers" placeholder="" />
                                             </div>
 
                                             <!-- TYPE OF BUSINESS LICENSE menu -->
@@ -370,7 +397,7 @@
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio"
                                                                 value="Solo Proprietorship" name="default-radio"
-                                                                v-model="type_of_business_license"
+                                                                v-model="businessType"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Solo
@@ -381,7 +408,7 @@
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio"
                                                                 value="Partnership Agreement" name="default-radio"
-                                                                v-model="type_of_business_license"
+                                                                v-model="businessType"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Partnership
@@ -392,7 +419,7 @@
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio"
                                                                 value="Limited Company" name="default-radio"
-                                                                v-model="type_of_business_license"
+                                                                v-model="businessType"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Limited
@@ -402,7 +429,7 @@
                                                     <li>
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio" value="Others"
-                                                                name="default-radio" v-model="type_of_business_license"
+                                                                name="default-radio" v-model="businessType"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Others</label>
@@ -412,116 +439,6 @@
                                             </div>
                                         </div>
 
-                                        <hr>
-                                        <!-- CONTACT PERSON -->
-                                        <h3 class='text-lg font-bold mt-4 mb-2'>Contact Person</h3>
-
-                                        <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                            <div class="md:col-span-5">
-                                                <label for="name"
-                                                    class="block text-sm font-medium text-gray-900 ">Name</label>
-                                                <input type="text" name="name" id="name"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                            </div>
-
-                                            <div class="md:col-span-2">
-                                                <label for="person_tel"
-                                                    class="block text-sm font-medium text-gray-900 ">Tel</label>
-                                                <input type="text" name="person_tel" id="person_tel"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    placeholder="" />
-                                            </div>
-
-                                            <div class="md:col-span-3">
-                                                <label for="Designation"
-                                                    class="block text-sm font-medium text-gray-900 ">Designation</label>
-                                                <input type="text" name="Designation" id="Designation"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    placeholder="" />
-                                            </div>
-
-                                            <div class="md:col-span-5">
-                                                <label class="block text-sm font-medium text-gray-900 ">Nature of
-                                                    Business</label>
-                                                <div
-                                                    class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                                    <span
-                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{nature_of_business}}</span>
-                                                    <button tabindex="-1" for="show_more"
-                                                        id="dropdownRadioBgHoverButton"
-                                                        data-dropdown-toggle="dropdownRadioBgHover3"
-                                                        class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                        <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
-                                                            stroke="currentColor" viewBox="0 0 24 24"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div v-if="nature_of_business == 'Others'" class="md:col-span-3">
-                                                <label class="block text-sm font-medium text-gray-900 ">Please
-                                                    Specify</label>
-                                                <input type="text"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    v-model="nature_of_business_others" placeholder="" />
-                                            </div>
-
-                                            <!-- BUSINESS NATURE menu -->
-                                            <div id="dropdownRadioBgHover3"
-                                                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
-                                                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                                                    aria-labelledby="dropdownRadioBgHoverButton">
-                                                    <li>
-                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                                            <input id="default-radio-4" type="radio"
-                                                                value="Manufacturing" name="default-radio"
-                                                                v-model="nature_of_business"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                                            <label for="default-radio-4"
-                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Manufacturing</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                                            <input id="default-radio-4" type="radio"
-                                                                value="Agent/Dealer" name="default-radio"
-                                                                v-model="nature_of_business"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                                            <label for="default-radio-4"
-                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Agent/Dealer</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                                            <input id="default-radio-4" type="radio" value="Others"
-                                                                name="default-radio" v-model="nature_of_business"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                                            <label for="default-radio-4"
-                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Others</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="md:col-span-5">
-                                                <label for="product_service"
-                                                    class="block text-sm font-medium text-gray-900 ">Product/Service</label>
-                                                <input type="text" name="product_service" id="product_service"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                            </div>
-
-                                            <div class="md:col-span-5">
-                                                <label class="block mb-1 text-sm font-medium text-gray-900 "
-                                                    for="default_size">Company's Profile</label>
-                                                <input
-                                                    class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-                                                    id="default_size" type="file">
-                                            </div>
-
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -529,7 +446,7 @@
                     </div>
                     <div
                     class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                    <button type="button"  data-te-modal-dismiss
+                    <button @click="createAcc" type="button"  data-te-modal-dismiss
                         class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
                             fill="#FFFFFF">
@@ -560,14 +477,24 @@
         data: {
             localhost: "http://localhost:5000",
             userList: "",
-            gst_value: "Yes",
-            type_of_business_license: "",
-            type_of_business_license_others: "",
-            nature_of_business: "",
-            nature_of_business_others: "",
+            highestUserID: 0,
+
+            companyName: "",
+            companyRegistrationNo: "",
+            companyEmail: "",
+            companyOfficeAddress: "",
+            gstValue: "Yes",
+            companyTel: "",
+            companyFax: "",
+            userName: "",
+            password: "",
+            businessType: "",
+            businessTypeOthers: "",
+
+            
         },
         mounted: async function () {
-            const API_URL = this.localhost + "/users";
+            const API_URL = this.localhost + "/users/"
 
             axios.get(API_URL)
                 .then(response => {
@@ -575,19 +502,44 @@
                     // console.log(this.userList)
                 })
                 .catch(error => {
-                    console.error(error);
+                    console.error(error)
                 })
         },
         methods: {
-            createAcc() {
-                console.log(this.gstRegistered);
+            async createAcc() {
+                console.log('reached here')
+                await axios
+                    .post("http://localhost:5000/users/vendor", 
+                    {
+                        "userType": 'VENDOR',
+                        "userName": this.userName,
+                        "emailAddress": this.companyEmail,
+                        "password": this.password,
+                        "companyName": this.companyName,
+                        "officeAddress": this.companyOfficeAddress,
+                        "officeTel": this.companyTel,
+                        "officeFax": this.companyFax,
+                        "registrationNo": this.companyRegistrationNo,
+                        "businessType": this.businessType,
+                        "evaluationId": '123456789test'
+                    })
+                    .then((response) => {
+                        console.log("reached here")
+                        alert("Account has been successfully created")
+                        document.location.reload();      
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+
             },
-            DeleteAcc(userI, index) {
-                console.log("reached here");
-                console.log(API_URL + userId); //need check if this is correct link first
-                axios.get(API_URL + userId) //need check if this is correct link first
+            deleteAcc(userId) {
+                const DELETE_ACC_API_URL = this.localhost + "/users/" + userId
+
+                axios.delete(DELETE_ACC_API_URL) //need check if this is correct link first
                 .then(response => {
-                    // do something here with index to remove the entire row
+                    alert("Account has been successfully deleted")
+                    document.location.reload();                
                 })
                 .catch(error => {
                     console.error(error);
