@@ -441,8 +441,11 @@
                     for (each of this.all_questions) {
                         if (each.questionId == question_id) {
                             each['inputType'] = this.varFieldTypes[question_id]
-                            var data = each;
                         }
+                        if (this.varFieldTypes[question_id] == "text"){
+                            each['questionProperties'] = []
+                        }
+                        var data = each
                     }
                     var URL = this.localhost + '/question/' + question_id
                     axios.put(URL, data)
@@ -516,19 +519,73 @@
                 },
                 showOptions() {
                     this.show = true;
-                    console.log(this.totalOptions)
                 },
                 updateLabel(){
                     for (each of this.all_questions) {
                         if (each.questionId == this.updateID) {
+                            var all_new_labels = []
+                            for (i in this.varLabels){
+                                all_new_labels.push(this.varLabels[i].toLowerCase())
+                            }
+                            // already have options
                             if ("questionProperties" in each){
-                                each.questionProperties = this.varLabels
+                                var all_existing_labels = []
+                                for (each_label of each.questionProperties){
+                                    all_existing_labels.push(each_label.label.toLowerCase())
+                                }
+
+                                var all_labels = each.questionProperties
+                                // the number of input options is lesser than the usual 
+                                if (all_labels.length > Object.keys(this.varLabels).length){
+                                    for (i in this.varLabels){
+                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))){
+                                            var label_list = {}
+                                            label_list['label'] = this.varLabels[i]
+                                            all_labels.push(label_list)
+                                        }
+                                    }
+                                    console.log(all_labels)
+                                    // remove all the extra from original that is not in the new
+                                    for (i in all_labels){
+                                        console.log(all_labels[i].label.toLowerCase())
+                                        console.log(all_new_labels)
+                                        if (!(all_new_labels.includes(all_labels[i].label.toLowerCase()))){
+                                            for (i2 in all_labels){
+                                                if (all_labels[i2].label.toLowerCase() == all_labels[i].label.toLowerCase()){
+                                                    all_labels.splice(i2,1);
+                                                    break
+                                                }
+                                            }
+                                            console.log(all_labels)
+                                        }
+                                    }
+                                    each['questionProperties'] = all_labels
+                                }
+                                else{
+                                    for (i in this.varLabels){
+                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))){
+                                            var label_list = {}
+                                            label_list['label'] = this.varLabels[i]
+                                            all_labels.push(label_list)
+                                        }
+                                    }
+                                    each['questionProperties'] = all_labels
+                                }
                             }
+                            // no options at all
                             else{
-                                each['questionProperties'] = this.varLabels
+                                var all_labels = []
+                                for (i in this.varLabels){
+                                    var label_list = {}
+                                    label_list['label'] = this.varLabels[i]
+                                    all_labels.push(label_list)
+                                }
+                                each['questionProperties'] = all_labels
                             }
+
                             var data = each;
                             console.log(data)
+                            break
                         }
                     }
                     var URL = this.localhost + '/question/' + this.updateID
@@ -539,7 +596,8 @@
                         .catch(error => {
                             console.log(error.message)
                     })
-                    console.log(this.varLabels)
+                    // this.closeUpdateModal();
+                    // document.location.reload();
                 }
             }
         })

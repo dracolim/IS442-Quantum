@@ -161,7 +161,7 @@
                     </li>
                     <li>
                         <a href="../Approver/Approver_form.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white">
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
                             Forms</a>
                     </li>
                 </ul>
@@ -182,7 +182,7 @@
                 <div class="w-7/12 p-6 bg-white border border-gray-200 rounded-lg shadow">
                     <div class='row' style='height: 8px; background-color: #0284c7'></div>
                     <h5 class="mt-2 mb-2 text-xl font-bold tracking-tight text-gray-900">{{form_name}}</h5>
-                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Form ID: {{form_id}}</p>
+                    <p class="mb-3 font-normal text-gray-700">Form ID: {{form_id}}</p>
                 </div>
             </div>
 
@@ -204,7 +204,7 @@
                             <div class="flex items-center mb-4">
                                 <input :id ="value3.id" class="bg-gray-50 border border-gray-300" :type="value.question.inputType" :name="value.question.questionId" :required="value.question.isRequired" value = "value3.label">
                                 <label for="value3.id" :id ="value3.id"
-                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300" :name="value.question.questionId">{{value3.label}}</label>
+                                    class="ml-2 text-sm font-medium text-gray-900" :name="value.question.questionId">{{value3.label}}</label>
                             </div>
                         </div>
                     </div>
