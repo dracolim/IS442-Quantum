@@ -736,8 +736,8 @@
                         .catch(error => {
                             console.log(error.message)
                         })
-                    // this.closeUpdateModal();
-                    // document.location.reload();
+                    this.closeUpdateModal();
+                    document.location.reload();
                 },
                 addNewField(){
                     const API_URL4 = this.localhost + "/form/" + this.form_id
