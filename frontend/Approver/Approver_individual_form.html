@@ -740,17 +740,17 @@
                     // document.location.reload();
                 },
                 addNewField(){
-                    const API_URL4 = this.localhost + "/question" 
-                    axios.post(API_URL4 , {
+                    const API_URL4 = this.localhost + "/form" 
+                    
+                    axios.put(API_URL4 , {
                         inputLabel: this.NewFieldName,
                         inputType: this.NewFieldType,
                         isRequired: this.NewisRequired,
-                        queestionProperties: this.NewOptions
                     })
                     .then(response => {
                         console.log(response.data)
                     })
-                    .catch(errro => {
+                    .catch(error => {
                         console.log(error.message)
                     })
                     // console.log(this.NewFieldName)
