@@ -367,7 +367,7 @@
                         d="M12 17c-2.727 0-6-2.778-6-5s3.273-5 6-5s6 2.778 6 5s-3.273 5-6 5Zm-1-5a1 1 0 1 0 2 0a1 1 0 0 0-2 0Z" />
                 </svg>
                 View Form</button>
-            <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal" 
+            <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
                 class="inline-flex items-center mr-5 float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
                     <path fill="#FFFFFF"
@@ -459,7 +459,7 @@
                                     <option value=true>true</option>
                                 </select>
                             </div>
-                            <button type="button" @click = "addNewField()" data-modal-toggle="default-modal"
+                            <button type="button" @click="addNewField()" data-modal-toggle="default-modal"
                                 class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create
                                 New Field</button>
                         </form>
@@ -554,18 +554,17 @@
                     axios.get(API_URL)
                         .then(response => {
                             this.one_form = response.data
-                        })
-                        .catch(error => {
-                            console.log(error.message)
-                        })
+                            //edit the form name
+                            this.one_form['formName'] = this.form_name
 
-                    //edit the form name
-                    this.one_form['formName'] = this.form_name
-
-                    // udpate new form name
-                    axios.put(API_URL, this.one_form)
-                        .then(response => {
-                            console.log(response.data)
+                            // update new form name
+                            axios.put(API_URL, this.one_form)
+                                .then(response => {
+                                    console.log(response.data)
+                                })
+                                .catch(error => {
+                                    console.log(error.message)
+                                })
                         })
                         .catch(error => {
                             console.log(error.message)
@@ -673,7 +672,7 @@
                     this.show = false;
                     this.totalOptions = 0
                     this.labelOptions = [],
-                    this.varLabels = []
+                        this.varLabels = []
                 },
                 showOptions() {
                     this.show = true;
