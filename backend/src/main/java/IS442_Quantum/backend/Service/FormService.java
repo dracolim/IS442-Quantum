@@ -59,10 +59,13 @@ public class FormService {
         eForm.setLastEdited(form.getLastEdited());
         if (type == 1){
             eForm.getFormQuestions().addAll(form.getFormQuestions().stream().map(formQuestion -> {
+                Question generatedQuestion;
                 if (formQuestion.getQuestion().getQuestionId()==null){
-                    questionService.createNewQuestion(formQuestion.getQuestion());
+                    generatedQuestion = questionService.createNewQuestion(formQuestion.getQuestion());
+                } else {
+                    generatedQuestion = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
                 }
-                Question question = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
+                Question question = questionService.findByQuestion(generatedQuestion.getQuestionId());
                 FormQuestion newFormQuestion = new FormQuestion();
                 newFormQuestion.setForm(eForm);
                 newFormQuestion.setQuestion(question);
@@ -72,10 +75,13 @@ public class FormService {
         } else {
             ArrayList<FormQuestion> updatedFormQuestions = new ArrayList<>();
             for (FormQuestion formQuestion : form.getFormQuestions()) {
-                if (formQuestion.getQuestion().getQuestionId() == null) {
-                    questionService.createNewQuestion(formQuestion.getQuestion());
+                Question generatedQuestion;
+                if (formQuestion.getQuestion().getQuestionId()==null){
+                    generatedQuestion = questionService.createNewQuestion(formQuestion.getQuestion());
+                } else {
+                    generatedQuestion = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
                 }
-                Question question = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
+                Question question = questionService.findByQuestion(generatedQuestion.getQuestionId());
                 FormQuestion existingFormQuestion = eForm.getFormQuestions().stream()
                         .filter(fq -> fq.getFormQId().equals(formQuestion.getFormQId()))
                         .findFirst().orElse(null);
