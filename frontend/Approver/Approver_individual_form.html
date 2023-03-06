@@ -225,7 +225,7 @@
                 </thead>
                 <tbody id="tablebody">
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
-                        v-for="(value,key) in form_questions" track-by ="$index">
+                        v-for="(value,key) in form_questions" track-by="$index">
                         <td class="px-6 py-4 font-medium text-gray-900 ">
                             {{value.question.questionId}}
                         </td>
@@ -365,49 +365,61 @@
                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
                     <path fill="none" stroke="currentColor" stroke-width="2"
                         d="M12 17c-2.727 0-6-2.778-6-5s3.273-5 6-5s6 2.778 6 5s-3.273 5-6 5Zm-1-5a1 1 0 1 0 2 0a1 1 0 0 0-2 0Z" />
-                    </svg>
+                </svg>
                 View Form</button>
             <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
                 class="inline-flex items-center mr-5 float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
                     <path fill="#FFFFFF"
                         d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
-                    </svg> Add New Fields
+                </svg> Add New Fields
             </button>
         </div>
 
         <!-- CREATE NEW FIELD MODAL -->
-        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+        <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
             <div class="relative w-full h-full max-w-md md:h-auto">
                 <!-- Modal content -->
                 <div class="relative bg-white rounded-lg shadow">
-                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="authentication-modal">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                    <button type="button"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                        data-modal-hide="authentication-modal">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="px-6 py-6 lg:px-8">
                         <h3 class="mb-4 text-xl font-medium text-gray-900">Add New Field</h3>
                         <form class="space-y-6" action="#">
                             <div>
-                                <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field Name</label>
-                                <input type="NewFieldName" v-model = "NewFieldName" name="NewFieldName" id="NewFieldName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                                <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
+                                    Name</label>
+                                <input type="NewFieldName" v-model="NewFieldName" name="NewFieldName" id="NewFieldName"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
                             </div>
                             <div>
-                                <label for="NewFieldType" class="block mb-2 text-sm font-medium text-gray-900">Field Type</label>
+                                <label for="NewFieldType" class="block mb-2 text-sm font-medium text-gray-900">Field
+                                    Type</label>
                                 <select id="inputType" v-model="NewFieldType"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                <option value = "text" selected>Text</option>
-                                <option value="checkbox">Checkbox</option>
-                                <option value="radio">Radio</option>
-                                <option value="date">Date</option>
-                                <option value="text">Text</option>
-                                <option value="textarea">Textarea</option>
-                                <option value="email">Email</option>
-                                <option value="file">File</option>
-                                <option value="number">Number</option>
-                            </select>
+                                    <option value="text" selected>Text</option>
+                                    <option value="checkbox">Checkbox</option>
+                                    <option value="radio">Radio</option>
+                                    <option value="date">Date</option>
+                                    <option value="text">Text</option>
+                                    <option value="textarea">Textarea</option>
+                                    <option value="email">Email</option>
+                                    <option value="file">File</option>
+                                    <option value="number">Number</option>
+                                </select>
                             </div>
-                            <div v-if ="NewFieldType == 'checkbox' || NewFieldType == 'radio'">
+                            <div v-if="NewFieldType == 'checkbox' || NewFieldType == 'radio'">
                                 <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number
                                     of
                                     Input
@@ -436,22 +448,25 @@
                                             required>
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div>
-                                <label for="NewisRequired" class="block mb-2 text-sm font-medium text-gray-900">Required</label>
+                                <label for="NewisRequired"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Required</label>
                                 <select id="NewisRequired" v-model="NewisRequired"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
-                                <option value=false selected>false</option>
-                                <option value=true>true</option>
+                                    <option value=false selected>false</option>
+                                    <option value=true>true</option>
                                 </select>
                             </div>
-                            <button type="button" @click ="addNewField()" class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create New Field</button>
+                            <button type="button" @click="addNewField()"
+                                class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create
+                                New Field</button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
 
     <script>
@@ -482,6 +497,7 @@
                 NewFieldName: "",
                 NewisRequired: false,
                 NewOptions: {},
+                raw_form: "",
             },
             mounted: async function () {
                 var query = window.location.search.substring(4);
@@ -502,6 +518,7 @@
                         const responseThree = responses[2].data
 
                         this.form_questions = responseOne.formQuestions
+                        this.raw_form = responseOne
                         console.log(this.form_questions)
                         this.all_questions = responseTwo
                         console.log(this.all_questions)
@@ -739,20 +756,30 @@
                     this.closeUpdateModal();
                     document.location.reload();
                 },
-                addNewField(){
-                    const API_URL4 = this.localhost + "/form/" + this.form_id
-                    
-                    axios.put(API_URL4 , {
-                        inputLabel: this.NewFieldName,
-                        inputType: this.NewFieldType,
-                        isRequired: this.NewisRequired,
-                    })
-                    .then(response => {
-                        console.log(response.data)
-                    })
-                    .catch(error => {
-                        console.log(error.message)
-                    })
+                addNewField() {
+                    var all_questions_in_this_form = this.raw_form.formQuestions
+                    var check = 0
+
+                    for (each_question of all_questions_in_this_form) {
+                        if (each_question.question.inputLabel != this.NewFieldName) {
+                                check += 1
+                        }
+                    }
+
+                    if (check == all_questions_in_this_form.length){
+                        const API_URL4 = this.localhost + "/question"
+                            axios.post(API_URL4, {
+                                    inputLabel: this.NewFieldName,
+                                    inputType: this.NewFieldType,
+                                    isRequired: this.NewisRequired,
+                                })
+                                .then(response => {
+                                    console.log(response.data)
+                                })
+                                .catch(error => {
+                                    console.log(error.message)
+                            })
+                    }
                     // console.log(this.NewFieldName)
                     // console.log(this.NewFieldType)
                     // console.log(this.NewOptions)
