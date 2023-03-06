@@ -27,7 +27,20 @@ public class QuestionService {
     }
 
     public Question createNewQuestion(Question newQuestion){
-        return questionRepository.save(newQuestion);
+        Question question = new Question();
+        question.setInputLabel(newQuestion.getInputLabel());
+        question.setInputType(newQuestion.getInputType());
+        question.setAttribute(newQuestion.getAttribute());
+        question.setIsRequired(newQuestion.getIsRequired());
+        List<QuestionProperty> questionProperties = new ArrayList<>();
+        for (QuestionProperty questionProperty : newQuestion.getQuestionProperties()) {
+            QuestionProperty newQuestionProperty = new QuestionProperty();
+            newQuestionProperty.setLabel(questionProperty.getLabel());
+            newQuestionProperty.setQuestion(question);
+            questionProperties.add(newQuestionProperty);
+        }
+        question.getQuestionProperties().addAll(questionProperties);
+        return questionRepository.save(question);
     }
 
     public void deleteQuestionById(Long id){
