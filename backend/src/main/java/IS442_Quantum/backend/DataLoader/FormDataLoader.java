@@ -11,6 +11,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class FormDataLoader implements ApplicationRunner {
@@ -126,7 +127,6 @@ public class FormDataLoader implements ApplicationRunner {
 
         questionRepository.saveAll(Arrays.asList(q1,q2,q3,q4,q5,q6,q7,q7a,q8,q9,q9a,q10));
 
-
         // set new Form
         Form newVendorAssessmentForm = new Form();
         newVendorAssessmentForm.setFormName("New Vendor Assessment Form");
@@ -139,165 +139,237 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(newVendorAssessmentForm);
 
-
-        // create Section 1:
-        Section generalInformationSection = new Section();
-        generalInformationSection.setTitle("General Information");
-        generalInformationSection.setDescription("General Information about the vendor company");
-        generalInformationSection.setForm(newVendorAssessmentForm);
-
-        newVendorAssessmentForm.getSections().add(generalInformationSection);
-
         Question[] questionSet1 = {q1,q2,q3,q4,q5,q6,q7,q7a,q8};
 
-        for (Question q : questionSet1){
-            QuestionSection newSq = new QuestionSection();
-            newSq.setSection(generalInformationSection);
-            newSq.setQuestion(q);
-            generalInformationSection.addSectionQuestion(newSq);
-        }
+        // create Section 1: General Information about the vendor company
+        setupSection(
+                "General Information",
+                "General Information about the vendor company",
+                newVendorAssessmentForm,
+                questionSet1
+        );
 
-        // create Section 2:
-        Section evaluationSection = new Section();
-        evaluationSection.setTitle("Evaluation");
-        evaluationSection.setDescription("Vendor Evaluation (to be filled by Quantum Leap");
-        evaluationSection.setForm(newVendorAssessmentForm);
 
-        newVendorAssessmentForm.getSections().add(evaluationSection);
-
+        // create Section 2: Vendor Evaluation (to be filled by Quantum Leap)
         Question[] questionSet2 = {q9, q9a, q10};
 
-        for (Question q : questionSet2){
-            QuestionSection newSq = new QuestionSection();
-            newSq.setSection(evaluationSection);
-            newSq.setQuestion(q);
-            evaluationSection.addSectionQuestion(newSq);
-        }
+        setupSection(
+                "Evaluation",
+                "Vendor Evaluation (to be filled by Quantum Leap)",
+                newVendorAssessmentForm,
+                questionSet2
+        );
 
         formRepository.save(newVendorAssessmentForm);
 
         // --------- Subcontractor's Safety & Health pre-evaluation -------------
 
-//        Question f2q1 = new Question();
-//        f2q1.setInputLabel("Name of Sub-Contractor");
-//        f2q1.setInputType("text");
-//        f2q1.setIsRequired(true);
-//
-//        Question f2q2 = new Question();
-//        f2q2.setInputLabel("Scope of Work");
-//        f2q2.setInputType("text");
-//        f2q2.setIsRequired(true);
-//
-//        Question f2q3 = new Question();
-//        f2q3.setInputLabel("Evaluated By");
-//        f2q3.setInputType("text");
-//        f2q3.setIsRequired(true);
-//
-//        Question f2q4 = new Question();
-//        f2q4.setInputLabel("Date");
-//        f2q4.setInputType("Date");
-//        f2q4.setIsRequired(true);
-//
-//        Question f2q5 = new Question();
-//        f2q5.setInputLabel("Is there a written Safety & Health Policy?");
-//        addYesNoRadio(f2q5);
-//        f2q5.setIsRequired(true);
-//
-//        Question f2q6 = new Question();
-//        f2q6.setInputLabel("Is there a Safety Organisation with proper delegation of responsibility and accountability for safety and health?");
-//        addYesNoRadio(f2q6);
-//        f2q6.setIsRequired(true);
-//
-//        Question f2q7 = new Question();
-//        f2q7.setInputLabel("Is there a written safety commitment and is it submitted?");
-//        addYesNoRadio(f2q7);
-//        f2q7.setIsRequired(true);
-//
-//        Question f2q8 = new Question();
-//        f2q8.setInputLabel("Are relevant safety training courses provided for management/Supervisors?");
-//        addYesNoRadio(f2q8);
-//        f2q8.setIsRequired(true);
-//
-//        Question f2q9 = new Question();
-//        f2q9.setInputLabel("Are relevant safety training courses provided for workers?");
-//        addYesNoRadio(f2q9);
-//        f2q9.setIsRequired(true);
-//
-//        Question f2q10 = new Question();
-//        f2q10.setInputLabel("Are relevant safety training certificates submitted?");
-//        addYesNoRadio(f2q10);
-//        f2q10.setIsRequired(true);
-//
-//        Question f2q11 = new Question();
-//        f2q11.setInputLabel("Are there written safety & health rules for the workers?");
-//        addYesNoRadio(f2q11);
-//        f2q11.setIsRequired(true);
-//
-//        Question f2q12 = new Question();
-//        f2q12.setInputLabel("Are there written safe work procedures/ risk assessment formulated and submitted?");
-//        addYesNoRadio(f2q12);
-//        f2q12.setIsRequired(true);
-//
-//        Question f2q13 = new Question();
-//        f2q13.setInputLabel("Is there a written programme outlining inspection guidelines, frequency and follow-up corrective actions?");
-//        addYesNoRadio(f2q13);
-//        f2q13.setIsRequired(true);
-//
-//        Question f2q14 = new Question();
-//        f2q14.setInputLabel("Is there available Personal Protective Equipment and of proper working condition and comply to safety requirements?");
-//        addYesNoRadio(f2q14);
-//        f2q14.setIsRequired(true);
-//
-//        Question f2q15 = new Question();
-//        f2q15.setInputLabel("Is there a Safety Supervisor working at least 5 hrs / week?");
-//        addYesNoRadio(f2q15);
-//        f2q15.setIsRequired(true);
-//
-//        Question f2q16 = new Question();
-//        f2q16.setInputLabel("Is there a qualified First Aider?");
-//        addYesNoRadio(f2q16);
-//        f2q16.setIsRequired(true);
-//
-//        Question f2q17 = new Question();
-//        f2q17.setInputLabel("Are there relevant Licensed Electrical Workers, qualified engineers, qualified supervisors, lifting supervisors, qualified JCB Tower/Mobile/Crawler Crane operators?");
-//        addYesNoRadio(f2q17);
-//        f2q17.setIsRequired(true);
-//
-//        Question f2q18 = new Question();
-//        f2q18.setInputLabel("Number of Temporary Disability Cases");
-//        f2q18.setInputType("number");
-//        f2q18.setIsRequired(true);
-//
-//        Question f2q19 = new Question();
-//        f2q19.setInputLabel("Number of Permanent Disability Cases");
-//        f2q19.setInputType("number");
-//        f2q19.setIsRequired(true);
-//
-//        Question f2q20 = new Question();
-//        f2q20.setInputLabel("Number of Fatal Cases");
-//        f2q20.setInputType("number");
-//        f2q20.setIsRequired(true);
-//
-//        questionRepository.saveAll(Arrays.asList(f2q1,f2q2,f2q3,f2q4,f2q5,f2q6,f2q7,f2q8,f2q9, f2q10, f2q11, f2q12, f2q13, f2q14, f2q15, f2q16, f2q17, f2q18, f2q19));
-//
-//        Form subcontractorSafetyHealthEvaluationForm = new Form();
-//        subcontractorSafetyHealthEvaluationForm.setFormName("Subcontractor's Safety & Health Pre-Evaluation");
-//
-//        subcontractorSafetyHealthEvaluationForm.setDateSubmitted(formDate);
-//        subcontractorSafetyHealthEvaluationForm.setLastEdited(formDate);
-//
-//        formRepository.save(subcontractorSafetyHealthEvaluationForm);
-//
-//        Question[] questions2 = {f2q1,f2q2,f2q3,f2q4,f2q5,f2q6,f2q7,f2q8,f2q9, f2q10, f2q11, f2q12, f2q13, f2q14, f2q15, f2q16, f2q17, f2q18, f2q19};
-//
-//        for (Question q : questions2){
-//            QuestionSection newFq = new QuestionSection();
-//            newFq.setForm(subcontractorSafetyHealthEvaluationForm);
-//            newFq.setQuestion(q);
-//            subcontractorSafetyHealthEvaluationForm.addFormQuestion(newFq);
-//        }
-//
-//        formRepository.save(subcontractorSafetyHealthEvaluationForm);
+        Question f2q1 = new Question();
+        f2q1.setInputLabel("Name of Sub-Contractor");
+        f2q1.setInputType("text");
+        f2q1.setIsRequired(true);
+
+        Question f2q2 = new Question();
+        f2q2.setInputLabel("Scope of Work");
+        f2q2.setInputType("text");
+        f2q2.setIsRequired(true);
+
+        Question f2q3 = new Question();
+        f2q3.setInputLabel("Evaluated By");
+        f2q3.setInputType("text");
+        f2q3.setIsRequired(true);
+
+        Question f2q4 = new Question();
+        f2q4.setInputLabel("Date");
+        f2q4.setInputType("Date");
+        f2q4.setIsRequired(true);
+
+        Question f2q5 = new Question();
+        f2q5.setInputLabel("Is there a written Safety & Health Policy?");
+        addYesNoRadio(f2q5);
+        f2q5.setIsRequired(true);
+
+        Question f2q6 = new Question();
+        f2q6.setInputLabel("Is there a Safety Organisation with proper delegation of responsibility and accountability for safety and health?");
+        addYesNoRadio(f2q6);
+        f2q6.setIsRequired(true);
+
+        Question f2q7 = new Question();
+        f2q7.setInputLabel("Is there a written safety commitment and is it submitted?");
+        addYesNoRadio(f2q7);
+        f2q7.setIsRequired(true);
+
+        Question f2q8 = new Question();
+        f2q8.setInputLabel("Are relevant safety training courses provided for management/Supervisors?");
+        addYesNoRadio(f2q8);
+        f2q8.setIsRequired(true);
+
+        Question f2q9 = new Question();
+        f2q9.setInputLabel("Are relevant safety training courses provided for workers?");
+        addYesNoRadio(f2q9);
+        f2q9.setIsRequired(true);
+
+        Question f2q10 = new Question();
+        f2q10.setInputLabel("Are relevant safety training certificates submitted?");
+        addYesNoRadio(f2q10);
+        f2q10.setIsRequired(true);
+
+        Question f2q11 = new Question();
+        f2q11.setInputLabel("Are there written safety & health rules for the workers?");
+        addYesNoRadio(f2q11);
+        f2q11.setIsRequired(true);
+
+        Question f2q12 = new Question();
+        f2q12.setInputLabel("Are there written safe work procedures/ risk assessment formulated and submitted?");
+        addYesNoRadio(f2q12);
+        f2q12.setIsRequired(true);
+
+        Question f2q13 = new Question();
+        f2q13.setInputLabel("Is there a written programme outlining inspection guidelines, frequency and follow-up corrective actions?");
+        addYesNoRadio(f2q13);
+        f2q13.setIsRequired(true);
+
+        Question f2q14 = new Question();
+        f2q14.setInputLabel("Is there available Personal Protective Equipment and of proper working condition and comply to safety requirements?");
+        addYesNoRadio(f2q14);
+        f2q14.setIsRequired(true);
+
+        Question f2q15 = new Question();
+        f2q15.setInputLabel("Is there a Safety Supervisor working at least 5 hrs / week?");
+        addYesNoRadio(f2q15);
+        f2q15.setIsRequired(true);
+
+        Question f2q16 = new Question();
+        f2q16.setInputLabel("Is there a qualified First Aider?");
+        addYesNoRadio(f2q16);
+        f2q16.setIsRequired(true);
+
+        Question f2q17 = new Question();
+        f2q17.setInputLabel("Are there relevant Licensed Electrical Workers, qualified engineers, qualified supervisors, lifting supervisors, qualified JCB Tower/Mobile/Crawler Crane operators?");
+        addYesNoRadio(f2q17);
+        f2q17.setIsRequired(true);
+
+        Question f2q18 = new Question();
+        f2q18.setInputLabel("Number of Temporary Disability Cases");
+        f2q18.setInputType("number");
+        f2q18.setIsRequired(true);
+
+        Question f2q19 = new Question();
+        f2q19.setInputLabel("Number of Permanent Disability Cases");
+        f2q19.setInputType("number");
+        f2q19.setIsRequired(true);
+
+        Question f2q20 = new Question();
+        f2q20.setInputLabel("Number of Fatal Cases");
+        f2q20.setInputType("number");
+        f2q20.setIsRequired(true);
+
+        questionRepository.saveAll(Arrays.asList(f2q1,f2q2,f2q3,f2q4,f2q5,f2q6,f2q7,f2q8,f2q9, f2q10, f2q11, f2q12, f2q13, f2q14, f2q15, f2q16, f2q17, f2q18, f2q19));
+
+        Form subcontractorSafetyHealthEvaluationForm = new Form();
+        subcontractorSafetyHealthEvaluationForm.setFormName("Subcontractor's Safety & Health Pre-Evaluation");
+
+        subcontractorSafetyHealthEvaluationForm.setDateSubmitted(formDate);
+        subcontractorSafetyHealthEvaluationForm.setLastEdited(formDate);
+
+        // create Section 1: Safety & Health Policy and Organisation
+        Question[] questionSet3 = {f2q1,f2q2,f2q3};
+
+        setupSection(
+                "General Information",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet3
+        );
+
+        // create Section 1: Safety & Health Policy and Organisation
+        Question[] questionSet3 = {f2q1,f2q2,f2q3};
+
+        setupSection(
+                "Safety & Health Policy and Organisation",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet3
+        );
+
+        formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
+        Question[] questionSet4 = {f2q4};
+
+        setupSection(
+                "Tool Box Meeting",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet4
+        );
+
+        formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
+        Question[] questionSet5 = {f2q5,f2q6,f2q7};
+
+        setupSection(
+                "Safety Training",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet5
+        );
+
+        formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
+        Question[] questionSet6 = {f2q8,f2q9};
+
+        setupSection(
+                "Safety & Health Rules & Safe Work Procedures/ Risk Assessment",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet6
+        );
+
+        formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
+        Question[] questionSet7 = {f2q10, f2q11};
+
+        setupSection(
+                "Safety & Health Inspection & Equipment",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet7
+        );
+
+        formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
+        Question[] questionSet8 = {f2q12, f2q13, f2q14};
+
+        setupSection(
+                "Responsible Personnel",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet8
+        );
+
+        formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
+        Question[] questionSet9 = {f2q15, f2q16, f2q17};
+
+        setupSection(
+                "Responsible Personnel",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet9
+        );
+
+        formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
+        Question[] questionSet10 = {f2q18, f2q19, f2q20};
+
+        setupSection(
+                "Accident Analysis",
+                "",
+                subcontractorSafetyHealthEvaluationForm,
+                questionSet10
+        );
+
+        formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
     }
 
@@ -306,6 +378,22 @@ public class FormDataLoader implements ApplicationRunner {
         q.addList(new QuestionProperty(("Yes")));
         q.addList(new QuestionProperty(("No")));
 
+    }
+
+    public void setupSection(String title, String description, Form form, Question[] questions){
+        Section newSection = new Section();
+        newSection.setTitle(title);
+        newSection.setDescription(description);
+        newSection.setForm(form);
+
+        for (Question q : questions){
+            QuestionSection newSq = new QuestionSection();
+            newSq.setSection(newSection);
+            newSq.setQuestion(q);
+            newSection.addSectionQuestion(newSq);
+        }
+
+        form.getSections().add(newSection);
     }
 
 }
