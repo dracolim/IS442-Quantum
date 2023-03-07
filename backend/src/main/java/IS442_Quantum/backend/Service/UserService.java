@@ -19,9 +19,13 @@ public class UserService {
     public Vendor createVendor(Vendor vendor){
         return userRepository.save(vendor);
     }
+
     public User updateUser(User user){
+        // spring JPA .save() will update the existing user if the id is present
+        // instead of creating a brand-new user in the db
         return userRepository.save(user);
     }
+
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
