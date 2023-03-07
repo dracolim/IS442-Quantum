@@ -49,4 +49,15 @@ public class SectionController {
         return new ResponseEntity<>("creation failed", HttpStatus.NOT_FOUND);
     }
 
+    @DeleteMapping("/section/{id}")
+    public ResponseEntity<?> deleteSectionById(@PathVariable Long id){
+        if(id == 0 || !sectionService.checkSectionById(id)){
+            return new ResponseEntity<>("Delete failed, please provide a valid section ID", HttpStatus.NOT_FOUND);
+        } else {
+            Section tempSection = sectionService.findBySectionId(id);
+            sectionService.deleteSectionById(id);
+            return new ResponseEntity<>(tempSection, HttpStatus.OK);
+        }
+    }
+
 }

@@ -62,8 +62,14 @@ public class SectionService {
             newSection.getQuestions().add(newQuestion);
         }
 
+    }
 
+    public void deleteSectionById(Long sectionId){
+        sectionRepository.deleteById(sectionId);
+    }
 
+    public boolean checkSectionById(Long sectionId){
+        return sectionRepository.existsById(sectionId);
     }
 
 
