@@ -14,9 +14,11 @@ public class QuestionProperty {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String label;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="question_id")
     @JsonIgnore
+
     private Question question;
     public QuestionProperty(String label) {
         this.label = label;

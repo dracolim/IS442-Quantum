@@ -20,14 +20,12 @@ public class Section {
 
     @ManyToOne
     @JoinColumn(name="form_id", nullable = false)
+    @JsonIgnore
     private Form form;
 
     @OneToMany(mappedBy="section", cascade={CascadeType.ALL})
-    private Collection<QuestionSection> questionSections = new ArrayList<>();
+    private Collection<Question> questions = new ArrayList<>();
 
-    public void addSectionQuestion(QuestionSection qe){
-        this.questionSections.add(qe);
-        qe.setSection(this);
-    }
+
 
 }

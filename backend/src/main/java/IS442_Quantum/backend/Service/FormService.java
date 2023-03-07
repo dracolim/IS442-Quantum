@@ -1,12 +1,9 @@
 package IS442_Quantum.backend.Service;
 
 import IS442_Quantum.backend.Model.Form;
-import IS442_Quantum.backend.Model.QuestionSection;
-import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Repository.FormRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 @Service

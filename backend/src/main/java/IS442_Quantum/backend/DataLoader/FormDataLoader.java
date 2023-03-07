@@ -390,10 +390,9 @@ public class FormDataLoader implements ApplicationRunner {
         newSection.setForm(form);
 
         for (Question q : questions){
-            QuestionSection newSq = new QuestionSection();
-            newSq.setSection(newSection);
-            newSq.setQuestion(q);
-            newSection.addSectionQuestion(newSq);
+            newSection.getQuestions().add(q);
+            q.setSection(newSection);
+            form.getQuestionValues().add(new QuestionValue(form, q));
         }
 
         form.getSections().add(newSection);

@@ -1,14 +1,12 @@
 package IS442_Quantum.backend.Controller;
 
 
+import IS442_Quantum.backend.Model.Section;
 import IS442_Quantum.backend.Service.SectionService;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -29,6 +27,26 @@ public class SectionController {
     @GetMapping("/section/{id}")
     public ResponseEntity<?> getSectionById(@PathVariable Long id) {
         return new ResponseEntity<>(sectionService.findBySectionId(id), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/form/{formId}/section")
+    public ResponseEntity<?> newSection(@RequestBody Section newSection, @PathVariable Long formId){
+       if (newSection != null &&
+            newSection.getTitle() != null &&
+            newSection.getDescription() != null
+        ){
+            return new ResponseEntity<>(sectionService.createNewSection(formId, newSection), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("creation failed", HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping(value = "/form/{formId}/section/{sectionId}")
+    public ResponseEntity<?> newSection(@RequestBody Section newSection, @PathVariable Long formId, @PathVariable Long sectionId){
+       if (newSection != null && newSection.getQuestions() != null
+        ){
+            return new ResponseEntity<>(sectionService.addQuestions(formId, sectionId, newSection), HttpStatus.OK);
+        }
+        return new ResponseEntity<>("creation failed", HttpStatus.NOT_FOUND);
     }
 
 }

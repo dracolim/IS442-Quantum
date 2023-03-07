@@ -1,6 +1,5 @@
 package IS442_Quantum.backend.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -22,7 +21,10 @@ public class Form {
     private Date lastEdited;
 
     @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
-    @JsonIgnore
     private Collection<Section> sections = new ArrayList<>();
+
+    @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
+
+    private Collection<QuestionValue> questionValues = new ArrayList<>();
 
 }
