@@ -130,7 +130,7 @@
                     Accounts
                     <p class="mt-1 text-sm font-normal text-gray-500">
                         <span onclick="document.location = 'Approver_home.html'">Home</span>
-                        <span class='text-sky-600'>> Accounts</span>
+                        <span class='text-sky-600'> Accounts</span>
 
                     </p>
                 </caption>
@@ -202,20 +202,27 @@
             </table>
         </div>
 
-        <!-- Button for Creating Account -->
+        <!-- Buttons for Creating Account -->
         <div class="mx-8 mt-5">
             <button type="button"
-                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
-                data-te-toggle="modal" data-te-target="#exampleModalScrollable" data-te-ripple-init
+                class="float-left inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                data-te-toggle="modal" data-te-target="#adminModalScrollable" data-te-ripple-init
                 data-te-ripple-color="light">
-                Create Account
+                Create Admin Account
+            </button>
+
+            <button type="button"
+                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                data-te-toggle="modal" data-te-target="#vendorModalScrollable" data-te-ripple-init
+                data-te-ripple-color="light">
+                Create Vendor Account
             </button>
         </div>
 
-        <!-- FORM MODAL -->
+        <!-- FORM MODAL FOR VENDOR -->
         <div data-te-modal-init
             class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-            id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            id="vendorModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
             <div data-te-modal-dialog-ref
                 class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
                 <div
@@ -223,7 +230,7 @@
                     <div
                         class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
                         <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
-                            Create Account
+                            Create Vendor Account
                         </h5>
                         <button type="button"
                             class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
@@ -239,6 +246,7 @@
                             <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
                                 <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
                                     <div class="lg:col-span-2">
+
                                         <!-- ACCOUNT INFORMATION -->
                                         <span class="text-lg font-bold"
                                             class="block text-sm font-medium text-gray-900 ">Account Information</span>
@@ -446,7 +454,8 @@
                     </div>
                     <div
                     class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-                    <button @click="createAcc" type="button"  data-te-modal-dismiss
+                    
+                    <button @click="createVendorAcc" type="button"  data-te-modal-dismiss
                         class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
                             fill="#FFFFFF">
@@ -464,6 +473,90 @@
                 </div>
             </div>
         </div>
+
+        <!-- FORM MODAL FOR ADMIN -->
+        <div data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="adminModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            <div data-te-modal-dialog-ref
+                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+                <div
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none light:bg-neutral-600">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
+                            Create Admin Account
+                        </h5>
+                        <button type="button"
+                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-te-modal-dismiss aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="relative overflow-y-auto p-4">
+                        <div class="modal-body relative p-4">
+                            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
+                                    <div class="lg:col-span-2">
+
+                                        <!-- ACCOUNT INFORMATION -->
+                                        <span class="text-lg font-bold"
+                                            class="block text-sm font-medium text-gray-900 ">Account Information</span>
+                                        <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-5">
+                                                <label for="user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
+                                                <input v-model="adminUserName" type="text" name="user_name" id="user_name"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Admin_email"
+                                                    class="block text-sm font-medium text-gray-900 ">Admin Email</label>
+                                                <input v-model="adminEmail" type="text" name="Admin_email" id="Admin_email"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="password"
+                                                    class="block text-sm font-medium text-gray-900 ">Password</label>
+                                                <input v-model="adminPassword" type="password" name="password" id="password"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="">
+                                            </div>
+
+                                    </div>
+
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                    
+                    <button @click="createAdminAcc" type="button"  data-te-modal-dismiss
+                        class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="#FFFFFF">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path
+                                d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z"
+                                opacity=".3"></path>
+                            <path
+                                d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z">
+                            </path>
+                        </svg>
+                        <span class="pl-2 mx-1">Save</span>
+                    </button>
+                </div>
+                </div>
+        </div>
+
+    </div>
 
     </div>
 
@@ -491,6 +584,10 @@
             businessType: "",
             businessTypeOthers: "",
 
+            adminUserName: "",
+            adminPassword: "",
+            adminEmail: "",
+
             
         },
         mounted: async function () {
@@ -506,7 +603,7 @@
                 })
         },
         methods: {
-            async createAcc() {
+            async createVendorAcc() {
                 console.log('reached here')
                 await axios
                     .post("http://localhost:5000/users/vendor", 
@@ -525,7 +622,27 @@
                     })
                     .then((response) => {
                         console.log("reached here")
-                        alert("Account has been successfully created")
+                        alert("Vendor Account has been successfully created")
+                        document.location.reload();      
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+
+            },
+            async createAdminAcc() {
+                console.log('reached here')
+                await axios
+                    .post("http://localhost:5000/users/admin", 
+                    {
+                        "userType": 'ADMIN',
+                        "userName": this.adminUserName,
+                        "emailAddress": this.adminEmail,
+                        "password": this.adminPassword,
+                    })
+                    .then((response) => {
+                        console.log("reached here")
+                        alert("Admin Account has been successfully created")
                         document.location.reload();      
                     })
                     .catch((error) => {
