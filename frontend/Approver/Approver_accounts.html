@@ -161,7 +161,10 @@
                             Office Fax
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Action
+                            Delete
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Update
                         </th>
                     </tr>
                 </thead>
@@ -197,6 +200,22 @@
                                 <iconify-icon icon="mdi:trashcan-outline" class ="hover:text-red-500" width="28" height="28"></iconify-icon>
                             </button>
                         </td>
+                        <td class="px-6 py-4" style ="text-align: center;">
+                            <button v-if="value.userType == 'VENDOR'" @click ="getRowObject(value.userId)" data-te-toggle="modal" data-te-target="#updateVendorModalScrollable" data-te-ripple-init
+                            data-te-ripple-color="light">
+                                <iconify-icon icon="ic:baseline-system-update-alt" class ="hover:text-red-500" width="25" height="25"></iconify-icon>
+                            </button>
+                            <button v-if="value.userType == 'ADMIN'" @click ="getRowObject(value.userId)" data-te-toggle="modal" data-te-target="#updateAdminModalScrollable" data-te-ripple-init
+                            data-te-ripple-color="light">
+                                <iconify-icon icon="ic:baseline-system-update-alt" class ="hover:text-red-500" width="25" height="25"></iconify-icon>
+                            </button>
+                            <button v-if="value.userType == 'APPROVER'" @click ="getRowObject(value.userId)" data-te-toggle="modal" data-te-target="#updateApproverModalScrollable" data-te-ripple-init
+                            data-te-ripple-color="light">
+                                <iconify-icon icon="ic:baseline-system-update-alt" class ="hover:text-red-500" width="25" height="25"></iconify-icon>
+                            </button>
+                        </td>                            
+    
+
                     </tr>
                 </tbody>
             </table>
@@ -265,9 +284,9 @@
                                             </div>
 
                                         <div class="md:col-span-5">
-                                            <label for="password"
+                                            <label for="Vendor_password"
                                                 class="block text-sm font-medium text-gray-900 ">Password</label>
-                                            <input v-model="password" type="password" name="password" id="password"
+                                            <input v-model="password" type="password" name="Vendor_password" id="Vendor_password"
                                                 class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                 placeholder="">
                                         </div>
@@ -480,6 +499,260 @@
                 </div>
             </div>
         </div>
+        <!-- UPDATE FORM MODAL FOR VENDOR -->
+        <div data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="updateVendorModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            <div data-te-modal-dialog-ref
+                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+                <div
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none light:bg-neutral-600">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4">
+                        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
+                            Update Vendor Account
+                        </h5>
+                        <button type="button"
+                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-te-modal-dismiss aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="relative overflow-y-auto p-4">
+                        <div class="modal-body relative p-4">
+                            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
+                                    <div class="lg:col-span-2">
+
+                                        <!-- ACCOUNT INFORMATION -->
+                                        <span class="text-lg font-bold"
+                                            class="block text-sm font-medium text-gray-900 ">Account Information</span>
+                                        <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-5">
+                                                <label for="Update_user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
+                                                <input v-model="specificUserUserName" type="text" name="Update_user_name" id="Update_user_name"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value= "" />
+                                            </div>
+
+                                        <div class="md:col-span-5">
+                                            <label for="Admin_password"
+                                                class="block text-sm font-medium text-gray-900 ">Password</label>
+                                            <input v-model="specificUserPassword" type="password" name="Admin_password" id="Admin_password"
+                                                class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                placeholder="">
+                                        </div>
+
+                                    </div>
+
+                                    <hr>
+                                        <!-- COMPANY -->
+                                        <h3 class='text-lg font-bold mt-4 mb-2'>Company</h3>
+                                        <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-5">
+                                                <label for="Update_company_name" class="block text-sm font-medium text-gray-900 ">Company's Name</label>
+                                                <input v-model="specificUserCompanyName" type="text" name="Update_company_name" id="Update_company_name"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Update_Registration_no"
+                                                    class="block text-sm font-medium text-gray-900 ">Company
+                                                    Registration
+                                                    No</label>
+                                                <input v-model="specificUserCompanyRegistrationNo" type="text" name="Update_Registration_no" id="Update_Registration_no"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Update_Company_email"
+                                                    class="block text-sm font-medium text-gray-900 ">Company Email</label>
+                                                <input v-model="specificUserCompanyEmail" type="text" name="Update_Company_email" id="Update_Company_email"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Update_address"
+                                                    class="block text-sm font-medium text-gray-900 ">Office
+                                                    Address</label>
+                                                <input v-model="specificUserCompanyOfficeAddress" type="text" name="Update_address" id="Update_address"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="update_gst" class="block text-sm font-medium text-gray-900 ">GST
+                                                    Registered</label>
+                                                <div
+                                                    class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                                    <span
+                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{gstValue}}</span>
+                                                    <button tabindex="-1" for="show_more"
+                                                        id="dropdownRadioBgHoverButton"
+                                                        data-dropdown-toggle="dropdownRadioBgHover"
+                                                        class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                                        <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
+                                                            stroke="currentColor" viewBox="0 0 24 24"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <!-- GST DROPDOWN menu -->
+                                            <div id="dropdownRadioBgHover"
+                                                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
+                                                <ul class="p-3 space-y-1 text-sm text-gray-700"
+                                                    aria-labelledby="dropdownRadioBgHoverButton">
+                                                    <li>
+                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                            <input id="default-radio-4" type="radio" value="Yes"
+                                                                name="default-radio" v-model="gstValue"
+                                                                aria-selected="true"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                            <label for="default-radio-4"
+                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Yes</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                            <input id="default-radio-4" type="radio" value="No"
+                                                                name="default-radio" v-model="gstValue"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                            <label for="default-radio-4"
+                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">No</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="md:col-span-2">
+                                                <label for="Update_tel"
+                                                    class="block text-sm font-medium text-gray-900 ">Tel</label>
+                                                <input v-model = "specificUserCompanyTel" type="text" name="Update_tel" id="Update_tel"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-2">
+                                                <label for="Update_fax"
+                                                    class="block text-sm font-medium text-gray-900 ">Fax</label>
+                                                <input v-model = "specificUserCompanyFax" type="text" name="Update_fax" id="Update_fax"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label class="block text-sm font-medium text-gray-900 ">Type
+                                                    of Business</label>
+                                                <div
+                                                    class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                                    <span
+                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{businessType}}</span>
+                                                    <button tabindex="-1" for="show_more"
+                                                        id="dropdownRadioBgHoverButton"
+                                                        data-dropdown-toggle="dropdownRadioBgHover2"
+                                                        class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                                        <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
+                                                            stroke="currentColor" viewBox="0 0 24 24"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div v-if="businessType == 'Others'" class="md:col-span-3">
+                                                <label class="block text-sm font-medium text-gray-900 ">Please
+                                                    Specify</label>
+                                                <input type="text"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    v-model="businessTypeOthers" placeholder="" />
+                                            </div>
+
+                                            <!-- TYPE OF BUSINESS LICENSE menu -->
+                                            <div id="dropdownRadioBgHover2"
+                                                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
+                                                <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
+                                                    aria-labelledby="dropdownRadioBgHoverButton">
+                                                    <li>
+                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                            <input id="default-radio-4" type="radio"
+                                                                value="Solo Proprietorship" name="default-radio"
+                                                                v-model="businessType"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                            <label for="default-radio-4"
+                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Solo
+                                                                Proprietorship</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                            <input id="default-radio-4" type="radio"
+                                                                value="Partnership Agreement" name="default-radio"
+                                                                v-model="businessType"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                            <label for="default-radio-4"
+                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Partnership
+                                                                Agreement</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                            <input id="default-radio-4" type="radio"
+                                                                value="Limited Company" name="default-radio"
+                                                                v-model="businessType"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                            <label for="default-radio-4"
+                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Limited
+                                                                Company</label>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                                            <input id="default-radio-4" type="radio" value="Others"
+                                                                name="default-radio" v-model="businessType"
+                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
+                                                            <label for="default-radio-4"
+                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Others</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                    
+                    <button @click="updateAcc()" type="button"  data-te-modal-dismiss
+                        class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="#FFFFFF">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path
+                                d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z"
+                                opacity=".3"></path>
+                            <path
+                                d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z">
+                            </path>
+                        </svg>
+                        <span class="pl-2 mx-1">Save</span>
+                    </button>
+                </div>
+                </div>
+            </div>
+        </div>
 
         <!-- FORM MODAL FOR ADMIN -->
         <div data-te-modal-init
@@ -514,8 +787,8 @@
                                             class="block text-sm font-medium text-gray-900 ">Account Information</span>
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
-                                                <label for="user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
-                                                <input v-model="adminUserName" type="text" name="user_name" id="user_name"
+                                                <label for="Admin_user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
+                                                <input v-model="adminUserName" type="text" name="Admin_user_name" id="Admin_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
                                             </div>
 
@@ -546,6 +819,93 @@
                     class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
                     
                     <button @click="createAdminAcc" type="button"  data-te-modal-dismiss
+                        class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="#FFFFFF">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path
+                                d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z"
+                                opacity=".3"></path>
+                            <path
+                                d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z">
+                            </path>
+                        </svg>
+                        <span class="pl-2 mx-1">Save</span>
+                    </button>
+                </div>
+                </div>
+        </div>
+
+        
+
+    </div>
+
+        </div>
+        <!-- UPDATE FORM MODAL FOR ADMIN -->
+        <div data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="updateAdminModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            <div data-te-modal-dialog-ref
+                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+                <div
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none light:bg-neutral-600">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 ">
+                        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
+                            Update Admin Account
+                        </h5>
+                        <button type="button"
+                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-te-modal-dismiss aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="relative overflow-y-auto p-4">
+                        <div class="modal-body relative p-4">
+                            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
+                                    <div class="lg:col-span-2">
+
+                                        <!-- ACCOUNT INFORMATION -->
+                                        <span class="text-lg font-bold"
+                                            class="block text-sm font-medium text-gray-900 ">Account Information</span>
+                                        <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-5">
+                                                <label for="Update_Admin_user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
+                                                <input v-model="specificUserUserName" type="text" name="Update_Admin_user_name" id="Update_Admin_user_name"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Update_Admin_email"
+                                                    class="block text-sm font-medium text-gray-900 ">Admin Email</label>
+                                                <input v-model="specificUserCompanyEmail" type="text" name="Update_Admin_email" id="Update_Admin_email"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Update_password"
+                                                    class="block text-sm font-medium text-gray-900 ">Password</label>
+                                                <input v-model="specificUserPassword" type="password" name="Update_password" id="Update_password"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="">
+                                            </div>
+
+                                    </div>
+
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                    
+                    <button @click="updateAcc" type="button"  data-te-modal-dismiss
                         class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
                             fill="#FFFFFF">
@@ -602,23 +962,23 @@
                                             class="block text-sm font-medium text-gray-900 ">Account Information</span>
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
-                                                <label for="user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
-                                                <input v-model="approverUserName" type="text" name="user_name" id="user_name"
+                                                <label for="Approver_user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
+                                                <input v-model="approverUserName" type="text" name="Approver_user_name" id="Approver_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
                                             </div>
 
                                             <div class="md:col-span-5">
-                                                <label for="Admin_email"
+                                                <label for="Approver_email"
                                                     class="block text-sm font-medium text-gray-900 ">Admin Email</label>
-                                                <input v-model="approverEmail" type="text" name="Admin_email" id="Admin_email"
+                                                <input v-model="approverEmail" type="text" name="Approver_email" id="Approver_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
                                             </div>
 
                                             <div class="md:col-span-5">
-                                                <label for="password"
+                                                <label for="Approver_password"
                                                     class="block text-sm font-medium text-gray-900 ">Password</label>
-                                                <input v-model="approverPassword" type="password" name="password" id="password"
+                                                <input v-model="approverPassword" type="password" name="Approver_password" id="Approver_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
                                             </div>
@@ -656,6 +1016,93 @@
     </div>
 
         </div>
+        <!-- UPDATE FORM MODAL FOR APPROVER -->
+        <div data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="updateApproverModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            <div data-te-modal-dialog-ref
+                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+                <div
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none light:bg-neutral-600">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 ">
+                        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalScrollableLabel">
+                            Update Approver Account
+                        </h5>
+                        <button type="button"
+                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-te-modal-dismiss aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="relative overflow-y-auto p-4">
+                        <div class="modal-body relative p-4">
+                            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
+                                    <div class="lg:col-span-2">
+
+                                        <!-- ACCOUNT INFORMATION -->
+                                        <span class="text-lg font-bold"
+                                            class="block text-sm font-medium text-gray-900 ">Account Information</span>
+                                        <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                            <div class="md:col-span-5">
+                                                <label for="Update_Approver_user_name" class="block text-sm font-medium text-gray-900 ">User Name</label>
+                                                <input v-model="specificUserUserName" type="text" name="Update_Approver_user_name" id="Update_Approver_user_name"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Update_Approver_email"
+                                                    class="block text-sm font-medium text-gray-900 ">Admin Email</label>
+                                                <input v-model="specificUserCompanyEmail" type="text" name="Update_Approver_email" id="Update_Approver_email"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="" />
+                                            </div>
+
+                                            <div class="md:col-span-5">
+                                                <label for="Update_password"
+                                                    class="block text-sm font-medium text-gray-900 ">Password</label>
+                                                <input v-model="specificUserPassword" type="password" name="Update_password" id="Update_password"
+                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    placeholder="">
+                                            </div>
+
+                                    </div>
+
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                    
+                    <button @click="updateAcc" type="button"  data-te-modal-dismiss
+                        class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="#FFFFFF">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path
+                                d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z"
+                                opacity=".3"></path>
+                            <path
+                                d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z">
+                            </path>
+                        </svg>
+                        <span class="pl-2 mx-1">Save</span>
+                    </button>
+                </div>
+                </div>
+        </div>
+
+        
+
+    </div>
+
+        </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
@@ -667,6 +1114,20 @@
         data: {
             localhost: "http://localhost:5000",
             userList: "",
+
+            specificUser: null,
+            specificUserUserId: "",
+            specificUserUserType: "",
+            specificUserUserName: "",
+            specificUserPassword: "",
+            specificUserCompanyName: "",
+            specificUserCompanyRegistrationNo: "",
+            specificUserCompanyEmail: "",
+            specificUserCompanyOfficeAddress: "",
+            specificUserCompanyTel: "",
+            specificUserCompanyFax: "",
+
+
             highestUserID: 0,
 
             companyName: "",
@@ -770,6 +1231,33 @@
                     });
 
             },
+            getRowObject(userId) {
+                console.log("it works")
+                console.log(userId)
+                const GET_USER_API_URL = this.localhost + "/users/" + userId
+
+                axios.get(GET_USER_API_URL)
+                .then(response => {
+
+                    this.specificUser = response.data
+                    this.specificUserUserId = response.data.userId
+                    this.specificUserUserType = response.data.userType
+
+                    this.specificUserUserName = response.data.userName
+                    this.specificUserPassword = response.data.password
+                    this.specificUserCompanyName = response.data.companyName
+                    this.specificUserCompanyRegistrationNo = response.data.registrationNo
+                    this.specificUserCompanyEmail = response.data.emailAddress
+                    this.specificUserCompanyOfficeAddress = response.data.officeAddress
+                    this.specificUserCompanyTel = response.data.officeTel
+                    this.specificUserCompanyFax = response.data.officeFax
+
+                    console.log(this.specificUser)
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+            },
             deleteAcc(userId) {
                 const DELETE_ACC_API_URL = this.localhost + "/users/" + userId
 
@@ -781,6 +1269,81 @@
                 .catch(error => {
                     console.error(error);
                 })
+            },
+            updateAcc() {
+                console.log('reached here')
+
+                if (this.specificUserUserType == "VENDOR") {
+                    console.log('reached here2')
+                    console.log(this.specificUserUserId)
+                    console.log(this.specificUserUserType)
+
+                    const UPDATE_ACC_API_URL = this.localhost + "/users/update/vendor"
+                    console.log("SEE HERE")
+                    console.log(this.specificUserUserName)
+
+                    axios.put(UPDATE_ACC_API_URL, 
+                    {
+                        "userId": this.specificUserUserId,
+                        "userType": this.specificUserUserType,
+                        "userName": this.specificUserUserName,
+                        "emailAddress": this.specificUserCompanyEmail,
+                        "password": this.specificUserPassword,
+                        "companyName": this.specificUserCompanyName,
+                        "officeAddress": this.specificUserCompanyOfficeAddress,
+                        "officeTel": this.specificUserCompanyTel,
+                        "officeFax": this.specificUserCompanyFax,
+                        "registrationNo": this.specificUserCompanyRegistrationNo,
+                        "businessType": 'private',
+                        "evaluationId": '',
+                        "workFlows": []
+                    })
+                    .then(response => {
+                        alert("Account has been successfully updated")
+                        document.location.reload();                
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+                }
+                if (this.specificUserUserType == "ADMIN") {
+                    const UPDATE_ACC_API_URL = this.localhost + "/users/update/admin"
+                    axios.put(UPDATE_ACC_API_URL, 
+                    {
+                        "userId": this.specificUserUserId,
+                        "userType": this.specificUserUserType,
+                        "userName": this.specificUserUserName,
+                        "emailAddress": this.specificUserCompanyEmail,
+                        "password": this.specificUserPassword,
+                    })
+                    .then(response => {
+                        alert("Account has been successfully updated")
+                        document.location.reload();                
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+                }
+                if (this.specificUserUserType == "APPROVER") {
+                    const UPDATE_ACC_API_URL = this.localhost + "/users/update/approver"
+                    axios.put(UPDATE_ACC_API_URL, 
+                    {
+                        "userId": this.specificUserUserId,
+                        "userType": this.specificUserUserType,
+                        "userName": this.specificUserUserName,
+                        "emailAddress": this.specificUserCompanyEmail,
+                        "password": this.specificUserPassword,
+                    })
+                    .then(response => {
+                        alert("Account has been successfully updated")
+                        document.location.reload();                
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+                }           
+
+
             }
         }
     })
