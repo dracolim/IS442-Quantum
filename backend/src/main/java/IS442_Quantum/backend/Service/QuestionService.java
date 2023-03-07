@@ -17,7 +17,7 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question findByQuestion(Long questionId){
+    public Question findByQuestionId(Long questionId){
         return questionRepository.findByQuestionId(questionId);
     }
 

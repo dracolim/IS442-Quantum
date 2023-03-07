@@ -3,6 +3,7 @@ package IS442_Quantum.backend.DataLoader;
 import IS442_Quantum.backend.Model.*;
 import IS442_Quantum.backend.Repository.FormRepository;
 import IS442_Quantum.backend.Repository.QuestionRepository;
+import IS442_Quantum.backend.Repository.SectionRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -20,12 +21,15 @@ public class FormDataLoader implements ApplicationRunner {
 
     private final QuestionRepository questionRepository;
 
+    private final SectionRepository sectionRepository;
+
     @PersistenceContext
     private EntityManager entityManager;
 
-    public FormDataLoader(FormRepository formRepository, QuestionRepository questionRepository) {
+    public FormDataLoader(FormRepository formRepository, QuestionRepository questionRepository, SectionRepository sectionRepository) {
         this.formRepository = formRepository;
         this.questionRepository = questionRepository;
+        this.sectionRepository = sectionRepository;
     }
 
 
@@ -34,12 +38,16 @@ public class FormDataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
 
         // Reset the auto-increment value of the form and question table
-        formRepository.deleteAll();
         questionRepository.deleteAll();
-        String resetFormRepositoryQuery = "ALTER TABLE form AUTO_INCREMENT = 1";
+        sectionRepository.deleteAll();
+        formRepository.deleteAll();
+
         String resetQuestionRepositoryQuery = "ALTER TABLE question AUTO_INCREMENT = 1";
-        entityManager.createNativeQuery(resetFormRepositoryQuery).executeUpdate();
+        String resetSectionRepositoryQuery = "ALTER TABLE section AUTO_INCREMENT = 1";
+        String resetFormRepositoryQuery = "ALTER TABLE form AUTO_INCREMENT = 1";
         entityManager.createNativeQuery(resetQuestionRepositoryQuery).executeUpdate();
+        entityManager.createNativeQuery(resetSectionRepositoryQuery).executeUpdate();
+        entityManager.createNativeQuery(resetFormRepositoryQuery).executeUpdate();
 
 
         // ------------------------ New Vendor Assessment Form --------------------------
@@ -200,71 +208,76 @@ public class FormDataLoader implements ApplicationRunner {
         f2q7.setIsRequired(true);
 
         Question f2q8 = new Question();
-        f2q8.setInputLabel("Are relevant safety training courses provided for management/Supervisors?");
+        f2q8.setInputLabel("Are regular tool-box meetings conducted and reports submitted?");
         addYesNoRadio(f2q8);
         f2q8.setIsRequired(true);
 
         Question f2q9 = new Question();
-        f2q9.setInputLabel("Are relevant safety training courses provided for workers?");
+        f2q9.setInputLabel("Are relevant safety training courses provided for management/Supervisors?");
         addYesNoRadio(f2q9);
         f2q9.setIsRequired(true);
 
         Question f2q10 = new Question();
-        f2q10.setInputLabel("Are relevant safety training certificates submitted?");
+        f2q10.setInputLabel("Are relevant safety training courses provided for workers?");
         addYesNoRadio(f2q10);
         f2q10.setIsRequired(true);
 
         Question f2q11 = new Question();
-        f2q11.setInputLabel("Are there written safety & health rules for the workers?");
+        f2q11.setInputLabel("Are relevant safety training certificates submitted?");
         addYesNoRadio(f2q11);
         f2q11.setIsRequired(true);
 
         Question f2q12 = new Question();
-        f2q12.setInputLabel("Are there written safe work procedures/ risk assessment formulated and submitted?");
+        f2q12.setInputLabel("Are there written safety & health rules for the workers?");
         addYesNoRadio(f2q12);
         f2q12.setIsRequired(true);
 
         Question f2q13 = new Question();
-        f2q13.setInputLabel("Is there a written programme outlining inspection guidelines, frequency and follow-up corrective actions?");
+        f2q13.setInputLabel("Are there written safe work procedures/ risk assessment formulated and submitted?");
         addYesNoRadio(f2q13);
         f2q13.setIsRequired(true);
 
         Question f2q14 = new Question();
-        f2q14.setInputLabel("Is there available Personal Protective Equipment and of proper working condition and comply to safety requirements?");
+        f2q14.setInputLabel("Is there a written programme outlining inspection guidelines, frequency and follow-up corrective actions?");
         addYesNoRadio(f2q14);
         f2q14.setIsRequired(true);
 
         Question f2q15 = new Question();
-        f2q15.setInputLabel("Is there a Safety Supervisor working at least 5 hrs / week?");
+        f2q15.setInputLabel("Is there available Personal Protective Equipment and of proper working condition and comply to safety requirements?");
         addYesNoRadio(f2q15);
         f2q15.setIsRequired(true);
 
         Question f2q16 = new Question();
-        f2q16.setInputLabel("Is there a qualified First Aider?");
+        f2q16.setInputLabel("Is there a Safety Supervisor working at least 5 hrs / week?");
         addYesNoRadio(f2q16);
         f2q16.setIsRequired(true);
 
         Question f2q17 = new Question();
-        f2q17.setInputLabel("Are there relevant Licensed Electrical Workers, qualified engineers, qualified supervisors, lifting supervisors, qualified JCB Tower/Mobile/Crawler Crane operators?");
+        f2q17.setInputLabel("Is there a qualified First Aider?");
         addYesNoRadio(f2q17);
         f2q17.setIsRequired(true);
 
         Question f2q18 = new Question();
-        f2q18.setInputLabel("Number of Temporary Disability Cases");
-        f2q18.setInputType("number");
+        f2q18.setInputLabel("Are there relevant Licensed Electrical Workers, qualified engineers, qualified supervisors, lifting supervisors, qualified JCB Tower/Mobile/Crawler Crane operators?");
+        addYesNoRadio(f2q18);
         f2q18.setIsRequired(true);
 
         Question f2q19 = new Question();
-        f2q19.setInputLabel("Number of Permanent Disability Cases");
+        f2q19.setInputLabel("Number of Temporary Disability Cases");
         f2q19.setInputType("number");
         f2q19.setIsRequired(true);
 
         Question f2q20 = new Question();
-        f2q20.setInputLabel("Number of Fatal Cases");
+        f2q20.setInputLabel("Number of Permanent Disability Cases");
         f2q20.setInputType("number");
         f2q20.setIsRequired(true);
 
-        questionRepository.saveAll(Arrays.asList(f2q1,f2q2,f2q3,f2q4,f2q5,f2q6,f2q7,f2q8,f2q9, f2q10, f2q11, f2q12, f2q13, f2q14, f2q15, f2q16, f2q17, f2q18, f2q19));
+        Question f2q21 = new Question();
+        f2q21.setInputLabel("Number of Fatal Cases");
+        f2q21.setInputType("number");
+        f2q21.setIsRequired(true);
+
+        questionRepository.saveAll(Arrays.asList(f2q1,f2q2,f2q3,f2q4,f2q5,f2q6,f2q7,f2q8,f2q9, f2q10, f2q11, f2q12, f2q13, f2q14, f2q15, f2q16, f2q17, f2q18, f2q19, f2q20, f2q21));
 
         Form subcontractorSafetyHealthEvaluationForm = new Form();
         subcontractorSafetyHealthEvaluationForm.setFormName("Subcontractor's Safety & Health Pre-Evaluation");
@@ -273,7 +286,7 @@ public class FormDataLoader implements ApplicationRunner {
         subcontractorSafetyHealthEvaluationForm.setLastEdited(formDate);
 
         // create Section 1: Safety & Health Policy and Organisation
-        Question[] questionSet3 = {f2q1,f2q2,f2q3};
+        Question[] questionSet3 = {f2q1,f2q2,f2q3,f2q4};
 
         setupSection(
                 "General Information",
@@ -283,21 +296,10 @@ public class FormDataLoader implements ApplicationRunner {
         );
 
         // create Section 1: Safety & Health Policy and Organisation
-        Question[] questionSet3 = {f2q1,f2q2,f2q3};
+        Question[] questionSet4 = {f2q5,f2q6,f2q7};
 
         setupSection(
                 "Safety & Health Policy and Organisation",
-                "",
-                subcontractorSafetyHealthEvaluationForm,
-                questionSet3
-        );
-
-        formRepository.save(subcontractorSafetyHealthEvaluationForm);
-
-        Question[] questionSet4 = {f2q4};
-
-        setupSection(
-                "Tool Box Meeting",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
                 questionSet4
@@ -305,10 +307,10 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
-        Question[] questionSet5 = {f2q5,f2q6,f2q7};
+        Question[] questionSet5 = {f2q8};
 
         setupSection(
-                "Safety Training",
+                "Tool Box Meeting",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
                 questionSet5
@@ -316,10 +318,10 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
-        Question[] questionSet6 = {f2q8,f2q9};
+        Question[] questionSet6 = {f2q9,f2q10,f2q11};
 
         setupSection(
-                "Safety & Health Rules & Safe Work Procedures/ Risk Assessment",
+                "Safety Training",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
                 questionSet6
@@ -327,10 +329,10 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
-        Question[] questionSet7 = {f2q10, f2q11};
+        Question[] questionSet7= {f2q12,f2q13};
 
         setupSection(
-                "Safety & Health Inspection & Equipment",
+                "Safety & Health Rules & Safe Work Procedures/ Risk Assessment",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
                 questionSet7
@@ -338,10 +340,10 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
-        Question[] questionSet8 = {f2q12, f2q13, f2q14};
+        Question[] questionSet8 = {f2q14, f2q15};
 
         setupSection(
-                "Responsible Personnel",
+                "Safety & Health Inspection & Equipment",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
                 questionSet8
@@ -349,7 +351,7 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
-        Question[] questionSet9 = {f2q15, f2q16, f2q17};
+        Question[] questionSet9 = {f2q16, f2q17, f2q18};
 
         setupSection(
                 "Responsible Personnel",
@@ -360,7 +362,7 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
-        Question[] questionSet10 = {f2q18, f2q19, f2q20};
+        Question[] questionSet10 = {f2q19, f2q20, f2q21};
 
         setupSection(
                 "Accident Analysis",
@@ -370,6 +372,7 @@ public class FormDataLoader implements ApplicationRunner {
         );
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
 
     }
 

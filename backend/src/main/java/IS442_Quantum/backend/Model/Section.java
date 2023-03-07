@@ -1,5 +1,6 @@
 package IS442_Quantum.backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
