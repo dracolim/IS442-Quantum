@@ -1,9 +1,7 @@
 package IS442_Quantum.backend.Service;
 
 import IS442_Quantum.backend.Enums.UserTypes;
-import IS442_Quantum.backend.Model.User;
-import IS442_Quantum.backend.Model.Vendor;
-import IS442_Quantum.backend.Model.WorkFlow;
+import IS442_Quantum.backend.Model.*;
 import IS442_Quantum.backend.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +16,14 @@ public class UserService {
     private UserRepository userRepository;
     public Vendor createVendor(Vendor vendor){
         return userRepository.save(vendor);
+    }
+
+    public Admin createAdmin(Admin admin){
+        return userRepository.save(admin);
+    }
+
+    public Approver createApprover(Approver approver) {
+        return userRepository.save(approver);
     }
 
     public User updateUser(User user){

@@ -62,7 +62,27 @@ public class UserController {
     public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor){
         try {
             userService.createVendor(vendor);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(vendor, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/admin")
+    public ResponseEntity<Admin> createAdmin(@RequestBody Admin admin){
+        try {
+            userService.createAdmin(admin);
+            return new ResponseEntity<>(admin, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/approver")
+    public ResponseEntity<Approver> createApprover(@RequestBody Approver approver){
+        try {
+            userService.createApprover(approver);
+            return new ResponseEntity<>(approver, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -82,7 +102,7 @@ public class UserController {
     public ResponseEntity<Vendor> updateVendor(@RequestBody Vendor updatedVendor) {
         try {
             userService.updateUser(updatedVendor);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(updatedVendor, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -92,7 +112,7 @@ public class UserController {
     public ResponseEntity<Admin> updateAdmin(@RequestBody Admin updatedAdmin) {
         try {
             userService.updateUser(updatedAdmin);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(updatedAdmin, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -102,7 +122,7 @@ public class UserController {
     public ResponseEntity<Approver> updateApprover(@RequestBody Approver updatedApprover) {
         try {
             userService.updateUser(updatedApprover);
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(updatedApprover, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
