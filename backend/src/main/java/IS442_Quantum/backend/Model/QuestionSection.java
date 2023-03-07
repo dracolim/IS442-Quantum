@@ -7,16 +7,16 @@ import lombok.*;
 @Entity
 @Data
 @NoArgsConstructor
-public class FormQuestion {
+public class QuestionSection {
 
     @EmbeddedId
-    private FormQId formQId = new FormQId();
+    private QuestionSectionId questionSectionId = new QuestionSectionId();
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @MapsId("formId")
-    @JoinColumn(name="form_id")
+    @MapsId("sectionId")
+    @JoinColumn(name="section_id")
     @JsonIgnore
-    private Form form;
+    private Section section;
 
     @ManyToOne
     @MapsId("questionId")
@@ -24,10 +24,5 @@ public class FormQuestion {
     private Question question;
 
     private String inputValue;
-
-    public FormQuestion(Question question) {
-        this.question = question;
-    }
-
 
 }

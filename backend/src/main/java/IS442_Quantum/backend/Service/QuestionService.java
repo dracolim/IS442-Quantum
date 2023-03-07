@@ -1,6 +1,5 @@
 package IS442_Quantum.backend.Service;
 
-import IS442_Quantum.backend.Model.FormQuestion;
 import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Model.QuestionProperty;
 import IS442_Quantum.backend.Repository.QuestionRepository;

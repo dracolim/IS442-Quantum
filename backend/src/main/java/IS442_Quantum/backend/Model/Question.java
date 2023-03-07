@@ -27,7 +27,7 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL})
     @JsonIgnore
-    private Collection<FormQuestion> formQuestions = new ArrayList<>();
+    private Collection<QuestionSection> questionSections = new ArrayList<>();
 
     public void addList(QuestionProperty questionProperty){
         questionProperties.add(questionProperty);
