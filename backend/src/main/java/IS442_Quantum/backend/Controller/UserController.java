@@ -1,9 +1,7 @@
 package IS442_Quantum.backend.Controller;
 
 import IS442_Quantum.backend.Enums.UserTypes;
-import IS442_Quantum.backend.Model.User;
-import IS442_Quantum.backend.Model.Vendor;
-import IS442_Quantum.backend.Model.WorkFlow;
+import IS442_Quantum.backend.Model.*;
 import IS442_Quantum.backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,14 +59,49 @@ public class UserController {
     }
 
     @PostMapping("/vendor")
-    public Vendor createVendor(@RequestBody Vendor vendor){
-        return userService.createVendor(vendor);
+    public ResponseEntity<Vendor> createVendor(@RequestBody Vendor vendor){
+        try {
+            userService.createVendor(vendor);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/vendor/{userId}")
     public ResponseEntity<User> addWorkflowToVendor(@PathVariable Long userId, @RequestBody WorkFlow workflow){
         try {
             userService.addWorkflowToVendor(userId, workflow);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update/vendor")
+    public ResponseEntity<Vendor> updateVendor(@RequestBody Vendor updatedVendor) {
+        try {
+            userService.updateUser(updatedVendor);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update/admin")
+    public ResponseEntity<Admin> updateAdmin(@RequestBody Admin updatedAdmin) {
+        try {
+            userService.updateUser(updatedAdmin);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/update/approver")
+    public ResponseEntity<Approver> updateApprover(@RequestBody Approver updatedApprover) {
+        try {
+            userService.updateUser(updatedApprover);
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
