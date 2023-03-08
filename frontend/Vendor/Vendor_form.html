@@ -10,11 +10,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    
+      
 
     <title>Quantum</title>
 </head>
 
-<body onload="getFormDetails()">
+<body onload="vm.getFormDetails()">
 
     <!-- header -->
     <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
@@ -112,42 +118,59 @@
     <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
     <!--Cards-->
-    
-    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-            <img class="rounded-t-lg" src="#" alt="" />
-        </a>
-        <div class="p-5">
-            <a href="#">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">New Vendor Acquisition Form</h5>
-            </a>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Workflow 111</p>
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Edit
-                <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-            </a>
-        </div>
+    <div id="app">
+        <form-cards v-bind:form="forms"></form-cards>
     </div>
 
-
-
+    
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
 <script>
-  function getFormDetails(){
 
-      axios.get("http://localhost:5000/forms")
-      .then(response => {
-        console.log(response.data[0].formName)
-      })
-      .catch(error => {
-        console.log("Forms not found")
-      });
-  }
+    const app = Vue.createApp({
+        
+        data() {
+          return {
+            forms: []
+          }
+        },
+        methods: {
+          async getFormDetails() {
+            try {
+              const response = await axios.get("http://localhost:5000/forms");
+              this.forms = response.data;
+              console.log(this.forms)
+              
+            } catch (error) {
+              console.log(error);
+            }
+          }
+        }
+    })
 
+    app.component('form-cards',{
+        props:['form'],
+        template: 
+        `<div v-for="f in form">
+         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <a href="#">
+                <img class="rounded-t-lg" src="#" alt="" />
+            </a>
+            <div class="p-5">
+                <a href="#">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{f.formName}}</h5>
+                </a>
+                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Workflow 111</p>
+                <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white    bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300      dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Edit
+                    <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"  xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6  6a1  1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0   010-1. 414z" clip-rule="evenodd"></path></svg>
+                </a>
+            </div>
+        </div>
+    </div>`
+    })
+
+    const vm = app.mount('#app')
+                                                    
 </script>
 </html>
