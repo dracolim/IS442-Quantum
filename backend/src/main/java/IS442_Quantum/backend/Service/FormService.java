@@ -1,6 +1,8 @@
 package IS442_Quantum.backend.Service;
 
 import IS442_Quantum.backend.Model.Form;
+import IS442_Quantum.backend.Model.Question;
+import IS442_Quantum.backend.Model.Section;
 import IS442_Quantum.backend.Repository.FormRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +15,14 @@ public class FormService {
 
     private final QuestionService questionService;
 
-    public FormService(FormRepository formRepository, QuestionService questionService) {
+    private final SectionService sectionService;
+
+    public FormService(FormRepository formRepository, QuestionService questionService, SectionService sectionService) {
         this.formRepository = formRepository;
         this.questionService = questionService;
+        this.sectionService = sectionService;
     }
 
-    // creating new form
-    public Form createNewForm(Form form){
-        Form newForm = new Form();
-        return null;
-//        return updateFormMapping(form, newForm, 1);
-    }
-
-    // to edit existing form
-    public Form editForm(Form form){
-        Form eForm = getFormById(form.getFormId());
-        return null;
-//        return updateFormMapping(form, eForm, 2);
-    }
 
     public Collection<Form> getAllForm(){
         return formRepository.findAll();
@@ -48,55 +40,35 @@ public class FormService {
         return formRepository.existsById(id);
     }
 
-    // mapping update for forms
-    // Type 1 == create || Type 2 == Edit
-//    public Form updateFormMapping(Form form, Form eForm, Integer type){
-//        eForm.setFormName(form.getFormName());
-//        eForm.setDateSubmitted(form.getDateSubmitted());
-//        eForm.setLastEdited(form.getLastEdited());
-//        if (type == 1){
-//            eForm.getFormQuestions().addAll(form.getFormQuestions().stream().map(formQuestion -> {
-//                Question generatedQuestion;
-//                if (formQuestion.getQuestion().getQuestionId()==null){
-//                    generatedQuestion = questionService.createNewQuestion(formQuestion.getQuestion());
-//                } else {
-//                    generatedQuestion = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
-//                }
-//                Question question = questionService.findByQuestion(generatedQuestion.getQuestionId());
-//                QuestionSection newQuestionSection = new QuestionSection();
-//                newQuestionSection.setForm(eForm);
-//                newQuestionSection.setQuestion(question);
-//                newQuestionSection.setInputValue(formQuestion.getInputValue());
-//                return newQuestionSection;
-//            }).toList());
-//        } else {
-//            ArrayList<QuestionSection> updatedQuestionSections = new ArrayList<>();
-//            for (QuestionSection questionSection : form.getFormQuestions()) {
-//                Question generatedQuestion;
-//                if (questionSection.getQuestion().getQuestionId()==null){
-//                    generatedQuestion = questionService.createNewQuestion(questionSection.getQuestion());
-//                } else {
-//                    generatedQuestion = questionService.findByQuestion(questionSection.getQuestion().getQuestionId());
-//                }
-//                Question question = questionService.findByQuestion(generatedQuestion.getQuestionId());
-//                QuestionSection existingQuestionSection = eForm.getFormQuestions().stream()
-//                        .filter(fq -> fq.getFormQId().equals(questionSection.getFormSectionId()))
-//                        .findFirst().orElse(null);
-//                if (existingQuestionSection == null) {
-//                    QuestionSection newQuestionSection = new QuestionSection();
-//                    newQuestionSection.setForm(eForm);
-//                    newQuestionSection.setQuestion(question);
-//                    newQuestionSection.setInputValue(questionSection.getInputValue());
-//                    updatedQuestionSections.add(newQuestionSection);
-//                } else {
-//                    existingQuestionSection.setQuestion(question);
-//                    existingQuestionSection.setInputValue(questionSection.getInputValue());
-//                    updatedQuestionSections.add(existingQuestionSection);
-//                }
-//            }
-//            eForm.setFormQuestions(updatedQuestionSections);
-//        }
-//        return formRepository.save(eForm);
-//    }
+    public Form createUpdateForm(Form formBody){
+
+        // Add general information
+        Form form = formRepository.findByFormId(formBody.getFormId()) != null ? formRepository.findByFormId(formBody.getFormId()) : new Form();
+        form.setFormName(formBody.getFormName());
+        form.setDateSubmitted(formBody.getDateSubmitted());
+        form.setLastEdited(formBody.getLastEdited());
+
+        // Add section
+        for(Section section : formBody.getSections()){
+            Section newSection = sectionService.findBySectionId(section.getSectionId()) != null ? sectionService.findBySectionId(section.getSectionId()) : new Section();
+            newSection.setTitle(section.getTitle());
+            newSection.setDescription(section.getDescription());
+            newSection.setForm(form);
+
+            // add questions to the newly generated section
+            for (Question question : section.getQuestions()){
+                Question newQuestion = question.getQuestionId() != null ? questionService.findByQuestionId(question.getQuestionId()) : questionService.createNewQuestion(question);
+                newQuestion.setSection(newSection);
+                newQuestion.setInputValue(question.getInputValue());
+                newSection.getQuestions().add(newQuestion);
+            }
+
+            form.getSections().add(newSection);
+        }
+
+        return formRepository.save(form);
+
+    }
+
 
 }

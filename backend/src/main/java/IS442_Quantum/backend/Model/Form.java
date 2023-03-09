@@ -23,8 +23,5 @@ public class Form {
     @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
     private Collection<Section> sections = new ArrayList<>();
 
-    @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
-
-    private Collection<QuestionValue> questionValues = new ArrayList<>();
 
 }
