@@ -34,7 +34,7 @@ public class QuestionController {
             newQuestion.getInputType() != null &&
             newQuestion.getIsRequired() != null
         ){
-            return new ResponseEntity<>(questionService.createNewQuestion(newQuestion), HttpStatus.OK);
+            return new ResponseEntity<>(questionService.createNewQuestion(newQuestion), HttpStatus.CREATED);
         }
         return new ResponseEntity<>("creation failed", HttpStatus.NOT_FOUND);
     }
