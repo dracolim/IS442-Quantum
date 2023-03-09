@@ -1,10 +1,8 @@
 package IS442_Quantum.backend.DataLoader;
 
-import IS442_Quantum.backend.Model.Form;
-import IS442_Quantum.backend.Model.FormQuestion;
-import IS442_Quantum.backend.Model.QuestionProperty;
-import IS442_Quantum.backend.Model.Question;
+import IS442_Quantum.backend.Model.*;
 import IS442_Quantum.backend.Repository.FormRepository;
+import IS442_Quantum.backend.Repository.FormSequenceRepository;
 import IS442_Quantum.backend.Repository.QuestionRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -270,6 +268,15 @@ public class FormDataLoader implements ApplicationRunner {
         }
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
+
+        // WorkFlow
+        WorkFlow workFlow = new WorkFlow();
+        workFlow.setVendor(subcontractorSafetyHealthEvaluationForm);
+
+        // Form Sequence
+        FormSequence fs = new FormSequence();
+        fs.setForm(subcontractorSafetyHealthEvaluationForm);
+        fs.setSeqNo(1);
 
     }
 

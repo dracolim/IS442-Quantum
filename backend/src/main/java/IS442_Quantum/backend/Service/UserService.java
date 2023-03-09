@@ -14,6 +14,10 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EmailNotificationService emailService;
+
     public Vendor createVendor(Vendor vendor){
         return userRepository.save(vendor);
     }
@@ -39,16 +43,27 @@ public class UserService {
        return userRepository.findById(id);
     }
 
-    public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
+    public void deleteUserById(Long userId) {
+        userRepository.deleteById(userId);
     }
     public List<User> findByUserType(UserTypes userType) {
         return userRepository.findByUserType(userType);
     }
     public void addWorkflowToVendor(Long userId, WorkFlow workFlow) {
-        Vendor vendor = (Vendor) userRepository.findById(userId).get();
-        vendor.addWorkflow(workFlow);
-        userRepository.save(vendor);
+        try {
+            Vendor vendor = (Vendor) userRepository.findById(userId).get();
+            vendor.addWorkflow(workFlow);
+            userRepository.save(vendor);
+            try {
+                emailService.sendEmail("wisely.kwek.2020@scis.smu.edu.sg", "New Workflow", "You have a new workflow for your attention");
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

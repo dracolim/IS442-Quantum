@@ -55,15 +55,23 @@ public class WorkFlowService {
     }
 
     public WorkFlow updateWorkFlowById(Long id,WorkFlow newWorkFlow){
+        // id = wf_id
+        System.out.println("updatedWorkflow: " + newWorkFlow);
+        System.out.println("updated Form sequence: " + newWorkFlow.getFormSequences());
         Optional<WorkFlow> optionalWorkFlow = workFlowRepository.findById(id);
+        System.out.println(checkWorkFlowById(id));
         if(checkWorkFlowById(id)) {
             WorkFlow eWorkFlow = optionalWorkFlow.get();
+            System.out.println("Existing workflow form sequence: " + eWorkFlow.getFormSequences());
+            
             eWorkFlow.setWfName(newWorkFlow.getWfName());
             eWorkFlow.setValidated(newWorkFlow.isValidated());
             eWorkFlow.setWfDateline(newWorkFlow.getWfDateline());
             eWorkFlow.setWfLastSubmit(newWorkFlow.getWfLastSubmit());
             eWorkFlow.getFormSequences().clear();
+
             Collection<FormSequence> formSequences = new ArrayList<>();
+
             for (FormSequence fs : newWorkFlow.getFormSequences()) {
                 FormSequence newFormSequence = new FormSequence();
                 newFormSequence.setWorkFlow(eWorkFlow);
@@ -76,9 +84,6 @@ public class WorkFlowService {
         }else {
             return null;
         }
-
-
-
     }
 
 }
