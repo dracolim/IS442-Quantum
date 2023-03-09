@@ -47,7 +47,11 @@ public class QuestionService {
     }
 
     public boolean checkQuestionById(Long id){
-        return questionRepository.existsById(id);
+        try {
+            return questionRepository.existsById(id);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public Question editQuestionById(Long id, Question question){

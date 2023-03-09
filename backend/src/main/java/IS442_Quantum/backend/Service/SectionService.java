@@ -73,15 +73,7 @@ public class SectionService {
         if(sectionBody.getQuestions() != null){
             section.getQuestions().clear();
             for (Question question : sectionBody.getQuestions()){
-                Question newQuestion = null;
-
-                // check if the provided id is correct, if not then create as new question
-                if(questionService.findByQuestionId(question.getQuestionId())==null){
-                    newQuestion = questionService.createNewQuestion(question);
-                } else {
-                    newQuestion = questionService.findByQuestionId(question.getQuestionId());
-                }
-
+                Question newQuestion = questionService.checkQuestionById(question.getQuestionId()) ? questionService.findByQuestionId(question.getQuestionId()) : questionService.createNewQuestion(question);
                 newQuestion.setSection(section);
                 section.getQuestions().add(newQuestion);
             }
