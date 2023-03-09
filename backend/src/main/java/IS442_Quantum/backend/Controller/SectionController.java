@@ -35,7 +35,7 @@ public class SectionController {
             newSection.getTitle() != null &&
             newSection.getDescription() != null
         ){
-            return new ResponseEntity<>(sectionService.createNewSection(formId, newSection), HttpStatus.OK);
+            return new ResponseEntity<>(sectionService.createNewSection(formId, newSection), HttpStatus.CREATED);
         }
         return new ResponseEntity<>("creation failed", HttpStatus.NOT_FOUND);
     }
@@ -44,7 +44,7 @@ public class SectionController {
     public ResponseEntity<?> newSection(@RequestBody Section newSection, @PathVariable Long formId, @PathVariable Long sectionId){
        if (newSection != null && newSection.getQuestions() != null
         ){
-            return new ResponseEntity<>(sectionService.addQuestions(formId, sectionId, newSection), HttpStatus.OK);
+            return new ResponseEntity<>(sectionService.addQuestions(formId, sectionId, newSection), HttpStatus.CREATED);
         }
         return new ResponseEntity<>("creation failed", HttpStatus.NOT_FOUND);
     }
