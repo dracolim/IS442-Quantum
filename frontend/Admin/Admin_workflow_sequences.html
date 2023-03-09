@@ -164,46 +164,70 @@
                 <thead class="text-xs text-white uppercase bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                           Work Flow ID
+                            Work Flow ID
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Form ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Sequence Number
+                            Form Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Approved
+                            Date Submitted
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Approval User ID
+                            Last Edited
                         </th>
-
-
+                        <th scope="col" class="px-6 py-3">
+                            Sequence No
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Approval ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Form Document
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
-                    v-for="(value,key) in AllWorkflow">
+                    v-for="(value,key) in forms_sequences">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            Someone<!-- {{value.workFlowId}} -->
+                            {{workflow_id}}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            {{value.form.formId}}
                         </th>
                         <td class="px-6 py-4">
-                           Something <!-- {{value.wfName}} -->
+                           {{value.form.formName}}
                         </td>
                         <td class="px-6 py-4">
-                            <!-- {{value.wfDateline}} -->
+                            {{value.form.dateSubmitted}}
                         </td>
                         <td class="px-6 py-4">
-                            <!-- {{value.wfLastSubmit}} -->
+                            {{value.form.lastEdited}}
                         </td>
                         <td class="px-6 py-4">
-                            <!-- {{value.validated}} -->
+                            {{value.seqNo}}
+                        </td>
+                        <td class="px-6 py-4"  v-if="status != null" >
+                            {{value.status}}
+                        </td>     
+                        <td class="px-6 py-4"  v-if="status == null" >
+                            Status Not Valid
+                        </td>                      
+                        <td class="px-6 py-4">
+                            {{value.approvalId}}
                         </td>
                         <td style="text-align: center;">
-                            <button v-on:click="goToSinglepage(value.formId)" type="button">
+                            <button v-on:click="goToFormPage(value.form.formId)" type="button">
                                 <iconify-icon icon="mdi:file-document" width="28" height="28"></iconify-icon>
                             </button>
+
                         </td>
                     </tr>
 
@@ -225,40 +249,42 @@
         
     </div>
     
-</body>
 
-<script>
-    const vm = new Vue({
-        el: '#app',
-        data: {
-            localhost: "http://localhost:5000",
-            AllWorkflow:"",
-        },
-        mounted: async function () {
-            const API_URL = this.localhost + "/workflows";
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                localhost: "http://localhost:5000",
+                workflow_id: null,
+                forms_sequences: "",
+            },
+            mounted: async function () {
+                var query = window.location.search.substring(4);
+                this.workflow_id = query;
+                const API_URL = this.localhost + "/workflows/"+this.workflow_id;
+    
+                axios.get(API_URL)
+                    .then(response => {
+                        this.forms_sequences = response.data.formSequences;
+                        console.log(this.forms_sequences)
 
-            axios.get(API_URL)
-                .then(response => {
-                    this.AllWorkflow = response.data;
-                    console.log(this.AllWorkflow)
-                    // Vue.set(this, 'AllWorkflow', response.data);
-                    // console.log(this.AllWorkflow)
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-        },
-        methods: {
-            createAcc() {
-                console.log(this.gstRegistered);
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+            },
+            methods: {
+                goToFormPage: function (id) {
+                    console.log(id)
+                    window.location.assign("./Admin_individual_form.html?id=" + id)
+                },
             }
-        }
-    })
-</script>
+        })
+    </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+</body>
 
 </html>

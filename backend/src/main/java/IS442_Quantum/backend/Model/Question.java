@@ -20,14 +20,16 @@ public class Question {
     private String attribute;
     private String inputLabel;
     private Boolean isRequired;
+    private String inputValue;
 
     @OneToMany(mappedBy ="question", cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private List<QuestionProperty> questionProperties = new ArrayList<>();
 
-    @OneToMany(mappedBy = "question", cascade = {CascadeType.ALL})
+    @ManyToOne
+    @JoinColumn(name="section_id")
     @JsonIgnore
-    private Collection<FormQuestion> formQuestions = new ArrayList<>();
+    private Section section;
 
     public void addList(QuestionProperty questionProperty){
         questionProperties.add(questionProperty);

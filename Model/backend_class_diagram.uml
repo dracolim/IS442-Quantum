@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>IS442_Quantum.backend.Model</OriginalElement>
+  <nodes>
+    <node x="880.5" y="811.0">IS442_Quantum.backend.Model.Admin</node>
+    <node x="380.0" y="218.0">IS442_Quantum.backend.Model.WorkFlow</node>
+    <node x="1684.0" y="1153.4955357142858">IS442_Quantum.backend.Model.QuestionProperty</node>
+    <node x="1268.5" y="229.0">IS442_Quantum.backend.Model.User</node>
+    <node x="880.5" y="0.0">IS442_Quantum.backend.Model.Approver</node>
+    <node x="1245.0" y="994.5491071428571">IS442_Quantum.backend.Model.Question</node>
+    <node x="0.0" y="895.3035714285714">IS442_Quantum.backend.Model.FormSequence</node>
+    <node x="841.5" y="1115.549107142857">IS442_Quantum.backend.Model.Section</node>
+    <node x="1643.0" y="1515.4955357142858">IS442_Quantum.backend.Model.QuestionValue</node>
+    <node x="756.0" y="163.0">IS442_Quantum.backend.Model.Vendor</node>
+    <node x="1967.0" y="1612.0">IS442_Quantum.backend.Model.QuestionValueId</node>
+    <node x="378.0" y="1228.5535714285716">IS442_Quantum.backend.Model.Form</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="IS442_Quantum.backend.Model.QuestionValue" target="IS442_Quantum.backend.Model.Question" relationship="TO_ONE">
+      <point x="-137.0" y="107.5" />
+      <point x="1612.0" y="1837.9955357142858" />
+      <point x="1612.0" y="1866.049107142857" />
+      <point x="1602.0" y="1866.049107142857" />
+      <point x="1602.0" y="1384.3035714285716" />
+      <point x="1592.0" y="1384.3035714285716" />
+      <point x="1592.0" y="1531.549107142857" />
+      <point x="163.0" y="179.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Form" target="IS442_Quantum.backend.Model.Section" relationship="DEPENDENCY">
+      <point x="163.0" y="-135.0" />
+      <point x="725.0" y="1363.5535714285716" />
+      <point x="725.0" y="1279.5535714285716" />
+      <point x="735.0" y="1279.5535714285716" />
+      <point x="735.0" y="1234.049107142857" />
+      <point x="-132.0" y="-118.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Section" target="IS442_Quantum.backend.Model.Form" relationship="DEPENDENCY">
+      <point x="-132.0" y="-118.5" />
+      <point x="735.0" y="1234.049107142857" />
+      <point x="735.0" y="1279.5535714285716" />
+      <point x="725.0" y="1279.5535714285716" />
+      <point x="725.0" y="1363.5535714285716" />
+      <point x="163.0" y="-135.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Question" target="IS442_Quantum.backend.Model.QuestionValue" relationship="TO_MANY">
+      <point x="163.0" y="179.0" />
+      <point x="1592.0" y="1531.549107142857" />
+      <point x="1592.0" y="1384.3035714285716" />
+      <point x="1602.0" y="1384.3035714285716" />
+      <point x="1602.0" y="1866.049107142857" />
+      <point x="1612.0" y="1866.049107142857" />
+      <point x="1612.0" y="1837.9955357142858" />
+      <point x="-137.0" y="107.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Question" target="IS442_Quantum.backend.Model.QuestionProperty" relationship="DEPENDENCY">
+      <point x="163.0" y="-179.0" />
+      <point x="1592.0" y="1173.549107142857" />
+      <point x="1592.0" y="1374.3035714285716" />
+      <point x="1612.0" y="1374.3035714285716" />
+      <point x="1612.0" y="1238.9955357142858" />
+      <point x="-96.0" y="-85.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.QuestionProperty" target="IS442_Quantum.backend.Model.Question" relationship="DEPENDENCY">
+      <point x="-96.0" y="-85.5" />
+      <point x="1612.0" y="1238.9955357142858" />
+      <point x="1612.0" y="1374.3035714285716" />
+      <point x="1592.0" y="1374.3035714285716" />
+      <point x="1592.0" y="1173.549107142857" />
+      <point x="163.0" y="-179.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.QuestionProperty" target="IS442_Quantum.backend.Model.Question" relationship="TO_ONE">
+      <point x="-96.0" y="85.5" />
+      <point x="1612.0" y="1409.9955357142858" />
+      <point x="1612.0" y="1384.3035714285716" />
+      <point x="1592.0" y="1384.3035714285716" />
+      <point x="1592.0" y="1531.549107142857" />
+      <point x="163.0" y="179.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Question" target="IS442_Quantum.backend.Model.Section" relationship="TO_ONE">
+      <point x="-163.0" y="-179.0" />
+      <point x="1218.0" y="1173.549107142857" />
+      <point x="1218.0" y="1234.049107142857" />
+      <point x="132.0" y="-118.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Question" target="IS442_Quantum.backend.Model.QuestionProperty" relationship="TO_MANY">
+      <point x="163.0" y="179.0" />
+      <point x="1592.0" y="1531.549107142857" />
+      <point x="1592.0" y="1384.3035714285716" />
+      <point x="1612.0" y="1384.3035714285716" />
+      <point x="1612.0" y="1409.9955357142858" />
+      <point x="-96.0" y="85.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Section" target="IS442_Quantum.backend.Model.Question" relationship="TO_MANY">
+      <point x="132.0" y="-118.5" />
+      <point x="1218.0" y="1234.049107142857" />
+      <point x="1218.0" y="1173.549107142857" />
+      <point x="-163.0" y="-179.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Section" target="IS442_Quantum.backend.Model.Form" relationship="TO_ONE">
+      <point x="-132.0" y="118.5" />
+      <point x="735.0" y="1471.049107142857" />
+      <point x="735.0" y="1598.3035714285716" />
+      <point x="725.0" y="1598.3035714285716" />
+      <point x="725.0" y="1633.5535714285716" />
+      <point x="163.0" y="135.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.FormSequence" target="IS442_Quantum.backend.Model.Form" relationship="TO_ONE">
+      <point x="159.0000000000001" y="140.5" />
+      <point x="338.0" y="1316.8035714285716" />
+      <point x="338.0" y="1503.5535714285716" />
+      <point x="348.0" y="1503.5535714285716" />
+      <point x="348.0" y="1633.5535714285716" />
+      <point x="-163.0" y="135.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Question" target="IS442_Quantum.backend.Model.QuestionValue" relationship="DEPENDENCY">
+      <point x="163.0" y="-179.0" />
+      <point x="1592.0" y="1173.549107142857" />
+      <point x="1592.0" y="1374.3035714285716" />
+      <point x="1602.0" y="1374.3035714285716" />
+      <point x="1602.0" y="984.0491071428571" />
+      <point x="1622.0" y="984.0491071428571" />
+      <point x="1622.0" y="1622.9955357142858" />
+      <point x="-137.0" y="-107.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.QuestionValue" target="IS442_Quantum.backend.Model.Question" relationship="DEPENDENCY">
+      <point x="-137.0" y="-107.5" />
+      <point x="1622.0" y="1622.9955357142858" />
+      <point x="1622.0" y="984.0491071428571" />
+      <point x="1602.0" y="984.0491071428571" />
+      <point x="1602.0" y="1374.3035714285716" />
+      <point x="1592.0" y="1374.3035714285716" />
+      <point x="1592.0" y="1173.549107142857" />
+      <point x="163.0" y="-179.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Vendor" target="IS442_Quantum.backend.Model.WorkFlow" relationship="TO_MANY">
+      <point x="-217.5" y="-157.0" />
+      <point x="725.0" y="320.0" />
+      <point x="725.0" y="347.5" />
+      <point x="161.0" y="-129.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Section" target="IS442_Quantum.backend.Model.Question" relationship="DEPENDENCY">
+      <point x="132.0" y="118.5" />
+      <point x="1218.0" y="1471.049107142857" />
+      <point x="1218.0" y="1531.549107142857" />
+      <point x="-163.0" y="179.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Question" target="IS442_Quantum.backend.Model.Section" relationship="DEPENDENCY">
+      <point x="-163.0" y="179.0" />
+      <point x="1218.0" y="1531.549107142857" />
+      <point x="1218.0" y="1471.049107142857" />
+      <point x="132.0" y="118.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.WorkFlow" target="IS442_Quantum.backend.Model.Vendor" relationship="TO_ONE">
+      <point x="161.0" y="-129.5" />
+      <point x="725.0" y="347.5" />
+      <point x="725.0" y="320.0" />
+      <point x="-217.5" y="-157.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.WorkFlow" target="IS442_Quantum.backend.Model.FormSequence" relationship="TO_MANY">
+      <point x="-161.0" y="129.5" />
+      <point x="348.0" y="606.5" />
+      <point x="348.0" y="1503.5535714285716" />
+      <point x="338.0" y="1503.5535714285716" />
+      <point x="338.0" y="1316.8035714285716" />
+      <point x="159.0000000000001" y="140.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Form" target="IS442_Quantum.backend.Model.Section" relationship="TO_MANY">
+      <point x="163.0" y="135.0" />
+      <point x="725.0" y="1633.5535714285716" />
+      <point x="725.0" y="1598.3035714285716" />
+      <point x="735.0" y="1598.3035714285716" />
+      <point x="735.0" y="1471.049107142857" />
+      <point x="-132.0" y="118.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.FormSequence" target="IS442_Quantum.backend.Model.WorkFlow" relationship="TO_ONE">
+      <point x="159.0000000000001" y="140.5" />
+      <point x="338.0" y="1316.8035714285716" />
+      <point x="338.0" y="1503.5535714285716" />
+      <point x="348.0" y="1503.5535714285716" />
+      <point x="348.0" y="606.5" />
+      <point x="-161.0" y="129.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.WorkFlow" target="IS442_Quantum.backend.Model.FormSequence" relationship="DEPENDENCY">
+      <point x="-161.0" y="-129.5" />
+      <point x="358.0" y="347.5" />
+      <point x="358.0" y="472.0" />
+      <point x="338.0" y="472.0" />
+      <point x="338.0" y="1035.8035714285716" />
+      <point x="159.0000000000001" y="-140.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.FormSequence" target="IS442_Quantum.backend.Model.WorkFlow" relationship="DEPENDENCY">
+      <point x="159.0000000000001" y="-140.5" />
+      <point x="338.0" y="1035.8035714285716" />
+      <point x="338.0" y="472.0" />
+      <point x="358.0" y="472.0" />
+      <point x="358.0" y="347.5" />
+      <point x="-161.0" y="-129.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Admin" target="IS442_Quantum.backend.Model.User" relationship="GENERALIZATION">
+      <point x="93.0" y="-0.0" />
+      <point x="1218.0" y="882.5" />
+      <point x="1218.0" y="477.0" />
+      <point x="-139.5" y="-0.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.WorkFlow" target="IS442_Quantum.backend.Model.Vendor" relationship="DEPENDENCY">
+      <point x="161.0" y="129.5" />
+      <point x="725.0" y="606.5" />
+      <point x="725.0" y="634.0" />
+      <point x="-217.5" y="157.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Vendor" target="IS442_Quantum.backend.Model.WorkFlow" relationship="DEPENDENCY">
+      <point x="-217.5" y="157.0" />
+      <point x="725.0" y="634.0" />
+      <point x="725.0" y="606.5" />
+      <point x="161.0" y="129.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.FormSequence" target="IS442_Quantum.backend.Model.Form" relationship="DEPENDENCY">
+      <point x="159.0000000000001" y="-140.5" />
+      <point x="338.0" y="1035.8035714285716" />
+      <point x="338.0" y="472.0" />
+      <point x="358.0" y="472.0" />
+      <point x="358.0" y="1363.5535714285716" />
+      <point x="-163.0" y="-135.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.QuestionValue" target="IS442_Quantum.backend.Model.QuestionValueId" relationship="CREATE">
+      <point x="137.00000000000006" y="-107.5" />
+      <point x="1942.0" y="1622.9955357142858" />
+      <point x="1942.0" y="1675.5" />
+      <point x="-90.5" y="-63.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Approver" target="IS442_Quantum.backend.Model.User" relationship="GENERALIZATION">
+      <point x="93.0" y="-0.0" />
+      <point x="1218.0" y="71.5" />
+      <point x="1218.0" y="477.0" />
+      <point x="-139.5" y="-0.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Vendor" target="IS442_Quantum.backend.Model.User" relationship="GENERALIZATION">
+      <point x="217.5" y="-0.0" />
+      <point x="-139.5" y="-0.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Form" target="IS442_Quantum.backend.Model.QuestionValue" relationship="TO_MANY">
+      <point x="163.0" y="135.0" />
+      <point x="725.0" y="1633.5535714285716" />
+      <point x="725.0" y="1598.3035714285716" />
+      <point x="735.0" y="1598.3035714285716" />
+      <point x="735.0" y="1866.049107142857" />
+      <point x="1612.0" y="1866.049107142857" />
+      <point x="1612.0" y="1837.9955357142858" />
+      <point x="-137.0" y="107.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.QuestionValue" target="IS442_Quantum.backend.Model.Form" relationship="TO_ONE">
+      <point x="-137.0" y="107.5" />
+      <point x="1612.0" y="1837.9955357142858" />
+      <point x="1612.0" y="1866.049107142857" />
+      <point x="735.0" y="1866.049107142857" />
+      <point x="735.0" y="1598.3035714285716" />
+      <point x="725.0" y="1598.3035714285716" />
+      <point x="725.0" y="1633.5535714285716" />
+      <point x="163.0" y="135.0" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.QuestionValue" target="IS442_Quantum.backend.Model.QuestionValueId" relationship="TO_ONE">
+      <point x="137.00000000000006" y="107.5" />
+      <point x="1942.0" y="1837.9955357142858" />
+      <point x="1942.0" y="1802.5" />
+      <point x="-90.5" y="63.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.Form" target="IS442_Quantum.backend.Model.QuestionValue" relationship="DEPENDENCY">
+      <point x="163.0" y="-135.0" />
+      <point x="725.0" y="1363.5535714285716" />
+      <point x="725.0" y="1279.5535714285716" />
+      <point x="735.0" y="1279.5535714285716" />
+      <point x="735.0" y="984.0491071428571" />
+      <point x="1622.0" y="984.0491071428571" />
+      <point x="1622.0" y="1622.9955357142858" />
+      <point x="-137.0" y="-107.5" />
+    </edge>
+    <edge source="IS442_Quantum.backend.Model.QuestionValue" target="IS442_Quantum.backend.Model.Form" relationship="DEPENDENCY">
+      <point x="-137.0" y="-107.5" />
+      <point x="1622.0" y="1622.9955357142858" />
+      <point x="1622.0" y="984.0491071428571" />
+      <point x="735.0" y="984.0491071428571" />
+      <point x="735.0" y="1279.5535714285716" />
+      <point x="725.0" y="1279.5535714285716" />
+      <point x="725.0" y="1363.5535714285716" />
+      <point x="163.0" y="-135.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.42619926199262004" showDependencies="true" x="1068.9641100382592" y="1013.371756500013" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>Production</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

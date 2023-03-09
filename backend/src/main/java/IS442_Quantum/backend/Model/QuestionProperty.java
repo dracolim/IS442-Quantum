@@ -13,18 +13,16 @@ public class QuestionProperty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String label;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="question_id")
     @JsonIgnore
-    private Question question;
 
+    private Question question;
     public QuestionProperty(String label) {
         this.label = label;
     }
-
     @Override
     public boolean equals(Object o){
         if (this == o) return true;

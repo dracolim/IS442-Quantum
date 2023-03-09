@@ -18,13 +18,13 @@ public class QuestionController {
     }
 
     @GetMapping("/questions")
-    public ResponseEntity<?> getAllQuestionnaires() {
+    public ResponseEntity<?> getAllQuestions() {
         return new ResponseEntity<>(questionService.getAllQuestion(), HttpStatus.OK);
     }
 
     @GetMapping("/question/{id}")
     public ResponseEntity<?> findByInputId(@PathVariable Long id){
-        return new ResponseEntity<>(questionService.findByQuestion(id), HttpStatus.OK);
+        return new ResponseEntity<>(questionService.findByQuestionId(id), HttpStatus.OK);
     }
 
     @PostMapping(value = "/question")
@@ -44,7 +44,7 @@ public class QuestionController {
         if(id == 0 || !questionService.checkQuestionById(id)){
             return new ResponseEntity<>("Delete failed, please provide a valid question ID", HttpStatus.NOT_FOUND);
         } else {
-            Question tempQn = questionService.findByQuestion(id);
+            Question tempQn = questionService.findByQuestionId(id);
             questionService.deleteQuestionById(id);
             return new ResponseEntity<>(tempQn, HttpStatus.OK);
         }

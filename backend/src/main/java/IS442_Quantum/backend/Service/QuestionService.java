@@ -1,6 +1,5 @@
 package IS442_Quantum.backend.Service;
 
-import IS442_Quantum.backend.Model.FormQuestion;
 import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Model.QuestionProperty;
 import IS442_Quantum.backend.Repository.QuestionRepository;
@@ -18,7 +17,7 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question findByQuestion(Long questionId){
+    public Question findByQuestionId(Long questionId){
         return questionRepository.findByQuestionId(questionId);
     }
 
@@ -27,7 +26,20 @@ public class QuestionService {
     }
 
     public Question createNewQuestion(Question newQuestion){
-        return questionRepository.save(newQuestion);
+        Question question = new Question();
+        question.setInputLabel(newQuestion.getInputLabel());
+        question.setInputType(newQuestion.getInputType());
+        question.setAttribute(newQuestion.getAttribute());
+        question.setIsRequired(newQuestion.getIsRequired());
+        List<QuestionProperty> questionProperties = new ArrayList<>();
+        for (QuestionProperty questionProperty : newQuestion.getQuestionProperties()) {
+            QuestionProperty newQuestionProperty = new QuestionProperty();
+            newQuestionProperty.setLabel(questionProperty.getLabel());
+            newQuestionProperty.setQuestion(question);
+            questionProperties.add(newQuestionProperty);
+        }
+        question.getQuestionProperties().addAll(questionProperties);
+        return questionRepository.save(question);
     }
 
     public void deleteQuestionById(Long id){
@@ -44,6 +56,7 @@ public class QuestionService {
         eQuestion.setInputType(question.getInputType());
         eQuestion.setAttribute(question.getAttribute());
         eQuestion.setIsRequired(question.getIsRequired());
+        eQuestion.setInputValue(question.getInputValue());
 
         // update question properties if there is any question properties
         if (question.getQuestionProperties() != null) {

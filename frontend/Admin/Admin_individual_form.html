@@ -188,14 +188,10 @@
 
         <!-- Table -->
         <div class="relative overflow-x- shadow-md sm:rounded-lg mx-8 mt-3">
-            <table class="w-full text-sm text-left text-gray-500 table-auto" id="fieldTable">
+            <table class="w-full text-sm text-left text-gray-500">
 
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                    Form ID: {{form_id}} <br>
-                    <span>Form Name: <input type="text"
-                            class="ml-2 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-sky-500 w-9/12"
-                            v-model="form_name" @change="updateFormName()"></span>
-                    <!-- <span id="form_name">Form Name: {{form_name}}</span> -->
+                    Form ID: {{form_id}}
                     <p class="mt-1 text-sm font-normal text-gray-500">
                         <a href="../Approver/Approver_home.html"><span>Home ></span></a>
                         <a href="../Approver/Approver_form.html"><span> Forms </span></a>
@@ -209,13 +205,13 @@
                             Question ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Field Name
+                            Field's Label
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Field Type
+                            Field's Type
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Input Options
+                            Input Labels
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Required
@@ -223,9 +219,9 @@
                         <th>Delete</th>
                     </tr>
                 </thead>
-                <tbody id="tablebody">
+                <tbody>
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
-                        v-for="(value,key) in form_questions" track-by ="$index">
+                        v-for="(value,key) in form_questions">
                         <td class="px-6 py-4 font-medium text-gray-900 ">
                             {{value.question.questionId}}
                         </td>
@@ -244,40 +240,52 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                 <option :value="value.question.inputType" disabled selected>{{value.question.inputType}}
                                 </option>
-                                <option v-if="value.question.inputType != 'checkbox'" value="checkbox">Checkbox</option>
-                                <option v-if="value.question.inputType != 'radio'" value="radio">Radio</option>
-                                <option v-if="value.question.inputType != 'date'" value="date">Date</option>
-                                <option v-if="value.question.inputType != 'text'" value="text">Text</option>
-                                <option v-if="value.question.inputType != 'textarea'" value="textarea">Textarea</option>
-                                <option v-if="value.question.inputType != 'email'" value="email">Email</option>
-                                <option v-if="value.question.inputType != 'file'" value="file">File</option>
-                                <option v-if="value.question.inputType != 'number'" value="number">Number</option>
+                                <option v-if="value.question.inputType != 'checkbox'" value="checkbox">checkbox</option>
+                                <option v-if="value.question.inputType != 'radio'" value="radio">radio</option>
+                                <option v-if="value.question.inputType != 'date'" value="date">date</option>
+                                <option v-if="value.question.inputType != 'text'" value="text">text</option>
+                                <option v-if="value.question.inputType != 'textarea'" value="textarea">textarea</option>
+                                <option v-if="value.question.inputType != 'email'" value="email">email</option>
+                                <option v-if="value.question.inputType != 'file'" value="file">file</option>
+                                <option v-if="value.question.inputType != 'number'" value="number">number</option>
                             </select>
                         </td>
 
                         <!-- input values -->
                         <td class="px-6 py-4">
-                            <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside mb-2">
+                            <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside dark:text-gray-400 mb-2">
                                 <li v-for="eachValue in value.question.questionProperties" class="text-gray-900 ">
                                     {{eachValue.label}}
                                 </li>
                             </ul>
                             <!-- TO ADD INPUT LABELS -->
-                            <button
-                                v-if="value.question.inputType.toLowerCase() == 'radio' || value.question.inputType.toLowerCase() == 'checkbox'"
-                                type="button" v-on:click="openUpdateModal(value.question.questionId)"
-                                class="underline border-none py-2.5 text-sm font-medium text-gray-900 focus:outline-none rounded-lg hover:text-gray-600 focus:z-10 focus:ring-4 focus:ring-gray-200 gray-600">
+                            <button type="button" v-on:click="openUpdateModal(value.question.questionId)"
+                                class="underline border-none py-2.5 mb-2 text-sm font-medium text-gray-900 focus:outline-none rounded-lg hover:text-gray-600 focus:z-10 focus:ring-4 focus:ring-gray-200 gray-600">
                                 <div class="inline-flex items-center">
                                     <iconify-icon icon="material-symbols:add"></iconify-icon> Add Options
                                 </div>
                             </button>
+
+                            <!-- <button id  = "inputValues" v-if="value.question.inputType == 'radio' || value.question.inputType == 'checkbox'"
+                                class="inline-flex items-center" @click="addMore()">
+                                <iconify-icon icon="material-symbols:add"></iconify-icon>
+                                <div class="relative z-0 w-full group">
+                                    <input type="text" name="value.question.questionId" 
+                                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                        placeholder=" " />
+                                    <label for="value.question.questionId"
+                                        class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Add Option</label>
+                                </div>
+                            </button> 
+                            <div id ="more">
+                            </div>  -->
                         </td>
 
                         <!--required -->
                         <td class="px-6 py-4">
                             <select id="isRequired" @change="updateFieldRequired(value.question.questionId)"
                                 v-model="varFieldRequired[value.question.questionId]"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                 <option disabled selected :value="value.question.isRequired">
                                     {{value.question.isRequired}}</option>
                                 <option v-if="value.question.isRequired != false" value=false>false</option>
@@ -302,6 +310,7 @@
                 <div class="relative w-full h-full max-w-md md:h-auto px-6">
                     <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow w-96 mt-12 md:mt-0">
+
                         <button type="button" v-on:click="closeUpdateModal"
                             class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                             data-modal-toggle="authentication-modal">
@@ -316,12 +325,10 @@
 
                         <div class="px-6 py-6 lg:px-8">
                             <h3 class="mb-4 text-xl font-medium text-gray-900">Add Input Labels</h3>
-                            <h3 class="mb-4 text-md font-medium text-gray-900 underline">
-                                {{all_question_labels[updateID]}}</h3>
-                            <form class="space-y-6">
+                            <h3 class="mb-4 text-md font-medium text-gray-900 underline">{{all_questions[updateID].inputLabel}}</h3>
+                            <form class="space-y-6" action="#">
                                 <div>
-                                    <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number
-                                        of
+                                    <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number of
                                         Input
                                         Options</label>
                                     <input type="number" name="optionsNum" id="optionsNum" v-model="totalOptions"
@@ -340,118 +347,33 @@
                                 </div>
 
                                 <div v-if="show == true">
-                                    <label for="text"
-                                        class="block mb-2 text-sm font-medium text-gray-900">Options</label>
+                                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900">Option
+                                        Labels</label>
 
                                     <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="varLabels[n]"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
-                                            required>
+                                        <input type="text" name="text" id="text"
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
+                                                required>
                                     </div>
                                 </div>
 
-                                <button type="button" @click="updateLabel()"
-                                    class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+                                    <button type="submit"
+                                        class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
                             </form>
                         </div>
+
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="mx-8 mt-5 mb-12 py-5">
             <button type="button" v-on:click="goToSinglepage()"
-                class="float-right inline-flex items-center  px-4 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
-                    <path fill="none" stroke="currentColor" stroke-width="2"
-                        d="M12 17c-2.727 0-6-2.778-6-5s3.273-5 6-5s6 2.778 6 5s-3.273 5-6 5Zm-1-5a1 1 0 1 0 2 0a1 1 0 0 0-2 0Z" />
-                    </svg>
-                View Form</button>
-            <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                class="inline-flex items-center mr-5 float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
-                    <path fill="#FFFFFF"
-                        d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
-                    </svg> Add New Fields
-            </button>
+                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Create
+                Form</button>
         </div>
 
-        <!-- CREATE NEW FIELD MODAL -->
-        <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
-            <div class="relative w-full h-full max-w-md md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow">
-                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="authentication-modal">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900">Add New Field</h3>
-                        <form class="space-y-6" action="#">
-                            <div>
-                                <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field Name</label>
-                                <input type="NewFieldName" v-model = "NewFieldName" name="NewFieldName" id="NewFieldName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                            </div>
-                            <div>
-                                <label for="NewFieldType" class="block mb-2 text-sm font-medium text-gray-900">Field Type</label>
-                                <select id="inputType" v-model="NewFieldType"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                <option value = "text" selected>Text</option>
-                                <option value="checkbox">Checkbox</option>
-                                <option value="radio">Radio</option>
-                                <option value="date">Date</option>
-                                <option value="text">Text</option>
-                                <option value="textarea">Textarea</option>
-                                <option value="email">Email</option>
-                                <option value="file">File</option>
-                                <option value="number">Number</option>
-                            </select>
-                            </div>
-                            <div v-if ="NewFieldType == 'checkbox' || NewFieldType == 'radio'">
-                                <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number
-                                    of
-                                    Input
-                                    Options</label>
-                                <input type="number" name="optionsNum" id="optionsNum" v-model="totalOptions"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    placeholder="1" min="1" required>
-                                <!-- button to show the bottom modal -->
-                                <button type="button" @click="showOptions()"
-                                    class="float-right text-black font-medium  text-sm p-2.5 text-center inline-flex items-center">
-                                    <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-
-                                <div v-if="show == true">
-                                    <label for="text"
-                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900">Options</label>
-
-                                    <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="NewOptions[n]"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
-                                            required>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <div>
-                                <label for="NewisRequired" class="block mb-2 text-sm font-medium text-gray-900">Required</label>
-                                <select id="NewisRequired" v-model="NewisRequired"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
-                                <option value=false selected>false</option>
-                                <option value=true>true</option>
-                                </select>
-                            </div>
-                            <button type="button" @click ="addNewField()" class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create New Field</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> 
     </div>
 
     <script>
@@ -461,15 +383,11 @@
                 localhost: "http://localhost:5000",
                 all_forms: "",
                 all_questions: "",
-                all_question_labels: {},
-                one_form: "",
                 form_id: null,
-                form_name: "",
                 form_questions: "",
                 varFieldNames: [],
                 varFieldTypes: {},
                 varFieldRequired: {},
-                varLabels: {},
                 needOptions: ['radio', 'checkbox'],
                 show: false,
                 updateID: null,
@@ -477,11 +395,6 @@
                 show: false,
                 totalOptions: 0,
                 labelOptions: [],
-                //CREATE NEW FIELD
-                NewFieldType: "",
-                NewFieldName: "",
-                NewisRequired: false,
-                NewOptions: {},
             },
             mounted: async function () {
                 var query = window.location.search.substring(4);
@@ -489,36 +402,23 @@
 
                 const API_URL = this.localhost + "/form/" + this.form_id;
                 const API_URL2 = this.localhost + "/questions"
-                const API_URL3 = this.localhost + "/forms";
 
                 const requestOne = axios.get(API_URL);
                 const requestTwo = axios.get(API_URL2);
-                const requestThree = axios.get(API_URL3)
 
-                axios.all([requestOne, requestTwo, requestThree])
+                axios.all([requestOne, requestTwo])
                     .then(axios.spread((...responses) => {
                         const responseOne = responses[0].data
                         const responseTwo = responses[1].data
-                        const responseThree = responses[2].data
 
                         this.form_questions = responseOne.formQuestions
                         console.log(this.form_questions)
                         this.all_questions = responseTwo
                         console.log(this.all_questions)
-                        this.all_forms = responseThree
-                        for (each of responseThree) {
-                            if (each.formId == this.form_id) {
-                                this.form_name = each.formName
-                            }
-                        }
 
                         for (each of this.all_questions) {
                             this.varFieldTypes[each.questionId] = each.inputType;
                             this.varFieldRequired[each.questionId] = each.isRequired;
-                        }
-                        for (each of this.form_questions) {
-                            this.all_question_labels[each.question.questionId] = each.question
-                                .inputLabel
                         }
                     })).catch(errors => {
                         console.log(errors)
@@ -527,31 +427,6 @@
             methods: {
                 goToSinglepage: function () {
                     window.location.assign("./Approver_overview_form.html?id=" + this.form_id)
-                },
-                updateFormName() {
-                    console.log(this.form_name)
-                    const API_URL = this.localhost + "/form/" + this.form_id;
-
-                    // get the form details first
-                    axios.get(API_URL)
-                        .then(response => {
-                            this.one_form = response.data
-                        })
-                        .catch(error => {
-                            console.log(error.message)
-                        })
-
-                    //edit the form name
-                    this.one_form['formName'] = this.form_name
-
-                    // udpate new form name
-                    axios.put(API_URL, this.one_form)
-                        .then(response => {
-                            console.log(response.data)
-                        })
-                        .catch(error => {
-                            console.log(error.message)
-                        })
                 },
                 updateFieldName: function (question_id) {
                     console.log(question_id)
@@ -578,13 +453,8 @@
                     for (each of this.all_questions) {
                         if (each.questionId == question_id) {
                             each['inputType'] = this.varFieldTypes[question_id]
-                            //delete the input labels
-                            if (this.varFieldTypes[question_id] == 'text') {
-                                each['questionProperties'] = []
-                            }
-                            var data = each
+                            var data = each;
                         }
-
                     }
                     var URL = this.localhost + '/question/' + question_id
                     axios.put(URL, data)
@@ -606,22 +476,22 @@
                                 false : thisval;
                             // var isTrueSet = (this.varFieldRequired[question_id] ? .toLowerCase ? .() ==='true');
                             each['isRequired'] = isTrueSet
-                            var data = each;
-                            console.log(data)
+                            var data2 = each;
+                            console.log(data2)
                         }
                     }
                     this.varFieldRequired[question_id] = isTrueSet
                     console.log(this.varFieldRequired)
 
                     var URL = this.localhost + '/question/' + question_id
-                    axios.put(URL, data)
+                    axios.put(URL, data2)
                         .then(response => {
                             console.log(response.data)
                         })
                         .catch(error => {
                             console.log(error.message)
                         })
-                    document.location.reload();
+                    // document.location.reload();
                 },
                 deleteQuestion: function (question_id) {
                     var URL = this.localhost + '/question/' + question_id
@@ -654,110 +524,17 @@
                     this.updateID = null;
                     this.show = false;
                     this.totalOptions = 0
-                    this.labelOptions = [],
-                        this.varLabels = []
+                    this.labelOptions = []
                 },
                 showOptions() {
                     this.show = true;
-                },
-                updateLabel() {
-                    for (each of this.all_questions) {
-                        if (each.questionId == this.updateID) {
-                            var all_new_labels = []
-                            for (i in this.varLabels) {
-                                all_new_labels.push(this.varLabels[i].toLowerCase())
-                            }
-                            // already have options
-                            if ("questionProperties" in each) {
-                                var all_existing_labels = []
-                                for (each_label of each.questionProperties) {
-                                    all_existing_labels.push(each_label.label.toLowerCase())
-                                }
-
-                                var all_labels = each.questionProperties
-                                // the number of input options is lesser than the usual 
-                                if (all_labels.length > Object.keys(this.varLabels).length) {
-                                    for (i in this.varLabels) {
-                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))) {
-                                            var label_list = {}
-                                            label_list['label'] = this.varLabels[i]
-                                            all_labels.push(label_list)
-                                        }
-                                    }
-                                    console.log(all_labels)
-                                    // remove all the extra from original that is not in the new 
-                                    for (i in all_labels) {
-                                        console.log(all_labels[i].label.toLowerCase())
-                                        console.log(all_new_labels)
-                                        if (!(all_new_labels.includes(all_labels[i].label.toLowerCase()))) {
-                                            for (i2 in all_labels) {
-                                                if (all_labels[i2].label.toLowerCase() == all_labels[i].label
-                                                    .toLowerCase()) {
-                                                    all_labels.splice(i2, 1);
-                                                    break
-                                                }
-                                            }
-                                            console.log(all_labels)
-                                        }
-                                    }
-                                    each['questionProperties'] = all_labels
-                                } else {
-                                    for (i in this.varLabels) {
-                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))) {
-                                            var label_list = {}
-                                            label_list['label'] = this.varLabels[i]
-                                            all_labels.push(label_list)
-                                        }
-                                    }
-                                    each['questionProperties'] = all_labels
-                                }
-                            }
-                            // no options at all
-                            else {
-                                var all_labels = []
-                                for (i in this.varLabels) {
-                                    var label_list = {}
-                                    label_list['label'] = this.varLabels[i]
-                                    all_labels.push(label_list)
-                                }
-                                each['questionProperties'] = all_labels
-                            }
-
-                            var data = each;
-                            console.log(data)
-                            break
-                        }
-                    }
-                    var URL = this.localhost + '/question/' + this.updateID
-                    axios.put(URL, data)
-                        .then(response => {
-                            console.log(response.data)
-                        })
-                        .catch(error => {
-                            console.log(error.message)
-                        })
-                    this.closeUpdateModal();
-                    document.location.reload();
-                },
-                addNewField(){
-                    const API_URL4 = this.localhost + "/form/" + this.form_id
-                    
-                    axios.put(API_URL4 , {
-                        inputLabel: this.NewFieldName,
-                        inputType: this.NewFieldType,
-                        isRequired: this.NewisRequired,
-                    })
-                    .then(response => {
-                        console.log(response.data)
-                    })
-                    .catch(error => {
-                        console.log(error.message)
-                    })
-                    // console.log(this.NewFieldName)
-                    // console.log(this.NewFieldType)
-                    // console.log(this.NewOptions)
-                    // console.log(this.NewisRequired)
+                    console.log(this.totalOptions)
                 }
+                // addMore() {
+                //     var button = document.getElementById('inputValues')
+                //     document.getElementById('more').innerHTML = button
+                // },
+
             }
         })
     </script>
