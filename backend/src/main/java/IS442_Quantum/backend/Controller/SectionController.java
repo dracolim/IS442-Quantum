@@ -60,4 +60,13 @@ public class SectionController {
         }
     }
 
+    @PutMapping("/form/{formId}/section/{sectionId}")
+    public ResponseEntity<?> updateSectionById(@PathVariable Long formId, @PathVariable Long sectionId, @RequestBody Section sectionBody){
+        if(sectionId == 0 || !sectionService.checkSectionById(sectionId)){
+            return new ResponseEntity<>("Update failed, please provide a valid section ID", HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(sectionService.updateSection(formId, sectionId, sectionBody), HttpStatus.OK);
+        }
+    }
+
 }

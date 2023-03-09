@@ -64,6 +64,31 @@ public class SectionService {
 
     }
 
+    // Update Section only allow modification of section body and its question, not the form assigned to it
+    public Section updateSection(Long formId, Long SectionId, Section sectionBody){
+        Section section = sectionRepository.findBySectionId(SectionId);
+        section.setForm(formRepository.findByFormId(formId));
+        section.setTitle(sectionBody.getTitle());
+        section.setDescription(sectionBody.getDescription());
+        if(sectionBody.getQuestions() != null){
+            section.getQuestions().clear();
+            for (Question question : sectionBody.getQuestions()){
+                Question newQuestion = null;
+
+                // check if the provided id is correct, if not then create as new question
+                if(questionService.findByQuestionId(question.getQuestionId())==null){
+                    newQuestion = questionService.createNewQuestion(question);
+                } else {
+                    newQuestion = questionService.findByQuestionId(question.getQuestionId());
+                }
+
+                newQuestion.setSection(section);
+                section.getQuestions().add(newQuestion);
+            }
+        }
+        return sectionRepository.save(section);
+    }
+
     public void deleteSectionById(Long sectionId){
         sectionRepository.deleteById(sectionId);
     }

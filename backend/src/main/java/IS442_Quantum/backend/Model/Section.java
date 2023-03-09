@@ -23,7 +23,7 @@ public class Section {
     @JsonIgnore
     private Form form;
 
-    @OneToMany(mappedBy="section", cascade={CascadeType.ALL})
+    @OneToMany(mappedBy="section", cascade={CascadeType.ALL}, orphanRemoval = true)
     private Collection<Question> questions = new ArrayList<>();
 
 
