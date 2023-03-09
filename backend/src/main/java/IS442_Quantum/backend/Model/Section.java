@@ -3,12 +3,14 @@ package IS442_Quantum.backend.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Section {
 
     @Id
@@ -25,6 +27,20 @@ public class Section {
 
     @OneToMany(mappedBy="section", cascade={CascadeType.ALL}, orphanRemoval = true)
     private Collection<Question> questions = new ArrayList<>();
+
+    // copy constructor
+    public Section(Section section) {
+        this.title = section.getTitle();
+        this.description = section.getDescription();
+        for(Question question : section.getQuestions()){
+            addQuestions(new Question(question));
+        }
+    }
+
+    public void addQuestions(Question question){
+        questions.add(question);
+        question.setSection(this);
+    }
 
 
 

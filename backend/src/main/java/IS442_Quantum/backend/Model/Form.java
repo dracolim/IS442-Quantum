@@ -23,5 +23,19 @@ public class Form {
     @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
     private Collection<Section> sections = new ArrayList<>();
 
+    // copy constructor
+    public Form(Form form) {
+        this.formName = form.getFormName();
+        this.dateSubmitted = form.getDateSubmitted();
+        this.lastEdited = form.getLastEdited();
+        for(Section section : form.getSections()){
+            addSections(new Section(section));
+        }
+    }
+
+    public void addSections(Section section){
+        sections.add(section);
+        section.setForm(this);
+    }
 
 }

@@ -2,19 +2,19 @@ package IS442_Quantum.backend.Service;
 
 import IS442_Quantum.backend.Model.Form;
 import IS442_Quantum.backend.Model.Question;
+import IS442_Quantum.backend.Model.QuestionProperty;
 import IS442_Quantum.backend.Model.Section;
 import IS442_Quantum.backend.Repository.FormRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Service
 public class FormService {
 
     private final FormRepository formRepository;
-
     private final QuestionService questionService;
-
     private final SectionService sectionService;
 
     public FormService(FormRepository formRepository, QuestionService questionService, SectionService sectionService) {
@@ -22,7 +22,6 @@ public class FormService {
         this.questionService = questionService;
         this.sectionService = sectionService;
     }
-
 
     public Collection<Form> getAllForm(){
         return formRepository.findAll();
@@ -68,6 +67,11 @@ public class FormService {
 
         return formRepository.save(form);
 
+    }
+
+    public Form cloneForm(Long id){
+        Form form = new Form(formRepository.findByFormId(id));
+        return formRepository.save(form);
     }
 
 

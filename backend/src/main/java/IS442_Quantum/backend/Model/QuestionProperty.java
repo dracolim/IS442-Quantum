@@ -34,4 +34,9 @@ public class QuestionProperty {
     public int hashCode(){
         return getClass().hashCode();
     }
+
+    // copy constructor
+    public QuestionProperty(QuestionProperty questionProperty) {
+        this.label = questionProperty.getLabel();
+    }
 }

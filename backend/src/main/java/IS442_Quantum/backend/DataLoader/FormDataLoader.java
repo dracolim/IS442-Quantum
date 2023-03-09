@@ -13,7 +13,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Component
 public class FormDataLoader implements ApplicationRunner {
@@ -139,7 +138,6 @@ public class FormDataLoader implements ApplicationRunner {
         // set new Form
         Form newVendorAssessmentForm = new Form();
         newVendorAssessmentForm.setFormName("New Vendor Assessment Form");
-
 
         Long millis = System.currentTimeMillis();
         java.sql.Date formDate = new java.sql.Date(millis);
@@ -308,14 +306,6 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
-        // WorkFlow
-        WorkFlow workFlow = new WorkFlow();
-        workFlow.setVendor(subcontractorSafetyHealthEvaluationForm);
-
-        // Form Sequence
-        FormSequence fs = new FormSequence();
-        fs.setForm(subcontractorSafetyHealthEvaluationForm);
-        fs.setSeqNo(1);
         Question[] questionSet5 = {f2q8};
 
         setupSection(
