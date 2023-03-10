@@ -49,17 +49,18 @@ public class UserService {
     public List<User> findByUserType(UserTypes userType) {
         return userRepository.findByUserType(userType);
     }
+
     public void addWorkflowToVendor(Long userId, WorkFlow workFlow) {
         try {
             Vendor vendor = (Vendor) userRepository.findById(userId).get();
             vendor.addWorkflow(workFlow);
             userRepository.save(vendor);
-            try {
-                emailService.sendEmail("wisely.kwek.2020@scis.smu.edu.sg", "New Workflow", "You have a new workflow for your attention");
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
+//            try {
+//                emailService.sendEmail("wisely.kwek.2020@scis.smu.edu.sg", "New Workflow", "You have a new workflow for your attention");
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//                e.printStackTrace();
+//            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
