@@ -2,8 +2,11 @@ package IS442_Quantum.backend.Model;
 import IS442_Quantum.backend.Enums.UserTypes;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name="userType")

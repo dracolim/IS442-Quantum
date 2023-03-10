@@ -1,5 +1,6 @@
 package IS442_Quantum.backend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -23,7 +24,7 @@ public class Vendor extends User{
     private Long registrationNo;
     private String businessType;
     private String evaluationId;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "vendor", cascade = {CascadeType.ALL})
     private Set<WorkFlow> workFlows;
 
