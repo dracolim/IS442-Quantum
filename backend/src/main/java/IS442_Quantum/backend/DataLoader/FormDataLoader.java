@@ -1,10 +1,9 @@
 package IS442_Quantum.backend.DataLoader;
 
+import IS442_Quantum.backend.Enums.FormSequenceStatus;
+import IS442_Quantum.backend.Enums.UserTypes;
 import IS442_Quantum.backend.Model.*;
-import IS442_Quantum.backend.Repository.FormRepository;
-import IS442_Quantum.backend.Repository.FormSequenceRepository;
-import IS442_Quantum.backend.Repository.QuestionRepository;
-import IS442_Quantum.backend.Repository.SectionRepository;
+import IS442_Quantum.backend.Repository.*;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -12,7 +11,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 @Component
 public class FormDataLoader implements ApplicationRunner {
@@ -23,13 +24,28 @@ public class FormDataLoader implements ApplicationRunner {
 
     private final SectionRepository sectionRepository;
 
+    private final UserRepository userRepository;
+
+    private final FormSequenceRepository formSequenceRepository;
+
+    private final WorkFlowRepository workFlowRepository;
+
     @PersistenceContext
     private EntityManager entityManager;
 
-    public FormDataLoader(FormRepository formRepository, QuestionRepository questionRepository, SectionRepository sectionRepository) {
+    public FormDataLoader(
+            FormRepository formRepository,
+            QuestionRepository questionRepository,
+            SectionRepository sectionRepository,
+            UserRepository userRepository,
+            FormSequenceRepository formSequenceRepository,
+            WorkFlowRepository workFlowRepository) {
         this.formRepository = formRepository;
         this.questionRepository = questionRepository;
         this.sectionRepository = sectionRepository;
+        this.userRepository = userRepository;
+        this.formSequenceRepository = formSequenceRepository;
+        this.workFlowRepository = workFlowRepository;
     }
 
 
@@ -38,18 +54,26 @@ public class FormDataLoader implements ApplicationRunner {
     public void run(ApplicationArguments args) {
 
         // Reset the auto-increment value of the form and question table
+        formRepository.deleteAll();
+        workFlowRepository.deleteAll();
+        userRepository.deleteAll();
         questionRepository.deleteAll();
         sectionRepository.deleteAll();
-        formRepository.deleteAll();
+        formSequenceRepository.deleteAll();
 
         String resetQuestionRepositoryQuery = "ALTER TABLE question AUTO_INCREMENT = 1";
         String resetSectionRepositoryQuery = "ALTER TABLE section AUTO_INCREMENT = 1";
         String resetFormRepositoryQuery = "ALTER TABLE form AUTO_INCREMENT = 1";
+        String resetUserRepositoryQuery = "ALTER TABLE user AUTO_INCREMENT = 1";
+        String resetFormSequenceRepositoryQuery = "ALTER TABLE form_sequence AUTO_INCREMENT = 1";
+        String resetWorkFlowRepositoryQuery = "ALTER TABLE work_flow AUTO_INCREMENT = 1";
+
         entityManager.createNativeQuery(resetQuestionRepositoryQuery).executeUpdate();
         entityManager.createNativeQuery(resetSectionRepositoryQuery).executeUpdate();
         entityManager.createNativeQuery(resetFormRepositoryQuery).executeUpdate();
-
-
+        entityManager.createNativeQuery(resetUserRepositoryQuery).executeUpdate();
+        entityManager.createNativeQuery(resetFormSequenceRepositoryQuery).executeUpdate();
+        entityManager.createNativeQuery(resetWorkFlowRepositoryQuery).executeUpdate();
         // ------------------------ New Vendor Assessment Form --------------------------
 
         // add questions
@@ -372,7 +396,103 @@ public class FormDataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
+        // ------------------------------- Create Vendors -------------------------------
+        Vendor vendor1 = new Vendor();
+        vendor1.setUserName("Vendor1");
+        vendor1.setEmailAddress("vendor.1@gmail.com");
+        vendor1.setPassword("123456");
+        vendor1.setCompanyName("Vendor1 Company");
+        vendor1.setOfficeAddress("Vendor1 Office Address");
+        vendor1.setOfficeTel("12345678");
+        vendor1.setOfficeFax("12345678");
+        vendor1.setRegistrationNo(1233456L);
+        vendor1.setBusinessType("Vendor1 Business Type");
 
+        Vendor vendor2 = new Vendor();
+        vendor2.setEvaluationId("123");
+        vendor2.setUserName("Vendor2");
+        vendor2.setEmailAddress("vendor.2@gmail.com");
+        vendor2.setPassword("123456");
+        vendor2.setCompanyName("Vendor2 Company");
+        vendor2.setOfficeAddress("Vendor2 Office Address");
+        vendor2.setOfficeTel("12345678");
+        vendor2.setOfficeFax("12345678");
+        vendor2.setRegistrationNo(1233456L);
+        vendor2.setBusinessType("Vendor2 Business Type");
+
+        Vendor vendor3 = new Vendor();
+        vendor3.setEvaluationId("123");
+        vendor3.setUserName("Vendor3");
+        vendor3.setEmailAddress("vendor.3@gmail.com");
+        vendor3.setPassword("123456");
+        vendor3.setCompanyName("Vendor3 Company");
+        vendor3.setOfficeAddress("Vendor3 Office Address");
+        vendor3.setOfficeTel("12345678");
+        vendor3.setOfficeFax("12345678");
+        vendor3.setRegistrationNo(1233456L);
+        vendor3.setBusinessType("Vendor3 Business Type");
+        vendor3.setEvaluationId("123");
+
+
+        // ------------------------------- Create Admins ------------------------------
+        Admin admin1 = new Admin();
+        admin1.setUserName("Admin1");
+        admin1.setEmailAddress("admin.1@gmail.com");
+        admin1.setPassword("123456");
+
+        Admin admin2 = new Admin();
+        admin2.setUserName("Admin2");
+        admin2.setEmailAddress("admin.2@gmail.com");
+        admin2.setPassword("123456");
+
+
+        // ------------------------------- Create Approver ------------------------------
+        Approver approver1 = new Approver();
+        approver1.setUserName("Approver1");
+        approver1.setEmailAddress("approver.1@gmail.com");
+        approver1.setPassword("123456");
+
+
+        // ------------------------------- Save Users to DB ------------------------------
+        userRepository.saveAll(Arrays.asList(vendor1, vendor2, vendor3, admin1, admin2, approver1));
+
+
+        // -------------------------------- WorkFlow ----------------------
+
+        WorkFlow workFlow1 = new WorkFlow();
+        workFlow1.setWfName("workflow1");
+        workFlow1.setWfDateline(new Date(2020,1,1));
+        workFlow1.setWfLastSubmit(new Date(2020,1,1));
+        workFlow1.setValidated(false);
+        workFlow1.setVendor(vendor1);
+
+        WorkFlow workFlow2 = new WorkFlow();
+        workFlow2.setWfName("workflow2");
+        workFlow2.setWfDateline(new Date(2020,1,1));
+        workFlow2.setWfLastSubmit(new Date(2020,1,1));
+        workFlow2.setValidated(false);
+        workFlow2.setVendor(vendor2);
+
+        workFlowRepository.saveAll(Arrays.asList(workFlow1, workFlow2));
+
+        // ------------------------------- Create Form Sequence -------------------------------
+        ArrayList<FormSequence> fs1List = new ArrayList<FormSequence>();
+        FormSequence fs1 = new FormSequence();
+        fs1.setForm(subcontractorSafetyHealthEvaluationForm);
+        fs1.setSeqNo(1);
+        fs1.setStatus(FormSequenceStatus.PENDING);
+        fs1.setWorkFlow(workFlow1);
+        fs1List.add(fs1);
+
+        ArrayList<FormSequence> fs2List = new ArrayList<FormSequence>();
+        FormSequence fs2 = new FormSequence();
+        fs2.setForm(subcontractorSafetyHealthEvaluationForm);
+        fs2.setSeqNo(2);
+        fs2.setStatus(FormSequenceStatus.REQUESTED);
+        fs2.setWorkFlow(workFlow2);
+        fs2List.add(fs2);
+
+        formSequenceRepository.saveAll(Arrays.asList(fs1, fs2));
     }
 
     public void addYesNoRadio(Question q){
