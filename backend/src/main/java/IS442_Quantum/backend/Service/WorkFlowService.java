@@ -2,6 +2,7 @@ package IS442_Quantum.backend.Service;
 
 import IS442_Quantum.backend.Model.Form;
 import IS442_Quantum.backend.Model.FormSequence;
+import IS442_Quantum.backend.Model.Vendor;
 import IS442_Quantum.backend.Model.WorkFlow;
 import IS442_Quantum.backend.Repository.FormRepository;
 import IS442_Quantum.backend.Repository.WorkFlowRepository;
@@ -24,12 +25,16 @@ public class WorkFlowService {
     @Autowired
     private FormService formService;
 
+    @Autowired
+    private UserService userService;
+
     public WorkFlow createWorkFlow(WorkFlow workFlow){
         WorkFlow newWorkFlow = new WorkFlow();
         newWorkFlow.setValidated(workFlow.isValidated());
         newWorkFlow.setWfName(workFlow.getWfName());
         newWorkFlow.setWfDateline(workFlow.getWfDateline());
         newWorkFlow.setWfLastSubmit(workFlow.getWfLastSubmit());
+        newWorkFlow.setVendor(null);
 
         Collection<FormSequence> formSequences = new ArrayList<>();
 
@@ -70,6 +75,11 @@ public class WorkFlowService {
             eWorkFlow.setValidated(newWorkFlow.isValidated());
             eWorkFlow.setWfDateline(newWorkFlow.getWfDateline());
             eWorkFlow.setWfLastSubmit(newWorkFlow.getWfLastSubmit());
+            // this chunk of code will set the vendor
+            Optional optionalUser = userService.findUserById(newWorkFlow.getVendor().getUserId());
+            Vendor user = (Vendor)optionalUser.get();
+            eWorkFlow.setVendor(user);
+            // this chunk of code will set the vendor
             eWorkFlow.getFormSequences().clear();
 
             Collection<FormSequence> formSequences = new ArrayList<>();
