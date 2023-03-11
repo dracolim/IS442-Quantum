@@ -465,6 +465,7 @@ public class FormDataLoader implements ApplicationRunner {
         workFlow1.setWfLastSubmit(new Date(2020,1,1));
         workFlow1.setValidated(false);
         workFlow1.setVendor(vendor1);
+        workFlow1.setAdmin(admin1);
 
         WorkFlow workFlow2 = new WorkFlow();
         workFlow2.setWfName("workflow2");
@@ -472,6 +473,7 @@ public class FormDataLoader implements ApplicationRunner {
         workFlow2.setWfLastSubmit(new Date(2020,1,1));
         workFlow2.setValidated(false);
         workFlow2.setVendor(vendor2);
+        workFlow2.setAdmin(admin2);
 
         workFlowRepository.saveAll(Arrays.asList(workFlow1, workFlow2));
 

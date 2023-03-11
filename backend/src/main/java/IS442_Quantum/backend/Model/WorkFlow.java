@@ -32,9 +32,17 @@ public class WorkFlow {
     @OneToMany(mappedBy="workFlow", cascade={CascadeType.ALL})
     private Collection<FormSequence> formSequences = new ArrayList<>();
 
-    @ManyToOne()
-    @JoinColumn(name="userId")
+    @ManyToOne(optional=true)
+    @JoinColumn(name="vendorId", insertable=false, updatable=true)
     private Vendor vendor;
+
+    @ManyToOne()
+    @JoinColumn(name="adminId")
+    private Admin admin;
+
+    @ManyToOne(optional=true)
+    @JoinColumn(name="approverId", insertable=false, updatable=true)
+    private Approver approver;
 
 //    public boolean isValidated() {
 //        return isValidated;
