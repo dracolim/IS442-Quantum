@@ -15,7 +15,7 @@ public class FormSequence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int formSequenceId;
+    private Long formSequenceId;
 
     @ManyToOne
     @JoinColumn(name="work_flow_id")

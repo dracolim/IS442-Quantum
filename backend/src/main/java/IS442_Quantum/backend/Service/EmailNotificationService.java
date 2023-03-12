@@ -10,7 +10,7 @@ public class EmailNotificationService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendEmail(String toEmailAddress, String subject, String body) throws Exception {
+    public void sendEmail(String toEmailAddress, String subject, String body) {
         SimpleMailMessage email = new SimpleMailMessage();
         email.setFrom("quantum.leap.oop@gmail.com");
         email.setTo(toEmailAddress);
@@ -21,7 +21,6 @@ public class EmailNotificationService {
             System.out.println("Email Sent Successfully!");
         } catch (Exception e) {
             System.out.println("Email Failed to Send!");
-            throw new Exception(e);
         } finally {
             System.out.println("Email Notification Service Executed");
         }

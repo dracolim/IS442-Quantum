@@ -33,7 +33,7 @@ public class WorkFlow {
     private Collection<FormSequence> formSequences = new ArrayList<>();
 
     @ManyToOne(optional=true)
-    @JoinColumn(name="vendorId", insertable=false, updatable=true)
+    @JoinColumn(name="vendorId", insertable=true, updatable=true)
     private Vendor vendor;
 
     @ManyToOne()
@@ -41,8 +41,18 @@ public class WorkFlow {
     private Admin admin;
 
     @ManyToOne(optional=true)
-    @JoinColumn(name="approverId", insertable=false, updatable=true)
+    @JoinColumn(name="approverId", insertable=true, updatable=true)
     private Approver approver;
+
+    public void addFormSequence(FormSequence formSequence){
+        formSequences.add(formSequence);
+        formSequence.setWorkFlow(this);
+    }
+
+    public void removeFormSequence(FormSequence formSequence){
+        formSequences.remove(formSequence);
+        formSequence.setWorkFlow(null);
+    }
 
 //    public boolean isValidated() {
 //        return isValidated;

@@ -1,7 +1,11 @@
 package IS442_Quantum.backend.Enums;
 
 public enum FormSequenceStatus {
+    NOT_STARTED,
     APPROVED,
     PENDING,
-    REQUESTED
+    REQUESTED,
+    VALIDATED,
+    REJECTED,
+    DELETED
 }
