@@ -1,38 +1,26 @@
 package IS442_Quantum.backend.Service;
 
 import IS442_Quantum.backend.Model.Form;
-import IS442_Quantum.backend.Model.FormQuestion;
 import IS442_Quantum.backend.Model.Question;
+import IS442_Quantum.backend.Model.QuestionProperty;
+import IS442_Quantum.backend.Model.Section;
 import IS442_Quantum.backend.Repository.FormRepository;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 @Service
 public class FormService {
 
     private final FormRepository formRepository;
-
     private final QuestionService questionService;
+    private final SectionService sectionService;
 
-    public FormService(FormRepository formRepository, QuestionService questionService) {
+    public FormService(FormRepository formRepository, QuestionService questionService, SectionService sectionService) {
         this.formRepository = formRepository;
         this.questionService = questionService;
-    }
-
-    // creating new form
-    public Form createNewForm(Form form){
-        Form newForm = new Form();
-        return updateFormMapping(form, newForm, 1);
-    }
-
-    // to edit existing form
-    public Form editForm(Form form){
-        Form eForm = getFormById(form.getFormId());
-        return updateFormMapping(form, eForm, 2);
+        this.sectionService = sectionService;
     }
 
     public Collection<Form> getAllForm(){
@@ -51,55 +39,40 @@ public class FormService {
         return formRepository.existsById(id);
     }
 
-    // mapping update for forms
-    // Type 1 == create || Type 2 == Edit
-    public Form updateFormMapping(Form form, Form eForm, Integer type){
-        eForm.setFormName(form.getFormName());
-        eForm.setDateSubmitted(form.getDateSubmitted());
-        eForm.setLastEdited(form.getLastEdited());
-        if (type == 1){
-            eForm.getFormQuestions().addAll(form.getFormQuestions().stream().map(formQuestion -> {
-                Question generatedQuestion;
-                if (formQuestion.getQuestion().getQuestionId()==null){
-                    generatedQuestion = questionService.createNewQuestion(formQuestion.getQuestion());
-                } else {
-                    generatedQuestion = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
-                }
-                Question question = questionService.findByQuestion(generatedQuestion.getQuestionId());
-                FormQuestion newFormQuestion = new FormQuestion();
-                newFormQuestion.setForm(eForm);
-                newFormQuestion.setQuestion(question);
-                newFormQuestion.setInputValue(formQuestion.getInputValue());
-                return newFormQuestion;
-            }).toList());
-        } else {
-            ArrayList<FormQuestion> updatedFormQuestions = new ArrayList<>();
-            for (FormQuestion formQuestion : form.getFormQuestions()) {
-                Question generatedQuestion;
-                if (formQuestion.getQuestion().getQuestionId()==null){
-                    generatedQuestion = questionService.createNewQuestion(formQuestion.getQuestion());
-                } else {
-                    generatedQuestion = questionService.findByQuestion(formQuestion.getQuestion().getQuestionId());
-                }
-                Question question = questionService.findByQuestion(generatedQuestion.getQuestionId());
-                FormQuestion existingFormQuestion = eForm.getFormQuestions().stream()
-                        .filter(fq -> fq.getFormQId().equals(formQuestion.getFormQId()))
-                        .findFirst().orElse(null);
-                if (existingFormQuestion == null) {
-                    FormQuestion newFormQuestion = new FormQuestion();
-                    newFormQuestion.setForm(eForm);
-                    newFormQuestion.setQuestion(question);
-                    newFormQuestion.setInputValue(formQuestion.getInputValue());
-                    updatedFormQuestions.add(newFormQuestion);
-                } else {
-                    existingFormQuestion.setQuestion(question);
-                    existingFormQuestion.setInputValue(formQuestion.getInputValue());
-                    updatedFormQuestions.add(existingFormQuestion);
-                }
+    public Form createUpdateForm(Form formBody){
+
+        // Add general information
+        Form form = formRepository.findByFormId(formBody.getFormId()) != null ? formRepository.findByFormId(formBody.getFormId()) : new Form();
+        form.setFormName(formBody.getFormName());
+        form.setDateSubmitted(formBody.getDateSubmitted());
+        form.setLastEdited(formBody.getLastEdited());
+
+        // Add section
+        for(Section section : formBody.getSections()){
+            Section newSection = sectionService.findBySectionId(section.getSectionId()) != null ? sectionService.findBySectionId(section.getSectionId()) : new Section();
+            newSection.setTitle(section.getTitle());
+            newSection.setDescription(section.getDescription());
+            newSection.setForm(form);
+
+            // add questions to the newly generated section
+            for (Question question : section.getQuestions()){
+                Question newQuestion = question.getQuestionId() != null ? questionService.findByQuestionId(question.getQuestionId()) : questionService.createNewQuestion(question);
+                newQuestion.setSection(newSection);
+                newQuestion.setInputValue(question.getInputValue());
+                newSection.getQuestions().add(newQuestion);
             }
-            eForm.setFormQuestions(updatedFormQuestions);
+
+            form.getSections().add(newSection);
         }
-        return formRepository.save(eForm);
+
+        return formRepository.save(form);
+
     }
+
+    public Form cloneForm(Long id){
+        Form form = new Form(formRepository.findByFormId(id));
+        return formRepository.save(form);
+    }
+
 
 }

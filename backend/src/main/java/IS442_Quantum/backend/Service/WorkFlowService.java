@@ -1,14 +1,10 @@
 package IS442_Quantum.backend.Service;
 
-import IS442_Quantum.backend.Model.Form;
-import IS442_Quantum.backend.Model.FormSequence;
-import IS442_Quantum.backend.Model.WorkFlow;
-import IS442_Quantum.backend.Repository.FormRepository;
+import IS442_Quantum.backend.Enums.FormSequenceStatus;
+import IS442_Quantum.backend.Model.*;
+import IS442_Quantum.backend.Repository.FormSequenceRepository;
 import IS442_Quantum.backend.Repository.WorkFlowRepository;
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.objenesis.instantiator.basic.DelegatingToExoticInstantiator;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,21 +20,28 @@ public class WorkFlowService {
     @Autowired
     private FormService formService;
 
-    public WorkFlow createWorkFlow(WorkFlow workFlow){
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private FormSequenceRepository formSequenceRepository;
+
+    @Autowired
+    private EmailNotificationService emailNotificationService;
+
+    public WorkFlow createWorkFlow(WorkFlow workFlowBody){
         WorkFlow newWorkFlow = new WorkFlow();
-        newWorkFlow.setValidated(workFlow.isValidated());
-        newWorkFlow.setWfName(workFlow.getWfName());
-        newWorkFlow.setWfDateline(workFlow.getWfDateline());
-        newWorkFlow.setWfLastSubmit(workFlow.getWfLastSubmit());
-        Collection<FormSequence> formSequences = new ArrayList<>();
-        for(FormSequence fs : workFlow.getFormSequences()){
-            FormSequence newFormSequence = new FormSequence();
-            newFormSequence.setWorkFlow(newWorkFlow);
-            newFormSequence.setForm(formService.getFormById(fs.getForm().getFormId()));
-            newFormSequence.setStatus(fs.getStatus());
-            formSequences.add(newFormSequence);
-        }
-        newWorkFlow.setFormSequences(formSequences);
+        newWorkFlow.setValidated(workFlowBody.isValidated());
+        newWorkFlow.setWfName(workFlowBody.getWfName());
+        newWorkFlow.setWfDateline(workFlowBody.getWfDateline());
+        newWorkFlow.setWfLastSubmit(workFlowBody.getWfLastSubmit());
+        setUser(newWorkFlow, userService.findByUserId(workFlowBody.getVendor().getUserId()));
+        setUser(newWorkFlow, userService.findByUserId(workFlowBody.getApprover().getUserId()));
+        setUser(newWorkFlow, userService.findByUserId(workFlowBody.getAdmin().getUserId()));
+
+        // Add formSequence
+        updateFormSequence(newWorkFlow, workFlowBody);
+
         return workFlowRepository.save(newWorkFlow);
     }
 
@@ -54,31 +57,152 @@ public class WorkFlowService {
         return workFlowRepository.findById(id);
     }
 
-    public WorkFlow updateWorkFlowById(Long id,WorkFlow newWorkFlow){
-        Optional<WorkFlow> optionalWorkFlow = workFlowRepository.findById(id);
-        if(checkWorkFlowById(id)) {
-            WorkFlow eWorkFlow = optionalWorkFlow.get();
-            eWorkFlow.setWfName(newWorkFlow.getWfName());
-            eWorkFlow.setValidated(newWorkFlow.isValidated());
-            eWorkFlow.setWfDateline(newWorkFlow.getWfDateline());
-            eWorkFlow.setWfLastSubmit(newWorkFlow.getWfLastSubmit());
-            eWorkFlow.getFormSequences().clear();
-            Collection<FormSequence> formSequences = new ArrayList<>();
-            for (FormSequence fs : newWorkFlow.getFormSequences()) {
-                FormSequence newFormSequence = new FormSequence();
-                newFormSequence.setWorkFlow(eWorkFlow);
-                newFormSequence.setForm(formService.getFormById(fs.getForm().getFormId()));
-                newFormSequence.setStatus(fs.getStatus());
-                formSequences.add(newFormSequence);
+    public void updateFormSequence(WorkFlow workFlow, WorkFlow workFlowBody){
+        Collection<FormSequence> formSequences = new ArrayList<>();
+
+        for(FormSequence fs : workFlowBody.getFormSequences()){
+
+            FormSequence newFormSequence = fs.getFormSequenceId() == null ? new FormSequence() : formSequenceRepository.findById(fs.getFormSequenceId()).get();
+
+            newFormSequence.setWorkFlow(workFlow);
+            newFormSequence.setForm(formService.getFormById(fs.getForm().getFormId()));
+
+            FormSequenceStatus currStatus = FormSequenceStatus.NOT_STARTED;
+            FormSequenceStatus newStatus = fs.getStatus();
+
+            // Get current form status based on FormId and seqNo
+            if (workFlow.getFormSequences()!=null){
+                    for(FormSequence f : workFlow.getFormSequences()){
+                    if(f.getForm().getFormId() == fs.getForm().getFormId()){
+                        currStatus = f.getStatus();
+                        break;
+                    }
+                }
             }
-            eWorkFlow.setFormSequences(formSequences);
+
+            // this method update the status and trigger notification logic
+            updateFormStatus(newFormSequence, fs, workFlow, currStatus, newStatus);
+
+            formSequences.add(newFormSequence);
+        }
+
+        workFlow.setFormSequences(formSequences);
+
+    }
+
+    // update status and trigger notification
+    public void updateFormStatus(FormSequence formSequence, FormSequence formSequenceBody, WorkFlow workflow, FormSequenceStatus currStatus, FormSequenceStatus newStatus){
+
+        // retrieve basic information
+        String companyName = workflow.getVendor().getCompanyName();
+        String formName = formSequence.getForm().getFormName();
+
+        // Not Started to Pending: Vendor to Admin
+        if (currStatus == FormSequenceStatus.NOT_STARTED && newStatus == FormSequenceStatus.PENDING){
+
+            formSequence.setStatus(FormSequenceStatus.PENDING);
+            String email = workflow.getAdmin().getEmailAddress();
+            String emailSubject = "New Form Submission from " + email;
+            String emailBody = "You have a new form submission from " + companyName + " for the following Form: " + formName;
+
+            emailNotificationService.sendEmail(email, emailSubject, emailBody);
+
+        // Pending to Requested: Vendor to Admin
+        } else if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.REQUESTED){
+
+            formSequence.setStatus(FormSequenceStatus.REQUESTED);
+            String email = workflow.getVendor().getEmailAddress();
+            String emailSubject = "Form requires attention [" + formName + "]";
+            String emailBody = "Dear " + companyName + ", \n The following form requires attention: \n " + formName + " Kindly update the information and resubmit";
+
+            emailNotificationService.sendEmail(email, emailSubject , emailBody);
+
+        // Pending to Validated: Admin to Approver
+        } else if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.VALIDATED){
+
+            formSequence.setStatus(FormSequenceStatus.REQUESTED);
+            String email = workflow.getApprover().getEmailAddress();
+            String emailSubject = "Form validated [" + formName + "] please approve/reject";
+            String emailBody = "Please approve/reject the following form: \n " + workflow.getWfName() + " \n\n Workflow: \n " + workflow.getWfName() ;
+
+            emailNotificationService.sendEmail(email, emailSubject, emailBody);
+
+        // Validated to Rejected: Approver to Admin
+        } else if (currStatus == FormSequenceStatus.VALIDATED && newStatus == FormSequenceStatus.REJECTED){
+
+            formSequence.setStatus(FormSequenceStatus.REJECTED);
+            String email = workflow.getAdmin().getEmailAddress();
+            String emailSubject = "Form rejected [" + formName + "]";
+            String emailBody = "The following form has been rejected: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
+
+            emailNotificationService.sendEmail(email, emailSubject, emailBody);
+
+        // Validated to Approved: Approver to Admin
+        } else if (currStatus == FormSequenceStatus.VALIDATED && newStatus == FormSequenceStatus.APPROVED){
+
+            formSequence.setStatus(FormSequenceStatus.APPROVED);
+            String email = workflow.getAdmin().getEmailAddress();
+            String emailSubject = "Form approved [" + formName + "]";
+            String emailBody = "The following form has been approved: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
+
+            emailNotificationService.sendEmail(email, emailSubject, emailBody);
+
+        // Rejected to Deleted: Admin to Vendor
+        } else if (currStatus == FormSequenceStatus.REJECTED && newStatus == FormSequenceStatus.DELETED){
+
+            formSequence.setStatus(FormSequenceStatus.DELETED);
+            String email = workflow.getVendor().getEmailAddress();
+            String emailSubject = "Form deleted [" + formName + "]";
+            String emailBody = "The following form has been deleted: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
+
+            emailNotificationService.sendEmail(email, emailSubject, emailBody);
+
+        } else {
+            formSequence.setStatus(FormSequenceStatus.NOT_STARTED);
+        }
+
+    }
+
+    public WorkFlow updateWorkFlowById(Long id, WorkFlow workFlowBody){
+
+        // id = wf_id
+        Optional<WorkFlow> optionalWorkFlow = workFlowRepository.findById(id);
+
+        if(checkWorkFlowById(id)) {
+
+            WorkFlow eWorkFlow = optionalWorkFlow.get();
+            eWorkFlow.setWfName(workFlowBody.getWfName());
+            eWorkFlow.setValidated(workFlowBody.isValidated());
+            eWorkFlow.setWfDateline(workFlowBody.getWfDateline());
+            eWorkFlow.setWfLastSubmit(workFlowBody.getWfLastSubmit());
+
+            // update admin
+            setUser(eWorkFlow, userService.findByUserId(workFlowBody.getAdmin().getUserId()));
+
+            // update approver
+            setUser(eWorkFlow, userService.findByUserId(workFlowBody.getApprover().getUserId()));
+
+            // update vendor
+            setUser(eWorkFlow, userService.findByUserId(workFlowBody.getVendor().getUserId()));
+
+
+            // Add formSequence
+            updateFormSequence(eWorkFlow, workFlowBody);
+
             return workFlowRepository.save(eWorkFlow);
         }else {
             return null;
         }
+    }
 
-
-
+    public void setUser(WorkFlow workFlow, User user){
+        if(user instanceof Admin){
+            workFlow.setAdmin((Admin)user);
+        }else if(user instanceof Approver){
+            workFlow.setApprover((Approver)user);
+        }else if(user instanceof Vendor){
+            workFlow.setVendor((Vendor)user);
+        }
     }
 
 }

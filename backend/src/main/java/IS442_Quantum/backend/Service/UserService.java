@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EmailNotificationService emailService;
+
     public Vendor createVendor(Vendor vendor){
         return userRepository.save(vendor);
     }
@@ -35,20 +38,33 @@ public class UserService {
     public List<User> findAllUsers() {
         return userRepository.findAll();
     }
-    public Optional<User> findUserById(Long id){
-       return userRepository.findById(id);
+
+    public User findByUserId(Long id){
+       return userRepository.findByUserId(id);
     }
 
-    public void deleteUserById(Long id) {
-        userRepository.deleteById(id);
+    public void deleteUserById(Long userId) {
+        userRepository.deleteById(userId);
     }
     public List<User> findByUserType(UserTypes userType) {
         return userRepository.findByUserType(userType);
     }
+
     public void addWorkflowToVendor(Long userId, WorkFlow workFlow) {
-        Vendor vendor = (Vendor) userRepository.findById(userId).get();
-        vendor.addWorkflow(workFlow);
-        userRepository.save(vendor);
+        try {
+            Vendor vendor = (Vendor) userRepository.findById(userId).get();
+            vendor.addWorkflow(workFlow);
+            userRepository.save(vendor);
+//            try {
+//                emailService.sendEmail("wisely.kwek.2020@scis.smu.edu.sg", "New Workflow", "You have a new workflow for your attention");
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//                e.printStackTrace();
+//            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
 }

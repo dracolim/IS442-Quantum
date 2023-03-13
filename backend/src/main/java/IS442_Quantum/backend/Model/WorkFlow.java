@@ -32,9 +32,27 @@ public class WorkFlow {
     @OneToMany(mappedBy="workFlow", cascade={CascadeType.ALL})
     private Collection<FormSequence> formSequences = new ArrayList<>();
 
-    @ManyToOne()
-    @JoinColumn(name="userId")
+    @ManyToOne(optional=true)
+    @JoinColumn(name="vendorId", insertable=true, updatable=true)
     private Vendor vendor;
+
+    @ManyToOne()
+    @JoinColumn(name="adminId")
+    private Admin admin;
+
+    @ManyToOne(optional=true)
+    @JoinColumn(name="approverId", insertable=true, updatable=true)
+    private Approver approver;
+
+    public void addFormSequence(FormSequence formSequence){
+        formSequences.add(formSequence);
+        formSequence.setWorkFlow(this);
+    }
+
+    public void removeFormSequence(FormSequence formSequence){
+        formSequences.remove(formSequence);
+        formSequence.setWorkFlow(null);
+    }
 
 //    public boolean isValidated() {
 //        return isValidated;

@@ -12,13 +12,7 @@ public class FormSequenceService {
 
     @Autowired
     private FormSequenceRepository formSequenceRepository;
-
-
-
     public Collection<FormSequence> getAll(){
         return formSequenceRepository.findAll();
     }
-
-
-
 }

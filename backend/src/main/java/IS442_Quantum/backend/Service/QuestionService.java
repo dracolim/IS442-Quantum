@@ -1,6 +1,5 @@
 package IS442_Quantum.backend.Service;
 
-import IS442_Quantum.backend.Model.FormQuestion;
 import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Model.QuestionProperty;
 import IS442_Quantum.backend.Repository.QuestionRepository;
@@ -18,7 +17,7 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question findByQuestion(Long questionId){
+    public Question findByQuestionId(Long questionId){
         return questionRepository.findByQuestionId(questionId);
     }
 
@@ -48,7 +47,11 @@ public class QuestionService {
     }
 
     public boolean checkQuestionById(Long id){
-        return questionRepository.existsById(id);
+        try {
+            return questionRepository.existsById(id);
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public Question editQuestionById(Long id, Question question){
@@ -57,6 +60,7 @@ public class QuestionService {
         eQuestion.setInputType(question.getInputType());
         eQuestion.setAttribute(question.getAttribute());
         eQuestion.setIsRequired(question.getIsRequired());
+        eQuestion.setInputValue(question.getInputValue());
 
         // update question properties if there is any question properties
         if (question.getQuestionProperties() != null) {

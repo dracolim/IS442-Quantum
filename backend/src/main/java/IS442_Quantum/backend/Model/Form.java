@@ -21,10 +21,21 @@ public class Form {
     private Date lastEdited;
 
     @OneToMany(mappedBy="form", cascade={CascadeType.ALL})
-    private Collection<FormQuestion> formQuestions = new ArrayList<>();
+    private Collection<Section> sections = new ArrayList<>();
 
-    public void addFormQuestion(FormQuestion fq){
-        formQuestions.add(fq);
-        fq.setForm(this);
+    // copy constructor
+    public Form(Form form) {
+        this.formName = form.getFormName();
+        this.dateSubmitted = form.getDateSubmitted();
+        this.lastEdited = form.getLastEdited();
+        for(Section section : form.getSections()){
+            addSections(new Section(section));
+        }
     }
+
+    public void addSections(Section section){
+        sections.add(section);
+        section.setForm(this);
+    }
+
 }

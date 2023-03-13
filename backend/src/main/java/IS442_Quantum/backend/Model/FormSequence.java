@@ -1,6 +1,6 @@
 package IS442_Quantum.backend.Model;
 
-import IS442_Quantum.backend.Enums.Status;
+import IS442_Quantum.backend.Enums.FormSequenceStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,7 +15,7 @@ public class FormSequence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int formSequenceId;
+    private Long formSequenceId;
 
     @ManyToOne
     @JoinColumn(name="work_flow_id")
@@ -27,7 +27,8 @@ public class FormSequence {
     private Form form;
 
     private int seqNo;
-    private Status status;
-    private int approvalId;
+    @Enumerated(EnumType.STRING)
+    private FormSequenceStatus status;
+//    private int approvalId;
 
 }

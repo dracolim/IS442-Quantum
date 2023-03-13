@@ -51,7 +51,7 @@ public class WorkFlowController {
         }
     }
     @PutMapping("/workflows/{id}")
-    public ResponseEntity<?> newWorkFlow(@RequestBody WorkFlow newWorkFlow,@PathVariable Long id){
+    public ResponseEntity<?> updateWorkflowById(@RequestBody WorkFlow newWorkFlow,@PathVariable Long id){
         return new ResponseEntity<>(workFlowService.updateWorkFlowById(id,newWorkFlow), HttpStatus.OK);
     }
 
@@ -59,11 +59,4 @@ public class WorkFlowController {
     public ResponseEntity<?> getPendingWorkFlows() {
         return new ResponseEntity<>(workFlowRepository.findPendingWorkFlow(), HttpStatus.OK);
     }
-
-
-
-
-
-
-
 }
