@@ -31,24 +31,25 @@
         }
     </script>
     <title>Quantum</title>
-    <style> table {
-        border: none;
-        border-collapse: collapse;
-    }
+    <style>
+        table {
+            border: none;
+            border-collapse: collapse;
+        }
 
-    table td {
-        border-left: 1px solid #e6e6e6;
-        border-right: 1px solid #d6d6d6;
-    }
+        table td {
+            border-left: 1px solid #e6e6e6;
+            border-right: 1px solid #d6d6d6;
+        }
 
-    table td:first-child {
-        border-left: none;
-    }
+        table td:first-child {
+            border-left: none;
+        }
 
-    table td:last-child {
-        border-right: none;
-    }
-</style>
+        table td:last-child {
+            border-right: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -62,7 +63,8 @@
 
                 <div class="flex md:order-2">
                     <a href="../Admin/Admin_home.html" style="margin-right: 10px;">
-                        <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
+                        <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
+                        </iconify-icon>
                     </a>
 
                     <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
@@ -70,7 +72,8 @@
                         type="button">
                         <span class="sr-only">Open user menu</span>
                         <a class='mr-2'>
-                            <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40" height="40">
+                            <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40"
+                                height="40">
                             </iconify-icon>
                         </a>
                         Tim Klemmer
@@ -92,13 +95,11 @@
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
                             <li>
-                                <a href="#"
-                                    class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -127,24 +128,24 @@
                     class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
                         <a href="../Admin/Admin_home.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
-                        aria-current="page">Home</a>
-                    </li>               
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
+                            Home</a>
+                    </li>
+                    <li>
                         <a href="../Admin/Admin_workflow.html"
-                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0"
-                            aria-current="page">Workflows</a>
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
+                            Workflows</a>
                     </li>
                     <li>
                         <a href="../Admin/Admin_accounts.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
-                        aria-current="page">Accounts</a>
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
+                            aria-current="page">Accounts</a>
                     </li>
                     <li>
                         <a href="../Admin/Admin_form.html"
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                             Forms</a>
                     </li>
-
                 </ul>
             </div>
         </nav>
@@ -158,13 +159,14 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Workflows
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Admin_home.html'">Home > </span><span onclick="document.location = 'Admin_workflow.html'" class = 'text-sky-600'>Workflow </span> 
+                        <span onclick="document.location = 'Admin_home.html'">Home > </span><span
+                            onclick="document.location = 'Admin_workflow.html'" class='text-sky-600'>Workflow </span>
                     </p>
                 </caption>
                 <thead class="text-xs text-white uppercase bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                           ID
+                            ID
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Name
@@ -184,7 +186,7 @@
                 </thead>
                 <tbody>
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
-                    v-for="(value,key) in AllWorkflow">
+                        v-for="(value,key) in AllWorkflow">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.workFlowId}}
                         </th>
@@ -211,21 +213,18 @@
             </table>
         </div>
         <!-- Button for Creating Form -->
-            <!-- Button for Creating Form -->
-            <div class="mx-8 mt-5">
-                <button type="button"
-                    class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
-                    data-te-toggle="modal"
-                    data-te-target="#exampleModalScrollable"
-                    data-te-ripple-init
-                    data-te-ripple-color="light"
-                    v-on:click="goToSinglepage(value.formId)">
-                    Assign New Workflow
-                </button>
-            </div>
-        
+        <!-- Button for Creating Form -->
+        <div class="mx-8 mt-5">
+            <button type="button"
+                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                data-te-toggle="modal" data-te-target="#exampleModalScrollable" data-te-ripple-init
+                data-te-ripple-color="light" v-on:click="goToSinglepage(value.formId)">
+                Assign New Workflow
+            </button>
+        </div>
+
     </div>
-    
+
 </body>
 
 <script>
@@ -233,7 +232,7 @@
         el: '#app',
         data: {
             localhost: "http://localhost:5000",
-            AllWorkflow:"",
+            AllWorkflow: "",
         },
         mounted: async function () {
             const API_URL = this.localhost + "/workflows";
