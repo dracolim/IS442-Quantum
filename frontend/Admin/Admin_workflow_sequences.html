@@ -31,25 +31,24 @@
         }
     </script>
     <title>Quantum</title>
-    <style>
-        table {
-            border: none;
-            border-collapse: collapse;
-        }
+    <style> table {
+        border: none;
+        border-collapse: collapse;
+    }
 
-        table td {
-            border-left: 1px solid #e6e6e6;
-            border-right: 1px solid #d6d6d6;
-        }
+    table td {
+        border-left: 1px solid #e6e6e6;
+        border-right: 1px solid #d6d6d6;
+    }
 
-        table td:first-child {
-            border-left: none;
-        }
+    table td:first-child {
+        border-left: none;
+    }
 
-        table td:last-child {
-            border-right: none;
-        }
-    </style>
+    table td:last-child {
+        border-right: none;
+    }
+</style>
 </head>
 
 <body>
@@ -63,8 +62,7 @@
 
                 <div class="flex md:order-2">
                     <a href="../Admin/Admin_home.html" style="margin-right: 10px;">
-                        <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
-                        </iconify-icon>
+                        <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
                     </a>
 
                     <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
@@ -72,8 +70,7 @@
                         type="button">
                         <span class="sr-only">Open user menu</span>
                         <a class='mr-2'>
-                            <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40"
-                                height="40">
+                            <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40" height="40">
                             </iconify-icon>
                         </a>
                         Tim Klemmer
@@ -95,11 +92,13 @@
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
                             <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
+                                <a href="#"
+                                    class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -124,29 +123,28 @@
         <nav class="bg-gray-100">
             <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
                 style="width: 100%; overflow: hidden;">
-
                 <ul
                     class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
                         <a href="../Admin/Admin_home.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                            Home</a>
-                    </li>
-                    <li>
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
+                        aria-current="page">Home</a>
+                    </li>               
                         <a href="../Admin/Admin_workflow.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
-                            Workflows</a>
+                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0"
+                            aria-current="page">Workflows</a>
                     </li>
                     <li>
                         <a href="../Admin/Admin_accounts.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                            aria-current="page">Accounts</a>
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0 "
+                        aria-current="page">Accounts</a>
                     </li>
                     <li>
                         <a href="../Admin/Admin_form.html"
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                             Forms</a>
                     </li>
+
                 </ul>
             </div>
         </nav>
@@ -158,12 +156,9 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
             <table class="w-full text-sm text-left text-gray-500">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                    Form Sequences
+                    Work Flow Sequences
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Admin_home.html'">Home > </span><span
-                            onclick="document.location = 'Admin_workflow.html'">Workflow > </span><span
-                            onclick="document.location = 'Admin_workflow_sequences.html'" class='text-sky-600'>Form
-                            Sequences </span>
+                        <span onclick="document.location = 'Admin_home.html'">Home > </span><span onclick="document.location = 'Admin_workflow.html'">Workflow > </span><span onclick="document.location = 'Admin_workflow_sequences.html'" class = 'text-sky-600'>Form Sequences </span> 
                     </p>
                 </caption>
                 <thead class="text-xs text-white uppercase bg-sky-600">
@@ -186,23 +181,16 @@
                         <th scope="col" class="px-6 py-3">
                             Sequence No
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Status
-                        </th>
+
                         <th scope="col" class="px-6 py-3">
                             Approval ID
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Form Document
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Delete
-                        </th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
-                        v-for="(value,key) in forms_sequences">
+                    v-for="(value,key) in forms_sequences">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{workflow_id}}
                         </th>
@@ -210,7 +198,7 @@
                             {{value.form.formId}}
                         </th>
                         <td class="px-6 py-4">
-                            {{value.form.formName}}
+                           {{value.form.formName}}
                         </td>
                         <td class="px-6 py-4">
                             {{value.form.dateSubmitted}}
@@ -221,100 +209,42 @@
                         <td class="px-6 py-4">
                             {{value.seqNo}}
                         </td>
-                        <td class="px-6 py-4" v-if="status != null">
-                            {{value.status}}
-                        </td>
-                        <td class="px-6 py-4" v-if="status == null">
-                            Status Not Valid
-                        </td>
+                    
                         <td class="px-6 py-4">
                             {{value.approvalId}}
-                        </td>
-                        <td style="text-align: center;">
-                            <button v-on:click="goToFormPage(value.form.formId)" type="button">
-                                <iconify-icon icon="mdi:file-document" class="hover:text-sky-600" width="28"
-                                    height="28"></iconify-icon>
-                            </button>
-                        </td>
-                        <!-- delete form -->
-                        <td class="px-6 py-4" style="text-align: center;">
-                            <button @click="deleteForm(value.formId)">
-                                <iconify-icon icon="mdi:trashcan-outline" class="hover:text-red-500" width="28"
-                                    height="28"></iconify-icon>
-                            </button>
                         </td>
                     </tr>
 
                 </tbody>
             </table>
         </div>
-
-        <div class="mx-8 mt-5">
-            <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-                class="inline-flex items-center float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
-                    <path fill="#FFFFFF"
-                        d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
-                </svg> Create New Forms
-            </button>
-            <button type="button" data-te-toggle="modal" data-te-target="#exampleModalScrollable" data-te-ripple-init
-                data-te-ripple-color="light"
-                class="inline-flex items-center float-right mr-5  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
-                    <path fill="#FFFFFF"
-                        d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
-                </svg> Add New Forms
-            </button>
-        </div>
-
-        <!-- CREATE NEW FORM modal -->
-        <div id="authentication-modal" tabindex="-1" aria-hidden="true"
-            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
-            <div class="relative w-full h-full max-w-md md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow ">
-                    <button type="button" @click="closeCreateModal()"
-                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                        data-modal-hide="authentication-modal">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900">Create New Form</h3>
-                        <form class="space-y-6" action="#">
-                            <div>
-                                <label for="formName" class="block mb-2 text-sm font-medium text-gray-900">Form
-                                    Name</label>
-                                <input type="formName" name="formName" id="formName" v-model="form_name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    required>
-                            </div>
-                            <button type="button" @click="createNewForm()"
-                                class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
-                        </form>
-                    </div>
-                </div>
+        <!-- Button for Creating Form -->
+            <!-- Button for Creating Form -->
+            <div class="mx-8 mt-5">
+                <button type="button"
+                    class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                    @click = "getFormList()"
+                    data-te-toggle="modal"
+                    data-te-target="exampleModal"
+                    data-te-ripple-init
+                    data-te-ripple-color="light"
+                    aria-hidden = "true">
+                    Assign New Form
+                </button>
             </div>
-        </div>
-
-        <!--ADD FORM MODAL-->
-        <div data-te-modal-init
+        
+            <!-- add new form modal -->
+            <div data-te-modal-init
             class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-            id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div data-te-modal-dialog-ref
                 class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
                 <div
-                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none">
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none light:bg-neutral-600">
                     <div
-                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4">
-                        <h5 class="text-xl font-medium leading-normal text-neutral-800"
-                            id="exampleModalScrollableLabel">
-                            Modal title
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 ">
+                        <h5 class="text-xl font-medium leading-normal text-gray-800" id="exampleModalLabel">
+                            Add Form
                         </h5>
                         <button type="button"
                             class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
@@ -326,46 +256,96 @@
                         </button>
                     </div>
                     <div class="relative overflow-y-auto p-4">
-                        <p>
-                            This is some placeholder content to show the scrolling behavior
-                            for modals. We use repeated line breaks to demonstrate how
-                            content can exceed minimum inner height, thereby showing inner
-                            scrolling. When content becomes longer than the predefined
-                            max-height of modal, content will be cropped and scrollable
-                            within the modal.
-                        </p>
-                        <div style="height:800px;"></div>
-                        <p>This content should appear at the bottom after you scroll.</p>
+                        <div class="modal-body relative p-4">
+                            <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                                <div class="grid gap-4 gap-y-2 text-sm grid-cols-1">
+                                    <div class="lg:col-span-2">
+                                        <table>
+                                            <thead class="text-xs text-white uppercase bg-sky-600">
+                                                <tr>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        Form ID
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        Form Name
+                                                    </th>
+                                                    <th scope="col" class="px-6 py-3">
+                                                        Add
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <form>
+                                                    <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable"
+                                                    v-for="(value,key) in all_forms" class="bg-white">
+                                                        <td>
+                                                            {{value.formId}}
+                                                        </td>
+                                                        <td>
+                                                            {{value.formName}}
+                                                        </td>
+                                                        <td style="text-align: center;">
+                                                            <!-- <button v-on:click="updateFormSequence(value.formId)" type="button">
+                                                                <iconify-icon icon="mdi:file-document" width="28" height="28"></iconify-icon>
+                                                            </button> -->
+                                                            <label><input type="checkbox" v-model="checked" id="value.formId" name="value.formId" value="value.formId"></label>
+                                                        </td>
+                                                    </tr>
+                                                    <button @click="addForms()"
+                                                    class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+                                                </form>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div
-                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4">
-                        <button type="button"
-                            class="w-3/12 text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                            data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
-                            Submit
-                        </button>
-                    </div>
+                    class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
+                    
+                    <button @click="addForm()" type="button"  data-te-modal-dismiss
+                        class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
+                            fill="#FFFFFF">
+                            <path d="M0 0h24v24H0V0z" fill="none"></path>
+                            <path
+                                d="M5 5v14h14V7.83L16.17 5H5zm7 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-8H6V6h9v4z"
+                                opacity=".3"></path>
+                            <path
+                                d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm2 16H5V5h11.17L19 7.83V19zm-7-7c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zM6 6h9v4H6z">
+                            </path>
+                        </svg>
+                        <span class="pl-2 mx-1">Save</span>
+                    </button>
                 </div>
             </div>
-        </div>
+                
+            </div>
+        
+
+            
+        
     </div>
-
-
-    <script>
+    
+</body>
+<script>
         const vm = new Vue({
             el: '#app',
             data: {
                 localhost: "http://localhost:5000",
                 workflow_id: null,
                 forms_sequences: "",
-                status: null,
-                form_name: "",
+                all_forms:[],
+                checked:[],
             },
             mounted: async function () {
                 var query = window.location.search.substring(4);
                 this.workflow_id = query;
-                const API_URL = this.localhost + "/workflows/" + this.workflow_id;
-
+                const API_URL = this.localhost + "/workflows/"+this.workflow_id;
+    
                 axios.get(API_URL)
                     .then(response => {
                         this.forms_sequences = response.data.formSequences;
@@ -381,46 +361,52 @@
                     console.log(id)
                     window.location.assign("./Admin_individual_form.html?id=" + id)
                 },
-                createNewForm() {
-                    var yourDate = new Date()
-                    yourDate.toISOString().split('T')[0]
-                    var URL = this.localhost + "/form"
-                    axios.post(URL, {
-                            formName: this.form_name,
-                            dateSubmitted: yourDate
-                        })
+                getFormList(){
+                    var URL = this.localhost + "/forms"
+                    axios.get(URL)
+                        .then(response =>{
+                        this.all_forms = response.data
+                        }).catch(error => {
+                        console.error(error);
+                    })
+                },
+                updateFormSequence(id){
+                    var URL = this.localhost + "/forms/" + id
+                    axios.get(URL)
                         .then(response => {
-                            console.log(response.data)
-
-                            document.location.reload();
-                            this.closeCreateModal()
-                        })
-                        .catch(error => {
+                            var newForm = response.data
+                            this.forms_sequences.push(response.data)
+                        }).catch(error => {
                             console.log(error.message)
                         })
                 },
-                deleteForm(form_id) {
-                    var URL = this.localhost + '/form/' + form_id
-                    axios.delete(URL)
-                        .then(response => {
-                            alert("Deletion is successful!")
-                            document.location.reload();
-                        })
-                        .catch(error => {
-                            console.log(error.message)
-                        })
-                },
-                closeCreateModal() {
-                    this.form_name = ""
+                addForms(){
+                    this.checked.forEach(i => {
+                        updateFormSequence(i)
+                    })
+                    var URL = this.localhost + "/workflows/" + this.workflow_id
+                    axios.put(URL,{
+                        "formSequences":this.forms_sequences
+                    }).then(response => {
+                        alert("Form(s) has been added")
+                        document.location.reload();                
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
                 }
+                // editWorflow: function(id) {
+                // var URL = this.localhost + "/workflows/" + id
+            
+                //     axios.put(URL, 
+                //     {
             }
         })
-    </script>
+</script>
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 </html>
