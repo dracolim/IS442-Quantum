@@ -6,16 +6,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Links -->
+   <!-- Links -->
+    <!-- flowbite -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ICONIFY -->
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
-    <script src="https://unpkg.com/vue@next"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    <!-- VUE 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- tailwind elements -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     
-      
 
     <title>Quantum</title>
 </head>
@@ -118,8 +125,29 @@
     <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
     <!--Cards-->
-    <div id="app">
-        <form-cards v-bind:form="forms"></form-cards>
+    <div id="app" class="flex flex-wrap justify-left m-4">
+        <div v-for="f in forms">
+            <div class="rounded overflow-hidden shadow-lg mx-4"></div>
+                <div style="max-width: 20rem" class="h-100 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-2">
+                   <a href="#">
+                       <img class="rounded-t-lg w-full h-48 object-cover object-top" src="../Images/New Vendor Assessment Form.PNG" alt="Image" />
+                   </a>
+                   <div class="p-5">
+                       <a href="#">
+                           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{f.formName}}</h5>
+                       </a>
+                       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Workflow 111</p>
+                       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Last edited: {{f.lastEdited}}</p>
+                       <button>
+                           <a v-bind:href="'./Vendor_form_details.html?id=' + f.formId" class="inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-white bg-sky-700   rounded-lg hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 dark:bg-sky-600 dark:hover:bg-sky-7dark:focus:ring-sky-800">
+                               Continue Editing
+                               
+                           </a>
+                       </button>
+                   </div>
+                </div>    
+            </div> 
+        </div>
     </div>
 
     
@@ -127,8 +155,8 @@
 
 <script>
 
-    const app = Vue.createApp({
-        
+    const app = new Vue({
+        el: '#app',
         data() {
           return {
             forms: [],
@@ -140,7 +168,7 @@
             try {
               const response = await axios.get("http://localhost:5000/forms");
               this.forms = response.data;
-              //console.log(this.forms)
+              console.log(this.forms)
               
             } catch (error) {
               console.log(error);
@@ -152,31 +180,13 @@
         }
     })
 
-    app.component('form-cards',{
-        props:['form'],
-        template: 
-        `<div v-for="f in form">
-         <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-            <a href="#">
-                <img class="rounded-t-lg" src="#" alt="" />
-            </a>
-            <div class="p-5">
-                <a href="#">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{f.formName}}</h5>
-                </a>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Workflow 111</p>
-                <button>
-                    <a v-bind:href="'./Vendor_form_details.html?id=' + f.formId" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white     bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300         dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Edit
-                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"      xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414     0l6  6a1  1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1     1 0   010-1. 414z" clip-rule="evenodd"></path></svg>
-                    </a>
-                </button>
-            </div>
-        </div>
-    </div>`
-    })
 
-    const vm = app.mount('#app')
+    const vm = app.$mount('#app')
+    
                                                     
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </html>
