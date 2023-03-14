@@ -642,7 +642,14 @@
 
                     //update raw form
                     this.raw_form["sections"] = this.form_sections
-                    var URL = this.localhost + "/form/" + this.form_id;
+                    for (i in this.all_forms){
+                        if (this.all_forms[i].formId == this.form_id){
+                            this.all_forms[i] = this.raw_form
+                        }
+                        break
+                    }
+
+                    var URL = this.localhost + "/forms";
 
                     axios.put(URL, this.raw_form)
                         .then(response => {
