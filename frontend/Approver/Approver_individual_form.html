@@ -234,8 +234,9 @@
                             <select id="inputType" @change="updateSectionId(value.question.questionId)"
                                 v-model="varSectionId[value.question.questionId]"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                <option :value = "value.sectionId" disabled selected>{{value.sectionId}}</option>
-                                <option v-for = "each_section in all_section_ids.filter(item => item !== value.sectionId)" :value = "each_section">{{each_section}}</option>
+                                <option :value="value.sectionId" disabled selected>{{value.sectionId}}</option>
+                                <option v-for="each_section in all_section_ids.filter(item => item !== value.sectionId)"
+                                    :value="each_section">{{each_section}}</option>
                             </select>
                         </td>
 
@@ -381,13 +382,143 @@
                         d="M12 17c-2.727 0-6-2.778-6-5s3.273-5 6-5s6 2.778 6 5s-3.273 5-6 5Zm-1-5a1 1 0 1 0 2 0a1 1 0 0 0-2 0Z" />
                 </svg>
                 View Form</button>
-            <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
+            <!-- data-modal-target="default-modal" data-modal-toggle="default-modal" -->
+            <button type="button" data-te-toggle="modal" data-te-target="#exampleModalScrollable" data-te-ripple-init
+                data-te-ripple-color="light"
                 class="inline-flex items-center mr-5 float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
                     <path fill="#FFFFFF"
                         d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
-                </svg> Add New Fields
+                </svg> Create New Fields
             </button>
+        </div>
+
+        <!-- CREATE NEW FIELD MODAL -->
+        <div data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="exampleModalScrollable" tabindex="-1" aria-labelledby="exampleModalScrollableLabel" aria-hidden="true">
+            <div data-te-modal-dialog-ref
+                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+                <div
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none ">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 ">
+                        <h5 class="text-xl font-medium leading-normal text-neutral-800"
+                            id="exampleModalScrollableLabel">
+                            Create New Fields
+                        </h5>
+                        <button type="button"
+                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-te-modal-dismiss aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="relative overflow-y-auto p-4">
+                        <form class="space-y-6" action="#">
+                            <!-- SECTION ID -->
+                            <div>
+                                <label for="NewSectionId" class="block mb-2 text-sm font-medium text-gray-900">Section
+                                    ID</label>
+                                <input type="number" id="NewSectionId" v-model="NewSectionId" min="1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+
+                            <!-- SECTION TITLE -->
+                            <div v-if="!all_section_ids.includes(NewSectionId)">
+                                <label for="NewSectionTitle"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Section Title</label>
+                                <input type="text" v-model="NewSectionTitle" name="NewSectionTitle" id="NewSectionTitle"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+
+                            <!-- SECTION DESCRIPTION -->
+                            <div v-if="!(all_section_ids.includes(NewSectionId))">
+                                <label for="NewSectionDescription"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Section Description</label>
+                                <input type="text" v-model="NewSectionDescription" name="NewSectionDescription"
+                                    id="NewSectionDescription"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+
+                            <div>
+                                <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
+                                    Name</label>
+                                <input type="NewFieldName" v-model="NewFieldName" name="NewFieldName" id="NewFieldName"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="NewFieldType" class="block mb-2 text-sm font-medium text-gray-900">Field
+                                    Type</label>
+                                <select id="inputType" v-model="NewFieldType"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option value="text" selected>Text</option>
+                                    <option value="checkbox">Checkbox</option>
+                                    <option value="radio">Radio</option>
+                                    <option value="date">Date</option>
+                                    <option value="text">Text</option>
+                                    <option value="textarea">Textarea</option>
+                                    <option value="email">Email</option>
+                                    <option value="file">File</option>
+                                    <option value="number">Number</option>
+                                </select>
+                            </div>
+                            <div v-if="NewFieldType == 'checkbox' || NewFieldType == 'radio'">
+                                <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number
+                                    of
+                                    Input
+                                    Options</label>
+                                <input type="number" name="optionsNum" id="optionsNum" v-model="totalOptions"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    placeholder="1" min="1" required>
+                                <!-- button to show the bottom modal -->
+                                <button type="button" @click="showOptions()"
+                                    class="float-right text-black font-medium  text-sm p-2.5 text-center inline-flex items-center">
+                                    <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+
+                                <div v-if="show == true">
+                                    <label for="text"
+                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900">Options</label>
+
+                                    <div v-for="n in parseInt(totalOptions)">
+                                        <input type="text" name="text" id="text" v-model="NewOptions[n]"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
+                                            required>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div>
+                                <label for="NewisRequired"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Required</label>
+                                <select id="NewisRequired" v-model="NewisRequired"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
+                                    <option value=false selected>false</option>
+                                    <option value=true>true</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div
+                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
+                        <button type="button" @click="addNewField()" data-modal-toggle="default-modal"
+                        class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create
+                        New Field</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- CREATE NEW FIELD MODAL -->
@@ -408,8 +539,36 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900">Add New Field</h3>
+                        <h3 class="mb-4 text-xl font-medium text-gray-900">Create New Field</h3>
                         <form class="space-y-6" action="#">
+                            <!-- SECTION ID -->
+                            <div>
+                                <label for="NewSectionId" class="block mb-2 text-sm font-medium text-gray-900">Section
+                                    ID</label>
+                                <input type="number" id="NewSectionId" v-model="NewSectionId" min="1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+
+                            <!-- SECTION TITLE -->
+                            <div v-if="!all_section_ids.includes(NewSectionId)">
+                                <label for="NewSectionTitle"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Section Title</label>
+                                <input type="text" v-model="NewSectionTitle" name="NewSectionTitle" id="NewSectionTitle"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+
+                            <!-- SECTION DESCRIPTION -->
+                            <div v-if="!(all_section_ids.includes(NewSectionId))">
+                                <label for="NewSectionDescription"
+                                    class="block mb-2 text-sm font-medium text-gray-900">Section Description</label>
+                                <input type="text" v-model="NewSectionDescription" name="NewSectionDescription"
+                                    id="NewSectionDescription"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+
                             <div>
                                 <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
                                     Name</label>
@@ -481,6 +640,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 
     <script>
@@ -513,6 +673,9 @@
                 NewFieldName: "",
                 NewisRequired: false,
                 NewOptions: {},
+                NewSectionId: "",
+                NewSectionTitle: "",
+                NewSectionDescription: "",
                 raw_form: "",
                 temp_question_id: "",
                 //NEW 
@@ -578,7 +741,7 @@
                             }
                         }
 
-                        for (each of this.combined){
+                        for (each of this.combined) {
                             this.varSectionId[each.question.questionId] = each.sectionId
                         }
 
@@ -620,19 +783,19 @@
                     var new_section_id = this.varSectionId[question_id]
 
                     // to REMOVE
-                    for (each of this.form_sections){
-                        for (i in each.questions){
-                            if (each.questions[i].questionId == question_id){
+                    for (each of this.form_sections) {
+                        for (i in each.questions) {
+                            if (each.questions[i].questionId == question_id) {
                                 var question = each.questions[i]
                                 // remove the existing question from OLD section
-                                each.questions.splice(i , 1);
+                                each.questions.splice(i, 1);
                             }
                         }
                     }
 
                     // to ADD
-                    for (each of this.form_sections){
-                        if (each.sectionId == new_section_id){
+                    for (each of this.form_sections) {
+                        if (each.sectionId == new_section_id) {
                             each.questions.push(question)
                         }
                     }
@@ -645,8 +808,8 @@
                         .then(response => {
                             console.log(response.data)
                             //update combined 
-                            for (each of this.combined){
-                                if (each.question == question_id){
+                            for (each of this.combined) {
+                                if (each.question == question_id) {
                                     each.sectionId = new_section_id;
                                 }
                             }
@@ -655,7 +818,7 @@
                         .catch(error => {
                             console.log(error.message)
                         })
-                    
+
                 },
                 updateFieldName: function (question_id) {
                     console.log(question_id)
@@ -729,12 +892,12 @@
                 deleteQuestion: function (question_id) {
                     var URL = this.localhost + '/form/' + this.form_id
 
-                    for (each of this.form_sections){
-                        for (i in each.questions){
-                            if (each.questions[i].questionId == question_id){
+                    for (each of this.form_sections) {
+                        for (i in each.questions) {
+                            if (each.questions[i].questionId == question_id) {
                                 var question = each.questions[i]
                                 // remove the existing question from OLD section
-                                each.questions.splice(i , 1);
+                                each.questions.splice(i, 1);
                             }
                         }
                     }
@@ -748,11 +911,10 @@
                     axios.put(URL, this.raw_form)
                         .then(response => {
                             alert("Deletion is successful!")
-                            // document.location.reload();
                             //update combined
-                            for (i in this.combined){
-                                if (this.combined[i].question.questionId == question_id){
-                                    this.combined.splice(i,1)
+                            for (i in this.combined) {
+                                if (this.combined[i].question.questionId == question_id) {
+                                    this.combined.splice(i, 1)
                                 }
                             }
                         })
@@ -866,74 +1028,99 @@
                     document.location.reload();
                 },
                 addNewField() {
-                    var all_questions_in_this_form = this.raw_form.formQuestions
+                    var section_id = this.NewSectionId;
+                    var inputLabel = this.NewFieldName;
+                    var inputType = this.NewFieldType;
+                    var isRequired = this.NewisRequired;
+                    var questionProperties = this.NewOptions;
+
+                    this.form_sections
+                    this.raw_form
+
+                    var all_questions_in_this_form = this.all_questions
                     var check = 0
 
                     for (each_question of all_questions_in_this_form) {
-                        if (each_question.question.inputLabel != this.NewFieldName) {
+                        if (each_question.inputLabel == this.NewFieldName) {
                             check += 1
                         }
                     }
 
-                    if (check == all_questions_in_this_form.length) {
+                    if (check != 0) {
                         var NewEditedOptions = []
                         for (i in this.NewOptions) {
                             let temp = {}
                             temp['label'] = this.NewOptions[i]
                             NewEditedOptions.push(temp)
                         }
-                        // post the question to questions
-                        const API_URL4 = this.localhost + "/question"
-                        axios.post(API_URL4, {
-                                inputLabel: this.NewFieldName,
-                                inputType: this.NewFieldType,
-                                isRequired: this.NewisRequired,
-                                questionProperties: NewEditedOptions
-                            })
-                            .then(response => {
-                                console.log(response.data)
-                                // get all the questions to get the question ID
-                                const API_URL5 = this.localhost + "/questions"
-                                axios.get(API_URL5)
-                                    .then(response => {
-                                        var temp_questions = response.data
-                                        for (each of temp_questions) {
-                                            if (each.inputLabel == this.NewFieldName) {
-                                                this.temp_question_id = each.questionId
-                                            }
-                                        }
-                                        const API_URL = this.localhost + "/form/" + this.form_id;
-                                        var question = {
-                                            questionId: this.temp_question_id,
-                                            inputLabel: this.NewFieldName,
-                                            inputType: this.NewFieldType,
-                                            isRequired: this.NewisRequired,
-                                            questionProperties: NewEditedOptions
-                                        }
-                                        let temp_dict = {}
-                                        temp_dict['question'] = question
-                                        this.raw_form.formQuestions.push(temp_dict)
-                                        //put the new questions to existing form
-                                        axios.put(API_URL, this.raw_form)
-                                            .then(response => {
-                                                console.log(response.data)
 
-                                                // to relead the whole form
-                                                document.location.reload();
-                                                this.closeCreateModal()
-                                            })
-                                            .catch(error => {
-                                                console.log(error.message)
-                                            })
-                                    })
-                                    .catch(error => {
-                                        console.log(error.message)
-                                    })
+                        if (this.all_section_ids.includes(this.NewSectionId)) {
+                            for (each_section in this.form_sections) {
+                                if (each_section.sectionId == this.NewSectionId) {
+                                    each_section.questions.push(question)
+                                }
+                            }
+                        } else {
+                            this.form_sections.push({
+                                "sectionId": this.NewSectionId,
+                                "title": this.NewSectionTitle,
+                                "description": this.NewSectionDescription,
+                                "questions": [question]
                             })
-                            .catch(error => {
-                                console.log(error.message)
-                            })
+                        }
                     }
+                    // // post the question to questions
+                    // const API_URL4 = this.localhost + "/question"
+                    // axios.post(API_URL4, {
+                    //         inputLabel: this.NewFieldName,
+                    //         inputType: this.NewFieldType,
+                    //         isRequired: this.NewisRequired,
+                    //         questionProperties: NewEditedOptions
+                    //     })
+                    //     .then(response => {
+                    //         console.log(response.data)
+                    //         // get all the questions to get the question ID
+                    //         const API_URL5 = this.localhost + "/questions"
+                    //         axios.get(API_URL5)
+                    //             .then(response => {
+                    //                 var temp_questions = response.data
+                    //                 for (each of temp_questions) {
+                    //                     if (each.inputLabel == this.NewFieldName) {
+                    //                         this.temp_question_id = each.questionId
+                    //                     }
+                    //                 }
+                    //                 const API_URL = this.localhost + "/form/" + this.form_id;
+                    //                 var question = {
+                    //                     questionId: this.temp_question_id,
+                    //                     inputLabel: this.NewFieldName,
+                    //                     inputType: this.NewFieldType,
+                    //                     isRequired: this.NewisRequired,
+                    //                     questionProperties: NewEditedOptions
+                    //                 }
+                    //                 let temp_dict = {}
+                    //                 temp_dict['question'] = question
+                    //                 this.raw_form.formQuestions.push(temp_dict)
+                    //                 //put the new questions to existing form
+                    //                 axios.put(API_URL, this.raw_form)
+                    //                     .then(response => {
+                    //                         console.log(response.data)
+
+                    //                         // to relead the whole form
+                    //                         // document.location.reload();
+                    //                         this.closeCreateModal()
+                    //                     })
+                    //                     .catch(error => {
+                    //                         console.log(error.message)
+                    //                     })
+                    //             })
+                    //             .catch(error => {
+                    //                 console.log(error.message)
+                    //             })
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error.message)
+                    //     })
+
                 },
                 closeCreateModal() {
                     this.showUpModal = false,
@@ -948,9 +1135,10 @@
         })
     </script>
 
-    <!-- flowbite -->
-    <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
 </html>
