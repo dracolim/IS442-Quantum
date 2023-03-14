@@ -30,6 +30,8 @@ public class FormDataLoader implements ApplicationRunner {
 
     private final WorkFlowRepository workFlowRepository;
 
+    private final QuestionPropertyRepository questionPropertyRepository;
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -39,13 +41,16 @@ public class FormDataLoader implements ApplicationRunner {
             SectionRepository sectionRepository,
             UserRepository userRepository,
             FormSequenceRepository formSequenceRepository,
-            WorkFlowRepository workFlowRepository) {
+            WorkFlowRepository workFlowRepository,
+            QuestionPropertyRepository questionPropertyRepository
+    ) {
         this.formRepository = formRepository;
         this.questionRepository = questionRepository;
         this.sectionRepository = sectionRepository;
         this.userRepository = userRepository;
         this.formSequenceRepository = formSequenceRepository;
         this.workFlowRepository = workFlowRepository;
+        this.questionPropertyRepository = questionPropertyRepository;
     }
 
 
@@ -57,9 +62,11 @@ public class FormDataLoader implements ApplicationRunner {
         formRepository.deleteAll();
         workFlowRepository.deleteAll();
         userRepository.deleteAll();
+        questionPropertyRepository.deleteAll();
         questionRepository.deleteAll();
         sectionRepository.deleteAll();
         formSequenceRepository.deleteAll();
+
 
         String resetQuestionRepositoryQuery = "ALTER TABLE question AUTO_INCREMENT = 1";
         String resetSectionRepositoryQuery = "ALTER TABLE section AUTO_INCREMENT = 1";
@@ -67,6 +74,7 @@ public class FormDataLoader implements ApplicationRunner {
         String resetUserRepositoryQuery = "ALTER TABLE user AUTO_INCREMENT = 1";
         String resetFormSequenceRepositoryQuery = "ALTER TABLE form_sequence AUTO_INCREMENT = 1";
         String resetWorkFlowRepositoryQuery = "ALTER TABLE work_flow AUTO_INCREMENT = 1";
+        String resetQuestionPropertyQuery = "ALTER TABLE question_property AUTO_INCREMENT = 1";
 
         entityManager.createNativeQuery(resetQuestionRepositoryQuery).executeUpdate();
         entityManager.createNativeQuery(resetSectionRepositoryQuery).executeUpdate();
@@ -74,6 +82,7 @@ public class FormDataLoader implements ApplicationRunner {
         entityManager.createNativeQuery(resetUserRepositoryQuery).executeUpdate();
         entityManager.createNativeQuery(resetFormSequenceRepositoryQuery).executeUpdate();
         entityManager.createNativeQuery(resetWorkFlowRepositoryQuery).executeUpdate();
+        entityManager.createNativeQuery(resetQuestionPropertyQuery).executeUpdate();
         // ------------------------ New Vendor Assessment Form --------------------------
 
         // add questions
@@ -466,6 +475,7 @@ public class FormDataLoader implements ApplicationRunner {
         workFlow1.setValidated(false);
         workFlow1.setVendor(vendor1);
         workFlow1.setAdmin(admin1);
+        workFlow1.setApprover(approver1);
 
         WorkFlow workFlow2 = new WorkFlow();
         workFlow2.setWfName("workflow2");
@@ -474,6 +484,7 @@ public class FormDataLoader implements ApplicationRunner {
         workFlow2.setValidated(false);
         workFlow2.setVendor(vendor2);
         workFlow2.setAdmin(admin2);
+        workFlow2.setApprover(approver1);
 
         workFlowRepository.saveAll(Arrays.asList(workFlow1, workFlow2));
 

@@ -32,8 +32,7 @@ public class FormController {
 
     @PostMapping(value = "/form")
     public ResponseEntity<?> newForm(@RequestBody Form newForm){
-
-        return new ResponseEntity<>(formService.createUpdateForm(newForm), HttpStatus.CREATED);
+        return new ResponseEntity<>(formService.createUpdateForm(newForm, null), HttpStatus.CREATED);
     }
 
     @PostMapping(value = "/form/clone/{id}")
@@ -42,12 +41,12 @@ public class FormController {
         return new ResponseEntity<>(formService.cloneForm(id), HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/form")
-    public ResponseEntity<?> editForm(@RequestBody Form eForm){
-        if(eForm == null || !formService.checkFormById(eForm.getFormId())){
+    @PutMapping(value = "/form/{id}")
+    public ResponseEntity<?> editForm(@RequestBody Form eForm, @PathVariable Long id){
+        if(eForm == null || !formService.checkFormById(id)){
             return new ResponseEntity<>("Update failed, please provide a valid form ID", HttpStatus.NOT_FOUND);
         } else {
-            return new ResponseEntity<>(formService.createUpdateForm(eForm), HttpStatus.OK);
+            return new ResponseEntity<>(formService.createUpdateForm(eForm, id), HttpStatus.OK);
         }
     }
 
