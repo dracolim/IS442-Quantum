@@ -234,12 +234,6 @@
 
         <!-- Button for Creating Form -->
         <div class="mx-8 mt-5">
-            <!-- <button type="button"
-                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
-                @click="getFormList()" data-te-toggle="modal" data-te-target="exampleModal" data-te-ripple-init
-                data-te-ripple-color="light" aria-hidden="true">
-                Assign New Form
-            </button> -->
             <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
                 class="inline-flex items-center float-right  px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
@@ -307,7 +301,7 @@
                             id="exampleModalCenteredScrollableLabel">
                             Add Existing Forms
                         </h5>
-                        <button type="button"
+                        <button type="button" @click = "closeAssignForm()"
                             class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
                             data-te-modal-dismiss aria-label="Close">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -338,7 +332,6 @@
                             data-te-modal-dismiss data-te-ripple-init data-te-ripple-color="light">
                             Close
                         </button> -->
-
                         <button type="button" @click="assignNewForm()" data-te-ripple-init data-te-ripple-color="light"
                             class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
                     </div>
@@ -490,10 +483,7 @@
                     }
                 }
 
-                console.log(this.forms_sequences)
                 this.workflow_data['formSequences'] = this.forms_sequences
-
-                console.log(this.workflow_data)
 
                 // update workflow with assigned forms
                 const API_URL3 = this.localhost + "/workflows/" + this.workflow_id;
@@ -505,6 +495,12 @@
                     .catch(error => {
                         console.log(error.message)
                     })
+                
+                // clear
+                this.closeAssignForm();
+            },
+            closeAssignForm(){
+                this.assignForms = {};
             }
             // editWorflow: function(id) {
             // var URL = this.localhost + "/workflows/" + id
