@@ -282,7 +282,7 @@
                             </textarea>
                         </td>
                         <!-- QUESTION ID -->
-                        <td class="px-6 py-4 font-medium text-gray-900 ">
+                        <td class="text-sm px-6 py-4 font-medium text-gray-900 ">
                             {{value.question.questionId}}
                         </td>
                         <!-- field label-->
@@ -951,35 +951,33 @@
                 deleteQuestion: function (question_id) {
                     var URL = this.localhost + '/form/' + this.form_id
 
-                    for (each of this.form_sections) {
-                        for (i in each.questions) {
-                            if (each.questions[i].questionId == question_id) {
-                                var question = each.questions[i]
+                    for (j in this.form_sections) {
+                        for (i in this.form_sections[j].questions) {
+                            if (this.form_sections[j].questions[i].questionId == question_id) {
+                                var question = this.form_sections[j].questions[i]
                                 // remove the existing question from OLD section
-                                each.questions.splice(i, 1)
-                                console.log(each)
+                                this.form_sections[j].questions.splice(i, 1)
+                            }
+                            if (this.form_sections[j].questions.length == 0){
+                                this.form_sections.splice(j , 1)
                             }
                         }
                     }
 
-                    console.log(this.form_sections)
-
                     //update raw form
+                    console.log(this.form_sections)
                     this.raw_form["sections"] = this.form_sections
                     var URL = this.localhost + "/form/" + this.form_id;
 
                     axios.put(URL, this.raw_form)
                         .then(response => {
                             //update combined
-                            console.log(response.data)
                             for (i in this.combined) {
                                 if (this.combined[i].question.questionId == question_id) {
                                     this.combined.splice(i, 1)
-                                    console.log(this.combined)
                                 }
                             }
                             alert("Deletion is successful!")
-                            console.log(this.combined)
                         })
                         .catch(error => {
                             console.log(error.message)
