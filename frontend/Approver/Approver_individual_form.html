@@ -268,17 +268,15 @@
                         <td class="px-6 py-4">
                             <input
                                 class="text-sm rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
-                                type="text" :placeholder="value.sectionTitle"
-                                v-model="varSectionTitle[value.sectionId]" :name="value.sectionTitle"
-                                @change="updateSectionTitle(value.sectionId)">
+                                type="text" :placeholder="value.sectionTitle" v-model="varSectionTitle[value.sectionId]"
+                                :name="value.sectionTitle" @change="updateSectionTitle(value.sectionId)">
                         </td>
                         <!-- SECTION DESCRIPTION-->
                         <td class="px-6 py-4">
                             <textarea
                                 class="text-sm rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
                                 type="text" :placeholder="value.sectionDescription"
-                                v-model="varSectionDescription[value.sectionId]"
-                                :name="value.sectionDescription"
+                                v-model="varSectionDescription[value.sectionId]" :name="value.sectionDescription"
                                 @change="updateSectionDescription(value.sectionId)">
                             </textarea>
                         </td>
@@ -886,8 +884,8 @@
                     var newSectionTitle = this.varSectionTitle[section_id]
                     console.log(newSectionTitle)
                     //update raw form
-                    for (each of this.form_sections){
-                        if (each.sectionId == section_id){
+                    for (each of this.form_sections) {
+                        if (each.sectionId == section_id) {
                             each['title'] = newSectionTitle
                         }
                     }
@@ -914,8 +912,8 @@
                     var newSectionDes = this.varSectionDescription[section_id]
 
                     //update raw form
-                    for (each of this.form_sections){
-                        if (each.sectionId == section_id){
+                    for (each of this.form_sections) {
+                        if (each.sectionId == section_id) {
                             each['description'] = newSectionDes
                         }
                     }
@@ -1018,9 +1016,11 @@
                                 // remove the existing question from OLD section
                                 this.form_sections[j].questions.splice(i, 1)
                             }
-                            if (this.form_sections[j].questions.length == 0) {
-                                this.form_sections.splice(j, 1)
-                            }
+                        }
+                        if (this.form_sections[j].questions.length == 0) {
+                            console.log("a;dfjlahldfjads")
+                            this.form_sections.splice(j, 1)
+                            console.log(this.form_sections)
                         }
                     }
 
