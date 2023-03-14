@@ -70,6 +70,25 @@
             border-bottom: none;
         }
 
+        .table th {
+            position: relative;
+        }
+
+        .resizer {
+            /* Displayed at the right side of column */
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            cursor: col-resize;
+            user-select: none;
+        }
+
+        .resizer:hover,
+        .resizing {
+            border-right: 0.9px solid #e6e6e6;
+        }
+
         .v-enter-active,
         .v-leave-active {
             transition: opacity 0.5s ease;
@@ -85,6 +104,7 @@
         }
     </style>
     <title>Quantum</title>
+
 </head>
 
 <body>
@@ -187,9 +207,8 @@
         <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
         <!-- Table -->
-        <div class="relative overflow-x- shadow-md sm:rounded-lg mx-8 mt-3">
-            <table class="w-full text-sm text-left text-gray-500 table-auto" id="fieldTable">
-
+        <div class="table-auto overflow-x-scroll block shadow-md mx-8 mt-3">
+            <table id="resizeMe" class="table">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Form ID: {{form_id}} <br>
                     <span>Form Name: <input type="text"
@@ -209,9 +228,15 @@
                             Section ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Question ID
+                            Section Title
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Section Description
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Question ID
+                        </th>
+                        <th scope="col" class="px-6 py-3 w-52">
                             Field Name
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -239,7 +264,23 @@
                                     :value="each_section">{{each_section}}</option>
                             </select>
                         </td>
-
+                        <!-- SECTION TITLE -->
+                        <td class="px-6 py-4">
+                            <input
+                                class="text-sm rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                                type="text" :placeholder="value.sectionTitle"
+                                v-model="varFieldNames[value.question.questionId]" :name="value.question.questionId"
+                                @change="updateFieldName(value.question.questionId)">
+                        </td>
+                        <!-- SECTION DESCRIPTION-->
+                        <td class="px-6 py-4">
+                            <textarea
+                                class="text-sm rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                                type="text" :placeholder="value.sectionDescription"
+                                v-model="varFieldNames[value.question.questionId]" :name="value.question.questionId"
+                                @change="updateFieldName(value.question.questionId)">
+                            </textarea>
+                        </td>
                         <!-- QUESTION ID -->
                         <td class="px-6 py-4 font-medium text-gray-900 ">
                             {{value.question.questionId}}
@@ -247,7 +288,7 @@
                         <!-- field label-->
                         <td class="px-6 py-4">
                             <input
-                                class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                                class="text-sm rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
                                 type="text" :placeholder="value.question.inputLabel"
                                 v-model="varFieldNames[value.question.questionId]" :name="value.question.questionId"
                                 @change="updateFieldName(value.question.questionId)">
@@ -273,7 +314,7 @@
                         <!-- input values -->
                         <td class="px-6 py-4">
                             <ul class="max-w-md space-y-1 text-gray-500 list-disc list-inside mb-2">
-                                <li v-for="eachValue in value.question.questionProperties" class="text-gray-900 ">
+                                <li v-for="eachValue in value.question.questionProperties" class="text-sm text-gray-900 ">
                                     {{eachValue.label}}
                                 </li>
                             </ul>
@@ -734,6 +775,8 @@
                         var existing_questions = []
                         for (each of this.form_sections) {
                             var section_id = each.sectionId;
+                            var section_title = each.title;
+                            var section_description = each.description;
                             if (!(this.all_section_ids.includes(section_id))) {
                                 this.all_section_ids.push(section_id)
                             }
@@ -742,6 +785,8 @@
                                 existing_questions.push(each_question.questionId)
                                 var temp = {}
                                 temp['sectionId'] = section_id
+                                temp['sectionTitle'] = section_title
+                                temp['sectionDescription'] = section_description
                                 temp['question'] = each_question
                                 this.combined.push(temp)
                             }
@@ -823,7 +868,7 @@
                             console.log(response.data)
                             //update combined 
                             for (each of this.combined) {
-                                if (each.question == question_id) {
+                                if (each.question.questionId == question_id) {
                                     each.sectionId = new_section_id;
                                 }
                             }
@@ -911,7 +956,8 @@
                             if (each.questions[i].questionId == question_id) {
                                 var question = each.questions[i]
                                 // remove the existing question from OLD section
-                                each.questions.splice(i, 1);
+                                each.questions.splice(i, 1)
+                                console.log(each)
                             }
                         }
                     }
@@ -924,13 +970,16 @@
 
                     axios.put(URL, this.raw_form)
                         .then(response => {
-                            alert("Deletion is successful!")
                             //update combined
+                            console.log(response.data)
                             for (i in this.combined) {
                                 if (this.combined[i].question.questionId == question_id) {
                                     this.combined.splice(i, 1)
+                                    console.log(this.combined)
                                 }
                             }
+                            alert("Deletion is successful!")
+                            console.log(this.combined)
                         })
                         .catch(error => {
                             console.log(error.message)
@@ -1177,6 +1226,64 @@
                 }
             }
         })
+    </script>
+    <script>
+        const createResizableColumn = function (col, resizer) {
+            // Track the current position of mouse
+            let x = 0;
+            let w = 0;
+
+            const mouseDownHandler = function (e) {
+                // Get the current mouse position
+                x = e.clientX;
+
+                // Calculate the current width of column
+                const styles = window.getComputedStyle(col);
+                w = parseInt(styles.width, 10);
+
+                // Attach listeners for document's events
+                document.addEventListener('mousemove', mouseMoveHandler);
+                document.addEventListener('mouseup', mouseUpHandler);
+            };
+
+            const mouseMoveHandler = function (e) {
+                // Determine how far the mouse has been moved
+                const dx = e.clientX - x;
+
+                // Update the width of column
+                col.style.width = `${w + dx}px`;
+            };
+
+            // When user releases the mouse, remove the existing event listeners
+            const mouseUpHandler = function () {
+                document.removeEventListener('mousemove', mouseMoveHandler);
+                document.removeEventListener('mouseup', mouseUpHandler);
+            };
+
+            resizer.addEventListener('mousedown', mouseDownHandler);
+        };
+        
+        // Query the table
+        const table = document.getElementById('resizeMe');
+
+        // Query all headers
+        const cols = table.querySelectorAll('th');
+
+        // Loop over them
+        [].forEach.call(cols, function (col) {
+            // Create a resizer element
+            const resizer = document.createElement('div');
+            resizer.classList.add('resizer');
+
+            // Set the height
+            resizer.style.height = `${table.offsetHeight}px`;
+
+            // Add a resizer element to the column
+            col.appendChild(resizer);
+
+            // Will be implemented in the next section
+            createResizableColumn(col, resizer);
+        });
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
