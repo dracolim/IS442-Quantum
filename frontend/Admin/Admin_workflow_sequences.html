@@ -259,7 +259,7 @@
                             id="exampleModalCenteredScrollableLabel">
                             Add Existing Forms
                         </h5>
-                        <button type="button" @click = "closeAssignForm()"
+                        <button type="button" @click="closeAssignForm()"
                             class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
                             data-te-modal-dismiss aria-label="Close">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -270,18 +270,36 @@
                     </div>
                     <div class="relative p-4">
                         <!-- BODY -->
-                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
-                            <li v-for="(value, idx) of to_show_forms">
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                    <input :id="value.formId" type="checkbox" :value="value.formId"
-                                        v-model="assignForms[value.formId]"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ">
-                                    <label :for="value.formId"
-                                        class="w-full ml-2 text-medium font-medium text-gray-900 rounded dark:text-gray-300">{{value.formName}}</label>
-                                </div>
-                            </li>
-                        </ul>
+                        <div v-if="to_show_forms.length != 0">
+                            <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200">
+                                <li v-for="(value, idx) of to_show_forms">
+                                    <div class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                        <input :id="value.formId" type="checkbox" :value="value.formId"
+                                            v-model="assignForms[value.formId]"
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ">
+                                        <label :for="value.formId"
+                                            class="w-full ml-2 text-medium font-medium text-gray-900 rounded dark:text-gray-300">{{value.formName}}</label>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
 
+                        <div v-if="to_show_forms.length == 0">
+                            <div id="alert-2"
+                                class="flex py-4 mb-2 mt-3 px-8 text-red-800 rounded-lg bg-red-50"
+                                role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div class="ml-3 text-sm font-medium">
+                                    All Exising Forms are already in this Workflow
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div
                         class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
@@ -412,7 +430,9 @@
                 }
 
                 this.workflow_data['formSequences'] = this.forms_sequences
-                this.workflow_data['approver'] = {'userid':6}
+                this.workflow_data['approver'] = {
+                    'userid': 6
+                }
 
                 // update workflow with assigned forms
                 const API_URL3 = this.localhost + "/workflows/" + this.workflow_id;
@@ -424,15 +444,15 @@
                     .catch(error => {
                         console.log(error.message)
                     })
-                
+
                 // clear
                 this.closeAssignForm();
             },
-            closeAssignForm(){
+            closeAssignForm() {
                 this.assignForms = {};
             },
             //to delete form
-            deleteForm(){
+            deleteForm() {
                 //TO DO!
 
             }
