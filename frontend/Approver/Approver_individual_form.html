@@ -627,9 +627,7 @@
                                 // remove the existing question from OLD section
                                 each.questions.splice(i , 1);
                             }
-                            break
                         }
-                        break
                     }
 
                     // to ADD
@@ -637,27 +635,27 @@
                         if (each.sectionId == new_section_id){
                             each.questions.push(question)
                         }
-                        break
                     }
 
                     //update raw form
                     this.raw_form["sections"] = this.form_sections
-                    for (i in this.all_forms){
-                        if (this.all_forms[i].formId == this.form_id){
-                            this.all_forms[i] = this.raw_form
-                        }
-                        break
-                    }
-
-                    var URL = this.localhost + "/forms";
+                    var URL = this.localhost + "/form/" + this.form_id;
 
                     axios.put(URL, this.raw_form)
                         .then(response => {
                             console.log(response.data)
+                            //update combined 
+                            for (each of this.combined){
+                                if (each.question == question_id){
+                                    each.sectionId = new_section_id;
+                                }
+                            }
+                            document.location.reload();
                         })
                         .catch(error => {
                             console.log(error.message)
                         })
+                    
                 },
                 updateFieldName: function (question_id) {
                     console.log(question_id)
@@ -690,7 +688,6 @@
                             }
                             var data = each
                         }
-
                     }
                     var URL = this.localhost + '/question/' + question_id
                     axios.put(URL, data)
