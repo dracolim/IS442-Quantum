@@ -171,9 +171,8 @@
         <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
         <!-- FORM START -->
-        <div style="background-color: #b4d1df" class="h-screen">
+        <div style="background-color: #b4d1df">
             <!-- back button -->
-
             <button type="button" v-on:click="goToSinglepage()"
                 class=" ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Back
             </button>
@@ -186,37 +185,32 @@
                 </div>
             </div>
 
-            <div v-for = "(value, key) in form_sections">
+            <!-- EACH SECTION FORM -->
+            <div v-for="(value2, key) in form_sections">
                 <div class="flex justify-center mt-2 pb-4">
-                    <!-- EACH SECTION FORM -->
-                    <div class="w-7/12 p-6 bg-white border border-gray-200 rounded-lg shadow">
-                        {{value.title}}
-
-                    </div>
-                </div>
-            </div>
-
-            <div v-for="(value,key) in form_questions">
-                <div class="flex justify-center mt-2 pb-4">
-                    <!-- Forms -->
-                    <div class="w-7/12 p-6 bg-white border border-gray-200 rounded-lg shadow">
-                        <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900">
-                            {{value.question.inputLabel}}</h5>
-                        <!-- options -->
-                        <!-- text -->
-                        <input
-                            v-if="value.question.inputType == 'text' || value.question.inputType == 'textarea' || value.question.inputType == 'date' || value.question.inputType == 'email' || value.question.inputType == 'file' || value.question.inputType == 'number' "
-                            class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
-                            :type="value.question.inputType" :required="value.question.isRequired">
-
-                        <!-- NON text -->
-                        <div v-else v-for="value3 in question_options[value.question.questionId]">
-                            <div class="flex items-center mb-4">
-                                <input :id="value3.id" class="bg-gray-50 border border-gray-300"
-                                    :type="value.question.inputType" :name="value.question.questionId"
-                                    :required="value.question.isRequired" value="value3.label">
-                                <label for="value3.id" :id="value3.id" class="ml-2 text-sm font-medium text-gray-900"
-                                    :name="value.question.questionId">{{value3.label}}</label>
+                    <div class="w-7/12 p-5 mb-4 bg-white border border-gray-200 rounded-lg shadow">
+                        <!--- SECTION TITLE -->
+                        <div class = "font-bold mb-3 py-3 text-center bg-sky-600 text-white rounded">{{value2.title}}</div>
+                        <!-- QUESTIONS IN EACH SECTION -->
+                        <div v-for="(value, idx) in value2.questions">
+                            <h5 class="mb-2 text-medium font-normal tracking-tight text-gray-900">
+                                {{value.inputLabel}}</h5>
+                            <!-- options -->
+                            <!-- text -->
+                            <input
+                                v-if="value.inputType == 'text' || value.inputType == 'textarea' || value.inputType == 'Date' || value.inputType == 'email' || value.inputType == 'file' || value.inputType == 'number' "
+                                class="mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                                :type="value.inputType" :required="value.isRequired">
+                            <!-- NON text -->
+                            <div v-else v-for="value3 in question_options[value.questionId]">
+                                <div class="flex items-center mb-4">
+                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300"
+                                        :type="value.inputType" :name="value.questionId" :required="value.isRequired"
+                                        value="value3.label">
+                                    <label for="value3.id" :id="value3.id"
+                                        class="ml-2 text-sm font-medium text-gray-900"
+                                        :name="value.questionId">{{value3.label}}</label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -272,28 +266,26 @@
                         }
                     }
 
-                    console.log(this.combined)
-
-
-
-                    for (i in this.form_questions) {
-                        var question_id = this.form_questions[i].question.questionId
-                        // console.log(question_id)
-                        if (!(question_id in this.question_options)) {
-                            if (this.form_questions[i].question.inputType == "text" || this
-                                .form_questions[i].question.inputType == "textarea" || this
-                                .form_questions[i].question.inputType == "email" || this
-                                .form_questions[i].question.inputType == "date" || this
-                                .form_questions[i].question.inputType == "file" ||
-                                this.form_questions[i].question.inputType == "number") {
-                                this.question_options[question_id] = ""
-                            } else {
-                                this.question_options[question_id] = this.form_questions[i].question
-                                    .questionProperties
+                    for (each of this.form_sections) {
+                        var questions = each.questions
+                        for (each_question of questions) {
+                            var question_id = each_question.questionId;
+                            if (!(question_id in this.question_options)) {
+                                if (each_question.inputType == "text" || each_question.inputType ==
+                                    "textarea" || each_question.inputType == "email" || each_question
+                                    .inputType == "date" || each_question.inputType == "file" ||
+                                    each_question.inputType == "number") {
+                                    this.question_options[question_id] = ""
+                                } else {
+                                    this.question_options[question_id] = each_question
+                                        .questionProperties
+                                }
                             }
                         }
                     }
+
                     console.log(this.question_options)
+
                 })
                 .catch(error => {
                     console.error(error);
