@@ -391,6 +391,15 @@
                         d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
                 </svg> Create New Fields
             </button>
+
+            <button type="button" data-te-toggle="modal" data-te-target="#exampleModalScrollable2" data-te-ripple-init
+                data-te-ripple-color="light"
+                class="inline-flex items-center mr-5 float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
+                    <path fill="#FFFFFF"
+                        d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
+                </svg> Assign Existing Fields
+            </button>
         </div>
 
         <!-- CREATE NEW FIELD MODAL -->
@@ -407,7 +416,7 @@
                             id="exampleModalScrollableLabel">
                             Create New Fields
                         </h5>
-                        <button type="button"
+                        <button type="button" @click="closeCreateModal()"
                             class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
                             data-te-modal-dismiss aria-label="Close">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -428,7 +437,7 @@
                             </div>
 
                             <!-- SECTION TITLE -->
-                            <div v-if="!all_section_ids.includes(NewSectionId)">
+                            <div v-if="all_section_ids.includes(parseInt(NewSectionId)) == false && NewSectionId != ''">
                                 <label for="NewSectionTitle"
                                     class="block mb-2 text-sm font-medium text-gray-900">Section Title</label>
                                 <input type="text" v-model="NewSectionTitle" name="NewSectionTitle" id="NewSectionTitle"
@@ -437,7 +446,7 @@
                             </div>
 
                             <!-- SECTION DESCRIPTION -->
-                            <div v-if="!(all_section_ids.includes(NewSectionId))">
+                            <div v-if="all_section_ids.includes(parseInt(NewSectionId)) == false && NewSectionId != ''">
                                 <label for="NewSectionDescription"
                                     class="block mb-2 text-sm font-medium text-gray-900">Section Description</label>
                                 <input type="text" v-model="NewSectionDescription" name="NewSectionDescription"
@@ -446,13 +455,31 @@
                                     required>
                             </div>
 
-                            <div>
+                            <!-- FIELD NAME-->
+                            <div v-if="inputLabelError == false">
                                 <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
                                     Name</label>
                                 <input type="NewFieldName" v-model="NewFieldName" name="NewFieldName" id="NewFieldName"
+                                    @change="checkFieldName()"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     required>
                             </div>
+
+                            <!-- ERROR HANDLING -->
+                            <div v-if="inputLabelError == true">
+                                <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
+                                    Name</label>
+                                <div class="relative">
+                                    <input type="NewFieldName" v-model="NewFieldName" name="NewFieldName"
+                                        id="NewFieldName" @change="checkFieldName()"
+                                        class="bg-gray-50 border border-red-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                        required>
+                                </div>
+                                <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span
+                                        class="font-medium">Field Name already exist!</span></p>
+                            </div>
+
+                            <!-- FIELD TYPE -->
                             <div>
                                 <label for="NewFieldType" class="block mb-2 text-sm font-medium text-gray-900">Field
                                     Type</label>
@@ -469,6 +496,8 @@
                                     <option value="number">Number</option>
                                 </select>
                             </div>
+
+                            <!-- FIELD OPTIONS -->
                             <div v-if="NewFieldType == 'checkbox' || NewFieldType == 'radio'">
                                 <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number
                                     of
@@ -498,8 +527,9 @@
                                             required>
                                     </div>
                                 </div>
-
                             </div>
+
+                            <!-- ISREQUIRED -->
                             <div>
                                 <label for="NewisRequired"
                                     class="block mb-2 text-sm font-medium text-gray-900">Required</label>
@@ -510,137 +540,110 @@
                                 </select>
                             </div>
                         </form>
+
+                        <!-- ERROR MESSAGE -->
+                        <div v-if="error_message != ''"
+                            class="mt-4 flex p-4 mb-3 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                            <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            <span class="sr-only">Info</span>
+                            <div>
+                                <span class="font-medium">Error!</span> {{error_message}}
+                            </div>
+                        </div>
+
                     </div>
                     <div
-                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-                        <button type="button" @click="addNewField()" data-modal-toggle="default-modal"
-                        class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create
-                        New Field</button>
+                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4">
+                        <button type="button" @click="addNewField()" id="addFieldButton"
+                            class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create
+                            New Field</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- CREATE NEW FIELD MODAL -->
-        <div id="default-modal" tabindex="-1" aria-hidden="true"
-            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
-            <div class="relative w-full h-full max-w-md md:h-auto">
-                <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow">
-                    <button type="button" @click="closeCreateModal()"
-                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                        data-modal-toggle="default-modal">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                    <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900">Create New Field</h3>
-                        <form class="space-y-6" action="#">
-                            <!-- SECTION ID -->
-                            <div>
-                                <label for="NewSectionId" class="block mb-2 text-sm font-medium text-gray-900">Section
-                                    ID</label>
-                                <input type="number" id="NewSectionId" v-model="NewSectionId" min="1"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    required>
-                            </div>
+        <!-- ASSIGN EXISTING FIELDS MODAL -->
+        <div data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="exampleModalScrollable2" tabindex="-1" aria-labelledby="exampleModalScrollable2Label"
+            aria-hidden="true">
+            <div data-te-modal-dialog-ref
+                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+                <div
+                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4">
+                        <h5 class="text-xl font-medium leading-normal text-neutral-800"
+                            id="exampleModalScrollableLabel">
+                            Add Existing
+                        </h5>
+                        <button type="button" @click="closeAssignModal()"
+                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-te-modal-dismiss aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="relative overflow-y-auto p-4">
+                        <!-- SECTION ID -->
+                        <div class="mb-4">
+                            <label for="NewSectionId" class="block mb-2 text-sm font-medium text-gray-900">Section
+                                ID</label>
+                            <input type="number" id="NewSectionId" v-model="NewSectionId" min="1"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                required>
+                        </div>
 
-                            <!-- SECTION TITLE -->
-                            <div v-if="!all_section_ids.includes(NewSectionId)">
-                                <label for="NewSectionTitle"
-                                    class="block mb-2 text-sm font-medium text-gray-900">Section Title</label>
-                                <input type="text" v-model="NewSectionTitle" name="NewSectionTitle" id="NewSectionTitle"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    required>
-                            </div>
+                        <!-- SECTION TITLE -->
+                        <div v-if="all_section_ids.includes(parseInt(NewSectionId)) == false && NewSectionId != ''"
+                            class="mb-4">
+                            <label for="NewSectionTitle" class="block mb-2 text-sm font-medium text-gray-900">Section
+                                Title</label>
+                            <input type="text" v-model="NewSectionTitle" name="NewSectionTitle" id="NewSectionTitle"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                required>
+                        </div>
 
-                            <!-- SECTION DESCRIPTION -->
-                            <div v-if="!(all_section_ids.includes(NewSectionId))">
-                                <label for="NewSectionDescription"
-                                    class="block mb-2 text-sm font-medium text-gray-900">Section Description</label>
-                                <input type="text" v-model="NewSectionDescription" name="NewSectionDescription"
-                                    id="NewSectionDescription"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    required>
-                            </div>
-
-                            <div>
-                                <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
-                                    Name</label>
-                                <input type="NewFieldName" v-model="NewFieldName" name="NewFieldName" id="NewFieldName"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    required>
-                            </div>
-                            <div>
-                                <label for="NewFieldType" class="block mb-2 text-sm font-medium text-gray-900">Field
-                                    Type</label>
-                                <select id="inputType" v-model="NewFieldType"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option value="text" selected>Text</option>
-                                    <option value="checkbox">Checkbox</option>
-                                    <option value="radio">Radio</option>
-                                    <option value="date">Date</option>
-                                    <option value="text">Text</option>
-                                    <option value="textarea">Textarea</option>
-                                    <option value="email">Email</option>
-                                    <option value="file">File</option>
-                                    <option value="number">Number</option>
-                                </select>
-                            </div>
-                            <div v-if="NewFieldType == 'checkbox' || NewFieldType == 'radio'">
-                                <label for="optionsNum" class="block mb-2 text-sm font-medium text-gray-900">Number
-                                    of
-                                    Input
-                                    Options</label>
-                                <input type="number" name="optionsNum" id="optionsNum" v-model="totalOptions"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    placeholder="1" min="1" required>
-                                <!-- button to show the bottom modal -->
-                                <button type="button" @click="showOptions()"
-                                    class="float-right text-black font-medium  text-sm p-2.5 text-center inline-flex items-center">
-                                    <svg aria-hidden="true" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-
-                                <div v-if="show == true">
-                                    <label for="text"
-                                        class="block mb-2 mt-2 text-sm font-medium text-gray-900">Options</label>
-
-                                    <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="NewOptions[n]"
-                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
-                                            required>
-                                    </div>
+                        <!-- SECTION DESCRIPTION -->
+                        <div v-if="all_section_ids.includes(parseInt(NewSectionId)) == false && NewSectionId != ''"
+                            class="mb-4">
+                            <label for="NewSectionDescription"
+                                class="block mb-2 text-sm font-medium text-gray-900">Section Description</label>
+                            <input type="text" v-model="NewSectionDescription" name="NewSectionDescription"
+                                id="NewSectionDescription"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                required>
+                        </div>
+                        <!-- EXISTING QUESTIONS -->
+                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 ">
+                            <li v-for="(value, idx) of questions_to_show">
+                                <div class="flex items-center p-2 rounded hover:bg-gray-100">
+                                    <input :id="value.questionId" type="checkbox" :value="value.questionId"
+                                        v-model="assignQuestions[value.questionId]"
+                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ">
+                                    <label :for="value.questionId"
+                                        class="w-full ml-2 text-medium font-medium text-gray-900 rounded">{{value.inputLabel}}</label>
                                 </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                            </div>
-                            <div>
-                                <label for="NewisRequired"
-                                    class="block mb-2 text-sm font-medium text-gray-900">Required</label>
-                                <select id="NewisRequired" v-model="NewisRequired"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
-                                    <option value=false selected>false</option>
-                                    <option value=true>true</option>
-                                </select>
-                            </div>
-                            <button type="button" @click="addNewField()" data-modal-toggle="default-modal"
-                                class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create
-                                New Field</button>
-                        </form>
+                    <div
+                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4">
+                        <button type="button" @click="assignNewField()" id="assignFieldButton"
+                            class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                            Assign Exiting Fields</button>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -650,6 +653,7 @@
                 localhost: "http://localhost:5000",
                 all_forms: "",
                 all_questions: "",
+                questions_to_show: [],
                 all_question_labels: {},
                 all_section_ids: [],
                 one_form: "",
@@ -678,9 +682,14 @@
                 NewSectionDescription: "",
                 raw_form: "",
                 temp_question_id: "",
+                inputLabelError: false,
+                error_message: "",
                 //NEW 
                 form_sections: "",
                 combined: [],
+                // ASSIGN NEW FIELD
+                assignQuestions: {},
+
             },
             mounted: async function () {
                 var query = window.location.search.substring(4);
@@ -716,17 +725,13 @@
                             }
                         }
 
-                        for (each of this.all_questions) {
-                            this.varFieldTypes[each.questionId] = each.inputType;
-                            this.varFieldRequired[each.questionId] = each.isRequired;
-                        }
-
                         // need to modify
                         for (each of this.form_questions) {
                             this.all_question_labels[each.question.questionId] = each.question
                                 .inputLabel
                         }
 
+                        var existing_questions = []
                         for (each of this.form_sections) {
                             var section_id = each.sectionId;
                             if (!(this.all_section_ids.includes(section_id))) {
@@ -734,10 +739,19 @@
                             }
                             var questions = each.questions;
                             for (each_question of questions) {
+                                existing_questions.push(each_question.questionId)
                                 var temp = {}
                                 temp['sectionId'] = section_id
                                 temp['question'] = each_question
                                 this.combined.push(temp)
+                            }
+                        }
+
+                        for (each of this.all_questions) {
+                            this.varFieldTypes[each.questionId] = each.inputType;
+                            this.varFieldRequired[each.questionId] = each.isRequired;
+                            if (!(existing_questions.includes(each.questionId))) {
+                                this.questions_to_show.push(each)
                             }
                         }
 
@@ -1034,24 +1048,26 @@
                     var isRequired = this.NewisRequired;
                     var questionProperties = this.NewOptions;
 
-                    this.form_sections
-                    this.raw_form
-
-                    var all_questions_in_this_form = this.all_questions
-                    var check = 0
-
-                    for (each_question of all_questions_in_this_form) {
-                        if (each_question.inputLabel == this.NewFieldName) {
-                            check += 1
-                        }
-                    }
-
-                    if (check != 0) {
+                    if (section_id == "" || inputLabel == "" || inputType == "") {
+                        document.getElementById("addFieldButton").disabled = false
+                        this.error_message = "Fields cannot be Empty!"
+                    } else {
+                        var all_questions_in_this_form = this.all_questions
                         var NewEditedOptions = []
                         for (i in this.NewOptions) {
                             let temp = {}
                             temp['label'] = this.NewOptions[i]
                             NewEditedOptions.push(temp)
+                        }
+
+                        console.log(NewEditedOptions)
+
+                        var question = {
+                            "inputType": this.NewFieldType,
+                            "attribute": null,
+                            "inputLabel": this.NewFieldName,
+                            "isRequired": this.NewisRequired,
+                            "questionProperties": NewEditedOptions
                         }
 
                         if (this.all_section_ids.includes(this.NewSectionId)) {
@@ -1068,59 +1084,22 @@
                                 "questions": [question]
                             })
                         }
+
+                        this.raw_form['sections'] = this.form_sections
+                        var URL = this.localhost + "/form/" + this.form_id;
+
+                        axios.put(URL, this.raw_form)
+                            .then(response => {
+                                console.log(response.data)
+                            })
+                            .catch(error => {
+                                console.log(error.message)
+                            })
+
+                        this.closeCreateModal()
+                        document.location.reload();
+
                     }
-                    // // post the question to questions
-                    // const API_URL4 = this.localhost + "/question"
-                    // axios.post(API_URL4, {
-                    //         inputLabel: this.NewFieldName,
-                    //         inputType: this.NewFieldType,
-                    //         isRequired: this.NewisRequired,
-                    //         questionProperties: NewEditedOptions
-                    //     })
-                    //     .then(response => {
-                    //         console.log(response.data)
-                    //         // get all the questions to get the question ID
-                    //         const API_URL5 = this.localhost + "/questions"
-                    //         axios.get(API_URL5)
-                    //             .then(response => {
-                    //                 var temp_questions = response.data
-                    //                 for (each of temp_questions) {
-                    //                     if (each.inputLabel == this.NewFieldName) {
-                    //                         this.temp_question_id = each.questionId
-                    //                     }
-                    //                 }
-                    //                 const API_URL = this.localhost + "/form/" + this.form_id;
-                    //                 var question = {
-                    //                     questionId: this.temp_question_id,
-                    //                     inputLabel: this.NewFieldName,
-                    //                     inputType: this.NewFieldType,
-                    //                     isRequired: this.NewisRequired,
-                    //                     questionProperties: NewEditedOptions
-                    //                 }
-                    //                 let temp_dict = {}
-                    //                 temp_dict['question'] = question
-                    //                 this.raw_form.formQuestions.push(temp_dict)
-                    //                 //put the new questions to existing form
-                    //                 axios.put(API_URL, this.raw_form)
-                    //                     .then(response => {
-                    //                         console.log(response.data)
-
-                    //                         // to relead the whole form
-                    //                         // document.location.reload();
-                    //                         this.closeCreateModal()
-                    //                     })
-                    //                     .catch(error => {
-                    //                         console.log(error.message)
-                    //                     })
-                    //             })
-                    //             .catch(error => {
-                    //                 console.log(error.message)
-                    //             })
-                    //     })
-                    //     .catch(error => {
-                    //         console.log(error.message)
-                    //     })
-
                 },
                 closeCreateModal() {
                     this.showUpModal = false,
@@ -1128,9 +1107,74 @@
                         this.NewFieldName = "",
                         this.NewisRequired = false,
                         this.NewOptions = {},
+                        this.NewSectionId = "",
+                        this.NewSectionTitle = "",
+                        this.NewSectionDescription = "",
                         this.raw_form = "",
                         this.temp_question_id = ""
                 },
+                checkFieldName() {
+                    var all_questions_in_this_form = this.all_questions
+                    this.inputLabelError = false;
+                    for (each_question of all_questions_in_this_form) {
+                        if (each_question.inputLabel == this.NewFieldName) {
+                            // error message stating similar input label exist 
+                            this.inputLabelError = true;
+                            document.getElementById("addFieldButton").disabled = true
+                        }
+                    }
+
+                    if (this.inputLabelError == false) {
+                        document.getElementById("addFieldButton").disabled = false
+                    }
+                },
+                assignNewField() {
+                    for (i in this.assignQuestions) {
+                        if (this.assignQuestions[i] == true) {
+                            // get the whole question
+                            for (each of this.all_questions) {
+                                if (each.questionId == i) {
+                                    var question = each;
+
+                                    if (this.all_section_ids.includes(this.NewSectionId)) {
+                                        for (each_section in this.form_sections) {
+                                            if (each_section.sectionId == this.NewSectionId) {
+                                                each_section.questions.push(question)
+                                            }
+                                        }
+                                    } else {
+                                        this.form_sections.push({
+                                            "sectionId": this.NewSectionId,
+                                            "title": this.NewSectionTitle,
+                                            "description": this.NewSectionDescription,
+                                            "questions": [question]
+                                        })
+                                    }
+
+                                    this.raw_form['sections'] = this.form_sections
+                                    var URL = this.localhost + "/form/" + this.form_id;
+
+                                    axios.put(URL, this.raw_form)
+                                        .then(response => {
+                                            console.log(response.data)
+                                        })
+                                        .catch(error => {
+                                            console.log(error.message)
+                                        })
+
+                                    this.closeCreateModal()
+                                    document.location.reload();
+                                }
+                            }
+                        }
+                    }
+
+                },
+                closeAssignModal() {
+                    this.NewSectionId = "";
+                    this.NewSectionTitle = "";
+                    this.NewSectionDescription = "";
+                }
             }
         })
     </script>
