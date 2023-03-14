@@ -727,11 +727,34 @@
                     document.location.reload();
                 },
                 deleteQuestion: function (question_id) {
-                    var URL = this.localhost + '/question/' + question_id
-                    axios.delete(URL)
+                    var URL = this.localhost + '/form/' + this.form_id
+
+                    for (each of this.form_sections){
+                        for (i in each.questions){
+                            if (each.questions[i].questionId == question_id){
+                                var question = each.questions[i]
+                                // remove the existing question from OLD section
+                                each.questions.splice(i , 1);
+                            }
+                        }
+                    }
+
+                    console.log(this.form_sections)
+
+                    //update raw form
+                    this.raw_form["sections"] = this.form_sections
+                    var URL = this.localhost + "/form/" + this.form_id;
+
+                    axios.put(URL, this.raw_form)
                         .then(response => {
                             alert("Deletion is successful!")
-                            document.location.reload();
+                            // document.location.reload();
+                            //update combined
+                            for (i in this.combined){
+                                if (this.combined[i].question.questionId == question_id){
+                                    this.combined.splice(i,1)
+                                }
+                            }
                         })
                         .catch(error => {
                             console.log(error.message)

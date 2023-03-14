@@ -187,13 +187,13 @@
 
             <!-- EACH SECTION FORM -->
             <div v-for="(value2, key) in form_sections">
-                <div class="flex justify-center mt-2 pb-4">
-                    <div class="w-7/12 p-5 mb-4 bg-white border border-gray-200 rounded-lg shadow">
+                <div class="flex justify-center mt-2 pb-3">
+                    <div class="w-7/12 p-5 mb-2 bg-white border border-gray-200 rounded-lg shadow">
                         <!--- SECTION TITLE -->
-                        <div class = "font-bold mb-3 py-3 text-center bg-sky-600 text-white rounded">{{value2.title}}</div>
+                        <div class = "font-bold mb-4 py-3 text-center bg-sky-600 text-white rounded">{{value2.title}}</div>
                         <!-- QUESTIONS IN EACH SECTION -->
                         <div v-for="(value, idx) in value2.questions">
-                            <h5 class="mb-2 text-medium font-normal tracking-tight text-gray-900">
+                            <h5 class="mb-2.5 text-medium font-normal tracking-tight text-gray-900">
                                 {{value.inputLabel}}</h5>
                             <!-- options -->
                             <!-- text -->
