@@ -39,10 +39,10 @@ public class FormService {
         return formRepository.existsById(id);
     }
 
-    public Form createUpdateForm(Form formBody){
+    public Form createUpdateForm(Form formBody, Long formId){
 
         // Add general information
-        Form form = formRepository.findByFormId(formBody.getFormId()) != null ? formRepository.findByFormId(formBody.getFormId()) : new Form();
+        Form form = formId != null ? formRepository.findByFormId(formId) : new Form();
         form.setFormName(formBody.getFormName());
         form.setDateSubmitted(formBody.getDateSubmitted());
         form.setLastEdited(formBody.getLastEdited());
