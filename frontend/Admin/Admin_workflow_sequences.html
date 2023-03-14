@@ -371,7 +371,7 @@
                     })
                 },
                 updateFormSequence(id){
-                    var URL = this.localhost + "/forms/" + id
+                    var URL = this.localhost + "/form/clone/" + id
                     axios.get(URL)
                         .then(response => {
                             var newForm = response.data
