@@ -54,6 +54,8 @@ public class FormService {
             newSection.setDescription(section.getDescription());
             newSection.setForm(form);
 
+            newSection.getQuestions().clear();
+
             // add questions to the newly generated section
             for (Question question : section.getQuestions()){
                 Question newQuestion = question.getQuestionId() != null ? questionService.findByQuestionId(question.getQuestionId()) : questionService.createNewQuestion(question);
