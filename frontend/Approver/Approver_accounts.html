@@ -290,6 +290,7 @@
                                                     class="block text-sm font-medium text-gray-900 ">User Name</label>
                                                 <input v-model="userName" type="text" name="user_name" id="user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    <div v-if="errors.userName">{{ errors.userName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -299,6 +300,7 @@
                                                     id="Vendor_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
+                                                    <div v-if="errors.password">{{ errors.password }}</div>
                                             </div>
 
                                         </div>
@@ -314,6 +316,7 @@
                                                 <input v-model="companyName" type="text" name="company_name"
                                                     id="company_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    <div v-if="errors.companyName">{{ errors.companyName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -325,6 +328,7 @@
                                                     name="Registration_no" id="Registration_no"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.companyRegistrationNo">{{ errors.companyRegistrationNo }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -335,6 +339,7 @@
                                                     id="Company_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.companyEmail">{{ errors.companyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -344,53 +349,7 @@
                                                 <input v-model="companyOfficeAddress" type="text" name="address"
                                                     id="address" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                                     value="" placeholder="" />
-                                            </div>
-
-                                            <div class="md:col-span-5">
-                                                <label for="gst" class="block text-sm font-medium text-gray-900 ">GST
-                                                    Registered</label>
-                                                <div
-                                                    class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                                    <span
-                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{gstValue}}</span>
-                                                    <button tabindex="-1" for="show_more"
-                                                        id="dropdownRadioBgHoverButton"
-                                                        data-dropdown-toggle="dropdownRadioBgHover"
-                                                        class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                        <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
-                                                            stroke="currentColor" viewBox="0 0 24 24"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <!-- GST DROPDOWN menu -->
-                                            <div id="dropdownRadioBgHover"
-                                                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
-                                                <ul class="p-3 space-y-1 text-sm text-gray-700"
-                                                    aria-labelledby="dropdownRadioBgHoverButton">
-                                                    <li>
-                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                                            <input id="default-radio-4" type="radio" value="Yes"
-                                                                name="default-radio" v-model="gstValue"
-                                                                aria-selected="true"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                                            <label for="default-radio-4"
-                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Yes</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                                            <input id="default-radio-4" type="radio" value="No"
-                                                                name="default-radio" v-model="gstValue"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                                            <label for="default-radio-4"
-                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">No</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                    <div v-if="errors.companyOfficeAddress">{{ errors.companyOfficeAddress }}</div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -399,6 +358,7 @@
                                                 <input v-model="companyTel" type="text" name="tel" id="tel"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.companyTel">{{ errors.companyTel }}</div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -407,6 +367,7 @@
                                                 <input v-model="companyFax" type="text" name="fax" id="fax"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.companyFax">{{ errors.companyFax }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -418,7 +379,7 @@
                                                         class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{businessType}}</span>
                                                     <button tabindex="-1" for="show_more"
                                                         id="dropdownRadioBgHoverButton"
-                                                        data-dropdown-toggle="dropdownRadioBgHover2"
+                                                        data-dropdown-toggle="dropdownRadioBgHover"
                                                         class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
                                                         <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
                                                             stroke="currentColor" viewBox="0 0 24 24"
@@ -439,7 +400,7 @@
                                             </div>
 
                                             <!-- TYPE OF BUSINESS LICENSE menu -->
-                                            <div id="dropdownRadioBgHover2"
+                                            <div id="dropdownRadioBgHover"
                                                 class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
                                                 <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
                                                     aria-labelledby="dropdownRadioBgHoverButton">
@@ -554,6 +515,7 @@
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_user_name" id="Update_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    <div v-if="errors.userName">{{ errors.userName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -563,6 +525,7 @@
                                                     name="Admin_password" id="Admin_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
+                                                    <div v-if="errors.password">{{ errors.password }}</div>
                                             </div>
 
                                         </div>
@@ -578,6 +541,7 @@
                                                 <input v-model="specificUserCompanyName" type="text"
                                                     name="Update_company_name" id="Update_company_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    <div v-if="errors.companyName">{{ errors.companyName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -589,6 +553,7 @@
                                                     name="Update_Registration_no" id="Update_Registration_no"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.companyRegistrationNo">{{ errors.companyRegistrationNo }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -599,6 +564,7 @@
                                                     name="Update_Company_email" id="Update_Company_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.companyEmail">{{ errors.companyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -609,54 +575,7 @@
                                                     name="Update_address" id="Update_address"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                            </div>
-
-                                            <div class="md:col-span-5">
-                                                <label for="update_gst"
-                                                    class="block text-sm font-medium text-gray-900 ">GST
-                                                    Registered</label>
-                                                <div
-                                                    class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                                    <span
-                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{gstValue}}</span>
-                                                    <button tabindex="-1" for="show_more"
-                                                        id="dropdownRadioBgHoverButton"
-                                                        data-dropdown-toggle="dropdownRadioBgHover"
-                                                        class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                        <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
-                                                            stroke="currentColor" viewBox="0 0 24 24"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <!-- GST DROPDOWN menu -->
-                                            <div id="dropdownRadioBgHover"
-                                                class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
-                                                <ul class="p-3 space-y-1 text-sm text-gray-700"
-                                                    aria-labelledby="dropdownRadioBgHoverButton">
-                                                    <li>
-                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                                            <input id="default-radio-4" type="radio" value="Yes"
-                                                                name="default-radio" v-model="gstValue"
-                                                                aria-selected="true"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                                            <label for="default-radio-4"
-                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Yes</label>
-                                                        </div>
-                                                    </li>
-                                                    <li>
-                                                        <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                                            <input id="default-radio-4" type="radio" value="No"
-                                                                name="default-radio" v-model="gstValue"
-                                                                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
-                                                            <label for="default-radio-4"
-                                                                class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">No</label>
-                                                        </div>
-                                                    </li>
-                                                </ul>
+                                                    <div v-if="errors.companyOfficeAddress">{{ errors.companyOfficeAddress }}</div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -666,6 +585,7 @@
                                                     id="Update_tel"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.companyTel">{{ errors.companyTel }}</div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -675,6 +595,7 @@
                                                     id="Update_fax"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.companyFax">{{ errors.companyFax }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -683,9 +604,9 @@
                                                 <div
                                                     class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                                                     <span
-                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{businessType}}</span>
+                                                        class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{specificUserBusinessType}}</span>
                                                     <button tabindex="-1" for="show_more"
-                                                        id="dropdownRadioBgHoverButton"
+                                                        id="dropdownRadioBgHoverButton2"
                                                         data-dropdown-toggle="dropdownRadioBgHover2"
                                                         class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
                                                         <svg class="mr-2 w-4 h-4 ml-1" aria-hidden="true" fill="none"
@@ -698,24 +619,24 @@
                                                 </div>
                                             </div>
 
-                                            <div v-if="businessType == 'Others'" class="md:col-span-3">
+                                            <div v-if="specificUserBusinessType == 'Others'" class="md:col-span-3">
                                                 <label class="block text-sm font-medium text-gray-900 ">Please
                                                     Specify</label>
                                                 <input type="text"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    v-model="businessTypeOthers" placeholder="" />
+                                                    v-model="specificUserBusinessTypeOthers" placeholder="" />
                                             </div>
 
                                             <!-- TYPE OF BUSINESS LICENSE menu -->
                                             <div id="dropdownRadioBgHover2"
                                                 class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
                                                 <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
-                                                    aria-labelledby="dropdownRadioBgHoverButton">
+                                                    aria-labelledby="dropdownRadioBgHoverButton2">
                                                     <li>
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio"
                                                                 value="Solo Proprietorship" name="default-radio"
-                                                                v-model="businessType"
+                                                                v-model="specificUserBusinessType"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Solo
@@ -726,7 +647,7 @@
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio"
                                                                 value="Partnership Agreement" name="default-radio"
-                                                                v-model="businessType"
+                                                                v-model="specificUserBusinessType"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Partnership
@@ -737,7 +658,7 @@
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio"
                                                                 value="Limited Company" name="default-radio"
-                                                                v-model="businessType"
+                                                                v-model="specificUserBusinessType"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Limited
@@ -747,7 +668,7 @@
                                                     <li>
                                                         <div class="flex items-center p-2 rounded hover:bg-gray-100">
                                                             <input id="default-radio-4" type="radio" value="Others"
-                                                                name="default-radio" v-model="businessType"
+                                                                name="default-radio" v-model="specificUserBusinessType"
                                                                 class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 ">
                                                             <label for="default-radio-4"
                                                                 class="w-full ml-2 text-sm font-medium text-gray-900 rounded ">Others</label>
@@ -755,6 +676,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                            
                                         </div>
 
                                     </div>
@@ -822,6 +744,7 @@
                                                 <input v-model="adminUserName" type="text" name="Admin_user_name"
                                                     id="Admin_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    <div v-if="errors.adminUserName">{{ errors.adminUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -831,6 +754,7 @@
                                                     id="Admin_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.adminEmail">{{ errors.adminEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -840,6 +764,7 @@
                                                     id="password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
+                                                    <div v-if="errors.adminPassword">{{ errors.adminPassword }}</div>
                                             </div>
 
                                         </div>
@@ -914,6 +839,7 @@
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_Admin_user_name" id="Update_Admin_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    <div v-if="errors.adminUserUserName">{{ errors.adminUserUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -923,6 +849,7 @@
                                                     name="Update_Admin_email" id="Update_Admin_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.adminUserCompanyEmail">{{ errors.adminUserCompanyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -932,6 +859,7 @@
                                                     name="Update_password" id="Update_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
+                                                    <div v-if="errors.adminUserPassword">{{ errors.adminUserPassword }}</div>
                                             </div>
 
                                         </div>
@@ -1006,6 +934,8 @@
                                                 <input v-model="approverUserName" type="text" name="Approver_user_name"
                                                     id="Approver_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    <div v-if="errors.approverUserName">{{ errors.approverUserName }}</div>
+
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -1015,6 +945,8 @@
                                                     id="Approver_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.approverEmail">{{ errors.approverEmail }}</div>
+
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -1024,6 +956,8 @@
                                                     name="Approver_password" id="Approver_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
+                                                    <div v-if="errors.approverPassword">{{ errors.approverPassword }}</div>
+
                                             </div>
 
                                         </div>
@@ -1098,6 +1032,7 @@
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_Approver_user_name" id="Update_Approver_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    <div v-if="errors.approverUserUserName">{{ errors.approverUserUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -1107,15 +1042,17 @@
                                                     name="Update_Approver_email" id="Update_Approver_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
+                                                    <div v-if="errors.approverUserCompanyEmail">{{ errors.approverUserCompanyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
-                                                <label for="Update_password"
+                                                <label for="Update_approver_password"
                                                     class="block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="specificUserPassword" type="password"
-                                                    name="Update_password" id="Update_password"
+                                                    name="Update_approver_password" id="Update_approver_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
+                                                    <div v-if="errors.approverUserPassword">{{ errors.approverUserPassword }}</div>
                                             </div>
 
                                         </div>
@@ -1174,15 +1111,13 @@
             specificUserCompanyOfficeAddress: "",
             specificUserCompanyTel: "",
             specificUserCompanyFax: "",
-
-
-            highestUserID: 0,
+            specificUserBusinessType: "",
+            specificUserBusinessTypeOthers: "",
 
             companyName: "",
             companyRegistrationNo: "",
             companyEmail: "",
             companyOfficeAddress: "",
-            gstValue: "Yes",
             companyTel: "",
             companyFax: "",
             userName: "",
@@ -1197,6 +1132,9 @@
             approverUserName: "",
             approverPassword: "",
             approverEmail: "",
+
+            errors: {},
+            hasErrors: false,
 
         },
         mounted: async function () {
@@ -1213,6 +1151,59 @@
         },
         methods: {
             async createVendorAcc() {
+                if (this.businessType != "Others") {
+
+                this.errors = {};
+                this.hasErrors = false;
+
+                if (!this.userName) {
+                    this.errors.userName = 'User Name is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyEmail) {
+                    this.errors.companyEmail = 'Email is required';
+                    this.hasErrors = true;
+                } else if (!this.validEmail(this.companyEmail)) {
+                    this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                    this.hasErrors = true;
+                }
+
+                if (!this.password) {
+                    this.errors.password = 'Password is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyName) {
+                    this.errors.companyName = 'Company Name is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyRegistrationNo) {
+                    this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyOfficeAddress) {
+                    this.errors.companyOfficeAddress = 'Company Office Address is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyTel) {
+                    this.errors.companyTel = 'Company Tel is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyFax) {
+                    this.errors.companyFax = 'Company Fax is required';
+                    this.hasErrors = true;
+                }
+
+                if (this.hasErrors) {
+                    alert("Vendor Account WAS NOT created successfully, please try again")
+                    return;
+                }
+
                 console.log('reached here')
                 await axios
                     .post("http://localhost:5000/users/vendor", {
@@ -1225,8 +1216,86 @@
                         "officeTel": this.companyTel,
                         "officeFax": this.companyFax,
                         "registrationNo": this.companyRegistrationNo,
-                        "businessType": this.businessType,
-                        "evaluationId": '123456789test'
+                        "businessType": this.businessType
+                        // "evaluationId": '123456789test'
+                    })
+                    .then((response) => {
+                        console.log("reached here")
+                        alert("Vendor Account has been successfully created")
+                        document.location.reload();
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+                    
+                }
+                else {
+
+                    this.errors = {};
+                this.hasErrors = false;
+
+                if (!this.userName) {
+                    this.errors.userName = 'User Name is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyEmail) {
+                    this.errors.companyEmail = 'Email is required';
+                    this.hasErrors = true;
+                } else if (!this.validEmail(this.companyEmail)) {
+                    this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                    this.hasErrors = true;
+                }
+
+                if (!this.password) {
+                    this.errors.password = 'Password is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyName) {
+                    this.errors.companyName = 'Company Name is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyRegistrationNo) {
+                    this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyOfficeAddress) {
+                    this.errors.companyOfficeAddress = 'Company Office Address is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyTel) {
+                    this.errors.companyTel = 'Company Tel is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.companyFax) {
+                    this.errors.companyFax = 'Company Fax is required';
+                    this.hasErrors = true;
+                }
+
+                if (this.hasErrors) {
+                    alert("Vendor Account WAS NOT created successfully, please try again")
+                    return;
+                }
+
+                    console.log('reached here')
+                    await axios
+                    .post("http://localhost:5000/users/vendor", {
+                        "userType": 'VENDOR',
+                        "userName": this.userName,
+                        "emailAddress": this.companyEmail,
+                        "password": this.password,
+                        "companyName": this.companyName,
+                        "officeAddress": this.companyOfficeAddress,
+                        "officeTel": this.companyTel,
+                        "officeFax": this.companyFax,
+                        "registrationNo": this.companyRegistrationNo,
+                        "businessType": this.businessTypeOthers
+                        // "evaluationId": '123456789test'
                     })
                     .then((response) => {
                         console.log("reached here")
@@ -1237,9 +1306,38 @@
                         console.log(error);
                     });
 
+                }
+
+
             },
             async createAdminAcc() {
                 console.log('reached here')
+                this.errors = {};
+                this.hasErrors = false;
+
+                if (!this.adminUserName) {
+                    this.errors.adminUserName = 'User Name is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.adminEmail) {
+                    this.errors.adminEmail = 'Email is required';
+                    this.hasErrors = true;
+                } else if (!this.validEmail(this.adminEmail)) {
+                    this.errors.adminEmail = 'Email is invalid (missing @ or information before/after)';
+                    this.hasErrors = true;
+                }
+
+                if (!this.adminPassword) {
+                    this.errors.adminPassword = 'Password is required';
+                    this.hasErrors = true;
+                }
+
+                if (this.hasErrors) {
+                    alert("Admin Account WAS NOT created successfully, please try again")
+                    return;
+                }
+
                 await axios
                     .post("http://localhost:5000/users/admin", {
                         "userType": 'ADMIN',
@@ -1257,8 +1355,44 @@
                     });
 
             },
+            validEmail(email) {
+                // Regular expression to validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // Check if the email matches the regular expression
+                if (!emailRegex.test(email)) {
+                    return false;
+                }
+
+                return true;
+            },
             async createApproverAcc() {
                 console.log('reached here')
+                this.errors = {};
+                this.hasErrors = false;
+
+                if (!this.approverUserName) {
+                    this.errors.approverUserName = 'User Name is required';
+                    this.hasErrors = true;
+                }
+
+                if (!this.approverEmail) {
+                    this.errors.approverEmail = 'Email is required';
+                    this.hasErrors = true;
+                } else if (!this.validEmail(this.approverEmail)) {
+                    this.errors.approverEmail = 'Email is invalid (missing @ or information before/after)';
+                    this.hasErrors = true;
+                }
+
+                if (!this.approverPassword) {
+                    this.errors.approverPassword = 'Password is required';
+                    this.hasErrors = true;
+                }
+
+                if (this.hasErrors) {
+                    alert("Approver Account WAS NOT created successfully, please try again")
+                    return;
+                }
                 await axios
                     .post("http://localhost:5000/users/approver", {
                         "userType": 'APPROVER',
@@ -1296,7 +1430,8 @@
                         this.specificUserCompanyOfficeAddress = response.data.officeAddress
                         this.specificUserCompanyTel = response.data.officeTel
                         this.specificUserCompanyFax = response.data.officeFax
-
+                        this.specificUserBusinessType = response.data.businessType
+                        
                         console.log(this.specificUser)
                     })
                     .catch(error => {
@@ -1319,6 +1454,58 @@
                 console.log('reached here')
 
                 if (this.specificUserUserType == "VENDOR") {
+
+                    this.errors = {};
+                    this.hasErrors = false;
+
+                    if (!this.specificUserUserName) {
+                        this.errors.userName = 'User Name is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserCompanyEmail) {
+                        this.errors.companyEmail = 'Email is required';
+                        this.hasErrors = true;
+                    } else if (!this.validEmail(this.specificUserCompanyEmail)) {
+                        this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserPassword) {
+                        this.errors.password = 'Password is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserCompanyName) {
+                        this.errors.companyName = 'Company Name is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserCompanyRegistrationNo) {
+                        this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserCompanyOfficeAddress) {
+                        this.errors.companyOfficeAddress = 'Company Office Address is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserCompanyTel) {
+                        this.errors.companyTel = 'Company Tel is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserCompanyFax) {
+                        this.errors.companyFax = 'Company Fax is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (this.hasErrors) {
+                        alert("Vendor Account WAS NOT updated successfully, please try again")
+                        return;
+                    }
+
                     console.log('reached here2')
                     console.log(this.specificUserUserId)
                     console.log(this.specificUserUserType)
@@ -1327,7 +1514,9 @@
                     console.log("SEE HERE")
                     console.log(this.specificUserUserName)
 
-                    axios.put(UPDATE_ACC_API_URL, {
+                    if (this.specificUserBusinessType != "Others") {
+
+                        axios.put(UPDATE_ACC_API_URL, {
                             "userId": this.specificUserUserId,
                             "userType": this.specificUserUserType,
                             "userName": this.specificUserUserName,
@@ -1338,9 +1527,35 @@
                             "officeTel": this.specificUserCompanyTel,
                             "officeFax": this.specificUserCompanyFax,
                             "registrationNo": this.specificUserCompanyRegistrationNo,
-                            "businessType": 'private',
-                            "evaluationId": '',
-                            "workFlows": []
+                            "businessType": this.specificUserBusinessType,
+                            // "evaluationId": '',
+                            // "workFlows": []
+                        })
+                        .then(response => {
+                            alert("Vendor Account has been successfully updated")
+                            document.location.reload();
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
+                    }
+
+                    else {
+
+                        axios.put(UPDATE_ACC_API_URL, {
+                            "userId": this.specificUserUserId,
+                            "userType": this.specificUserUserType,
+                            "userName": this.specificUserUserName,
+                            "emailAddress": this.specificUserCompanyEmail,
+                            "password": this.specificUserPassword,
+                            "companyName": this.specificUserCompanyName,
+                            "officeAddress": this.specificUserCompanyOfficeAddress,
+                            "officeTel": this.specificUserCompanyTel,
+                            "officeFax": this.specificUserCompanyFax,
+                            "registrationNo": this.specificUserCompanyRegistrationNo,
+                            "businessType": this.specificUserBusinessTypeOthers,
+                            // "evaluationId": '',
+                            // "workFlows": []
                         })
                         .then(response => {
                             alert("Account has been successfully updated")
@@ -1349,8 +1564,38 @@
                         .catch(error => {
                             console.error(error);
                         })
+                        
+                    }
+
                 }
                 if (this.specificUserUserType == "ADMIN") {
+
+                    this.errors = {};
+                    this.hasErrors = false;
+
+                    if (!this.specificUserUserName) {
+                        this.errors.adminUserUserName = 'User Name is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserCompanyEmail) {
+                        this.errors.adminUserCompanyEmail = 'Email is required';
+                        this.hasErrors = true;
+                    } else if (!this.validEmail(this.specificUserCompanyEmail)) {
+                        this.errors.adminUserCompanyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserPassword) {
+                        this.errors.adminUserPassword = 'Password is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (this.hasErrors) {
+                        alert("Admin Account WAS NOT updated successfully, please try again")
+                        return;
+                    }
+
                     const UPDATE_ACC_API_URL = this.localhost + "/users/update/admin"
                     axios.put(UPDATE_ACC_API_URL, {
                             "userId": this.specificUserUserId,
@@ -1360,7 +1605,7 @@
                             "password": this.specificUserPassword,
                         })
                         .then(response => {
-                            alert("Account has been successfully updated")
+                            alert("Admin Account has been successfully updated")
                             document.location.reload();
                         })
                         .catch(error => {
@@ -1368,6 +1613,33 @@
                         })
                 }
                 if (this.specificUserUserType == "APPROVER") {
+
+                    this.errors = {};
+                    this.hasErrors = false;
+
+                    if (!this.specificUserUserName) {
+                        this.errors.approverUserUserName = 'User Name is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserCompanyEmail) {
+                        this.errors.approverUserCompanyEmail = 'Email is required';
+                        this.hasErrors = true;
+                    } else if (!this.validEmail(this.specificUserCompanyEmail)) {
+                        this.errors.approverUserCompanyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.specificUserPassword) {
+                        this.errors.approverUserPassword = 'Password is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (this.hasErrors) {
+                        alert("Approver Account WAS NOT updated successfully, please try again")
+                        return;
+                    }
+
                     const UPDATE_ACC_API_URL = this.localhost + "/users/update/approver"
                     axios.put(UPDATE_ACC_API_URL, {
                             "userId": this.specificUserUserId,
@@ -1377,7 +1649,7 @@
                             "password": this.specificUserPassword,
                         })
                         .then(response => {
-                            alert("Account has been successfully updated")
+                            alert("Approver Account has been successfully updated")
                             document.location.reload();
                         })
                         .catch(error => {
