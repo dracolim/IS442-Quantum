@@ -204,11 +204,11 @@
             </div>
         </nav>
 
-        <div class='row' style='height: 8px; background-color: #0284c7'></div>
+        <div class='row' style='height: 8px; background-color: #0284c7 '></div>
 
         <!-- Table -->
         <div class="table-auto overflow-x-scroll block shadow-md mx-8 mt-3">
-            <table id="resizeMe" class="table">
+            <table id="resizeMe" class="table w-full">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Form ID: {{form_id}} <br>
                     <span>Form Name: <input type="text"
@@ -400,13 +400,28 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Options</label>
 
                                     <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="varLabels[n]"
+                                        <input type="text" name="text" id="text" v-model="varLabels[n]" @change = "checkUpdateLabel()"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
                                             required>
                                     </div>
                                 </div>
 
-                                <button type="button" @click="updateLabel()"
+                                <!-- ERROR MESSAGE -->
+                                <div v-if="error_message != ''"
+                                    class="mt-4 flex p-4 mb-3 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                                    <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3"
+                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                            clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span class="sr-only">Info</span>
+                                    <div>
+                                        <span class="font-medium">Error!</span> {{error_message}}
+                                    </div>
+                                </div>
+
+                                <button type="button" @click="updateLabel()" id="updateLabelButton"
                                     class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
                             </form>
                         </div>
@@ -430,15 +445,6 @@
                     <path fill="#FFFFFF"
                         d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
                 </svg> Create New Fields
-            </button>
-
-            <button type="button" data-te-toggle="modal" data-te-target="#exampleModalScrollable2" data-te-ripple-init
-                data-te-ripple-color="light"
-                class="inline-flex items-center mr-5 float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
-                    <path fill="#FFFFFF"
-                        d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
-                </svg> Assign Existing Fields
             </button>
         </div>
 
@@ -624,98 +630,7 @@
             </div>
         </div>
 
-        <!-- ASSIGN EXISTING FIELDS MODAL -->
-        <div data-te-modal-init
-            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
-            id="exampleModalScrollable2" tabindex="-1" aria-labelledby="exampleModalScrollable2Label"
-            aria-hidden="true">
-            <div data-te-modal-dialog-ref
-                class="pointer-events-none relative h-[calc(100%-1rem)] w-auto translate-y-[-50px] opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
-                <div
-                    class="pointer-events-auto relative flex max-h-[100%] w-full flex-col overflow-hidden rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none">
-                    <div
-                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4">
-                        <h5 class="text-xl font-medium leading-normal text-neutral-800"
-                            id="exampleModalScrollableLabel">
-                            Add Existing
-                        </h5>
-                        <button type="button" @click="closeAssignModal()"
-                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
-                            data-te-modal-dismiss aria-label="Close">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="h-6 w-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="relative overflow-y-auto p-4">
-                        <!-- SECTION ID -->
-                        <div v-if="SectionIdError == false" class="mb-4">
-                            <label for="NewSectionId" class="block mb-2 text-sm font-medium text-gray-900">Section
-                                ID</label>
-                            <input type="number" id="NewSectionId" v-model="NewSectionId" min="1"
-                                @change="checkSectionId()"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                required>
-                        </div>
 
-                        <!-- ERROR HANDLING -->
-                        <div v-if="SectionIdError == true" class="mb-4">
-                            <label for="NewSectionId" class="block mb-2 text-sm font-medium text-gray-900">Section
-                                ID</label>
-                            <div class="relative">
-                                <input type="number" id="NewSectionId" v-model="NewSectionId" min="1"
-                                    @change="checkSectionId()"
-                                    class="bg-gray-50 border border-red-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    required>
-                            </div>
-                            <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span class="font-medium">Cannot
-                                    use Section ID from other forms</span></p>
-                        </div>
-
-                        <!-- SECTION TITLE -->
-                        <div v-if="all_section_ids.includes(parseInt(NewSectionId)) == false && NewSectionId != '' && SectionIdError == false"
-                            class="mb-4">
-                            <label for="NewSectionTitle" class="block mb-2 text-sm font-medium text-gray-900">Section
-                                Title</label>
-                            <input type="text" v-model="NewSectionTitle" name="NewSectionTitle" id="NewSectionTitle"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                required>
-                        </div>
-
-                        <!-- SECTION DESCRIPTION -->
-                        <div v-if="all_section_ids.includes(parseInt(NewSectionId)) == false && NewSectionId != '' && SectionIdError == false"
-                            class="mb-4">
-                            <label for="NewSectionDescription"
-                                class="block mb-2 text-sm font-medium text-gray-900">Section Description</label>
-                            <input type="text" v-model="NewSectionDescription" name="NewSectionDescription"
-                                id="NewSectionDescription"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                required>
-                        </div>
-                        <!-- EXISTING QUESTIONS -->
-                        <ul class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 ">
-                            <li v-for="(value, idx) of questions_to_show">
-                                <div class="flex items-center p-2 rounded hover:bg-gray-100">
-                                    <input :id="value.questionId" type="checkbox" :value="value.questionId"
-                                        v-model="assignQuestions[value.questionId]"
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 ">
-                                    <label :for="value.questionId"
-                                        class="w-full ml-2 text-medium font-medium text-gray-900 rounded">{{value.inputLabel}}</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div
-                        class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4">
-                        <button type="button" @click="assignNewField()" id="assignFieldButton"
-                            class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                            Assign Exiting Fields</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <script>
@@ -764,9 +679,6 @@
                 //NEW 
                 form_sections: "",
                 combined: [],
-                // ASSIGN NEW FIELD
-                assignQuestions: {},
-
             },
             mounted: async function () {
                 var query = window.location.search.substring(4);
@@ -1111,91 +1023,137 @@
                 closeUpdateModal() {
                     this.updateID = null;
                     this.show = false;
-                    this.totalOptions = 0
-                    this.labelOptions = [],
-                        this.varLabels = []
+                    this.totalOptions = 0;
+                    this.labelOptions = [];
+                    this.varLabels = [];
+                    this.error_message = "";
                 },
                 showOptions() {
                     this.show = true;
                 },
-                updateLabel() {
-                    for (each of this.all_questions) {
-                        if (each.questionId == this.updateID) {
-                            var all_new_labels = []
-                            for (i in this.varLabels) {
-                                all_new_labels.push(this.varLabels[i].toLowerCase())
-                            }
-                            // already have options
-                            if ("questionProperties" in each) {
-                                var all_existing_labels = []
-                                for (each_label of each.questionProperties) {
-                                    all_existing_labels.push(each_label.label.toLowerCase())
-                                }
+                checkUpdateLabel(){
+                    console.log(this.varLabels)
 
-                                var all_labels = each.questionProperties
-                                // the number of input options is lesser than the usual 
-                                if (all_labels.length > Object.keys(this.varLabels).length) {
-                                    for (i in this.varLabels) {
-                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))) {
-                                            var label_list = {}
-                                            label_list['label'] = this.varLabels[i]
-                                            all_labels.push(label_list)
-                                        }
-                                    }
-                                    console.log(all_labels)
-                                    // remove all the extra from original that is not in the new 
-                                    for (i in all_labels) {
-                                        console.log(all_labels[i].label.toLowerCase())
-                                        console.log(all_new_labels)
-                                        if (!(all_new_labels.includes(all_labels[i].label.toLowerCase()))) {
-                                            for (i2 in all_labels) {
-                                                if (all_labels[i2].label.toLowerCase() == all_labels[i].label
-                                                    .toLowerCase()) {
-                                                    all_labels.splice(i2, 1);
-                                                    break
-                                                }
-                                            }
-                                            console.log(all_labels)
-                                        }
-                                    }
-                                    each['questionProperties'] = all_labels
-                                } else {
-                                    for (i in this.varLabels) {
-                                        if (!(all_existing_labels.includes(this.varLabels[i].toLowerCase()))) {
-                                            var label_list = {}
-                                            label_list['label'] = this.varLabels[i]
-                                            all_labels.push(label_list)
-                                        }
-                                    }
-                                    each['questionProperties'] = all_labels
-                                }
-                            }
-                            // no options at all
-                            else {
-                                var all_labels = []
-                                for (i in this.varLabels) {
-                                    var label_list = {}
-                                    label_list['label'] = this.varLabels[i]
-                                    all_labels.push(label_list)
-                                }
-                                each['questionProperties'] = all_labels
-                            }
-
-                            var data = each;
-                            console.log(data)
-                            break
-                        }
+                    var all_new_labels = []
+                    for (i in this.varLabels) {
+                        all_new_labels.push(this.varLabels[i].toLowerCase())
                     }
-                    var URL = this.localhost + '/question/' + this.updateID
-                    axios.put(URL, data)
-                        .then(response => {
-                            console.log(response.data)
-                        })
-                        .catch(error => {
-                            console.log(error.message)
-                        })
-                    this.closeUpdateModal();
-                    document.location.reload();
+
+                    // disable until options all added
+                    if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")){
+                        document.getElementById("updateLabelButton").disabled = false;
+                    }
+                    
+                    //check for duplicates in the new label
+                    let resultToReturn = false;
+                    resultToReturn = all_new_labels.some((element, index) => {
+                    return all_new_labels.indexOf(element) !== index
+                    });
+                    if (resultToReturn) {
+                        this.error_message = "Input Options cannot be the same!"
+                        document.getElementById("updateLabelButton").disabled = true;
+                    }
+                    else {
+                        this.error_message = ""
+                        document.getElementById("updateLabelButton").disabled = false;
+                    }
+                },
+                updateLabel() {
+                    var all_new_labels = []
+                    for (i in this.varLabels) {
+                        all_new_labels.push(this.varLabels[i].toLowerCase())
+                    }
+
+                    // check if there are any empty options
+                    if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")){
+                        this.error_message = "Input Labels cannot be Empty!"
+                        document.getElementById("updateLabelButton").disabled = true;
+                    }
+                    else{
+                        this.error_message = ""
+                        document.getElementById("updateLabelButton").disabled = false;
+                    }
+                    
+                    if (this.error_message == "") {
+                        for (each of this.all_questions) {
+                            if (each.questionId == this.updateID) {
+
+                                console.log("New Labels: " + all_new_labels)
+
+                                // already have options
+                                if ("questionProperties" in each) {
+                                    var all_existing_labels = []
+                                    for (each_label of each.questionProperties) {
+                                        all_existing_labels.push(each_label.label.toLowerCase())
+                                    }
+
+                                    console.log("Existing: " + all_existing_labels)
+
+                                    var all_labels = each.questionProperties
+                                    // the number of input options is lesser than the usual 
+                                    if (all_labels.length > Object.keys(this.varLabels).length) {
+                                        for (i in this.varLabels) {
+                                            if (!(all_existing_labels.includes(this.varLabels[i]
+                                            .toLowerCase()))) {
+                                                var label_list = {}
+                                                label_list['label'] = this.varLabels[i]
+                                                all_labels.push(label_list)
+                                            }
+                                        }
+                                        console.log(all_labels)
+                                        // remove all the extra from original that is not in the new 
+                                        for (i in all_labels) {
+                                            console.log(all_labels[i].label.toLowerCase())
+                                            console.log(all_new_labels)
+                                            if (!(all_new_labels.includes(all_labels[i].label.toLowerCase()))) {
+                                                for (i2 in all_labels) {
+                                                    if (all_labels[i2].label.toLowerCase() == all_labels[i]
+                                                        .label
+                                                        .toLowerCase()) {
+                                                        all_labels.splice(i2, 1);
+                                                    }
+                                                }
+                                                console.log(all_labels)
+                                            }
+                                        }
+                                        each['questionProperties'] = all_labels
+                                    } else {
+                                        for (i in this.varLabels) {
+                                            if (!(all_existing_labels.includes(this.varLabels[i]
+                                            .toLowerCase()))) {
+                                                var label_list = {}
+                                                label_list['label'] = this.varLabels[i]
+                                                all_labels.push(label_list)
+                                            }
+                                        }
+                                        each['questionProperties'] = all_labels
+                                    }
+                                }
+                                // no options at all
+                                else {
+                                    var all_labels = []
+                                    for (i in this.varLabels) {
+                                        var label_list = {}
+                                        label_list['label'] = this.varLabels[i]
+                                        all_labels.push(label_list)
+                                    }
+                                    each['questionProperties'] = all_labels
+                                }
+                                var data = each;
+                                console.log(data)
+                            }
+                        }
+                        var URL = this.localhost + '/question/' + this.updateID
+                        axios.put(URL, data)
+                            .then(response => {
+                                console.log(response.data)
+                            })
+                            .catch(error => {
+                                console.log(error.message)
+                            })
+                        this.closeUpdateModal();
+                        document.location.reload();
+                    }
                 },
                 addNewField() {
                     var section_id = this.NewSectionId;
@@ -1259,16 +1217,17 @@
                     }
                 },
                 closeCreateModal() {
-                    this.showUpModal = false,
-                        this.NewFieldType = "",
-                        this.NewFieldName = "",
-                        this.NewisRequired = false,
-                        this.NewOptions = {},
-                        this.NewSectionId = "",
-                        this.NewSectionTitle = "",
-                        this.NewSectionDescription = "",
-                        this.raw_form = "",
-                        this.temp_question_id = ""
+                    this.showUpModal = false;
+                    this.NewFieldType = "";
+                    this.NewFieldName = "";
+                    this.NewisRequired = false;
+                    this.NewOptions = {};
+                    this.NewSectionId = "";
+                    this.NewSectionTitle = "";
+                    this.NewSectionDescription = "";
+                    this.raw_form = "";
+                    this.temp_question_id = "";
+                    this.error_message = "";
                 },
                 checkSectionId() {
                     console.log(this.form_sections)
@@ -1304,69 +1263,6 @@
                         document.getElementById("addFieldButton").disabled = false
                     }
                 },
-                assignNewField() {
-                    this.NewSectionId = parseInt(this.NewSectionId);
-                    var temp_questions = {
-                        "questions" : [],
-                    }
-
-                    var totalQns = Object.keys(this.assignQuestions).length
-
-                    for (i in this.assignQuestions) {
-                        if (this.assignQuestions[i] == true) {
-                            // get the whole question
-                            for (each of this.all_questions) {
-                                if (each.questionId == i) {
-                                    var question = each;
-
-                                    if (this.all_section_ids.includes(this.NewSectionId)) {
-                                        for (j in this.form_sections) {
-                                            if (this.form_sections[j].sectionId == this.NewSectionId) {
-                                                this.form_sections[j].questions.push(question)
-                                                totalQns -= 1
-                                            }
-                                        }
-                                        
-                                    } else {
-                                        totalQns -= 1
-                                        temp_questions['questions'].push(question)
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    if (totalQns == 0 && temp_questions != {}){
-                        this.form_sections.push({
-                            "sectionId": this.NewSectionId,
-                            "title": this.NewSectionTitle,
-                            "description": this.NewSectionDescription,
-                            "questions": temp_questions.questions
-                        })
-                    }
-
-
-                    this.raw_form['sections'] = this.form_sections
-                    var URL = this.localhost + "/form/" + this.form_id;
-
-                    axios.put(URL, this.raw_form)
-                        .then(response => {
-                            console.log(response.data)
-                        })
-                        .catch(error => {
-                            console.log(error.message)
-                        })
-
-                    this.closeAssignModal()
-                    // document.location.reload();
-
-                },
-                closeAssignModal() {
-                    this.assignQuestions = {},
-                        this.NewSectionId = "";
-                    this.NewSectionTitle = "";
-                    this.NewSectionDescription = "";
-                }
             }
         })
     </script>
