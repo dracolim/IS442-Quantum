@@ -206,24 +206,19 @@
                             <button v-if="value.userType == 'VENDOR'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateVendorModalScrollable" data-te-ripple-init
                                 data-te-ripple-color="light">
-                                <iconify-icon icon="ic:baseline-system-update-alt" class="hover:text-red-500" width="25"
-                                    height="25"></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
                             </button>
                             <button v-if="value.userType == 'ADMIN'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateAdminModalScrollable" data-te-ripple-init
                                 data-te-ripple-color="light">
-                                <iconify-icon icon="ic:baseline-system-update-alt" class="hover:text-red-500" width="25"
-                                    height="25"></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
                             </button>
                             <button v-if="value.userType == 'APPROVER'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateApproverModalScrollable"
                                 data-te-ripple-init data-te-ripple-color="light">
-                                <iconify-icon icon="ic:baseline-system-update-alt" class="hover:text-red-500" width="25"
-                                    height="25"></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
                             </button>
                         </td>
-
-
                     </tr>
                 </tbody>
             </table>
@@ -232,21 +227,21 @@
         <!-- Buttons for Creating Account -->
         <div class="mx-8 mt-5">
             <button type="button"
-                class="float-left inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                class="mr-4 float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
                 data-te-toggle="modal" data-te-target="#adminModalScrollable" data-te-ripple-init
                 data-te-ripple-color="light">
                 Create Admin Account
             </button>
 
             <button type="button"
-                class="float-left inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                class="mr-4 float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
                 data-te-toggle="modal" data-te-target="#approverModalScrollable" data-te-ripple-init
                 data-te-ripple-color="light">
                 Create Approver Account
             </button>
 
             <button type="button"
-                class="float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                class="mr-4 float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
                 data-te-toggle="modal" data-te-target="#vendorModalScrollable" data-te-ripple-init
                 data-te-ripple-color="light">
                 Create Vendor Account
@@ -869,9 +864,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
 
         </div>
