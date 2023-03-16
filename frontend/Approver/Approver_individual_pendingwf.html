@@ -206,7 +206,7 @@
                         <td class="px-6 py-4" @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.lastEdited}}
                         </td>
-                        <td class="px-6 py-4" v-if="value.status == 'PENDING'">
+                        <td class="px-6 py-4" v-if="value.status == 'VALIDATED'">
                             <select id="ApprovalRequired" v-model="ApprovalRequired[value.form.formId]"
                                 @change="changeStatus(value.form.formId)"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
@@ -216,7 +216,7 @@
                                 <option value = 'Approved'>Approved</option>
                             </select>
                         </td>
-                        <td class="px-6 py-4" v-else-if="value.status == 'REQUESTED'">
+                        <td class="px-6 py-4" v-else-if="value.status == 'REQUESTED' || value.status == 'NOT_STARTED'">
                             <div class="flex p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
                                 <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -230,7 +230,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4" v-else-if="value.status == 'NOT_STARTED' ">
+                        <td class="px-6 py-4" v-else-if="value.status == 'PENDING' ">
                             <div class="flex p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
                                 <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -240,13 +240,12 @@
                                 </svg>
                                 <span class="sr-only">Info</span>
                                 <div>
-                                    Vendor have not submitted this form yet!
+                                    Waiting for Admin to Validate Form!
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4" v-else-if="value.status == 'VALIDATED' ">
-                            <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
-                                role="alert">
+                        <td class="px-6 py-4" v-else-if="value.status == 'APPROVED' ">
+                            <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
                                 <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd"
@@ -255,15 +254,30 @@
                                 </svg>
                                 <span class="sr-only">Info</span>
                                 <div>
-                                    Waiting for Approver's Approval!
+                                    Approval Notification has been sent to Admin!
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 text-red-600 font-medium">
+                        <td class="px-6 py-4" v-else-if="value.status == 'REJECTED' ">
+                            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    Rejection Notification has been sent to Admin!
+                                </div>
+                            </div>
+                        </td>
+                        <!-- STATUS -->
+                        <td v-if = "value.status == 'APPROVED'" class="px-6 py-4 text-green-600 font-medium">
                             {{value.status}}
                         </td>
-                        <td class="px-6 py-4 text-green-600" v-if="value.status == 'COMPLETED'">
-                            Completed
+                        <td v-else class="px-6 py-4 text-red-600 font-medium">
+                            {{value.status}}
                         </td>
                     </tr>
                 </tbody>
@@ -301,6 +315,7 @@
                     this.workflow_raw_data = result;
 
                     this.all_form_sequences = result.formSequences
+                    
 
                     console.log(this.all_form_sequences)
                 })
@@ -319,13 +334,13 @@
                 if (this.ApprovalRequired[form_id] == 'Approved') {
                     for (each of this.all_form_sequences) {
                         if (each.form.formId == form_id) {
-                            each.status = "VALIDATED"
+                            each.status = "APPROVED"
                         };
                     }
                 } else if (this.ApprovalRequired[form_id] == 'NotApproved') {
                     for (each of this.all_form_sequences) {
                         if (each.form.formId == form_id) {
-                            each.status = "REQUESTED"
+                            each.status = "REJECTED"
                         };
                     }
                 }

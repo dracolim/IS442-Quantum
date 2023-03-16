@@ -67,7 +67,7 @@ public class WorkFlowService {
             newFormSequence.setWorkFlow(workFlow);
             newFormSequence.setForm(formService.getFormById(fs.getForm().getFormId()));
 
-            FormSequenceStatus currStatus = FormSequenceStatus.NOT_STARTED;
+            FormSequenceStatus currStatus = FormSequenceStatus.REQUESTED;
             FormSequenceStatus newStatus = fs.getStatus();
 
             // Get current form status based on FormId and seqNo
@@ -98,7 +98,7 @@ public class WorkFlowService {
         String formName = formSequence.getForm().getFormName();
 
         // Not Started to Pending: Vendor to Admin
-        if (currStatus == FormSequenceStatus.NOT_STARTED && newStatus == FormSequenceStatus.PENDING){
+        if (currStatus == FormSequenceStatus.REQUESTED && newStatus == FormSequenceStatus.PENDING){
 
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
@@ -113,7 +113,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form requires attention [" + formName + "]";
-            String emailBody = "Dear " + companyName + ", \n The following form requires attention: \n " + formName + " Kindly update the information and resubmit";
+            String emailBody = "Dear " + companyName + ", \n\n The following form requires attention: \n " + formName + " Kindly update the information and resubmit \n\n Regards,\nQuantum Leap Incorporation Admin";
 
             emailNotificationService.sendEmail(email, emailSubject , emailBody);
 
@@ -123,7 +123,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form updated [" + formName + "]";
-            String emailBody = "Dear Admin, \n\n The following form has been updated: \n " + formName + " Kindly review the information and mark as validated/requested";
+            String emailBody = "Dear Admin, \n\n The following form has been updated: \n " + formName + " Kindly review the information and mark as validated/requested \n\n Regards,\nQuantum Leap Incorporation Admin";
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -133,7 +133,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getApprover().getEmailAddress();
             String emailSubject = "Form validated [" + formName + "] please approve/reject";
-            String emailBody = "Please approve/reject the following form: \n " + workflow.getWfName() + " \n\n Workflow: \n " + workflow.getWfName() ;
+            String emailBody = "Dear approver, \n\n Please approve/reject the following form: \n " + workflow.getWfName() + " \n\n Workflow: \n " + workflow.getWfName() + "\n\n Regards,\nQuantum Leap Incorporation Admin" ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -143,7 +143,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "Form rejected [" + formName + "]";
-            String emailBody = "The following form has been rejected: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
+            String emailBody = "The following form has been rejected by approver: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -153,7 +153,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "Form approved [" + formName + "]";
-            String emailBody = "The following form has been approved: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
+            String emailBody = "Dear Admin, \n\n The following form has been approved by approver: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -167,8 +167,15 @@ public class WorkFlowService {
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
+        // Trigger only if it's new vendor
         } else {
-            formSequence.setStatus(FormSequenceStatus.NOT_STARTED);
+            formSequence.setStatus(FormSequenceStatus.REQUESTED);
+            String email = workflow.getVendor().getEmailAddress();
+            String emailSubject = "New workflow assigned " + email;
+            String emailBody = "Dear " + companyName + ", \n\n The following form requires attention: \n " + formName + " Kindly update the information and submit \n\n Regards,\nQuantum Leap Incorporation Admin" ;
+
+            emailNotificationService.sendEmail(email, emailSubject, emailBody);
+
         }
 
     }

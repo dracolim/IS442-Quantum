@@ -230,7 +230,7 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4" v-else-if="value.status == 'NOT_STARTED' ">
+                        <!-- <td class="px-6 py-4" v-else-if="value.status == 'NOT_STARTED' ">
                             <div class="flex p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
                                 <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -243,7 +243,7 @@
                                     Vendor have not submitted this form yet!
                                 </div>
                             </div>
-                        </td>
+                        </td> -->
                         <td class="px-6 py-4" v-else-if="value.status == 'VALIDATED' ">
                             <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
                                 role="alert">
@@ -261,9 +261,6 @@
                         </td>
                         <td class="px-6 py-4 text-red-600 font-medium">
                             {{value.status}}
-                        </td>
-                        <td class="px-6 py-4 text-green-600" v-if="value.status == 'COMPLETED'">
-                            Completed
                         </td>
                     </tr>
                 </tbody>
