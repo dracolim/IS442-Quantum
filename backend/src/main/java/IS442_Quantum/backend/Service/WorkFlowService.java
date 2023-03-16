@@ -100,7 +100,7 @@ public class WorkFlowService {
         // Not Started to Pending: Vendor to Admin
         if (currStatus == FormSequenceStatus.NOT_STARTED && newStatus == FormSequenceStatus.PENDING){
 
-            formSequence.setStatus(FormSequenceStatus.PENDING);
+            formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "New Form Submission from " + email;
             String emailBody = "You have a new form submission from " + companyName + " for the following Form: " + formName;
@@ -110,7 +110,7 @@ public class WorkFlowService {
         // Pending to Requested: Vendor to Admin
         } else if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.REQUESTED){
 
-            formSequence.setStatus(FormSequenceStatus.REQUESTED);
+            formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form requires attention [" + formName + "]";
             String emailBody = "Dear " + companyName + ", \n The following form requires attention: \n " + formName + " Kindly update the information and resubmit";
@@ -120,7 +120,7 @@ public class WorkFlowService {
         // Pending to Validated: Admin to Approver
         } else if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.VALIDATED){
 
-            formSequence.setStatus(FormSequenceStatus.REQUESTED);
+            formSequence.setStatus(newStatus);
             String email = workflow.getApprover().getEmailAddress();
             String emailSubject = "Form validated [" + formName + "] please approve/reject";
             String emailBody = "Please approve/reject the following form: \n " + workflow.getWfName() + " \n\n Workflow: \n " + workflow.getWfName() ;
@@ -130,7 +130,7 @@ public class WorkFlowService {
         // Validated to Rejected: Approver to Admin
         } else if (currStatus == FormSequenceStatus.VALIDATED && newStatus == FormSequenceStatus.REJECTED){
 
-            formSequence.setStatus(FormSequenceStatus.REJECTED);
+            formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "Form rejected [" + formName + "]";
             String emailBody = "The following form has been rejected: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
@@ -140,7 +140,7 @@ public class WorkFlowService {
         // Validated to Approved: Approver to Admin
         } else if (currStatus == FormSequenceStatus.VALIDATED && newStatus == FormSequenceStatus.APPROVED){
 
-            formSequence.setStatus(FormSequenceStatus.APPROVED);
+            formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "Form approved [" + formName + "]";
             String emailBody = "The following form has been approved: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
@@ -150,7 +150,7 @@ public class WorkFlowService {
         // Rejected to Deleted: Admin to Vendor
         } else if (currStatus == FormSequenceStatus.REJECTED && newStatus == FormSequenceStatus.DELETED){
 
-            formSequence.setStatus(FormSequenceStatus.DELETED);
+            formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form deleted [" + formName + "]";
             String emailBody = "The following form has been deleted: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
