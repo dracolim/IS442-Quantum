@@ -408,7 +408,7 @@ public class FormDataLoader implements ApplicationRunner {
         // ------------------------------- Create Vendors -------------------------------
         Vendor vendor1 = new Vendor();
         vendor1.setUserName("Vendor1");
-        vendor1.setEmailAddress("vendor.1@gmail.com");
+        vendor1.setEmailAddress("lancelimzuyong9@gmail.com");
         vendor1.setPassword("123456");
         vendor1.setCompanyName("Vendor1 Company");
         vendor1.setOfficeAddress("Vendor1 Office Address");
@@ -420,7 +420,7 @@ public class FormDataLoader implements ApplicationRunner {
         Vendor vendor2 = new Vendor();
         vendor2.setEvaluationId("123");
         vendor2.setUserName("Vendor2");
-        vendor2.setEmailAddress("vendor.2@gmail.com");
+        vendor2.setEmailAddress("isalsamudra@gmail.com");
         vendor2.setPassword("123456");
         vendor2.setCompanyName("Vendor2 Company");
         vendor2.setOfficeAddress("Vendor2 Office Address");
@@ -446,19 +446,19 @@ public class FormDataLoader implements ApplicationRunner {
         // ------------------------------- Create Admins ------------------------------
         Admin admin1 = new Admin();
         admin1.setUserName("Admin1");
-        admin1.setEmailAddress("admin.1@gmail.com");
+        admin1.setEmailAddress("lancelimzuyong9@gmail.com");
         admin1.setPassword("123456");
 
         Admin admin2 = new Admin();
         admin2.setUserName("Admin2");
-        admin2.setEmailAddress("admin.2@gmail.com");
+        admin2.setEmailAddress("isalsamudra@gmail.com");
         admin2.setPassword("123456");
 
 
         // ------------------------------- Create Approver ------------------------------
         Approver approver1 = new Approver();
         approver1.setUserName("Approver1");
-        approver1.setEmailAddress("approver.1@gmail.com");
+        approver1.setEmailAddress("lancelimzuyong9@gmail.com");
         approver1.setPassword("123456");
 
 
