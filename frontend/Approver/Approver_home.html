@@ -80,7 +80,7 @@
                                 height="40">
                             </iconify-icon>
                         </a>
-                        Tim Klemmer
+                        {{userName}}
                         <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -94,7 +94,7 @@
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                         <div class="px-4 py-3 text-sm text-gray-900 ">
                             <div class="font-bold">Approver</div>
-                            <div class="truncate">Tim.Klemmer@quantum.com</div>
+                            <div class="truncate">{{emailAddress}}</div>
                         </div>
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
@@ -192,7 +192,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_pending_workflows" @click = "goToSinglepage(value.workFlowId)">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_pending_workflows"
+                        @click="goToSinglepage(value.workFlowId)">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.vendor.userId}}
                         </td>
@@ -230,14 +231,33 @@
         data: {
             localhost: "http://localhost:5000",
             all_pending_workflows: "",
+            userName: "",
+            emailAddress: "",
+            user_id: "",
         },
         mounted: async function () {
+            var query = window.location.search.substring(4);
+            this.user_id = query;
+
             const API_URL = this.localhost + "/workflows/pending";
+            const API_URL2 = this.localhost + "/users/userType/" + "APPROVER"
 
             axios.get(API_URL)
                 .then(response => {
                     this.all_pending_workflows = response.data
                     console.log(this.all_pending_workflows)
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+            axios.get(API_URL2)
+                .then(response => {
+                    for (each of response.data) {
+                        if (each.userId == this.user_id) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
+                        }
+                    }
                 })
                 .catch(error => {
                     console.error(error);

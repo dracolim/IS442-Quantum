@@ -76,7 +76,7 @@
                                 height="40">
                             </iconify-icon>
                         </a>
-                        Malfoy Chew
+                        {{userName}}
                         <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -90,7 +90,7 @@
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                         <div class="px-4 py-3 text-sm text-gray-900 ">
                             <div class="font-bold">User</div>
-                            <div class="truncate">Malfoy.chew@quantum.com</div>
+                            <div class="truncate">{{emailAddress}}</div>
                         </div>
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
@@ -168,28 +168,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b" v-for = "(value, idx) in all_workflows">                        
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                {{value.workFlowId}}
-                            </th>
-                            <td class="px-6 py-4">
-                                {{value.wfName}}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{value.wfDateline}}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{value.wfLastSubmit}}
-                            </td>
-                            <td class="px-6 py-4">
-                                {{value.isValidated}}
-                            </td>
-                            <td class="px-6 py-4">
-                                <button v-on:click="goToSinglepage(value.workFlowId)" type="button">
-                                    <iconify-icon icon="mdi:file-document" class="hover:text-sky-600" width="28"
-                                        height="28"></iconify-icon>
-                                </button>
-                            </td>
+                    <tr class="bg-white border-b" v-for="(value, idx) in all_workflows">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                            {{value.workFlowId}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{value.wfName}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{value.wfDateline}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{value.wfLastSubmit}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{value.isValidated}}
+                        </td>
+                        <td class="px-6 py-4">
+                            <button v-on:click="goToSinglepage(value.workFlowId)" type="button">
+                                <iconify-icon icon="mdi:file-document" class="hover:text-sky-600" width="28"
+                                    height="28"></iconify-icon>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -205,14 +205,34 @@
         data: {
             localhost: "http://localhost:5000",
             all_workflows: "",
+            userName: "",
+            emailAddress: "",
+            user_id: "",
         },
         mounted: async function () {
+            var query = window.location.search.substring(4);
+            this.user_id = query;
+
             const API_URL = this.localhost + "/workflows";
+            const API_URL2 = this.localhost + "/users/userType/" + "VENDOR"
 
             axios.get(API_URL)
                 .then(response => {
                     this.all_workflows = response.data;
                     console.log(this.all_workflows)
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+
+            axios.get(API_URL2)
+                .then(response => {
+                    for (each of response.data) {
+                        if (each.userId == this.user_id) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
+                        }
+                    }
                 })
                 .catch(error => {
                     console.error(error);
