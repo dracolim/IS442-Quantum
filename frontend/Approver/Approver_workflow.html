@@ -10,169 +10,721 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
-
+    <!-- VUE 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- tailwind elements -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <title>Quantum</title>
+    <style>
+        table {
+            border: none;
+            border-collapse: collapse;
+        }
 
+        table td {
+            border-left: 1px solid #e6e6e6;
+            border-right: 1px solid #d6d6d6;
+        }
+
+        table td:first-child {
+            border-left: none;
+        }
+
+        table td:last-child {
+            border-right: none;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="app">
+        <!-- header -->
+        <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
+            <div class="container flex flex-wrap items-center justify-between mx-auto"
+                style="width: 100%; overflow: hidden;">
+                <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
+                    style="height: 80px ; width: 200px;" />
 
-    <!-- header -->
-    <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
-        <div class="container flex flex-wrap items-center justify-between mx-auto"
-            style="width: 100%; overflow: hidden;">
-            <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
-                style="height: 80px ; width: 200px;" />
-
-            <div class="flex md:order-2">
-                <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
-                    <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
-                </a>
-
-                <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
-                    class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-sky-600  md:mr-0"
-                    type="button">
-                    <span class="sr-only">Open user menu</span>
-                    <a class='mr-2'>
-                        <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40" height="40">
+                <div class="flex md:order-2">
+                    <a href="../Admin/Admin_home.html" style="margin-right: 10px;">
+                        <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
                         </iconify-icon>
                     </a>
-                    Tim Klemmer
-                    <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
 
-                <!-- Dropdown menu -->
-                <div id="dropdownAvatarName"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
-                    <div class="px-4 py-3 text-sm text-gray-900 ">
-                        <div class="font-bold">Approver</div>
-                        <div class="truncate">Tim.Klemmer@quantum.com</div>
+                    <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
+                        class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-sky-600  md:mr-0"
+                        type="button">
+                        <span class="sr-only">Open user menu</span>
+                        <a class='mr-2'>
+                            <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40"
+                                height="40">
+                            </iconify-icon>
+                        </a>
+                        Tim Klemmer
+                        <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdownAvatarName"
+                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
+                        <div class="px-4 py-3 text-sm text-gray-900 ">
+                            <div class="font-bold">Admin</div>
+                            <div class="truncate">Tim.Klemmer@quantum.com</div>
+                        </div>
+                        <ul class="py-2 text-sm text-gray-700 "
+                            aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                            <li>
+                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
+                            </li>
+                        </ul>
+                        <div class="py-2">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                                out</a>
+                        </div>
                     </div>
-                    <ul class="py-2 text-sm text-gray-700 "
-                        aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
-                        </li>
-                    </ul>
-                    <div class="py-2">
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
-                            out</a>
+
+                    <button data-collapse-toggle="navbar-sticky" type="button"
+                        class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+                        aria-controls="navbar-cta" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="bg-gray-100">
+            <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
+                style="width: 100%; overflow: hidden;">
+                <ul
+                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
+                    <li>
+                        <a href="../Approver/Approver_home.html"
+                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
+                            aria-current="page">Pending Workflows</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_workflow.html"
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
+                            Workflows</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_accounts.html"
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
+                            Accounts</a>
+                    </li>
+                    <li>
+                        <a href="../Approver/Approver_form.html"
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
+                            Forms</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Orange Divider -->
+        <div class='row' style='height: 8px; background-color: #0284c7'></div>
+
+        <!-- Table -->
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
+            <table class="w-full text-sm text-left text-gray-500">
+                <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
+                    Workflows
+                    <p class="mt-1 text-sm font-normal text-gray-500">
+                        <span onclick="document.location = 'Approver_workflow.html'" class='text-sky-600'>Workflows </span>
+                    </p>
+                </caption>
+                <thead class="text-sm text-white bg-sky-600">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Workflow ID
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Name
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Date Submitted
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Last Edited
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Assigned Vendor
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Assigned Approver
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Assigned Admin
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Validated
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Check Sequence
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Edit
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Delete
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key) in AllWorkflow">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                            v-on:click="goToSequencePage(value.workFlowId)">
+                            {{value.workFlowId}}
+                        </th>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            {{value.wfName}}
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            {{value.wfDateline}}
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            {{value.wfLastSubmit}}
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            <div v-if="value.vendor != null">
+                                {{value.vendor.userName}}
+                            </div>
+                            <div v-if="value.vendor == null" class="text-red-500">
+                                Vendor not assigned
+                            </div>
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            <div v-if="value.approver != null">
+                                {{value.approver.userName}}
+                            </div>
+                            <div v-if="value.approver == null" class="text-red-500">
+                                Approver not assigned
+                            </div>
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            <div v-if="value.admin != null">
+                                {{value.admin.userName}}
+                            </div>
+                            <div v-if="value.admin == null" class="text-red-500">
+                                Admin not assigned
+                            </div>
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            {{value.isValidated}}
+                        </td>
+
+                        <!-- CHECK SEQUENCE -->
+                        <td style="text-align: center;">
+                            <button v-on:click="goToSequencePage(value.workFlowId)" type="button">
+                                <iconify-icon icon="mdi:file-document" width="28" height="28"
+                                    class="hover:text-sky-600"></iconify-icon>
+                            </button>
+                        </td>
+                        <!-- EDIT WORKFLOW -->
+                        <td style="text-align: center;">
+                            <button type="button" @click="getWorflow(value.workFlowId)" data-te-toggle="modal"
+                                data-te-target="#exampleModalCenteredScrollable" data-te-ripple-init
+                                data-te-ripple-color="light">
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500"
+                                    width="28"></iconify-icon>
+                            </button>
+                        </td>
+                        <!-- DELETE WORKFLOW -->
+                        <td style="text-align: center;">
+                            <button @click="deleteWorkflow(value.workFlowId)">
+                                <iconify-icon icon="mdi:trashcan-outline" class="hover:text-red-500" width="28"
+                                    height="28"></iconify-icon>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Button for Creating Account -->
+        <div class="mx-8 mt-5">
+            <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
+                class="inline-flex items-center float-right  px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
+                    <path fill="#FFFFFF"
+                        d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
+                </svg> Assign New WorkFlow
+            </button>
+        </div>
+
+        <!-- CREATE NEW WORKFLOW modal -->
+        <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] md:h-full">
+            <div class="relative w-full h-full max-w-md md:h-auto">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow ">
+                    <button type="button" @click="closeCreateModal()"
+                        class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                        data-modal-hide="authentication-modal">
+                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="px-6 py-6 lg:px-8">
+                        <h3 class="mb-4 text-xl font-medium text-gray-900">Assign New Workflow</h3>
+                        <form class="space-y-6" action="#">
+                            <!-- wfName -->
+                            <div>
+                                <label for="wfName" class="block  mb-1  text-sm font-medium text-gray-900">Workflow
+                                    Name</label>
+                                <input type="text" name="wfName" id="wfName" v-model="wfName"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+                            <!-- deadline -->
+                            <div>
+                                <label for="wfDateline" class="block  mb-1  text-sm font-medium text-gray-900">Deadline
+                                </label>
+                                <input type="date" name="wfDateline" id="wfDateline" v-model="wfDateline"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
+                            </div>
+                            <!-- ASSIGN VENDOR-->
+                            <div>
+                                <label for="vendor" class="block mb-1  text-sm font-medium text-gray-900">Vendor
+                                </label>
+                                <select name="vendor" id="vendor" v-model="AssignVendor"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_vendors" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- ASSIGN APPROVER -->
+                            <div>
+                                <label for="approver" class="block mb-1 text-sm font-medium text-gray-900">Approver
+                                </label>
+                                <select name="approver" id="approver" v-model="AssignApprover"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option v-for="(value,key) in all_approvers" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- ASSIGN ADMIN -->
+                            <div>
+                                <label for="admin" class="block  mb-1 text-sm font-medium text-gray-900">Admin
+                                </label>
+                                <select name="admin" id="admin" v-model="AssignAdmin"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_admins" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- ERROR MESSAGE -->
+                            <div v-if="error_message != ''"
+                                class="mt-4 flex p-4 mb-3 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    <span class="font-medium">Error!</span> {{error_message}}
+                                </div>
+                            </div>
+
+                            <button type="button" @click="createNewWorkflow()" id="createButton"
+                                class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+                        </form>
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <button data-collapse-toggle="navbar-sticky" type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
-                    aria-controls="navbar-cta" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
+        <!-- EDIT WORKFLOW MODAL  -->
+        <div data-te-modal-init
+            class="fixed top-0 left-0 z-[1055] hidden h-full w-full overflow-y-auto overflow-x-hidden outline-none"
+            id="exampleModalCenteredScrollable" tabindex="-1" aria-labelledby="exampleModalCenteredScrollable"
+            aria-modal="true" role="dialog">
+            <div data-te-modal-dialog-ref
+                class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
+                <div
+                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none">
+                    <div
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4">
+                        <h5 class="text-xl font-medium leading-normal text-neutral-800"
+                            id="exampleModalCenteredScrollableLabel">
+                            Edit WorkFlow
+                        </h5>
+                        <button type="button" @click="closeUpdateModal()"
+                            class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
+                            data-te-modal-dismiss aria-label="Close">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="relative p-4">
+                        <form class="space-y-6" action="#">
+                            <!-- wfName -->
+                            <div>
+                                <label for="edit_wfName" class="block mb-2 text-sm font-medium text-gray-900">Work Flow
+                                    Name</label>
+                                <input type="text" name="edit_wfName" id="edit_wfName" v-model="EditwfName"
+                                    :placeholder="edit_data.wfName"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+                            <!-- dateline -->
+                            <div>
+                                <label for="wfDateline" class="block mb-2 text-sm font-medium text-gray-900">Deadline
+                                </label>
+                                <input type="date" name="wfDateline" id="wfDateline" v-model="EditwfDateline"
+                                    placeholder="YYYY-MM-DD"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+                            <!-- isValidated -->
+                            <div>
+                                <label for="isValidated" class="block mb-2 text-sm font-medium text-gray-900">Has it
+                                    been Validated ?
+                                </label>
+                                <select name="isValidated" id="isValidated" v-model="EditisValidated"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in valid_options" :value="value">
+                                        {{ value | yesno }}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- EDIT vendor -->
+                            <div>
+                                <label for="vendor" class="block mb-2 text-sm font-medium text-gray-900">Vendor
+                                </label>
+                                <select name="vendor" id="vendor" v-model="EditVendor"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_vendors" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- EDIT APPROVER -->
+                            <div>
+                                <label for="approver" class="block mb-1 text-sm font-medium text-gray-900">Approver
+                                </label>
+                                <select name="approver" id="approver" v-model="EditApprover"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option v-for="(value,key) in all_approvers" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- EDIT ADMIN -->
+                            <div>
+                                <label for="admin" class="block  mb-1 text-sm font-medium text-gray-900">Admin
+                                </label>
+                                <select name="admin" id="admin" v-model="EditAdmin"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_admins" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- ERROR MESSAGE -->
+                            <div v-if="error_message != ''"
+                                class="mt-4 flex p-4 mb-3 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    <span class="font-medium">Error!</span> {{error_message}}
+                                </div>
+                            </div>
+                            <hr>
+                            <button type="button" @click="editWorflow(workflowID)"
+                                class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="bg-gray-100">
-        <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
-            style="width: 100%; overflow: hidden;">
-            <ul
-                class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
-                <li>
-                    <a href="Approver_home.html"
-                        class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                        aria-current="page">Pending Workflows</a>
-                </li>                
-                <li>
-                    <a href="Approver_workflow.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0"
-                        aria-current="page">Workflows</a>
-                </li>
-                <li>
-                    <a href="Approver_accounts.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Accounts</a>
-                </li>
-                <li>
-                    <a href="Approver_form.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Forms</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Orange Divider -->
-    <div class='row' style='height: 8px; background-color: #0284c7'></div>
-
-    <!-- Table -->
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
-        <table class="w-full text-sm text-left text-gray-500">
-            <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                Workflows
-                <p class="mt-1 text-sm font-normal text-gray-500">
-                    <span class='text-sky-600' onclick="document.location = 'Approver_home.html'" >Home > </span> <span>Workflows</span>
-                </p>
-            </caption>
-            <thead class="text-xs text-white uppercase bg-sky-600">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Workflow ID
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Workflow Name
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr onclick="document.location = '../Workflow_forms.html'" class="bg-white border-b ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        WF111
-                    </th>
-                    <td class="px-6 py-4">
-                        Generic Workflow 1
-                    </td>
-                </tr>
-                <tr onclick="document.location = '../Workflow_forms.html'" class="bg-white border-b ">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        WF123
-                    </th>
-                    <td class="px-6 py-4">
-                        Generic Workflow 2
-                    </td>
-                </tr>
-                <tr onclick="document.location = '../Workflow_forms.html'" class="bg-white">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                        WF112
-                    </th>
-                    <td class="px-6 py-4">
-                        Generic Workflow 3
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Button for Creating Workflow -->
-    <div class="mx-8 mt-3">
-        <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
-            class="text-white bg-sky-600 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Create
-            Workflow</button>
-    </div>
-
+    <!-- LINKS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </body>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+<script>
+    Vue.filter('yesno', function (value) {
+        return value ? 'Yes' : 'No';
+    })
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            localhost: "http://localhost:5000",
+            AllWorkflow: "",
+            userId: "",
+
+            isValidated: false,
+            formSequences: [],
+            validated: false,
+            workflowID: "",
+            edit_data: {},
+
+            valid_options: [true, false],
+            all_vendors: [],
+            all_admins: [],
+            all_approvers: [],
+
+            //ASSIGN NEW WORKFLOW
+            wfName: "",
+            wfDateline: "",
+            wfLastSubmit: "",
+            AssignApprover: "",
+            AssignAdmin: "",
+            AssignVendor: "",
+            error_message: "",
+
+            //EDIT WORKFLOW
+            EditwfName: "",
+            EditwfDateline: "",
+            EditVendor: "",
+            EditApprover: "",
+            EditAdmin: "",
+            EditisValidated: "",
+            ValidateToShow: "",
+
+        },
+        mounted: async function () {
+            // Fetch individual workflow
+            // var query = window.location.search.substring(4);
+            // this.userId = query;
+
+            // const API_URL = this.localhost + "/workflows"+this.userId;
+            const API_URL = this.localhost + "/workflows";
+            const API_URL2 = this.localhost + "/users/userType/VENDOR";
+            const API_URL3 = this.localhost + "/users/userType/ADMIN";
+            const API_URL4 = this.localhost + "/users/userType/APPROVER";
+
+            const requestOne = axios.get(API_URL);
+            const requestTwo = axios.get(API_URL2);
+            const requestThree = axios.get(API_URL3)
+            const requestFour = axios.get(API_URL4)
+
+            axios.all([requestOne, requestTwo, requestThree, requestFour])
+                .then(axios.spread((...responses) => {
+                    const responseOne = responses[0].data
+                    const responseTwo = responses[1].data
+                    const responseThree = responses[2].data
+                    const responseFour = responses[3].data
+
+                    this.AllWorkflow = responseOne;
+                    console.log(this.AllWorkflow)
+
+                    this.all_vendors = responseTwo;
+                    this.all_approvers = responseFour;
+                    this.all_admins = responseThree;
+                }))
+
+        },
+        methods: {
+            createNewWorkflow() {
+                if (this.AssignAdmin == "" || this.AssignApprover == "" || this.AssignVendor == "" || this
+                    .wfDateline == "" || this.wfName == "") {
+                    this.error_message = "Input cannot be Empty!"
+                    document.getElementById("createButton").disabled = true;
+                } else {
+                    var SubmittedDate = new Date()
+                    SubmittedDate.toISOString().split('T')[0]
+
+                    for (each of this.all_vendors) {
+                        if (each.userId == this.AssignVendor) {
+                            var vendor = each
+                        };
+                    }
+                    for (each of this.all_approvers) {
+                        if (each.userId == this.AssignApprover) {
+                            var approver = each
+                        }
+                    }
+                    for (each of this.all_admins) {
+                        if (each.userId == this.AssignAdmin) {
+                            var admin = each
+                        };
+                    }
+
+                    var workflow = {
+                        "wfName": this.wfName,
+                        "wfDateline": this.wfDateline,
+                        "wfLastSubmit": SubmittedDate,
+                        "isValidated": false,
+                        "formSequences": [],
+                        "vendor": vendor,
+                        "admin": admin,
+                        "approver": approver,
+                    }
+
+                    console.log(workflow)
+
+                    var URL = this.localhost + "/workflows"
+                    axios.post(URL, workflow)
+                        .then(response => {
+                            console.log(response.data)
+
+                            this.closeCreateModal()
+                            document.location.reload();
+
+                        })
+                        .catch(error => {
+                            console.log(error.message)
+                        })
+                }
+                document.getElementById("createButton").disabled = false;
+
+            },
+            deleteWorkflow(workflow_id) {
+                var URL = this.localhost + "/workflows/" + workflow_id
+                axios.delete(URL)
+                    .then(response => {
+                        alert("Deleted Succesfully!")
+                        console.log(response.data)
+                        document.location.reload();
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+            },
+            getWorflow: function (id) {
+                var URL = this.localhost + "/workflows/" + id
+                axios.get(URL)
+                    .then(response => {
+                        this.edit_data = response.data
+
+                        this.EditwfName = response.data.wfName
+                        this.EditwfDateline = response.data.wfDateline
+                        this.EditisValidated = response.data.isValidated
+                        if (this.EditisValidated == true) {
+                            this.ValidateToShow = "Yes"
+                        } else if (this.EditisValidated == false) {
+                            this.ValidateToShow = "No"
+                        }
+                        this.EditVendor = response.data.vendor.userId
+                        this.EditAdmin = response.data.admin.userId
+                        this.EditApprover = response.data.approver.userId
+                        this.workflowID = response.data.workFlowId
+                        console.log(this.edit_data)
+
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    })
+            },
+            editWorflow: function (id) {
+                var URL = this.localhost + "/workflows/" + id
+                if (this.EditwfName == "") {
+                    this.error_message = "Input cannot be Empty!"
+                    document.getElementById("createButton").disabled = true;
+                } else {
+                    for (each of this.all_vendors) {
+                        if (each.userId == this.EditVendor) {
+                            var vendor = each
+                        };
+                    }
+                    for (each of this.all_approvers) {
+                        if (each.userId == this.EditApprover) {
+                            var approver = each
+                        }
+                    }
+                    for (each of this.all_admins) {
+                        if (each.userId == this.EditAdmin) {
+                            var admin = each
+                        };
+                    }
+
+                    var workflow = {
+                        "wfName": this.EditwfName,
+                        "wfDateline": this.EditwfDateline,
+                        // "wfLastSubmit": SubmittedDate,
+                        "isValidated": this.EditisValidated,
+                        "formSequences": [],
+                        "vendor": vendor,
+                        "admin": admin,
+                        "approver": approver,
+                    }
+
+                    axios.put(URL, workflow)
+                        .then(response => {
+                            this.closeUpdateModal();
+                            document.location.reload();
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
+                    console.log(workflow)
+
+                }
+                document.getElementById("createButton").disabled = false;
+            },
+            closeUpdateModal() {
+                this.EditwfName = "";
+                this.EditwfDateline = "";
+                this.EditAdmin = "";
+                this.EditApprover = "";
+                this.EditVendor = "";
+                this.error_message = ""
+            },
+            goToSequencePage: function (id) {
+                console.log(id)
+                window.location.assign("./Approver_workflow_sequences.html?id=" + id)
+            },
+            closeCreateModal() {
+                this.wfName = "";
+                this.wfDateline = "";
+                this.AssignAdmin = "";
+                this.AssignApprover = "";
+                this.AssignVendor = "";
+                this.error_message = ""
+            }
+        }
+    })
+</script>
 
 
 </html>

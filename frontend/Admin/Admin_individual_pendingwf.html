@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <!-- Links -->
+    <!-- Links -->
     <!-- flowbite -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <!-- Tailwind -->
@@ -53,6 +53,7 @@
         }
     </style>
     <title>Quantum</title>
+
 </head>
 
 <body>
@@ -65,7 +66,7 @@
                     style="height: 80px ; width: 200px;" />
 
                 <div class="flex md:order-2">
-                    <a href="homepage.html" style="margin-right: 10px;">
+                    <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
                         <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
                         </iconify-icon>
                     </a>
@@ -79,7 +80,7 @@
                                 height="40">
                             </iconify-icon>
                         </a>
-                        Draco Green
+                        Tim Klemmer
                         <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -92,8 +93,8 @@
                     <div id="dropdownAvatarName"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                         <div class="px-4 py-3 text-sm text-gray-900 ">
-                            <div class="font-bold">Admin</div>
-                            <div class="truncate">Draco.green@quantum.com</div>
+                            <div class="font-bold">Approver</div>
+                            <div class="truncate">Tim.Klemmer@quantum.com</div>
                         </div>
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
@@ -123,8 +124,8 @@
             </div>
         </div>
 
-        <!-- Navbar -->
-        <nav class="bg-gray-100">
+         <!-- Navbar -->
+         <nav class="bg-gray-100">
             <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
                 style="width: 100%; overflow: hidden;">
                 <ul
@@ -152,6 +153,7 @@
                 </ul>
             </div>
         </nav>
+
         <!-- Orange Divider -->
         <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
@@ -159,30 +161,26 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
             <table class="w-full text-sm text-left text-gray-500">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                    Pending Workflows
+                    Workflow ID: {{workflow_id}}
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span class='text-sky-600'> Pending Workflows</span>
+                        <a href="../Approver/Approver_home.html"><span class="underline hover:text-gray-800"> Pending Workflows
+                        </span></a>
+                        <span class='text-sky-600'> > Workflow ID: {{workflow_id}}</span>
                     </p>
                 </caption>
                 <thead class="text-sm text-white bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            Vendor ID
+                            Form ID
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Vendor Name
+                            Form Name
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Workflow ID
+                            Date Submitted
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Workflow Name
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Deadline
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Last Submitted
+                            Last Edited
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
@@ -190,31 +188,27 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_pending_workflows"
-                        @click="goToSinglepage(value.workFlowId)">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_form_sequences" @click = "goToSinglePage(value.formSequenceId)">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            {{value.vendor.userId}}
+                            {{value.form.formId}}
                         </td>
                         <td class="px-6 py-4">
-                            {{value.vendor.userName}}
-                        </td>
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                            {{value.workFlowId}}
+                            {{value.form.formName}}
                         </td>
                         <td class="px-6 py-4">
-                            {{value.wfName}}
+                            {{value.form.dateSubmitted}}
                         </td>
                         <td class="px-6 py-4">
-                            {{value.wfDateline}}
+                            {{value.form.lastEdited}}
                         </td>
-                        <td class="px-6 py-4">
-                            {{value.wfLastSubmit}}
+                        <td class="px-6 py-4 text-red-600 font-medium" v-if = "value.status == 'NOT_STARTED'">
+                            NOT STARTED
                         </td>
-                        <td class="px-6 py-4 text-red-600 font-medium" v-if="value.isValidated == false">
-                            INCOMPLETE
-                        </td>
-                        <td class="px-6 py-4 text-green-600 font-medium" v-if="value.isValidated == true">
+                        <td class="px-6 py-4 text-green-600" v-else-if="value.status == 'Completed'">
                             Completed
+                        </td>
+                        <td class="px-6 py-4 text-red-600 font-medium" v-else>
+                            {{value.status}}
                         </td>
                     </tr>
                 </tbody>
@@ -228,15 +222,22 @@
         el: '#app',
         data: {
             localhost: "http://localhost:5000",
-            all_pending_workflows: "",
+            all_form_sequences: [],
+            workflow_id: "",
         },
         mounted: async function () {
-            const API_URL = this.localhost + "/workflows/pending";
+            var query = window.location.search.substring(4);
+            this.workflow_id = query;
+
+            const API_URL = this.localhost + "/workflows/" + this.workflow_id;
 
             axios.get(API_URL)
                 .then(response => {
-                    this.all_pending_workflows = response.data
-                    console.log(this.all_pending_workflows)
+                    var result = response.data
+                    this.all_form_sequences = result.formSequences
+
+                    
+                    console.log(this.all_form_sequences)
                 })
                 .catch(error => {
                     console.error(error);
@@ -244,9 +245,9 @@
 
         },
         methods: {
-            goToSinglepage: function (id) {
+            goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("./Admin_individual_pendingwf.html?id=" + id)
+                window.location.assign("../Vendor/Vendor_form_sequence.html?id=" + id + "/wf=" + this.workflow_id)
             },
         }
     })

@@ -164,7 +164,7 @@
                 <thead class="text-sm text-white bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
-                            ID
+                            Workflow ID
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Name
@@ -176,10 +176,16 @@
                             Last Edited
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Validated
+                            Assigned Vendor
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Assigned Vendor
+                            Assigned Approver
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Assigned Admin
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Validated
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Check Sequence
@@ -208,15 +214,31 @@
                             {{value.wfLastSubmit}}
                         </td>
                         <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
-                            {{value.isValidated}}
-                        </td>
-                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
                             <div v-if="value.vendor != null">
                                 {{value.vendor.userName}}
                             </div>
                             <div v-if="value.vendor == null" class="text-red-500">
-                                vendor not assigned
+                                Vendor not assigned
                             </div>
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            <div v-if="value.approver != null">
+                                {{value.approver.userName}}
+                            </div>
+                            <div v-if="value.approver == null" class="text-red-500">
+                                Approver not assigned
+                            </div>
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            <div v-if="value.admin != null">
+                                {{value.admin.userName}}
+                            </div>
+                            <div v-if="value.admin == null" class="text-red-500">
+                                Admin not assigned
+                            </div>
+                        </td>
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
+                            {{value.isValidated}}
                         </td>
 
                         <!-- CHECK SEQUENCE -->
@@ -243,7 +265,6 @@
                             </button>
                         </td>
                     </tr>
-
                 </tbody>
             </table>
         </div>
@@ -295,6 +316,17 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     required>
                             </div>
+                            <!-- ASSIGN VENDOR-->
+                            <div>
+                                <label for="vendor" class="block mb-1  text-sm font-medium text-gray-900">Vendor
+                                </label>
+                                <select name="vendor" id="vendor" v-model="AssignVendor"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_vendors" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
                             <!-- ASSIGN APPROVER -->
                             <div>
                                 <label for="approver" class="block mb-1 text-sm font-medium text-gray-900">Approver
@@ -313,17 +345,6 @@
                                 <select name="admin" id="admin" v-model="AssignAdmin"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                     <option v-for="(value,key) in all_admins" :value="value.userId">
-                                        {{value.userId}} : {{value.userName}}
-                                    </option>
-                                </select>
-                            </div>
-                            <!-- ASSIGN VENDOR-->
-                            <div>
-                                <label for="vendor" class="block mb-1  text-sm font-medium text-gray-900">Vendor
-                                </label>
-                                <select name="vendor" id="vendor" v-model="AssignVendor"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option v-for="(value,key) in all_vendors" :value="value.userId">
                                         {{value.userId}} : {{value.userName}}
                                     </option>
                                 </select>
@@ -359,14 +380,14 @@
             <div data-te-modal-dialog-ref
                 class="pointer-events-none relative flex min-h-[calc(100%-1rem)] w-auto translate-y-[-50px] items-center opacity-0 transition-all duration-300 ease-in-out min-[576px]:mx-auto min-[576px]:mt-7 min-[576px]:min-h-[calc(100%-3.5rem)] min-[576px]:max-w-[500px]">
                 <div
-                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none dark:bg-neutral-600">
+                    class="pointer-events-auto relative flex w-full flex-col rounded-md border-none bg-white bg-clip-padding text-current shadow-lg outline-none">
                     <div
-                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4 dark:border-opacity-50">
-                        <h5 class="text-xl font-medium leading-normal text-neutral-800 dark:text-neutral-200"
+                        class="flex flex-shrink-0 items-center justify-between rounded-t-md border-b-2 border-neutral-100 border-opacity-100 p-4">
+                        <h5 class="text-xl font-medium leading-normal text-neutral-800"
                             id="exampleModalCenteredScrollableLabel">
                             Edit WorkFlow
                         </h5>
-                        <button type="button"
+                        <button type="button" @click="closeUpdateModal()"
                             class="box-content rounded-none border-none hover:no-underline hover:opacity-75 focus:opacity-100 focus:shadow-none focus:outline-none"
                             data-te-modal-dismiss aria-label="Close">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -379,63 +400,78 @@
                         <form class="space-y-6" action="#">
                             <!-- wfName -->
                             <div>
-                                <label for="edit_wfName"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Work Flow
+                                <label for="edit_wfName" class="block mb-2 text-sm font-medium text-gray-900">Work Flow
                                     Name</label>
-                                <input type="text" name="edit_wfName" id="edit_wfName" v-model="wfName"
-                                    placeholder="edit_data.wfName"
+                                <input type="text" name="edit_wfName" id="edit_wfName" v-model="EditwfName"
+                                    :placeholder="edit_data.wfName"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
                             <!-- dateline -->
                             <div>
-                                <label for="wfDateline"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dateline
+                                <label for="wfDateline" class="block mb-2 text-sm font-medium text-gray-900">Deadline
                                 </label>
-                                <input type="text" name="wfDateline" id="wfDateline" v-model="wfDateline"
+                                <input type="date" name="wfDateline" id="wfDateline" v-model="EditwfDateline"
                                     placeholder="YYYY-MM-DD"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
                             <!-- isValidated -->
                             <div>
-                                <label for="isValidated"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Validated
+                                <label for="isValidated" class="block mb-2 text-sm font-medium text-gray-900">Has it
+                                    been Validated ?
                                 </label>
-                                <select name="isValidated" id="isValidated" v-model="isValidated"
+                                <select name="isValidated" id="isValidated" v-model="EditisValidated"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option v-for="(value,key) in valid_options">
-                                        {{value}}
+                                    <option v-for="(value,key) in valid_options" :value="value">
+                                        {{ value | yesno }}
                                     </option>
                                 </select>
-                                <!-- <input type="text" name="isValidated" id="isValidated" v-model="isValidated"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        > -->
                             </div>
-                            <!-- vendor -->
+                            <!-- EDIT vendor -->
                             <div>
-                                <label for="vendor"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vendor
+                                <label for="vendor" class="block mb-2 text-sm font-medium text-gray-900">Vendor
                                 </label>
-                                <select name="vendor" id="vendor" v-model="vendor"
+                                <select name="vendor" id="vendor" v-model="EditVendor"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option v-for="(value,key) in all_vendors" value="value.userId : value.userName">
+                                    <option v-for="(value,key) in all_vendors" :value="value.userId">
                                         {{value.userId}} : {{value.userName}}
                                     </option>
                                 </select>
                             </div>
-                            <!-- validated -->
+                            <!-- EDIT APPROVER -->
                             <div>
-                                <label for="validated"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Validated
+                                <label for="approver" class="block mb-1 text-sm font-medium text-gray-900">Approver
                                 </label>
-                                <!-- <input type="text" name="validated" id="validated" v-model="validated"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        > -->
-                                <select name="isValidated" id="isValidated" v-model="isValidated"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option v-for="(value,key) in valid_options">
-                                        {{value}}
+                                <select name="approver" id="approver" v-model="EditApprover"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option v-for="(value,key) in all_approvers" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
                                     </option>
                                 </select>
+                            </div>
+                            <!-- EDIT ADMIN -->
+                            <div>
+                                <label for="admin" class="block  mb-1 text-sm font-medium text-gray-900">Admin
+                                </label>
+                                <select name="admin" id="admin" v-model="EditAdmin"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_admins" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- ERROR MESSAGE -->
+                            <div v-if="error_message != ''"
+                                class="mt-4 flex p-4 mb-3 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    <span class="font-medium">Error!</span> {{error_message}}
+                                </div>
                             </div>
                             <hr>
                             <button type="button" @click="editWorflow(workflowID)"
@@ -456,6 +492,9 @@
 </body>
 
 <script>
+    Vue.filter('yesno', function (value) {
+        return value ? 'Yes' : 'No';
+    })
     const vm = new Vue({
         el: '#app',
         data: {
@@ -463,14 +502,13 @@
             AllWorkflow: "",
             userId: "",
 
-            isValidated: "false",
+            isValidated: false,
             formSequences: [],
-            vendor: null,
-            validated: "false",
+            validated: false,
             workflowID: "",
             edit_data: {},
 
-            valid_options: ["True", "False"],
+            valid_options: [true, false],
             all_vendors: [],
             all_admins: [],
             all_approvers: [],
@@ -483,6 +521,15 @@
             AssignAdmin: "",
             AssignVendor: "",
             error_message: "",
+
+            //EDIT WORKFLOW
+            EditwfName: "",
+            EditwfDateline: "",
+            EditVendor: "",
+            EditApprover: "",
+            EditAdmin: "",
+            EditisValidated: "",
+            ValidateToShow: "",
 
         },
         mounted: async function () {
@@ -528,16 +575,19 @@
                     SubmittedDate.toISOString().split('T')[0]
 
                     for (each of this.all_vendors) {
-                        each.userId == this.AssignVendor;
-                        var vendor = each
+                        if (each.userId == this.AssignVendor) {
+                            var vendor = each
+                        };
                     }
                     for (each of this.all_approvers) {
-                        each.userId == this.AssignApprover;
-                        var approver = each
+                        if (each.userId == this.AssignApprover) {
+                            var approver = each
+                        }
                     }
                     for (each of this.all_admins) {
-                        each.userId == this.AssignAdmin;
-                        var admin = each
+                        if (each.userId == this.AssignAdmin) {
+                            var admin = each
+                        };
                     }
 
                     var workflow = {
@@ -586,11 +636,18 @@
                 axios.get(URL)
                     .then(response => {
                         this.edit_data = response.data
-                        this.wfName = response.data.wfName
-                        this.wfDateline = response.data.wfDateline
-                        this.isValidated = response.data.isValidated
-                        this.vendor = response.data.vendor
-                        this.validated = response.data.validated
+
+                        this.EditwfName = response.data.wfName
+                        this.EditwfDateline = response.data.wfDateline
+                        this.EditisValidated = response.data.isValidated
+                        if (this.EditisValidated == true) {
+                            this.ValidateToShow = "Yes"
+                        } else if (this.EditisValidated == false) {
+                            this.ValidateToShow = "No"
+                        }
+                        this.EditVendor = response.data.vendor.userId
+                        this.EditAdmin = response.data.admin.userId
+                        this.EditApprover = response.data.approver.userId
                         this.workflowID = response.data.workFlowId
                         console.log(this.edit_data)
 
@@ -599,36 +656,71 @@
                         console.error(error);
                     })
             },
-
             editWorflow: function (id) {
                 var URL = this.localhost + "/workflows/" + id
+                if (this.EditwfName == "") {
+                    this.error_message = "Input cannot be Empty!"
+                    document.getElementById("createButton").disabled = true;
+                } else {
+                    for (each of this.all_vendors) {
+                        if (each.userId == this.EditVendor) {
+                            var vendor = each
+                        };
+                    }
+                    for (each of this.all_approvers) {
+                        if (each.userId == this.EditApprover) {
+                            var approver = each
+                        }
+                    }
+                    for (each of this.all_admins) {
+                        if (each.userId == this.EditAdmin) {
+                            var admin = each
+                        };
+                    }
 
-                axios.put(URL, {
-                        "wfName": this.wfName,
-                        "wfDateline": this.wfDateline,
-                        "isValidated": this.isValidated,
-                        "vendor": this.vendor,
-                        "validated": this.validated
-                    })
-                    .then(response => {
-                        alert("Workflow has been successfully updated")
-                        document.location.reload();
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
+                    var workflow = {
+                        "wfName": this.EditwfName,
+                        "wfDateline": this.EditwfDateline,
+                        // "wfLastSubmit": SubmittedDate,
+                        "isValidated": this.EditisValidated,
+                        "formSequences": [],
+                        "vendor": vendor,
+                        "admin": admin,
+                        "approver": approver,
+                    }
+
+                    axios.put(URL, workflow)
+                        .then(response => {
+                            this.closeUpdateModal();
+                            document.location.reload();
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        })
+                    console.log(workflow)
+
+                }
+                document.getElementById("createButton").disabled = false;
+            },
+            closeUpdateModal() {
+                this.EditwfName = "";
+                this.EditwfDateline = "";
+                this.EditAdmin = "";
+                this.EditApprover = "";
+                this.EditVendor = "";
+                this.error_message = ""
             },
             goToSequencePage: function (id) {
                 console.log(id)
                 window.location.assign("./Admin_workflow_sequences.html?id=" + id)
             },
             closeCreateModal() {
-                this.wfName = "",
-                    this.wfDateline = ""
-                this.AssignAdmin = "",
-                    this.AssignApprover = "",
-                    this.AssignVendor = "",
-                    this.error_message = ""
+                this.wfName = "";
+                this.wfDateline = "";
+                this.AssignAdmin = "";
+                this.AssignApprover = "";
+                this.AssignVendor = "";
+                this.error_message = ""
             }
         }
     })
