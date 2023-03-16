@@ -51,13 +51,28 @@
         table td:last-child {
             border-right: none;
         }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        tr {
+            border: 1px solid #e6e6e6;
+        }
+
+        tr:first-child {
+            border-top: none;
+        }
+
+        tr:last-child {
+            border-bottom: none;
+        }
     </style>
     <title>Quantum</title>
-
 </head>
 
 <body>
-    <div id="app">
+    <div id='app'>
         <!-- header -->
         <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
             <div class="container flex flex-wrap items-center justify-between mx-auto"
@@ -103,8 +118,7 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="../login_home.html"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -153,86 +167,73 @@
                 </ul>
             </div>
         </nav>
-
-        <!-- Orange Divider -->
         <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
-        <!-- Table -->
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
-            <table class="w-full text-sm text-left text-gray-500">
-                <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                    Workflow ID: {{workflow_id}}
-                    <p class="mt-1 text-sm font-normal text-gray-500">
-                        <a href="../Approver/Approver_home.html"><span class="underline hover:text-gray-800"> Pending Workflows
-                        </span></a>
-                        <span class='text-sky-600'> > Workflow ID: {{workflow_id}}</span>
-                    </p>
-                </caption>
-                <thead class="text-sm text-white bg-sky-600">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Approve
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Form ID
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Form Name
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Date Submitted
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Last Edited
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Form Document
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            Status
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_form_sequences">
-                        <td class="px-6 py-4">
-                            <select id="ApprovalRequired" v-model="ApprovalRequired"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
-                                    <option v-if ="value.status == 'APPROVED'" value="Approved" selected>Approved</option>
-                                    <option value="notApproved">Not Approved</option>
-                                    <option v-if ="value.status != 'APPROVED'" value="approved">Approved</option>
-                            </select>
-                        </td>
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" @click = "goToSinglePage(value.formSequenceId)">
-                            {{value.form.formId}}
-                        </td>
-                        <td class="px-6 py-4" @click = "goToSinglePage(value.formSequenceId)">
-                            {{value.form.formName}}
-                        </td>
-                        <td class="px-6 py-4" @click = "goToSinglePage(value.formSequenceId)">
-                            {{value.form.dateSubmitted}}
-                        </td>
-                        <td class="px-6 py-4" @click = "goToSinglePage(value.formSequenceId)">
-                            {{value.form.lastEdited}}
-                        </td>
-                        <td style="text-align: center;">
-                            <button @click = "goToSinglePage(value.formSequenceId)" type="button">
-                                <iconify-icon icon="mdi:file-document" class="hover:text-sky-600" width="28"
-                                    height="28"></iconify-icon>
-                            </button>
-                        </td>
-                        <td class="px-6 py-4 text-red-600 font-medium" v-if = "value.status == 'NOT_STARTED'" @click = "goToSinglePage(value.formSequenceId)">
-                            NOT STARTED
-                        </td>
-                        <td class="px-6 py-4 text-green-600" v-else-if="value.status == 'APPROVED'" @click = "goToSinglePage(value.formSequenceId)">
-                            APPROVED
-                        </td>
-                        <td class="px-6 py-4 text-red-600 font-medium" v-else @click = "goToSinglePage(value.formSequenceId)">
-                            {{value.status}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- FORM START -->
+        <div style="background-color: #b4d1df">
+            <!-- back button -->
+            <button type="button" v-on:click="goToSinglePage(workflow_id)"
+                class=" ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Back
+            </button>
+            <div class="flex justify-center pb-4">
+                <!-- Form Title -->
+                <div class="w-7/12 p-6 bg-white border border-gray-200 rounded-lg shadow">
+                    <div class='row' style='height: 8px; background-color: #0284c7'></div>
+                    <h5 class="mt-2 mb-2 text-xl font-bold tracking-tight text-gray-900">{{form_name}}</h5>
+                    <p class="mb-3 font-normal text-gray-700">Form ID: {{form_id}}</p>
+                </div>
+            </div>
+
+            <!-- EACH SECTION FORM -->
+            <div v-for="(value2, key) in form_sections">
+                <div class="flex justify-center mt-2 pb-3">
+                    <div class="w-7/12 p-5 mb-2 bg-white border border-gray-200 rounded-lg shadow">
+                        <!--- SECTION TITLE -->
+                        <div class="font-bold mb-4 py-3 text-center bg-sky-600 text-white rounded">{{value2.title}}
+                        </div>
+                        <!-- SECTION DESCRIPTION -->
+                        <div class="rounded-lg bg-gray-100 py-4 mb-2 px-4 text-center">
+                            <p class="font-bold">
+                                Description:
+                            </p>
+                            {{value2.description}}
+                        </div>
+                        <!-- QUESTIONS IN EACH SECTION -->
+                        <div v-for="(value, idx) in value2.questions">
+                            <h5 class="mb-2.5 text-medium font-normal tracking-tight text-gray-900">
+                                {{value.inputLabel}}</h5>
+                            <!-- options -->
+                            <!-- text -->
+                            <input v-model = "value.inputValue"
+                                v-if="value.inputType == 'text' || value.inputType == 'Date' || value.inputType == 'email' || value.inputType == 'file' || value.inputType == 'number' "
+                                class="text-gray-600 mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                                :type="value.inputType" :required="value.isRequired">
+                            <!-- TEXT AREA -->
+                            <textarea v-model = "value.inputValue" v-else-if="value.inputType == 'textarea'" id="message" rows="4" 
+                                class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" :required="value.isRequired">
+                            </textarea>
+                            <!-- NON text -->
+                            <div v-else v-for="value3 in question_options[value.questionId]">
+                                <div class="flex items-center mb-4">
+                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300" 
+                                        :type="value.inputType" :name="value.questionId" :required="value.isRequired"
+                                        value="value3.label">
+                                    <label for="value3.id" :id="value3.id"
+                                        class="ml-2 text-sm font-medium text-gray-900"
+                                        :name="value.questionId">{{value3.label}}</label>
+                                </div>
+                            </div>
+                            <!-- RADIO -->
+
+
+                            <!-- CHECKBOX -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="pb-12" style="background-color: #b4d1df" class="h-screen"></div>
         </div>
     </div>
 </body>
@@ -242,35 +243,105 @@
         el: '#app',
         data: {
             localhost: "http://localhost:5000",
-            all_form_sequences: [],
-            workflow_id: "",
-            ApprovalRequired: "",
+            all_forms: "",
+            form_sequence_id: null,
+            workflow_id: null,
+            form: "",
+            form_questions: "",
+            varFieldName: "",
+            form_name: "",
+            form_id: "",
+            question_options: {},
+            //NEW
+            form_sections: "",
+            combined: [],
+            all_section_ids: [],
+            all_answers: [],
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
-            this.workflow_id = query;
+            var dash_idx = query.indexOf("/")
+            this.form_sequence_id = query.substring(0, dash_idx);
+            this.workflow_id = query.substring(dash_idx + 4, )
 
-            const API_URL = this.localhost + "/workflows/" + this.workflow_id;
-
-            axios.get(API_URL)
+            const API_URL2 = this.localhost + "/workflows/" + this.workflow_id;
+            axios.get(API_URL2)
                 .then(response => {
-                    var result = response.data
-                    this.all_form_sequences = result.formSequences
+                    // console.log(response.data)
+                    this.all_form_sequences = response.data.formSequences;
 
+                    for (each of this.all_form_sequences) {
+                        if (each.formSequenceId == this.form_sequence_id) {
+                            this.form = each.form;
+                        }
+                    }
+
+                    this.form_sections = this.form.sections
+                    this.form_name = this.form.formName
+                    this.form_id = this.form.formId
+
+                    var sections = this.form_sections.filter(each_section => {
+                        if (Object.keys(each_section.questions).length !== 0) {
+                            return true;
+                        }
+
+                        return false;
+                    });
+                    this.form_sections = sections;
+
+
+                    for (each of this.form_sections) {
+                        var section_id = each.sectionId;
+                        if (!(this.all_section_ids.includes(section_id))) {
+                            this.all_section_ids.push(section_id)
+                        }
+                        var questions = each.questions;
+                        for (each_question of questions) {
+                            var temp = {}
+                            temp['sectionId'] = section_id
+                            temp['question'] = each_question
+                            this.combined.push(temp)
+                        }
+                    }
+
+                    for (each of this.form_sections) {
+                        var questions = each.questions
+                        for (each_question of questions) {
+                            var question_id = each_question.questionId;
+                            if (!(question_id in this.question_options)) {
+                                if (each_question.inputType == "text" || each_question.inputType ==
+                                    "textarea" || each_question.inputType == "email" || each_question
+                                    .inputType == "date" || each_question.inputType == "file" ||
+                                    each_question.inputType == "number") {
+                                    this.question_options[question_id] = ""
+                                } else {
+                                    this.question_options[question_id] = each_question
+                                        .questionProperties
+                                }
+                            }
+                        }
+                    }
+
+                    // GET ALL VALUES
+                    for (each of this.form_sections) {
+                        var questions = each.questions
+                        for (i in questions) {
+                            this.all_answers.push(questions[i].inputValue)
+                        }
+                    }
                     
-                    console.log(this.all_form_sequences)
+                    console.log(this.all_answers)
+                    console.log(this.question_options)
                 })
                 .catch(error => {
                     console.error(error);
                 })
-
         },
         methods: {
             goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("../Approver/Approver_form_sequence.html?id=" + id + "/wf=" + this.workflow_id)
+                window.location.assign("../Admin/Admin_individual_pendingwf.html?id=" + this.workflow_id)
             },
-
         }
     })
 </script>
@@ -279,7 +350,5 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
-
-
 
 </html>
