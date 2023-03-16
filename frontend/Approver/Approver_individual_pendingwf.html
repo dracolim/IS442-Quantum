@@ -129,11 +129,11 @@
             <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
                 style="width: 100%; overflow: hidden;">
                 <ul
-                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
+                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
                         <a href="../Approver/Approver_home.html"
-                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0"
-                            aria-current="page">Pending Workflows</a>
+                            class="lg:text-sm md:text-xs sm:ml-5 lg:ml-10  mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0"
+                            aria-current="page">Validated Workflows</a>
                     </li>
                     <li>
                         <a href="../Approver/Approver_workflow.html"
@@ -163,16 +163,14 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Workflow ID: {{workflow_id}}
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <a href="../Approver/Approver_home.html"><span class="underline hover:text-gray-800"> Pending Workflows
-                        </span></a>
+                        <a href="../Approver/Approver_home.html"><span class="underline hover:text-gray-800"> Validated
+                                Workflows
+                            </span></a>
                         <span class='text-sky-600'> > Workflow ID: {{workflow_id}}</span>
                     </p>
                 </caption>
                 <thead class="text-sm text-white bg-sky-600">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
-                            Approve
-                        </th>
                         <th scope="col" class="px-6 py-3">
                             Form ID
                         </th>
@@ -186,7 +184,7 @@
                             Last Edited
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Form Document
+                            Approval
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Status
@@ -195,40 +193,77 @@
                 </thead>
                 <tbody>
                     <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_form_sequences">
-                        <td class="px-6 py-4">
-                            <select id="ApprovalRequired" v-model="ApprovalRequired"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
-                                    <option v-if ="value.status == 'APPROVED'" value="Approved" selected>Approved</option>
-                                    <option value="notApproved">Not Approved</option>
-                                    <option v-if ="value.status != 'APPROVED'" value="approved">Approved</option>
-                            </select>
-                        </td>
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap" @click = "goToSinglePage(value.formSequenceId)">
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                            @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.formId}}
                         </td>
-                        <td class="px-6 py-4" @click = "goToSinglePage(value.formSequenceId)">
+                        <td class="px-6 py-4" @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.formName}}
                         </td>
-                        <td class="px-6 py-4" @click = "goToSinglePage(value.formSequenceId)">
+                        <td class="px-6 py-4" @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.dateSubmitted}}
                         </td>
-                        <td class="px-6 py-4" @click = "goToSinglePage(value.formSequenceId)">
+                        <td class="px-6 py-4" @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.lastEdited}}
                         </td>
-                        <td style="text-align: center;">
-                            <button @click = "goToSinglePage(value.formSequenceId)" type="button">
-                                <iconify-icon icon="mdi:file-document" class="hover:text-sky-600" width="28"
-                                    height="28"></iconify-icon>
-                            </button>
+                        <td class="px-6 py-4" v-if="value.status == 'PENDING'">
+                            <select id="ApprovalRequired" v-model="ApprovalRequired[value.form.formId]"
+                                @change="changeStatus(value.form.formId)"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
+                                <option></option>
+                                <option value = 'NotApproved'>Not Approved
+                                </option>
+                                <option value = 'Approved'>Approved</option>
+                            </select>
                         </td>
-                        <td class="px-6 py-4 text-red-600 font-medium" v-if = "value.status == 'NOT_STARTED'" @click = "goToSinglePage(value.formSequenceId)">
-                            NOT STARTED
+                        <td class="px-6 py-4" v-else-if="value.status == 'REQUESTED'">
+                            <div class="flex p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    Waiting for Vendor's Input!
+                                </div>
+                            </div>
                         </td>
-                        <td class="px-6 py-4 text-green-600" v-else-if="value.status == 'APPROVED'" @click = "goToSinglePage(value.formSequenceId)">
-                            APPROVED
+                        <td class="px-6 py-4" v-else-if="value.status == 'NOT_STARTED' ">
+                            <div class="flex p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    Vendor have not submitted this form yet!
+                                </div>
+                            </div>
                         </td>
-                        <td class="px-6 py-4 text-red-600 font-medium" v-else @click = "goToSinglePage(value.formSequenceId)">
+                        <td class="px-6 py-4" v-else-if="value.status == 'VALIDATED' ">
+                            <div class="flex p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
+                                role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    Waiting for Approver's Approval!
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-red-600 font-medium">
                             {{value.status}}
+                        </td>
+                        <td class="px-6 py-4 text-green-600" v-if="value.status == 'COMPLETED'">
+                            Completed
                         </td>
                     </tr>
                 </tbody>
@@ -238,13 +273,21 @@
 </body>
 
 <script>
+    Vue.filter('yesno', function (status) {
+        if (status == 'PENDING') {
+            return 'Not Approved'
+        } else if (status == 'VALIDATED') {
+            return 'Approved'
+        }
+    })
     const vm = new Vue({
         el: '#app',
         data: {
             localhost: "http://localhost:5000",
             all_form_sequences: [],
             workflow_id: "",
-            ApprovalRequired: "",
+            ApprovalRequired: {},
+            workflow_raw_data: "",
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
@@ -255,9 +298,10 @@
             axios.get(API_URL)
                 .then(response => {
                     var result = response.data
+                    this.workflow_raw_data = result;
+
                     this.all_form_sequences = result.formSequences
 
-                    
                     console.log(this.all_form_sequences)
                 })
                 .catch(error => {
@@ -268,9 +312,36 @@
         methods: {
             goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("../Approver/Approver_form_sequence.html?id=" + id + "/wf=" + this.workflow_id)
+                window.location.assign("./Approver_form_sequence.html?id=" + id + "/wf=" + this.workflow_id)
             },
+            changeStatus(form_id) {
+                console.log(this.ApprovalRequired)
+                if (this.ApprovalRequired[form_id] == 'Approved') {
+                    for (each of this.all_form_sequences) {
+                        if (each.form.formId == form_id) {
+                            each.status = "VALIDATED"
+                        };
+                    }
+                } else if (this.ApprovalRequired[form_id] == 'NotApproved') {
+                    for (each of this.all_form_sequences) {
+                        if (each.form.formId == form_id) {
+                            each.status = "REQUESTED"
+                        };
+                    }
+                }
 
+                this.workflow_raw_data['formSequences'] = this.all_form_sequences;
+                console.log(this.workflow_raw_data)
+
+                const URL = this.localhost + "/workflows/" + this.workflow_id
+                axios.put(URL, this.workflow_raw_data)
+                    .then(response => {
+                        console.log(response.data)
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+            }
         }
     })
 </script>
