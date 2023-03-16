@@ -56,7 +56,7 @@
                 style="height: 80px ; width: 200px;" />
 
             <div class="flex md:order-2">
-                <a href="homepage.html" style="margin-right: 10px;">
+                <a v-bind:href="'../Vendor/Vendor_workflow/' + user_id" style="margin-right: 10px;">
                     <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
                 </a>
 
@@ -118,7 +118,7 @@
             <ul
                 class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                 <li>
-                    <a href="./Vendor_workflow.html" class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 >
+                    <a v-bind:href="'../Vendor/Vendor_workflow.html?id=' + user_id" class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 >
                     rounded md:bg-transparent md:text-sky-600 md:p-0">
                         Pending Workflows</a>
                 </li>
@@ -132,7 +132,7 @@
         <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
             Pending Workflows
             <p class="mt-1 text-sm font-normal text-gray-500">
-                <a href="../Vendor/Vendor_workflow.html"><span class="underline hover:text-gray-800"> Pending Workflows
+                <a v-bind:href="'../Vendor/Vendor_workflow.html?id=' + user_id"><span class="underline hover:text-gray-800"> Pending Workflows
                     </span></a>
                 <span class='text-sky-600'>> Workflow ID: {{workflow_id}}</span>
             </p>
@@ -227,7 +227,7 @@
         methods: {
             goToSinglePage: function (formseq_id) {
                 window.location.assign("./Vendor_form_sequence.html?id=" + formseq_id + "/wf=" + this
-                    .workflow_id )
+                    .workflow_id + "/userid=" + this.user_id)
             },
         }
         // methods: {

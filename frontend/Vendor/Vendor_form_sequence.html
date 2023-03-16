@@ -81,7 +81,7 @@
                     style="height: 80px ; width: 200px;" />
 
                 <div class="flex md:order-2">
-                    <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
+                    <a v-bind:href="'../Vendor/Vendor_workflow.html?id=' + user_id" style="margin-right: 10px;">
                         <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
                         </iconify-icon>
                     </a>
@@ -95,7 +95,7 @@
                                 height="40">
                             </iconify-icon>
                         </a>
-                        Tim Klemmer
+                        {{userName}}
                         <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -109,7 +109,8 @@
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                         <div class="px-4 py-3 text-sm text-gray-900 ">
                             <div class="font-bold">Approver</div>
-                            <div class="truncate">Tim.Klemmer@quantum.com</div>
+                            <div class="truncate">{{emailAddress}}
+                            </div>
                         </div>
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
@@ -118,7 +119,7 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="../login_home.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -145,7 +146,7 @@
                 <ul
                     class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
-                        <a href="./Vendor_workflow.html/id=3" class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 >
+                        <a  v-bind:href="'../Vendor/Vendor_workflow.html?id=' + user_id" class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 >
                     rounded md:bg-transparent md:text-sky-600 md:p-0">
                             Pending Workflows</a>
                     </li>
@@ -199,17 +200,7 @@
                                 class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                                 :required="value.isRequired">
                             </textarea>
-                            <!-- NON text
-                            <div v-else v-for="value3 in question_options[value.questionId]">
-                                <div class="flex items-center mb-4">
-                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300" v-model ="allAnswers[value.questionId]"
-                                        :type="value.inputType" :name="value.questionId" :required="value.isRequired"
-                                        value="value3.label">
-                                    <label for="value3.id" :id="value3.id"
-                                        class="ml-2 text-sm font-medium text-gray-900"
-                                        :name="value.questionId">{{value3.label}}</label>
-                                </div>
-                            </div> -->
+                            <!-- NON text-->
                             <!-- RADIO -->
                             <div v-else-if="value.inputType == 'Radio'"
                                 v-for="value3 in question_options[value.questionId]">
@@ -273,12 +264,37 @@
             all_section_ids: [],
             allAnswers: {},
             workflow_raw_data: "",
+            //user
+            user_id : "",
+            userName: "",
+            emailAddress: "",
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
-            var dash_idx = query.indexOf("/")
-            this.form_sequence_id = query.substring(0, dash_idx);
-            this.workflow_id = query.substring(dash_idx + 4, )
+            var first_dash_idx = query.indexOf("/")
+
+            this.form_sequence_id = query.substring(0, first_dash_idx);
+            
+            var second_dash_idx = query.indexOf("/" , first_dash_idx + 1)
+            this.workflow_id = query.substring(first_dash_idx + 4, second_dash_idx)
+            this.user_id = query.substring(second_dash_idx + 8 , )
+
+            const URL3 = this.localhost + "/users/userType/" + "VENDOR"
+            axios.get(URL3)
+                .then(response => {
+                    
+                    for (each of response.data) {
+                        if (each.userId == this.user_id) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
+                            console.log(this.userName)
+                        }
+                    }
+
+                })
+                .catch(error => {
+                    console.error(error);
+                })
 
             const URL = this.localhost + "/questions"
             axios.get(URL)
@@ -358,7 +374,7 @@
         methods: {
             goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("../Vendor/?id=" + this.workflow_id)
+                window.location.assign("./Vendor_form.html?id=" + this.workflow_id + "/userId=" + this.user_id)
             },
             submitForm() {
                 var checkboxID = []
