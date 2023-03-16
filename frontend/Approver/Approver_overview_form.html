@@ -171,7 +171,7 @@
         <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
         <!-- FORM START -->
-        <div style="background-color: #b4d1df" class ="h-screen">
+        <div style="background-color: #b4d1df">
             <!-- back button -->
             <button type="button" v-on:click="goToSinglepage()"
                 class=" ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Back
@@ -190,10 +190,11 @@
                 <div class="flex justify-center mt-2 pb-3">
                     <div class="w-7/12 p-5 mb-2 bg-white border border-gray-200 rounded-lg shadow">
                         <!--- SECTION TITLE -->
-                        <div class = "font-bold mb-4 py-3 text-center bg-sky-600 text-white rounded">{{value2.title}}</div>
+                        <div class="font-bold mb-4 py-3 text-center bg-sky-600 text-white rounded">{{value2.title}}
+                        </div>
                         <!-- SECTION DESCRIPTION -->
-                        <div class = "rounded-lg bg-gray-100 py-4 mb-2 px-4 text-center">
-                            <p class = "font-bold">
+                        <div class="rounded-lg bg-gray-100 py-4 mb-2 px-4 text-center">
+                            <p class="font-bold">
                                 Description:
                             </p>
                             {{value2.description}}
@@ -225,10 +226,9 @@
             </div>
 
             <!-- FOOTER -->
-            <div class="pb-12"></div>
+            <div class="pb-12" style="background-color: #b4d1df" class="h-screen"></div>
         </div>
     </div>
-
 </body>
 
 <script>
@@ -257,6 +257,15 @@
                     this.form_sections = response.data.sections
                     this.form_name = response.data.formName
                     console.log(this.form_sections)
+
+                    var sections = this.form_sections.filter(each_section => {
+                        if (Object.keys(each_section.questions).length !== 0) {
+                            return true;
+                        }
+
+                        return false;
+                    });
+                    this.form_sections = sections;
 
 
                     for (each of this.form_sections) {

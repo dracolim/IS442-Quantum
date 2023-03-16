@@ -324,7 +324,8 @@
                                 type="button" v-on:click="openUpdateModal(value.question.questionId)"
                                 class="underline border-none py-2.5 text-sm font-medium text-gray-900 focus:outline-none rounded-lg hover:text-gray-600 focus:z-10 focus:ring-4 focus:ring-gray-200 gray-600">
                                 <div class="inline-flex items-center">
-                                    <iconify-icon icon="material-symbols:add"></iconify-icon> Add Options
+                                    <iconify-icon icon="material-symbols:edit" class="2xl:mr-2"></iconify-icon> Edit
+                                    Options
                                 </div>
                             </button>
                         </td>
@@ -371,7 +372,7 @@
                         </button>
 
                         <div class="px-6 py-6 lg:px-8">
-                            <h3 class="mb-4 text-xl font-medium text-gray-900">Add Input Labels</h3>
+                            <h3 class="mb-4 text-xl font-medium text-gray-900">Edit Input Options</h3>
                             <h3 class="mb-4 text-md font-medium text-gray-900 underline">
                                 {{all_question_labels[updateID]}}</h3>
                             <form class="space-y-6">
@@ -400,7 +401,8 @@
                                         class="block mb-2 text-sm font-medium text-gray-900">Options</label>
 
                                     <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="varLabels[n]" @change = "checkUpdateLabel()"
+                                        <input type="text" name="text" id="text" v-model="varLabels[n]"
+                                            @change="checkUpdateLabel()"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
                                             required>
                                     </div>
@@ -428,24 +430,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="mx-8 mt-5 mb-12 py-5">
-            <button type="button" v-on:click="goToSinglepage()"
-                class="float-right inline-flex items-center  px-4 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
-                    <path fill="none" stroke="currentColor" stroke-width="2"
-                        d="M12 17c-2.727 0-6-2.778-6-5s3.273-5 6-5s6 2.778 6 5s-3.273 5-6 5Zm-1-5a1 1 0 1 0 2 0a1 1 0 0 0-2 0Z" />
-                </svg>
-                View Form</button>
-            <button type="button" data-te-toggle="modal" data-te-target="#exampleModalScrollable" data-te-ripple-init
-                data-te-ripple-color="light"
-                class="inline-flex items-center mr-5 float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
-                    <path fill="#FFFFFF"
-                        d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
-                </svg> Create New Fields
-            </button>
         </div>
 
         <!-- CREATE NEW FIELD MODAL -->
@@ -523,13 +507,12 @@
                                 <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
                                     Name</label>
                                 <input type="NewFieldName" v-model="NewFieldName" name="NewFieldName" id="NewFieldName"
-                                    @change="checkFieldName()"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     required>
                             </div>
 
                             <!-- ERROR HANDLING -->
-                            <div v-if="inputLabelError == true">
+                            <!-- <div v-if="inputLabelError == true">
                                 <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
                                     Name</label>
                                 <div class="relative">
@@ -540,7 +523,7 @@
                                 </div>
                                 <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span
                                         class="font-medium">Field Name already exist!</span></p>
-                            </div>
+                            </div> -->
 
                             <!-- FIELD TYPE -->
                             <div>
@@ -631,6 +614,28 @@
         </div>
 
 
+        <div class="mx-8 mt-5 mb-12 py-5">
+            <button type="button" v-on:click="goToSinglepage()"
+                class="float-right inline-flex items-center  px-4 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24">
+                    <path fill="none" stroke="currentColor" stroke-width="2"
+                        d="M12 17c-2.727 0-6-2.778-6-5s3.273-5 6-5s6 2.778 6 5s-3.273 5-6 5Zm-1-5a1 1 0 1 0 2 0a1 1 0 0 0-2 0Z" />
+                </svg>
+                View Form</button>
+            <button type="button" data-te-toggle="modal" data-te-target="#exampleModalScrollable" data-te-ripple-init
+                data-te-ripple-color="light"
+                class="inline-flex items-center mr-5 float-right  px-6 py-3.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
+                    <path fill="#FFFFFF"
+                        d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
+                </svg> Create New Fields
+            </button>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="pb-12"></div>
+
+
     </div>
 
     <script>
@@ -702,13 +707,13 @@
                         const responseFour = responses[3].data
 
                         this.all_sections_in_DB = responseFour
+                        console.log(this.all_sections_in_DB)
                         // all IDs that already exist 
                         for (each of this.all_sections_in_DB) {
                             if (!(this.all_section_ids_in_DB.includes(each.sectionId))) {
                                 this.all_section_ids_in_DB.push(each.sectionId)
                             }
                         }
-                        console.log(this.all_section_ids_in_DB)
 
                         this.form_sections = responseOne.sections
                         console.log(this.form_sections)
@@ -801,43 +806,64 @@
                 updateSectionId(question_id) {
                     var new_section_id = this.varSectionId[question_id]
 
-                    // to REMOVE
-                    for (each of this.form_sections) {
-                        for (i in each.questions) {
-                            if (each.questions[i].questionId == question_id) {
-                                var question = each.questions[i]
-                                // remove the existing question from OLD section
-                                each.questions.splice(i, 1);
-                            }
+                    // // to REMOVE
+                    // for (each of this.form_sections) {
+                    //     for (i in each.questions) {
+                    //         if (each.questions[i].questionId == question_id) {
+                    //             var question = each.questions[i]
+                    //             // remove the existing question from OLD section
+                    //             each.questions.splice(i, 1);
+                    //         }
+                    //     }
+                    // }
+
+                    // // to ADD
+                    // for (each of this.form_sections) {
+                    //     if (each.sectionId == new_section_id) {
+                    //         each.questions.push(question)
+                    //     }
+                    // }
+                    // //update raw form
+                    // this.raw_form["sections"] = this.form_sections
+                    // var URL = this.localhost + "/form/" + this.form_id;
+
+                    // // console.log(this.raw_form)
+
+                    // // axios.put(URL, this.raw_form)
+                    // //     .then(response => {
+                    // //         console.log(response.data)
+                    // //         // document.location.reload();
+                    // //     })
+                    // //     .catch(error => {
+                    // //         console.log(error.message)
+                    // //     })
+
+                    ////update to questions
+                    var URL2 = this.localhost + "/form/" + this.form_id + "/section/" + new_section_id;
+                    // get the question details
+                    for (each of this.all_questions) {
+                        if (each.questionId == question_id) {
+                            var question = each;
                         }
                     }
-
-                    // to ADD
-                    for (each of this.form_sections) {
+                    // add the question to the section
+                    for (each of this.all_sections_in_DB) {
                         if (each.sectionId == new_section_id) {
-                            each.questions.push(question)
+                            var questions = each.questions;
+                            questions.push(question)
+                            var section = each
                         }
                     }
-                    //update raw form
-                    this.raw_form["sections"] = this.form_sections
-                    var URL = this.localhost + "/form/" + this.form_id;
+                    console.log(section)
 
-                    axios.put(URL, this.raw_form)
+                    axios.put(URL2, section)
                         .then(response => {
                             console.log(response.data)
-                            //update combined 
-                            for (each of this.combined) {
-                                if (each.question.questionId == question_id) {
-                                    each.sectionId = new_section_id;
-                                }
-                            }
-                            console.log(this.combined)
-                            document.location.reload();
+                            // document.location.reload();
                         })
                         .catch(error => {
                             console.log(error.message)
                         })
-
                 },
                 updateSectionTitle(section_id) {
                     var newSectionTitle = this.varSectionTitle[section_id]
@@ -966,43 +992,82 @@
                     document.location.reload();
                 },
                 deleteQuestion: function (question_id) {
-                    var URL = this.localhost + '/form/' + this.form_id
+                    // var URL = this.localhost + '/form/' + this.form_id
 
+                    // for (j in this.form_sections) {
+                    //     for (i in this.form_sections[j].questions) {
+                    //         if (this.form_sections[j].questions[i].questionId == question_id) {
+                    //             var question = this.form_sections[j].questions[i]
+                    //             // remove the existing question from OLD section
+                    //             this.form_sections[j].questions.splice(i, 1)
+                    //         }
+                    //     }
+                    //     if (this.form_sections[j].questions.length == 0) {
+                    //         console.log("a;dfjlahldfjads")
+                    //         this.form_sections.splice(j, 1)
+                    //         console.log(this.form_sections)
+                    //     }
+                    // }
+                    // //update raw form
+                    // console.log(this.form_sections)
+                    // this.raw_form["sections"] = this.form_sections
+                    // console.log(this.raw_form)
+                    // var URL = this.localhost + "/form/" + this.form_id;
+
+                    // axios.put(URL, this.raw_form)
+                    //     .then(response => {
+                    //         //update combined
+                    //         console.log(response.data)
+                    //         // for (i in this.combined) {
+                    //         //     if (this.combined[i].question.questionId == question_id) {
+                    //         //         this.combined.splice(i, 1)
+                    //         //     }
+                    //         // }
+                    //         // console.log(this.combined)
+                    //         alert("Deletion is successful!")
+                    //     })
+                    //     .catch(error => {
+                    //         console.log(error.message)
+                    //     })
+
+                    // get the section ID
                     for (j in this.form_sections) {
                         for (i in this.form_sections[j].questions) {
                             if (this.form_sections[j].questions[i].questionId == question_id) {
-                                var question = this.form_sections[j].questions[i]
-                                // remove the existing question from OLD section
-                                this.form_sections[j].questions.splice(i, 1)
+                                var section_id = this.form_sections[j].sectionId
                             }
-                        }
-                        if (this.form_sections[j].questions.length == 0) {
-                            console.log("a;dfjlahldfjads")
-                            this.form_sections.splice(j, 1)
-                            console.log(this.form_sections)
                         }
                     }
-                    //update raw form
-                    console.log(this.form_sections)
-                    this.raw_form["sections"] = this.form_sections
-                    console.log(this.raw_form)
-                    var URL = this.localhost + "/form/" + this.form_id;
 
-                    axios.put(URL, this.raw_form)
-                        .then(response => {
-                            //update combined
-                            console.log(response.data)
-                            for (i in this.combined) {
-                                if (this.combined[i].question.questionId == question_id) {
-                                    this.combined.splice(i, 1)
-                                }
+                    // get the question details
+                    for (each of this.all_questions) {
+                        if (each.questionId == question_id) {
+                            var question = each;
+                        }
+                    }
+                    // add the question to the section
+                    for (each of this.all_sections_in_DB) {
+                        if (each.sectionId == section_id) {
+                            var questions = each.questions;
+                            for (i in questions){
+                                questions.splice(i,1);
+                                break
                             }
-                            console.log(this.combined)
-                            alert("Deletion is successful!")
+                            var section = each
+                        }
+                    }
+
+                    var URL2 = this.localhost + "/form/" + this.form_id + "/section/" + section_id;
+                    axios.put(URL2, section)
+                        .then(response => {
+                            console.log(response.data)
+                            document.location.reload();
                         })
                         .catch(error => {
                             console.log(error.message)
                         })
+
+
                 },
                 openUpdateModal(question_id) {
                     this.updateID = question_id;
@@ -1031,29 +1096,28 @@
                 showOptions() {
                     this.show = true;
                 },
-                checkUpdateLabel(){
+                checkUpdateLabel() {
                     console.log(this.varLabels)
 
                     var all_new_labels = []
                     for (i in this.varLabels) {
-                        all_new_labels.push(this.varLabels[i].toLowerCase())
+                        all_new_labels.push(this.varLabels[i].toLowerCase().trim())
                     }
 
                     // disable until options all added
-                    if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")){
+                    if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")) {
                         document.getElementById("updateLabelButton").disabled = false;
                     }
-                    
+
                     //check for duplicates in the new label
                     let resultToReturn = false;
                     resultToReturn = all_new_labels.some((element, index) => {
-                    return all_new_labels.indexOf(element) !== index
+                        return all_new_labels.indexOf(element) !== index
                     });
                     if (resultToReturn) {
-                        this.error_message = "Input Options cannot be the same!"
+                        this.error_message = "Input Options cannot be the Same!"
                         document.getElementById("updateLabelButton").disabled = true;
-                    }
-                    else {
+                    } else {
                         this.error_message = ""
                         document.getElementById("updateLabelButton").disabled = false;
                     }
@@ -1065,80 +1129,25 @@
                     }
 
                     // check if there are any empty options
-                    if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")){
+                    if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")) {
                         this.error_message = "Input Labels cannot be Empty!"
                         document.getElementById("updateLabelButton").disabled = true;
-                    }
-                    else{
+                    } else {
                         this.error_message = ""
                         document.getElementById("updateLabelButton").disabled = false;
                     }
-                    
+
                     if (this.error_message == "") {
                         for (each of this.all_questions) {
                             if (each.questionId == this.updateID) {
-
-                                console.log("New Labels: " + all_new_labels)
-
-                                // already have options
-                                if ("questionProperties" in each) {
-                                    var all_existing_labels = []
-                                    for (each_label of each.questionProperties) {
-                                        all_existing_labels.push(each_label.label.toLowerCase())
-                                    }
-
-                                    console.log("Existing: " + all_existing_labels)
-
-                                    var all_labels = each.questionProperties
-                                    // the number of input options is lesser than the usual 
-                                    if (all_labels.length > Object.keys(this.varLabels).length) {
-                                        for (i in this.varLabels) {
-                                            if (!(all_existing_labels.includes(this.varLabels[i]
-                                            .toLowerCase()))) {
-                                                var label_list = {}
-                                                label_list['label'] = this.varLabels[i]
-                                                all_labels.push(label_list)
-                                            }
-                                        }
-                                        console.log(all_labels)
-                                        // remove all the extra from original that is not in the new 
-                                        for (i in all_labels) {
-                                            console.log(all_labels[i].label.toLowerCase())
-                                            console.log(all_new_labels)
-                                            if (!(all_new_labels.includes(all_labels[i].label.toLowerCase()))) {
-                                                for (i2 in all_labels) {
-                                                    if (all_labels[i2].label.toLowerCase() == all_labels[i]
-                                                        .label
-                                                        .toLowerCase()) {
-                                                        all_labels.splice(i2, 1);
-                                                    }
-                                                }
-                                                console.log(all_labels)
-                                            }
-                                        }
-                                        each['questionProperties'] = all_labels
-                                    } else {
-                                        for (i in this.varLabels) {
-                                            if (!(all_existing_labels.includes(this.varLabels[i]
-                                            .toLowerCase()))) {
-                                                var label_list = {}
-                                                label_list['label'] = this.varLabels[i]
-                                                all_labels.push(label_list)
-                                            }
-                                        }
-                                        each['questionProperties'] = all_labels
-                                    }
+                                var all_labels = []
+                                for (i in this.varLabels) {
+                                    var label_list = {}
+                                    label_list['label'] = this.varLabels[i]
+                                    all_labels.push(label_list)
                                 }
-                                // no options at all
-                                else {
-                                    var all_labels = []
-                                    for (i in this.varLabels) {
-                                        var label_list = {}
-                                        label_list['label'] = this.varLabels[i]
-                                        all_labels.push(label_list)
-                                    }
-                                    each['questionProperties'] = all_labels
-                                }
+                                each['questionProperties'] = all_labels
+
                                 var data = each;
                                 console.log(data)
                             }
@@ -1249,20 +1258,20 @@
                     }
 
                 },
-                checkFieldName() {
-                    var all_questions_in_this_form = this.all_questions
-                    this.inputLabelError = false;
-                    for (each_question of all_questions_in_this_form) {
-                        if (each_question.inputLabel == this.NewFieldName) {
-                            // error message stating similar input label exist 
-                            this.inputLabelError = true;
-                            document.getElementById("addFieldButton").disabled = true
-                        }
-                    }
-                    if (this.inputLabelError == false) {
-                        document.getElementById("addFieldButton").disabled = false
-                    }
-                },
+                // checkFieldName() {
+                //     var all_questions_in_this_form = this.all_questions
+                //     this.inputLabelError = false;
+                //     for (each_question of all_questions_in_this_form) {
+                //         if (each_question.inputLabel == this.NewFieldName) {
+                //             // error message stating similar input label exist 
+                //             this.inputLabelError = true;
+                //             document.getElementById("addFieldButton").disabled = true
+                //         }
+                //     }
+                //     if (this.inputLabelError == false) {
+                //         document.getElementById("addFieldButton").disabled = false
+                //     }
+                // },
             }
         })
     </script>
