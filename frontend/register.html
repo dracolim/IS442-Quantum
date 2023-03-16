@@ -40,10 +40,10 @@
                 </svg>
             </div>
             <h2 class="text-4xl tracking-tight">
-                Login to your Account
+                Register New Account
             </h2>
-            <span class="text-sm">or <a href="register.html" class="text-sky-500">
-                    register a new account
+            <span class="text-sm">or <a href="login_home.html" class="text-sky-500">
+                    Login to your account
                 </a>
             </span>
         </div>
@@ -56,17 +56,12 @@
                             for='Password'>Email address</label>
                         <label v-else class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for='Password'>Email address</label>
-                        <div v-if="email_error != ''" class="relative">
-                            <input
-                                class="border-red-500 text-red-900 placeholder-red-200 appearance-none block w-full bg-red-50 text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                                type='email' v-model="email" placeholder="Enter Email Address" required>
-                            <p id="filled_error_help" class="mt-2 text-xs text-red-600">{{email_error}}</p>
-                        </div>
-                        <div v-else class="relative">
-                            <input
-                                class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                                type='email' v-model="email" placeholder="Enter Email Address" required>
-                        </div>
+                        <input v-if="email_error != ''"
+                            class="border-red-500 text-red-900 placeholder-red-200 appearance-none block w-full bg-red-50 text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
+                            type='email' v-model="email" placeholder="Enter Email Address" required>
+                        <input v-else
+                            class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
+                            type='email' v-model="email" placeholder="Enter Email Address" required>
                     </div>
 
                     <div class="w-full md:w-full px-3 mb-6">
@@ -75,30 +70,27 @@
                             for='Password'>Password</label>
                         <label v-else class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
                             for='Password'>Password</label>
-                        <div v-if="password_error != ''" class="relative">
-                            <input
+                        <div class="relative">
+                            <input v-if="password_error != ''"
                                 class="border-red-500 text-red-900 placeholder-red-200 appearance-none block w-full bg-red-50 text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
-                                type='password' v-model="password" placeholder="Enter Password" required>
-                            <p id="filled_error_help" class="mt-2 text-xs text-red-600">{{password_error}}</p>
-                        </div>
-                        <div v-else class="relative">
-                            <input
+                                type='email' v-model="password" placeholder="Enter Password" required>
+                            <input v-else
                                 class="appearance-none block w-full bg-white text-gray-900 font-medium border border-gray-400 rounded-lg py-3 px-3 leading-tight focus:outline-none"
                                 type='password' v-model="password" placeholder="Enter Password" required>
+                            
                         </div>
 
                     </div>
                     <div class="w-full md:w-full px-3 mb-6">
-                        <button @click="checkUser()" style="background-color: #0284c7;" type="button"
-                            class="appearance-none block w-full bg-blue-600 text-gray-100 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-blue-500 focus:outline-none focus:bg-white focus:border-gray-500">Login</button>
+                        <button @click="checkUser()" style="background-color: #0284c7;"
+                            class="appearance-none block w-full bg-blue-600 text-gray-100 font-bold border border-gray-200 rounded-lg py-3 px-3 leading-tight hover:bg-blue-500 focus:outline-none focus:bg-white focus:border-gray-500">Sign
+                            in</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </body>
-
-
 <script>
     const vm = new Vue({
         el: '#app',
@@ -113,7 +105,7 @@
             all_admins: "",
         },
         mounted: async function () {
-            const API_URL = this.localhost + "/users/"
+            const API_URL  = this.localhost + "/users/"
             const API_URL2 = this.localhost + "/users/userType/VENDOR";
             const API_URL3 = this.localhost + "/users/userType/ADMIN";
             const API_URL4 = this.localhost + "/users/userType/APPROVER";
@@ -143,42 +135,40 @@
         },
         methods: {
             checkUser() {
-                if (!/^[^@]+@\w+(\.\w+)+\w$/.test(this.email)) {
+                if (!this.email) {
+                    this.email_error = 'Email is required!';
+                } else if (!/^[^@]+@\w+(\.\w+)+\w$/.test(this.email)) {
                     this.email_error = 'Invalid email!';
-                } else {
-                    var count = 0
-                    var total_users = this.users.length
-                    if (this.email != "" && this.password != "") {
-                        // check for user type
-                        for (each of this.users) {
-                            if (each.emailAddress == this.email && each.password == this.password.toString()) {
-                                var userType = each.userType
-                                if (userType == 'VENDOR') {
-                                    console.log("adkfjadfad")
-                                    window.location.assign("./Vendor/Vendor_workflow.html?id=" + each.userId)
-                                }
-                                if (userType == "APPROVER") {
-                                    window.location.assign("./Approver/Approver_home.html?id=" + each.userId)
-                                }
-                                if (userType == 'ADMIN') {
-                                    window.location.assign("./Admin/Admin_home.html?id=" + each.userId)
-                                }
-                            } else if (each.emailAddress == this.email && each.password != this.password
-                                .toString()) {
-                                this.password_error = "Invalid Password!"
-                            } 
-                            else{
-                                count += 1
+                }
+
+                if (!this.password) {
+                    this.password_error = 'Password is required!';
+                }
+
+                if (this.email && this.password) {
+                    // check for user type
+                    for (each of this.users){
+                        if (each.emailAddress == this.email && each.password == this.password){
+                            var userType = each.userType
+                            if (userType.tolowercase() == 'vendor'){
+                                console.log("adfakdjfhasd")
+                                // window.location.assign("frontend/Vendor/Vendor_workflow.html?id=" + each.userId)
+                            }
+                            if (userType.tolowercase() == 'approver'){
+                                // window.location.assign("frontend/Approver/Approver_home.html?id=" + each.userId)
+                            }
+                            if (userType.tolowercase() == 'admin'){
+                                // window.location.assign("frontend/Admin/Admin_home.html?id=" + each.userId)
                             }
                         }
-                    }
-
-                    if (count == total_users){
-                        this.email_error = "Email does not exist!"
+                        else if (each.emailAddress == this.email && each.password != this.password){
+                            this.password_error = "Invalid Password!"
+                        }
+                        else if (each.emailAddress != this.email && each.password == this.password){
+                            this.password_error = "Email and Password does not match!"
+                        }
                     }
                 }
-                this.email = "";
-                this.password = "";
             }
         }
     })
