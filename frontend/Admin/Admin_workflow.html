@@ -158,7 +158,7 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Workflows
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Admin_workflow.html'" class='text-sky-600'>Workflow </span>
+                        <span onclick="document.location = 'Admin_workflow.html'" class='text-sky-600'>Workflows </span>
                     </p>
                 </caption>
                 <thead class="text-sm text-white bg-sky-600">
@@ -185,9 +185,11 @@
                             Check Sequence
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Edit workflow
+                            Edit
                         </th>
-
+                        <th scope="col" class="px-6 py-3">
+                            Delete
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -232,6 +234,13 @@
                                     width="28"></iconify-icon>
                             </button>
                         </td>
+                        <!-- DELETE WORKFLOW -->
+                        <td style="text-align: center;">
+                            <button @click="deleteWorkflow(value.workFlowId)">
+                                <iconify-icon icon="mdi:trashcan-outline" class="hover:text-red-500" width="28"
+                                    height="28"></iconify-icon>
+                            </button>
+                        </td>
                     </tr>
 
                 </tbody>
@@ -267,12 +276,12 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Assign New Workflow</h3>
+                        <h3 class="mb-4 text-xl font-medium text-gray-900">Assign New Workflow</h3>
                         <form class="space-y-6" action="#">
                             <!-- wfName -->
                             <div>
                                 <label for="wfName"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Workflow
+                                    class="block  mb-1  text-sm font-medium text-gray-900">Workflow
                                     Name</label>
                                 <input type="text" name="wfName" id="wfName" v-model="wfName"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -281,7 +290,7 @@
                             <!-- deadline -->
                             <div>
                                 <label for="wfDateline"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deadline
+                                    class="block  mb-1  text-sm font-medium text-gray-900">Deadline
                                 </label>
                                 <input type="date" name="wfDateline" id="wfDateline" v-model="wfDateline"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -290,11 +299,11 @@
                             <!-- ASSIGN APPROVER -->
                             <div>
                                 <label for="approver"
-                                    class="block text-sm font-medium text-gray-900 dark:text-white">Approver
+                                    class="block mb-1 text-sm font-medium text-gray-900">Approver
                                 </label>
                                 <select name="approver" id="approver" v-model="AssignApprover"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                    <option v-for="(value,key) in all_approvers" value="value.userId : value.userName">
+                                    <option v-for="(value,key) in all_approvers" :value="value.userId">
                                         {{value.userId}} : {{value.userName}}
                                     </option>
                                 </select>
@@ -302,11 +311,11 @@
                             <!-- ASSIGN ADMIN -->
                             <div>
                                 <label for="admin"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Admin
+                                    class="block  mb-1 text-sm font-medium text-gray-900">Admin
                                 </label>
                                 <select name="admin" id="admin" v-model="AssignAdmin"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option v-for="(value,key) in all_admins" value="value.userId : value.userName">
+                                    <option v-for="(value,key) in all_admins" :value="value.userId">
                                         {{value.userId}} : {{value.userName}}
                                     </option>
                                 </select>
@@ -314,11 +323,11 @@
                             <!-- ASSIGN VENDOR-->
                             <div>
                                 <label for="vendor"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vendor
+                                    class="block mb-1  text-sm font-medium text-gray-900">Vendor
                                 </label>
                                 <select name="vendor" id="vendor" v-model="AssignVendor"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option v-for="(value,key) in all_vendors" value="value.userId : value.userName">
+                                    <option v-for="(value,key) in all_vendors" :value="value.userId">
                                         {{value.userId}} : {{value.userName}}
                                     </option>
                                 </select>
@@ -501,15 +510,31 @@
                 var SubmittedDate = new Date()
                 SubmittedDate.toISOString().split('T')[0]
 
-                console.log(this.wfDateline)
+                for (each of this.all_vendors){
+                    each.userId == this.AssignVendor;
+                    var vendor = each
+                }
+                for (each of this.all_approvers){
+                    each.userId == this.AssignApprover;
+                    var approver = each
+                }
+                for (each of this.all_admins){
+                    each.userId == this.AssignAdmin;
+                    var admin = each
+                }
 
                 var workflow = {
                     "wfName": this.wfName,
                     "wfDateline": this.wfDateline,
                     "wfLastSubmit": SubmittedDate,
                     "isValidated": false,
-                    "formSequences": []
+                    "formSequences": [],
+                    "vendor": vendor,
+                    "admin" : admin,
+                    "approver": approver,
                 }
+
+                console.log(workflow)
 
                 var URL = this.localhost + "/workflows"
                 axios.post(URL, workflow)
@@ -517,32 +542,15 @@
                         console.log(response.data)
 
                         this.closeCreateModal()
-                        // document.location.reload();
+                        document.location.reload();
 
                     })
                     .catch(error => {
                         console.log(error.message)
                     })
+            },
+            deleteWorkflow(workflow_id){
 
-                // var URL = this.localhost + "/workflows"
-                // axios.post(URL, {
-                //         wfName: this.wfName,
-                //         wfDateline: this.wfDateline,
-                //         wfLastSubmit: SubmittedDate,
-                //         formSequences: this.formSequences,
-                //         vendor: this.vendor,
-                //         validated: this.validated
-                //     })
-                //     .then(response => {
-                //         console.log(response.data)
-
-                //         this.closeCreateModal()
-                //         // document.location.reload();
-
-                //     })
-                //     .catch(error => {
-                //         console.log(error.message)
-                //     })
             },
             getWorflow: function (id) {
                 var URL = this.localhost + "/workflows/" + id
@@ -587,7 +595,10 @@
             },
             closeCreateModal() {
                 this.wfName = "",
-                    this.wfDateline = ""
+                this.wfDateline = ""
+                this.AssignAdmin = "",
+                this.AssignApprover = "",
+                this.AssignVendor = ""
             }
         }
     })
