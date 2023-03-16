@@ -160,7 +160,7 @@
                         <span class='text-sky-600'> Forms</span>
                     </p>
                 </caption>
-                <thead class="text-xs text-white uppercase bg-sky-600">
+                <thead class="text-sm text-white bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Form ID
@@ -186,8 +186,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
-                        v-for="(value,key) in all_forms">
+                    <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white border-gray-200 hover:bg-gray-100"
+                        v-for="(value,key) in all_forms" v-on:click="goToSinglepage(value.formId)">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.formId}}
                         </th>

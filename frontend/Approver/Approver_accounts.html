@@ -20,6 +20,25 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
 
+    <style>
+        table {
+            border: none;
+            border-collapse: collapse;
+        }
+
+        table td {
+            border-left: 1px solid #e6e6e6;
+            border-right: 1px solid #d6d6d6;
+        }
+
+        table td:first-child {
+            border-left: none;
+        }
+
+        table td:last-child {
+            border-right: none;
+        }
+    </style>
     <title>Quantum</title>
 
 </head>
@@ -101,7 +120,7 @@
                     <li>
                         <a href="../Approver/Approver_home.html"
                             class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                            aria-current="page">Home</a>
+                            aria-current="page">Pending Workflows</a>
                     </li>
                     <li>
                         <a href="../Approver/Approver_workflow.html"
@@ -171,7 +190,7 @@
                 </thead>
                 <tbody>
                     <!-- check if this works, having index in there to getr v-for index -->
-                    <tr class="bg-white border-b" v-for="(value,key,index) in userList">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key,index) in userList">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.userId}}
                         </th>
