@@ -117,6 +117,16 @@ public class WorkFlowService {
 
             emailNotificationService.sendEmail(email, emailSubject , emailBody);
 
+        // Requested to Pending: Admin to Vendor
+        } else if (currStatus == FormSequenceStatus.REQUESTED && newStatus == FormSequenceStatus.PENDING){
+
+            formSequence.setStatus(newStatus);
+            String email = workflow.getVendor().getEmailAddress();
+            String emailSubject = "Form updated [" + formName + "]";
+            String emailBody = "Dear Admin, \n\n The following form has been updated: \n " + formName + " Kindly review the information and mark as validated/requested";
+
+            emailNotificationService.sendEmail(email, emailSubject, emailBody);
+
         // Pending to Validated: Admin to Approver
         } else if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.VALIDATED){
 
