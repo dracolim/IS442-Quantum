@@ -222,7 +222,7 @@
                     </p>
                 </caption>
 
-                <thead class="text-xs text-white uppercase bg-sky-600">
+                <thead class="text-sm text-white bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Section ID
@@ -1172,7 +1172,7 @@
                     var questionProperties = this.NewOptions;
 
                     if (section_id == "" || inputLabel == "" || inputType == "") {
-                        document.getElementById("addFieldButton").disabled = false
+                        document.getElementById("addFieldButton").disabled = true;
                         this.error_message = "Fields cannot be Empty!"
                     } else {
                         var all_questions_in_this_form = this.all_questions

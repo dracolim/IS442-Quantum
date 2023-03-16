@@ -143,11 +143,11 @@
             <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
                 style="width: 100%; overflow: hidden;">
                 <ul
-                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
+                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
                         <a href="../Approver/Approver_home.html"
-                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                            aria-current="page">Home</a>
+                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0"
+                            aria-current="page">Pending Workflows</a>
                     </li>
                     <li>
                         <a href="../Approver/Approver_workflow.html"
@@ -161,19 +161,18 @@
                     </li>
                     <li>
                         <a href="../Approver/Approver_form.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                             Forms</a>
                     </li>
                 </ul>
             </div>
         </nav>
-
         <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
         <!-- FORM START -->
         <div style="background-color: #b4d1df">
             <!-- back button -->
-            <button type="button" v-on:click="goToSinglepage()"
+            <button type="button" v-on:click="goToSinglePage(workflow_id)"
                 class=" ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Back
             </button>
             <div class="flex justify-center pb-4">
@@ -205,18 +204,18 @@
                                 {{value.inputLabel}}</h5>
                             <!-- options -->
                             <!-- text -->
-                            <input
+                            <input v-model = "value.inputValue"
                                 v-if="value.inputType == 'text' || value.inputType == 'Date' || value.inputType == 'email' || value.inputType == 'file' || value.inputType == 'number' "
-                                class="mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                                class="text-gray-600 mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
                                 :type="value.inputType" :required="value.isRequired">
                             <!-- TEXT AREA -->
-                            <textarea v-else-if="value.inputType == 'textarea'" id="message" rows="4" 
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" :required="value.isRequired">
+                            <textarea v-model = "value.inputValue" v-else-if="value.inputType == 'textarea'" id="message" rows="4" 
+                                class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" :required="value.isRequired">
                             </textarea>
                             <!-- NON text -->
                             <div v-else v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
-                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300"
+                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300" 
                                         :type="value.inputType" :name="value.questionId" :required="value.isRequired"
                                         value="value3.label">
                                     <label for="value3.id" :id="value3.id"
@@ -224,6 +223,10 @@
                                         :name="value.questionId">{{value3.label}}</label>
                                 </div>
                             </div>
+                            <!-- RADIO -->
+
+
+                            <!-- CHECKBOX -->
                         </div>
                     </div>
                 </div>
@@ -241,26 +244,41 @@
         data: {
             localhost: "http://localhost:5000",
             all_forms: "",
-            form_id: null,
+            form_sequence_id: null,
+            workflow_id: null,
+            form: "",
             form_questions: "",
             varFieldName: "",
             form_name: "",
+            form_id: "",
             question_options: {},
             //NEW
             form_sections: "",
             combined: [],
             all_section_ids: [],
+            all_answers: [],
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
-            this.form_id = query;
-            const API_URL = this.localhost + "/form/" + this.form_id;
+            var dash_idx = query.indexOf("/")
+            this.form_sequence_id = query.substring(0, dash_idx);
+            this.workflow_id = query.substring(dash_idx + 4, )
 
-            axios.get(API_URL)
+            const API_URL2 = this.localhost + "/workflows/" + this.workflow_id;
+            axios.get(API_URL2)
                 .then(response => {
-                    this.form_sections = response.data.sections
-                    this.form_name = response.data.formName
-                    console.log(this.form_sections)
+                    // console.log(response.data)
+                    this.all_form_sequences = response.data.formSequences;
+
+                    for (each of this.all_form_sequences) {
+                        if (each.formSequenceId == this.form_sequence_id) {
+                            this.form = each.form;
+                        }
+                    }
+
+                    this.form_sections = this.form.sections
+                    this.form_name = this.form.formName
+                    this.form_id = this.form.formId
 
                     var sections = this.form_sections.filter(each_section => {
                         if (Object.keys(each_section.questions).length !== 0) {
@@ -304,17 +322,25 @@
                         }
                     }
 
+                    // GET ALL VALUES
+                    for (each of this.form_sections) {
+                        var questions = each.questions
+                        for (i in questions) {
+                            this.all_answers.push(questions[i].inputValue)
+                        }
+                    }
+                    
+                    console.log(this.all_answers)
                     console.log(this.question_options)
-
                 })
                 .catch(error => {
                     console.error(error);
                 })
-
         },
         methods: {
-            goToSinglepage: function () {
-                window.location.assign("./Approver_individual_form.html?id=" + this.form_id)
+            goToSinglePage: function (id) {
+                console.log(id)
+                window.location.assign("../Approver/Approver_individual_pendingwf.html?id=" + this.workflow_id)
             },
         }
     })

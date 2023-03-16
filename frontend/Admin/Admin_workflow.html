@@ -158,11 +158,10 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Workflows
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span
-                            onclick="document.location = 'Admin_workflow.html'" class='text-sky-600'>Workflow </span>
+                        <span onclick="document.location = 'Admin_workflow.html'" class='text-sky-600'>Workflows </span>
                     </p>
                 </caption>
-                <thead class="text-xs text-white uppercase bg-sky-600">
+                <thead class="text-sm text-white bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             ID
@@ -186,29 +185,32 @@
                             Check Sequence
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Edit workflow
+                            Edit
                         </th>
-
+                        <th scope="col" class="px-6 py-3">
+                            Delete
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white" v-for="(value,key) in AllWorkflow">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key) in AllWorkflow">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                            v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.workFlowId}}
                         </th>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.wfName}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.wfDateline}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.wfLastSubmit}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.isValidated}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
                             <div v-if="value.vendor != null">
                                 {{value.vendor.userName}}
                             </div>
@@ -220,7 +222,8 @@
                         <!-- CHECK SEQUENCE -->
                         <td style="text-align: center;">
                             <button v-on:click="goToSequencePage(value.workFlowId)" type="button">
-                                <iconify-icon icon="mdi:file-document" width="28" height="28"></iconify-icon>
+                                <iconify-icon icon="mdi:file-document" width="28" height="28"
+                                    class="hover:text-sky-600"></iconify-icon>
                             </button>
                         </td>
                         <!-- EDIT WORKFLOW -->
@@ -230,6 +233,13 @@
                                 data-te-ripple-color="light">
                                 <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500"
                                     width="28"></iconify-icon>
+                            </button>
+                        </td>
+                        <!-- DELETE WORKFLOW -->
+                        <td style="text-align: center;">
+                            <button @click="deleteWorkflow(value.workFlowId)">
+                                <iconify-icon icon="mdi:trashcan-outline" class="hover:text-red-500" width="28"
+                                    height="28"></iconify-icon>
                             </button>
                         </td>
                     </tr>
@@ -245,10 +255,9 @@
                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
                     <path fill="#FFFFFF"
                         d="M31 15H21V5a3 3 0 1 0-6 0v10H5a3 3 0 1 0 0 6h10v10a3 3 0 1 0 6 0V21h10a3 3 0 1 0 0-6z" />
-                </svg> Create New WorkFlow
+                </svg> Assign New WorkFlow
             </button>
         </div>
-        <!-- <div>{{all_vendors}}</div> -->
 
         <!-- CREATE NEW WORKFLOW modal -->
         <div id="authentication-modal" tabindex="-1" aria-hidden="true"
@@ -268,27 +277,73 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                     <div class="px-6 py-6 lg:px-8">
-                        <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New WorkFlow</h3>
+                        <h3 class="mb-4 text-xl font-medium text-gray-900">Assign New Workflow</h3>
                         <form class="space-y-6" action="#">
                             <!-- wfName -->
                             <div>
-                                <label for="wfName"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Work Flow
+                                <label for="wfName" class="block  mb-1  text-sm font-medium text-gray-900">Workflow
                                     Name</label>
                                 <input type="text" name="wfName" id="wfName" v-model="wfName"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     required>
                             </div>
-                            <!-- dateline -->
+                            <!-- deadline -->
                             <div>
-                                <label for="wfDateline"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dateline
+                                <label for="wfDateline" class="block  mb-1  text-sm font-medium text-gray-900">Deadline
                                 </label>
-                                <input type="wfDateline" name="wfDateline" id="wfDateline" v-model="wfDateline"
+                                <input type="date" name="wfDateline" id="wfDateline" v-model="wfDateline"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                     required>
                             </div>
-                            <button type="button" @click="createNewForm()"
+                            <!-- ASSIGN APPROVER -->
+                            <div>
+                                <label for="approver" class="block mb-1 text-sm font-medium text-gray-900">Approver
+                                </label>
+                                <select name="approver" id="approver" v-model="AssignApprover"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option v-for="(value,key) in all_approvers" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- ASSIGN ADMIN -->
+                            <div>
+                                <label for="admin" class="block  mb-1 text-sm font-medium text-gray-900">Admin
+                                </label>
+                                <select name="admin" id="admin" v-model="AssignAdmin"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_admins" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- ASSIGN VENDOR-->
+                            <div>
+                                <label for="vendor" class="block mb-1  text-sm font-medium text-gray-900">Vendor
+                                </label>
+                                <select name="vendor" id="vendor" v-model="AssignVendor"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_vendors" :value="value.userId">
+                                        {{value.userId}} : {{value.userName}}
+                                    </option>
+                                </select>
+                            </div>
+                            <!-- ERROR MESSAGE -->
+                            <div v-if="error_message != ''"
+                                class="mt-4 flex p-4 mb-3 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                                <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    <span class="font-medium">Error!</span> {{error_message}}
+                                </div>
+                            </div>
+
+                            <button type="button" @click="createNewWorkflow()" id="createButton"
                                 class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
                         </form>
                     </div>
@@ -345,7 +400,8 @@
                                 <label for="isValidated"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Validated
                                 </label>
-                                <select name="isValidated" id="isValidated" v-model="isValidated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <select name="isValidated" id="isValidated" v-model="isValidated"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                     <option v-for="(value,key) in valid_options">
                                         {{value}}
                                     </option>
@@ -359,8 +415,9 @@
                                 <label for="vendor"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vendor
                                 </label>
-                                <select name="vendor" id="vendor" v-model="vendor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option v-for="(value,key) in all_vendors" value = "value.userId : value.userName">
+                                <select name="vendor" id="vendor" v-model="vendor"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_vendors" value="value.userId : value.userName">
                                         {{value.userId}} : {{value.userName}}
                                     </option>
                                 </select>
@@ -373,7 +430,8 @@
                                 <!-- <input type="text" name="validated" id="validated" v-model="validated"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                         > -->
-                                <select name="isValidated" id="isValidated" v-model="isValidated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                <select name="isValidated" id="isValidated" v-model="isValidated"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                     <option v-for="(value,key) in valid_options">
                                         {{value}}
                                     </option>
@@ -405,10 +463,6 @@
             AllWorkflow: "",
             userId: "",
 
-
-            wfName: "",
-            wfDateline: "",
-            wfLastSubmit: "",
             isValidated: "false",
             formSequences: [],
             vendor: null,
@@ -417,7 +471,19 @@
             edit_data: {},
 
             valid_options: ["True", "False"],
-            all_vendors: []
+            all_vendors: [],
+            all_admins: [],
+            all_approvers: [],
+
+            //ASSIGN NEW WORKFLOW
+            wfName: "",
+            wfDateline: "",
+            wfLastSubmit: "",
+            AssignApprover: "",
+            AssignAdmin: "",
+            AssignVendor: "",
+            error_message: "",
+
         },
         mounted: async function () {
             // Fetch individual workflow
@@ -427,43 +493,89 @@
             // const API_URL = this.localhost + "/workflows"+this.userId;
             const API_URL = this.localhost + "/workflows";
             const API_URL2 = this.localhost + "/users/userType/VENDOR";
-            axios.get(API_URL)
-                .then(response => {
-                    this.AllWorkflow = response.data;
+            const API_URL3 = this.localhost + "/users/userType/ADMIN";
+            const API_URL4 = this.localhost + "/users/userType/APPROVER";
+
+            const requestOne = axios.get(API_URL);
+            const requestTwo = axios.get(API_URL2);
+            const requestThree = axios.get(API_URL3)
+            const requestFour = axios.get(API_URL4)
+
+            axios.all([requestOne, requestTwo, requestThree, requestFour])
+                .then(axios.spread((...responses) => {
+                    const responseOne = responses[0].data
+                    const responseTwo = responses[1].data
+                    const responseThree = responses[2].data
+                    const responseFour = responses[3].data
+
+                    this.AllWorkflow = responseOne;
                     console.log(this.AllWorkflow)
 
-                })
-                .catch(error => {
-                    console.error(error);
-                })
-            axios.get(API_URL2)
-                .then(response => {
-                    this.all_vendors = response.data;
-                    console.log(this.all_vendors)
+                    this.all_vendors = responseTwo;
+                    this.all_approvers = responseFour;
+                    this.all_admins = responseThree;
+                }))
 
-                })
-                .catch(error => {
-                    console.error(error);
-                })
         },
         methods: {
-            createNewForm() {
-                var SubmittedDate = new Date()
-                SubmittedDate.toISOString().split('T')[0]
-                var URL = this.localhost + "/workflows"
-                axios.post(URL, {
-                        wfName: this.wfName,
-                        wfDateline: this.wfDateline,
-                        wfLastSubmit: SubmittedDate,
-                        formSequences: this.formSequences,
-                        vendor: this.vendor,
-                        validated: this.validated
-                    })
-                    .then(response => {
-                        console.log(response.data)
+            createNewWorkflow() {
+                if (this.AssignAdmin == "" || this.AssignApprover == "" || this.AssignVendor == "" || this
+                    .wfDateline == "" || this.wfName == "") {
+                    this.error_message = "Input cannot be Empty!"
+                    document.getElementById("createButton").disabled = true;
+                } else {
+                    var SubmittedDate = new Date()
+                    SubmittedDate.toISOString().split('T')[0]
 
+                    for (each of this.all_vendors) {
+                        each.userId == this.AssignVendor;
+                        var vendor = each
+                    }
+                    for (each of this.all_approvers) {
+                        each.userId == this.AssignApprover;
+                        var approver = each
+                    }
+                    for (each of this.all_admins) {
+                        each.userId == this.AssignAdmin;
+                        var admin = each
+                    }
+
+                    var workflow = {
+                        "wfName": this.wfName,
+                        "wfDateline": this.wfDateline,
+                        "wfLastSubmit": SubmittedDate,
+                        "isValidated": false,
+                        "formSequences": [],
+                        "vendor": vendor,
+                        "admin": admin,
+                        "approver": approver,
+                    }
+
+                    console.log(workflow)
+
+                    var URL = this.localhost + "/workflows"
+                    axios.post(URL, workflow)
+                        .then(response => {
+                            console.log(response.data)
+
+                            this.closeCreateModal()
+                            document.location.reload();
+
+                        })
+                        .catch(error => {
+                            console.log(error.message)
+                        })
+                }
+                document.getElementById("createButton").disabled = false;
+
+            },
+            deleteWorkflow(workflow_id) {
+                var URL = this.localhost + "/workflows/" + workflow_id
+                axios.delete(URL)
+                    .then(response => {
+                        alert("Deleted Succesfully!")
+                        console.log(response.data)
                         document.location.reload();
-                        this.closeCreateModal()
                     })
                     .catch(error => {
                         console.log(error.message)
@@ -513,6 +625,10 @@
             closeCreateModal() {
                 this.wfName = "",
                     this.wfDateline = ""
+                this.AssignAdmin = "",
+                    this.AssignApprover = "",
+                    this.AssignVendor = "",
+                    this.error_message = ""
             }
         }
     })
