@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Links -->
+     <!-- Links -->
     <!-- flowbite -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <!-- Tailwind -->
@@ -17,9 +17,22 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- tailwind elements -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
-
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
     <style>
         table {
             border: none;
@@ -120,7 +133,7 @@
                     <li>
                         <a href="../Approver/Approver_home.html"
                             class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                            aria-current="page">Pending Workflows</a>
+                            aria-current="page">Validated Workflows</a>
                     </li>
                     <li>
                         <a href="../Approver/Approver_workflow.html"
@@ -149,7 +162,6 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Accounts
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Approver_home.html'">Home</span>
                         <span class='text-sky-600'> Accounts</span>
 
                     </p>
@@ -181,11 +193,12 @@
                             Office Fax
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Delete
+                            Edit
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Update
+                            Delete
                         </th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -216,12 +229,6 @@
                             {{value.officeFax}}
                         </td>
                         <td class="px-6 py-4" style="text-align: center;">
-                            <button @click="deleteAcc(value.userId)">
-                                <iconify-icon icon="mdi:trashcan-outline" class="hover:text-red-500" width="28"
-                                    height="28"></iconify-icon>
-                            </button>
-                        </td>
-                        <td class="px-6 py-4" style="text-align: center;">
                             <button v-if="value.userType == 'VENDOR'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateVendorModalScrollable" data-te-ripple-init
                                 data-te-ripple-color="light">
@@ -238,13 +245,19 @@
                                 <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
                             </button>
                         </td>
+                        <td class="px-6 py-4" style="text-align: center;">
+                            <button @click="deleteAcc(value.userId)">
+                                <iconify-icon icon="mdi:trashcan-outline" class="hover:text-red-500" width="28"
+                                    height="28"></iconify-icon>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <!-- Buttons for Creating Account -->
-        <div class="mx-8 mt-5">
+        <div class="mx-8 mt-5 pb-12">
             <button type="button"
                 class="mr-4 float-right inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
                 data-te-toggle="modal" data-te-target="#adminModalScrollable" data-te-ripple-init
