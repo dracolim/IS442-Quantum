@@ -157,11 +157,12 @@
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
             <table class="w-full text-sm text-left text-gray-500">
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
-                    Work Flow Sequences
+                    Workflow Sequences
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Admin_home.html'">Home > </span><span
-                            onclick="document.location = 'Admin_workflow.html'">Workflow > </span><span
-                            onclick="document.location = 'Admin_workflow_sequences.html'" class='text-sky-600'>Form
+                        
+                            <a href="../Admin/Admin_workflow.html"><span class="underline hover:text-gray-800"> Workflow
+                            </span></a><span
+                            onclick="document.location = 'Admin_workflow_sequences.html'" class='text-sky-600'>> Workflow
                             Sequences </span>
                     </p>
                 </caption>
@@ -440,6 +441,7 @@
                 axios.put(API_URL3, this.workflow_data)
                     .then(response => {
                         console.log(response.data)
+                        document.location.reload();
                     })
                     .catch(error => {
                         console.log(error.message)

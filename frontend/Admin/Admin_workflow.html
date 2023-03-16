@@ -158,7 +158,7 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Workflows
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Admin_home.html'">Home > </span><span
+                        <span
                             onclick="document.location = 'Admin_workflow.html'" class='text-sky-600'>Workflow </span>
                     </p>
                 </caption>
@@ -210,7 +210,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <div v-if="value.vendor != null">
-                                {{value.vendor}}
+                                {{value.vendor.userName}}
                             </div>
                             <div v-if="value.vendor == null" class="text-red-500">
                                 vendor not assigned
@@ -248,7 +248,7 @@
                 </svg> Create New WorkFlow
             </button>
         </div>
-        <div>{{all_vendors}}</div>
+        <!-- <div>{{all_vendors}}</div> -->
 
         <!-- CREATE NEW WORKFLOW modal -->
         <div id="authentication-modal" tabindex="-1" aria-hidden="true"
@@ -345,7 +345,7 @@
                                 <label for="isValidated"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Validated
                                 </label>
-                                <select name="isValidated" id="isValidated" v-model="isValidated">
+                                <select name="isValidated" id="isValidated" v-model="isValidated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                     <option v-for="(value,key) in valid_options">
                                         {{value}}
                                     </option>
@@ -359,8 +359,8 @@
                                 <label for="vendor"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Vendor
                                 </label>
-                                <select name="vendor" id="vendor" v-model="vendor">
-                                    <option v-for="(value,key) in all_vendors">
+                                <select name="vendor" id="vendor" v-model="vendor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                                    <option v-for="(value,key) in all_vendors" value = "value.userId : value.userName">
                                         {{value.userId}} : {{value.userName}}
                                     </option>
                                 </select>
@@ -373,7 +373,7 @@
                                 <!-- <input type="text" name="validated" id="validated" v-model="validated"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                         > -->
-                                <select name="isValidated" id="isValidated" v-model="isValidated">
+                                <select name="isValidated" id="isValidated" v-model="isValidated" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                     <option v-for="(value,key) in valid_options">
                                         {{value}}
                                     </option>
