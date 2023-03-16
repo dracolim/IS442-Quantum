@@ -22,12 +22,27 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        table {
+            border: none;
+            border-collapse: collapse;
+        }
+        table td {
+            border-left: 1px solid #e6e6e6;
+            border-right: 1px solid #d6d6d6;
+        }
+        table td:first-child {
+            border-left: none;
+        }
+        table td:last-child {
+            border-right: none;
+        }
+    </style>
     
 
     <title>Quantum</title>
 </head>
 
-<body onload="vm.getForms()">
 
     <!-- header -->
     <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
@@ -101,22 +116,10 @@
             <ul
                 class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                 <li>
-                    <a href="./Vendor_home.html"
-                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded 
-                    hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                    Home</a>
-                </li>
-                <li>
                     <a href="./Vendor_workflow.html"
-                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded 
-                    hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Workflows</a>
-                </li>
-                <li>
-                    <a href="#"
-                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 
-                    rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
-                    aria-current="page">Forms</a>
+                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 >
+                    rounded md:bg-transparent md:text-sky-600 md:p-0">
+                        Pending Workflows</a>
                 </li>
             </ul>
         </div>
@@ -124,30 +127,42 @@
     <!-- Orange Divider -->
     <div class='row' style='height: 8px; background-color: #0284c7'></div>
 
-    <!--Cards-->
-    <div id="app" class="flex flex-wrap justify-left m-4">
-        <div v-for="f in forms">
-            <div class="rounded overflow-hidden shadow-lg mx-4"></div>
-                <div style="max-width: 20rem" class="h-100 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 mx-2">
-                   <a href="#">
-                       <img class="rounded-t-lg w-full h-48 object-cover object-top" src="../Images/New Vendor Assessment Form.PNG" alt="Image" />
-                   </a>
-                   <div class="p-5">
-                       <a href="#">
-                           <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{f.formName}}</h5>
-                       </a>
-                       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Workflow 111</p>
-                       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Last edited: {{f.lastEdited}}</p>
-                       <button>
-                           <a v-bind:href="'./Vendor_form_details.html?id=' + f.formId" class="inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-white bg-sky-700   rounded-lg hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300 dark:bg-sky-600 dark:hover:bg-sky-7dark:focus:ring-sky-800">
-                               Continue Editing
-                               
+    <div id="app" class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
+        <table class="w-full text-sm text-left text-gray-500">
+            <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white mt-4">
+                Pending Workflows
+                <p class="mt-1 text-sm font-normal text-gray-500">
+                    <span onclick="document.location = 'Vendor_workflow.html'" class='text-sky-600'>Workflows</span> > Forms
+                </p>
+            </caption>
+           
+
+            <!--Cards-->
+            <div class="flex flex-wrap justify-left">
+                <div v-for="f in forms">
+                    <div class="rounded overflow-hidden shadow-lg mx-4"></div>
+                        <div style="max-width: 20rem" class="h-100 bg-white border border-gray-200 rounded-lg shadow mx-2">
+                           <a href="#">
+                               <img class="rounded-t-lg w-full h-48 object-cover object-top" src="../Images/New Vendor Assessment Form.PNG" alt="Image" />
                            </a>
-                       </button>
-                   </div>
-                </div>    
-            </div> 
-        </div>
+                           <div class="p-5">
+                               <a href="#">
+                                   <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{f.form.formName}}</h5>
+                               </a>
+                               <p class="mb-3 font-normal text-gray-700">Workflow: {{workflow_id}}</p>
+                               <p class="mb-3 font-normal text-gray-70">Form Sequence: {{f.formSequenceId}}</p>
+                               <button>
+                                   <a v-bind:href="'./Vendor_form_details.html?id=' + f.form.formId" class="inline-flex          items-center px-3 py-2 text-sm font-medium text-center text-white bg-sky-700        rounded-lg hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300">
+                                       Continue Editing
+
+                                   </a>
+                               </button>
+                           </div>
+                        </div>    
+                    </div> 
+                </div>
+            </div>
+        </table>
     </div>
 
     
@@ -159,16 +174,24 @@
         el: '#app',
         data() {
           return {
+            workflow: [],
             forms: [],
-            urls: ""
+            workflow_id: 0
           }
         },
         methods: {
           async getForms() {
             try {
-              const response = await axios.get("http://localhost:5000/forms");
-              this.forms = response.data;
-              console.log(this.forms)
+                //get workflow id
+                const url = window.location.href;
+                const queryParams = new URLSearchParams(window.location.search)
+                const wfid = queryParams.get('id');
+
+                const response = await axios.get("http://localhost:5000/workflows/" + wfid);
+                this.workflow = response.data;
+                this.workflow_id = wfid
+                this.forms = response.data.formSequences
+                console.log(this.forms)
               
             } catch (error) {
               console.log(error);
