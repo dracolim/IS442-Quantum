@@ -99,7 +99,7 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="../login_home.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -205,21 +205,31 @@
         el: '#app',
         data: {
             localhost: "http://localhost:5000",
-            all_workflows: "",
+            all_workflows: [],
             userName: "",
             emailAddress: "",
             user_id: "",
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
-            this.user_id = query;
+            this.user_id = query.toString();
 
             const API_URL = this.localhost + "/workflows";
             const API_URL2 = this.localhost + "/users/userType/" + "VENDOR"
 
             axios.get(API_URL)
                 .then(response => {
-                    this.all_workflows = response.data;
+                    var all_workflows = response.data;
+                    for(each of all_workflows){
+                        console.log(each.vendor.userId)
+                        console.log(this.user_id)
+                        if (each.vendor.userId == this.user_id)
+                        {
+                            console.log("adlfkajgdhfasd")
+                            this.all_workflows.push(each)
+                        }
+                    }
+
                     console.log(this.all_workflows)
                 })
                 .catch(error => {

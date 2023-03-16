@@ -143,26 +143,11 @@
             <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
                 style="width: 100%; overflow: hidden;">
                 <ul
-                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
+                    class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
-                        <a href="../Approver/Approver_home.html"
-                            class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0"
-                            aria-current="page">Pending Workflows</a>
-                    </li>
-                    <li>
-                        <a href="../Approver/Approver_workflow.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                            aria-current="page">Workflows</a>
-                    </li>
-                    <li>
-                        <a href="../Approver/Approver_accounts.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                            Accounts</a>
-                    </li>
-                    <li>
-                        <a href="../Approver/Approver_form.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                            Forms</a>
+                        <a href="./Vendor_workflow.html/id=3" class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 >
+                    rounded md:bg-transparent md:text-sky-600 md:p-0">
+                            Pending Workflows</a>
                     </li>
                 </ul>
             </div>
@@ -204,43 +189,62 @@
                                 {{value.inputLabel}}</h5>
                             <!-- options -->
                             <!-- text -->
-                            <input v-model="value.inputValue"
+                            <input v-model="allAnswers[value.questionId]"
                                 v-if="value.inputType == 'text' || value.inputType == 'Date' || value.inputType == 'email' || value.inputType == 'file' || value.inputType == 'number' "
                                 class="text-gray-600 mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
                                 :type="value.inputType" :required="value.isRequired">
                             <!-- TEXT AREA -->
-                            <textarea v-model="value.inputValue" v-else-if="value.inputType == 'textarea'" id="message"
-                                rows="4"
+                            <textarea v-model="allAnswers[value.questionId]" v-else-if="value.inputType == 'textarea'"
+                                id="message" rows="4"
                                 class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                                 :required="value.isRequired">
                             </textarea>
-                            <!-- NON text -->
+                            <!-- NON text
                             <div v-else v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
-                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300"
+                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300" v-model ="allAnswers[value.questionId]"
                                         :type="value.inputType" :name="value.questionId" :required="value.isRequired"
                                         value="value3.label">
                                     <label for="value3.id" :id="value3.id"
                                         class="ml-2 text-sm font-medium text-gray-900"
                                         :name="value.questionId">{{value3.label}}</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- RADIO -->
-
+                            <div v-else-if="value.inputType == 'Radio'"
+                                v-for="value3 in question_options[value.questionId]">
+                                <div class="flex items-center mb-4">
+                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300"
+                                        v-model="allAnswers[value.questionId]" type="radio" :name="value.questionId"
+                                        :required="value.isRequired" :value="value3.label">
+                                    <label for="value3.id" :id="value3.id"
+                                        class="ml-2 text-sm font-medium text-gray-900"
+                                        :name="value.questionId">{{value3.label}}</label>
+                                </div>
+                            </div>
 
                             <!-- CHECKBOX -->
+                            <div v-else-if="value.inputType == 'checkbox'"
+                                v-for="value3 in question_options[value.questionId]">
+                                <div class="flex items-center mb-4">
+                                    <input class="bg-gray-50 border border-gray-300" v-model="allAnswers[value3.id]"
+                                        type='checkbox' :required="value.isRequired" :value="value3.label">
+                                    <label for="value3.id"
+                                        class="ml-2 text-sm font-medium text-gray-900">{{value3.label}}</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class ="flex flex-col items-center justify-center">
+            <div class="flex flex-col items-center justify-center">
                 <button type="button" id="submitButton" @click="submitForm()"
-                class="flex inline-flex items-center mr-5 px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-sm leading-tight rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                Submit Form
-            </button>
+                    class="flex inline-flex items-center mr-5 px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-sm leading-tight rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                    Submit Form
+                </button>
             </div>
-           
+
 
             <!-- FOOTER -->
             <div class="pb-12" style="background-color: #b4d1df" class="h-screen"></div>
@@ -254,6 +258,7 @@
         data: {
             localhost: "http://localhost:5000",
             all_forms: "",
+            all_questions: "",
             form_sequence_id: null,
             workflow_id: null,
             form: "",
@@ -266,7 +271,8 @@
             form_sections: "",
             combined: [],
             all_section_ids: [],
-            all_answers: [],
+            allAnswers: {},
+            workflow_raw_data: "",
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
@@ -274,10 +280,21 @@
             this.form_sequence_id = query.substring(0, dash_idx);
             this.workflow_id = query.substring(dash_idx + 4, )
 
+            const URL = this.localhost + "/questions"
+            axios.get(URL)
+                .then(response => {
+                    this.all_questions = response.data
+
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+
             const API_URL2 = this.localhost + "/workflows/" + this.workflow_id;
             axios.get(API_URL2)
                 .then(response => {
                     // console.log(response.data)
+                    this.workflow_raw_data = response.data;
                     this.all_form_sequences = response.data.formSequences;
 
                     for (each of this.all_form_sequences) {
@@ -287,7 +304,6 @@
                     }
 
                     this.form_sections = this.form.sections
-                    console.log(this.form_sections)
                     this.form_name = this.form.formName
                     this.form_id = this.form.formId
 
@@ -333,15 +349,6 @@
                         }
                     }
 
-                    // GET ALL VALUES
-                    for (each of this.form_sections) {
-                        var questions = each.questions
-                        for (i in questions) {
-                            this.all_answers.push(questions[i].inputValue)
-                        }
-                    }
-
-                    console.log(this.all_answers)
                     console.log(this.question_options)
                 })
                 .catch(error => {
@@ -353,8 +360,68 @@
                 console.log(id)
                 window.location.assign("../Vendor/?id=" + this.workflow_id)
             },
-            submiteForm() {
+            submitForm() {
+                var checkboxID = []
+                for (i in this.allAnswers) {
+                    console.log(this.allAnswers[i])
+                    // checkbox questionpropertyID
+                    if (this.allAnswers[i] == true) {
+                        checkboxID.push(i)
+                        delete this.allAnswers[i];
+                    }
+                }
+                // get question ID for checkbox IDs
+                var question_ans = {}
+                for (each of this.all_questions) {
+                    if ("questionProperties" in each) {
+                        for (each_qp of each.questionProperties) {
+                            for (i in checkboxID) {
+                                if (each_qp.id == checkboxID[i]) {
+                                    if (!(each.questionId in question_ans)) {
+                                        question_ans[each.questionId] = [each_qp.label]
+                                    } else {
+                                        question_ans[each.questionId].push(each_qp.label)
+                                    }
+                                }
 
+                            }
+                        }
+                    }
+                }
+                console.log(this.allAnswers)
+                console.log(question_ans)
+
+                //combine all questions
+                var allQnA = Object.assign(this.allAnswers, question_ans);
+                console.log(allQnA)
+
+                for (each of this.form_sections) {
+                    for (question of each.questions) {
+                        if (question.questionId in allQnA) {
+                            question['inputValue'] = allQnA[question.questionId].toString();
+                        }
+                    }
+                }
+
+                console.log(this.form_sections)
+                for (each of this.all_form_sequences) {
+                    if (each.formSequenceId == this.form_sequence_id) {
+                        each.form['sections'] = this.form_sections;
+                    }
+                }
+
+                this.workflow_raw_data['formSequences'] = this.all_form_sequences
+                console.log(this.workflow_raw_data)
+
+                const URL = this.localhost + "/workflows/" + this.workflow_id;
+                axios.put(URL, this.workflow_raw_data)
+                    .then(response => {
+                        console.log(response.data)
+                        // document.location.reload();
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
             }
         }
     })
