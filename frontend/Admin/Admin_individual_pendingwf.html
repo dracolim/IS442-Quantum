@@ -124,8 +124,8 @@
             </div>
         </div>
 
-         <!-- Navbar -->
-         <nav class="bg-gray-100">
+        <!-- Navbar -->
+        <nav class="bg-gray-100">
             <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
                 style="width: 100%; overflow: hidden;">
                 <ul
@@ -163,8 +163,9 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Workflow ID: {{workflow_id}}
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <a href="../Approver/Approver_home.html"><span class="underline hover:text-gray-800"> Pending Workflows
-                        </span></a>
+                        <a href="../Approver/Approver_home.html"><span class="underline hover:text-gray-800"> Pending
+                                Workflows
+                            </span></a>
                         <span class='text-sky-600'> > Workflow ID: {{workflow_id}}</span>
                     </p>
                 </caption>
@@ -183,32 +184,40 @@
                             Last Edited
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Approval
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Status
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_form_sequences" @click = "goToSinglePage(value.formSequenceId)">
-                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_form_sequences">
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"  @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.formId}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4" @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.formName}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4" @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.dateSubmitted}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td class="px-6 py-4" @click="goToSinglePage(value.formSequenceId)">
                             {{value.form.lastEdited}}
                         </td>
-                        <td class="px-6 py-4 text-red-600 font-medium" v-if = "value.status == 'NOT_STARTED'">
-                            NOT STARTED
+                        <td class="px-6 py-4">
+                            <select id="ApprovalRequired" v-model="ApprovalRequired[value.form.formId]" @change="changeStatus(value.form.formId)"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
+                                    <option :value = "value.status" >{{ value.status | yesno }}</option>
+                                    <option v-if ="value.status == 'VALIDATED'" value="PENDING" selected>Not Approved</option>
+                                    <option v-if ="value.status == 'PENDING'" value="VALIDATED" selected>Approved</option>
+                            </select>
                         </td>
-                        <td class="px-6 py-4 text-green-600" v-else-if="value.status == 'Completed'">
-                            Completed
-                        </td>
-                        <td class="px-6 py-4 text-red-600 font-medium" v-else>
+                        <td class="px-6 py-4 text-red-600 font-medium">
                             {{value.status}}
+                        </td>
+                        <td class="px-6 py-4 text-green-600" v-if="value.status == 'COMPLETED'">
+                            Completed
                         </td>
                     </tr>
                 </tbody>
@@ -218,12 +227,21 @@
 </body>
 
 <script>
+    Vue.filter('yesno', function (status) {
+        if (status == 'PENDING'){
+            return 'Not Approved'
+        } else if (status == 'VALIDATED'){
+            return 'Approved'
+        }
+    })
     const vm = new Vue({
         el: '#app',
         data: {
             localhost: "http://localhost:5000",
             all_form_sequences: [],
             workflow_id: "",
+            ApprovalRequired: {},
+            workflow_raw_data: "",
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
@@ -234,10 +252,16 @@
             axios.get(API_URL)
                 .then(response => {
                     var result = response.data
+                    this.workflow_raw_data = result;
+
                     this.all_form_sequences = result.formSequences
 
-                    
                     console.log(this.all_form_sequences)
+
+                    for (each of this.all_form_sequences){
+                        this.ApprovalRequired[each.form.formId] = each.status;
+                    }
+                    console.log(this.ApprovalRequired)
                 })
                 .catch(error => {
                     console.error(error);
@@ -249,6 +273,33 @@
                 console.log(id)
                 window.location.assign("./Admin_form_sequence.html?id=" + id + "/wf=" + this.workflow_id)
             },
+            changeStatus(form_id){
+                if (this.ApprovalRequired[form_id] == 'VALIDATED'){
+                    for (each of this.all_form_sequences){
+                        if (each.form.formId == form_id){
+                            each.status = "VALIDATED"
+                        };
+                    }
+                } else if (this.ApprovalRequired[form_id] == 'PENDING'){
+                    for (each of this.all_form_sequences){
+                        if (each.form.formId == form_id){
+                            each.status = "PENDING"
+                        };
+                    }
+                }
+
+                this.workflow_raw_data['formSequences'] = this.all_form_sequences;
+                console.log(this.workflow_raw_data)
+
+                const URL = this.localhost + "/workflows/" + this.workflow_id
+                axios.put(URL, this.workflow_raw_data)
+                .then(response => {
+                    console.log(response.data)
+                })
+                .catch(error => {
+                    console.log(error.message)
+                })
+            }
         }
     })
 </script>
