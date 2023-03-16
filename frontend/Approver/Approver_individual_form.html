@@ -1172,7 +1172,7 @@
                     var questionProperties = this.NewOptions;
 
                     if (section_id == "" || inputLabel == "" || inputType == "") {
-                        document.getElementById("addFieldButton").disabled = false
+                        document.getElementById("addFieldButton").disabled = true;
                         this.error_message = "Fields cannot be Empty!"
                     } else {
                         var all_questions_in_this_form = this.all_questions
