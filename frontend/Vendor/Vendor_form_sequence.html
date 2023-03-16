@@ -204,18 +204,20 @@
                                 {{value.inputLabel}}</h5>
                             <!-- options -->
                             <!-- text -->
-                            <input v-model = "value.inputValue"
+                            <input v-model="value.inputValue"
                                 v-if="value.inputType == 'text' || value.inputType == 'Date' || value.inputType == 'email' || value.inputType == 'file' || value.inputType == 'number' "
                                 class="text-gray-600 mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
                                 :type="value.inputType" :required="value.isRequired">
                             <!-- TEXT AREA -->
-                            <textarea v-model = "value.inputValue" v-else-if="value.inputType == 'textarea'" id="message" rows="4" 
-                                class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" :required="value.isRequired">
+                            <textarea v-model="value.inputValue" v-else-if="value.inputType == 'textarea'" id="message"
+                                rows="4"
+                                class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                :required="value.isRequired">
                             </textarea>
                             <!-- NON text -->
                             <div v-else v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
-                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300" 
+                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300"
                                         :type="value.inputType" :name="value.questionId" :required="value.isRequired"
                                         value="value3.label">
                                     <label for="value3.id" :id="value3.id"
@@ -231,6 +233,14 @@
                     </div>
                 </div>
             </div>
+
+            <div class ="flex flex-col items-center justify-center">
+                <button type="button" id="submitButton" @click="submitForm()"
+                class="flex inline-flex items-center mr-5 px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-sm leading-tight rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                Submit Form
+            </button>
+            </div>
+           
 
             <!-- FOOTER -->
             <div class="pb-12" style="background-color: #b4d1df" class="h-screen"></div>
@@ -330,7 +340,7 @@
                             this.all_answers.push(questions[i].inputValue)
                         }
                     }
-                    
+
                     console.log(this.all_answers)
                     console.log(this.question_options)
                 })
@@ -341,8 +351,11 @@
         methods: {
             goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("../Approver/Approver_individual_pendingwf.html?id=" + this.workflow_id)
+                window.location.assign("../Vendor/?id=" + this.workflow_id)
             },
+            submiteForm() {
+
+            }
         }
     })
 </script>
