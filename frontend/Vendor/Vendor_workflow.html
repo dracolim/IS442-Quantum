@@ -142,10 +142,10 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Pending Workflows
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Vendor_workflow.html'" class='text-sky-600'>Workflows</span>
+                        <span onclick="document.location = 'Vendor_workflow.html'" class='text-sky-600'>Pending Workflows</span>
                     </p>
                 </caption>
-                <thead class="text-xs text-white uppercase bg-sky-600">
+                <thead class="text-sm text-white bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
                             Workflow ID
@@ -160,15 +160,12 @@
                             Last Submitted
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Is Validated?
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             Forms
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-b" v-for="(value, idx) in all_workflows">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value, idx) in all_workflows" @click="goToSinglepage(value.workFlowId)">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.workFlowId}}
                         </th>
@@ -180,9 +177,6 @@
                         </td>
                         <td class="px-6 py-4">
                             {{value.wfLastSubmit}}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{value.isValidated}}
                         </td>
                         <td class="px-6 py-4">
                             <button v-on:click="goToSinglepage(value.workFlowId)" type="button">
@@ -200,6 +194,13 @@
 </body>
 
 <script>
+    Vue.filter('yesno', function (status) {
+        if (status == 'PENDING') {
+            return 'Not Approved'
+        } else if (status == 'VALIDATED') {
+            return 'Approved'
+        }
+    })
     const vm = new Vue({
         el: '#app',
         data: {
@@ -241,7 +242,7 @@
         methods: {
             goToSinglepage: function (id) {
                 console.log(id)
-                window.location.assign("./Vendor_form.html?id=" + id)
+                window.location.assign("./Vendor_form.html?id=" + id + "/userId=" + this.user_id)
             },
         }
     })

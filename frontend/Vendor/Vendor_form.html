@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <!-- Links -->
+    <!-- Links -->
     <!-- flowbite -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <!-- Tailwind -->
@@ -27,189 +27,233 @@
             border: none;
             border-collapse: collapse;
         }
+
         table td {
             border-left: 1px solid #e6e6e6;
             border-right: 1px solid #d6d6d6;
         }
+
         table td:first-child {
             border-left: none;
         }
+
         table td:last-child {
             border-right: none;
         }
     </style>
-    
+
 
     <title>Quantum</title>
 </head>
 
 
-    <!-- header -->
-    <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
-        <div class="container flex flex-wrap items-center justify-between mx-auto"
-            style="width: 100%; overflow: hidden;">
-            <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
-                style="height: 80px ; width: 200px;" />
+<!-- header -->
+<div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
+    <div class="container flex flex-wrap items-center justify-between mx-auto" style="width: 100%; overflow: hidden;">
+        <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
+            style="height: 80px ; width: 200px;" />
 
-            <div class="flex md:order-2">
-                <a href="homepage.html" style="margin-right: 10px;">
-                    <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
+        <div class="flex md:order-2">
+            <a href="homepage.html" style="margin-right: 10px;">
+                <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
+            </a>
+
+            <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
+                class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-sky-600  md:mr-0"
+                type="button">
+                <span class="sr-only">Open user menu</span>
+                <a class='mr-2'>
+                    <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40" height="40">
+                    </iconify-icon>
                 </a>
+                {{userName}}
+                <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
 
-                <button id="dropdownAvatarNameButton" data-dropdown-toggle="dropdownAvatarName"
-                    class="flex items-center text-sm font-medium text-gray-900 rounded-full hover:text-sky-600  md:mr-0"
-                    type="button">
-                    <span class="sr-only">Open user menu</span>
-                    <a class='mr-2'>
-                        <iconify-icon icon="healthicons:ui-user-profile" style="color: #0284c7;" width="40" height="40">
-                        </iconify-icon>
-                    </a>
-                    Malfoy Chew
-                    <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
-
-                <!-- Dropdown menu -->
-                <div id="dropdownAvatarName"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
-                    <div class="px-4 py-3 text-sm text-gray-900 ">
-                        <div class="font-bold">User</div>
-                        <div class="truncate">Malfoy.chew@quantum.com</div>
-                    </div>
-                    <ul class="py-2 text-sm text-gray-700 "
-                        aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-                        <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
-                        </li>
-                    </ul>
-                    <div class="py-2">
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
-                            out</a>
-                    </div>
+            <!-- Dropdown menu -->
+            <div id="dropdownAvatarName" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
+                <div class="px-4 py-3 text-sm text-gray-900 ">
+                    <div class="font-bold">User</div>
+                    <div class="truncate">{{emailAddress}}</div>
                 </div>
-
-                <button data-collapse-toggle="navbar-sticky" type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
-                    aria-controls="navbar-cta" aria-expanded="false">
-                    <span class="sr-only">Open main menu</span>
-                    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button>
+                <ul class="py-2 text-sm text-gray-700 "
+                    aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
+                    <li>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
+                    </li>
+                </ul>
+                <div class="py-2">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                        out</a>
+                </div>
             </div>
+
+            <button data-collapse-toggle="navbar-sticky" type="button"
+                class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 "
+                aria-controls="navbar-cta" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
         </div>
     </div>
+</div>
 
-    <!-- Navbar -->
-    <nav class="bg-gray-100">
-        <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
-            style="width: 100%; overflow: hidden;">
-            <ul
-                class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
-                <li>
-                    <a href="./Vendor_workflow.html"
-                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 >
+<!-- Navbar -->
+<nav class="bg-gray-100">
+    <div class="items-center justify-between hidden w-full md:flex md:width-auto  md:order-1" id="navbar-sticky"
+        style="width: 100%; overflow: hidden;">
+        <ul
+            class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
+            <li>
+                <a href="./Vendor_workflow.html" class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 >
                     rounded md:bg-transparent md:text-sky-600 md:p-0">
-                        Pending Workflows</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- Orange Divider -->
-    <div class='row' style='height: 8px; background-color: #0284c7'></div>
+                    Pending Workflows</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- Orange Divider -->
+<div class='row' style='height: 8px; background-color: #0284c7'></div>
 
-    <div id="app" class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
-        <table class="w-full text-sm text-left text-gray-500">
-            <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white mt-4">
-                Pending Workflows
-                <p class="mt-1 text-sm font-normal text-gray-500">
-                    <span onclick="document.location = 'Vendor_workflow.html'" class='text-sky-600'>Workflows</span> > Forms
-                </p>
-            </caption>
-           
+<div id="app">
 
-            <!--Cards-->
-            <div class="flex flex-wrap justify-left">
-                <div v-for="f in forms">
-                    <div class="rounded overflow-hidden shadow-lg mx-4"></div>
-                        <div style="max-width: 20rem" class="h-100 bg-white border border-gray-200 rounded-lg shadow mx-2">
-                           <a href="#">
-                               <img class="rounded-t-lg w-full h-48 object-cover object-top" src="../Images/New Vendor Assessment Form.PNG" alt="Image" />
-                           </a>
-                           <div class="p-5">
-                               <a href="#">
-                                   <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{f.form.formName}}</h5>
-                               </a>
-                               <p class="mb-3 font-normal text-gray-700">Workflow: {{workflow_id}}</p>
-                               <p class="mb-3 font-normal text-gray-70">Form Sequence: {{f.formSequenceId}}</p>
-                               <button>
-                                   <a v-bind:href="'./Vendor_form_details.html?id=' + f.form.formId" class="inline-flex          items-center px-3 py-2 text-sm font-medium text-center text-white bg-sky-700        rounded-lg hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-sky-300">
-                                       Continue Editing
+    <table class="ml-10 mt-3 w-full text-sm text-left text-gray-500">
+        <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
+            Pending Workflows
+            <p class="mt-1 text-sm font-normal text-gray-500">
+                <a href="../Vendor/Vendor_workflow.html"><span class="underline hover:text-gray-800"> Pending Workflows
+                    </span></a>
+                <span class='text-sky-600'>> Workflow ID: {{workflow_id}}</span>
+            </p>
 
-                                   </a>
-                               </button>
-                           </div>
-                        </div>    
-                    </div> 
+        </caption>
+    </table>
+
+    <div style="background-color: #b4d1df" class="h-screen">
+        <div class="px-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5">
+            <!--Card 1-->
+            <div v-for="(value,idx) of formSequences" @click="goToSinglePage(value.formSequenceId)"
+                class="mt-10 mb-12 rounded overflow-hidden shadow-lg transform transition duration-500 hover:scale-110"
+                style="background-color: white">
+                <img class="object-cover w-full px-3 py-3 object-cover h-56"
+                    src="../Images/New Vendor Assessment Form.PNG">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-lg mb-2">{{value.form.formName}}</div>
+                    <p class="text-gray-700 text-base">
+                        <span class="font-medium text-sm text-black">Last Edited: </span>{{value.form.lastEdited}}
+                    </p>
+                </div>
+                <div class="flex flex-col items-center mb-4">
+                    <button type="button" id="addFieldButton"  @click="goToSinglePage(value.formSequenceId)"
+                        class="w-9/12 flex inline-flex items-center mr-5 px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                        <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
+                            <path fill="currentColor"
+                                d="m19.3 8.925l-4.25-4.2l1.4-1.4q.575-.575 1.413-.575q.837 0 1.412.575l1.4 1.4q.575.575.6 1.388q.025.812-.55 1.387ZM17.85 10.4L7.25 21H3v-4.25l10.6-10.6Z" />
+                        </svg>Edit
+                    </button>
                 </div>
             </div>
-        </table>
+        </div>
     </div>
+</div>
 
-    
+
 </body>
 
 <script>
-
     const app = new Vue({
         el: '#app',
-        data() {
-          return {
+        data: {
+            localhost: "http://localhost:5000",
             workflow: [],
-            forms: [],
-            workflow_id: 0
-          }
+            all_forms: [],
+
+            workflow_id: "",
+            workflow_raw_data: "",
+            formSequences: '',
+            //USER ACCOUNT
+            userName: "",
+            emailAddress: "",
+            user_id: "",
+
+        },
+        mounted: async function () {
+            var query = window.location.search.substring(4);
+            var slashidx = query.indexOf("/")
+            this.workflow_id = query.substring(0, slashidx);
+            this.user_id = query.substring(slashidx + 8, );
+
+            const API_URL = this.localhost + "/workflows/" + this.workflow_id;
+            const API_URL2 = this.localhost + "/users/userType/" + "VENDOR"
+
+            const requestOne = axios.get(API_URL);
+            const requestTwo = axios.get(API_URL2);
+
+            axios.all([requestOne, requestTwo])
+                .then(axios.spread((...responses) => {
+                    const responseOne = responses[0].data
+                    const responseTwo = responses[1].data
+
+                    this.workflow_raw_data = responseOne
+                    this.formSequences = responseOne.formSequences
+
+                    console.log(this.formSequences)
+
+                    for (each of responseTwo) {
+                        if (each.userId == this.user_id) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
+                        }
+                    }
+
+
+                })).catch(errors => {
+                    console.log(errors)
+                })
+
         },
         methods: {
-          async getForms() {
-            try {
-                //get workflow id
-                const url = window.location.href;
-                const queryParams = new URLSearchParams(window.location.search)
-                const wfid = queryParams.get('id');
-
-                const response = await axios.get("http://localhost:5000/workflows/" + wfid);
-                this.workflow = response.data;
-                this.workflow_id = wfid
-                this.forms = response.data.formSequences
-                console.log(this.forms)
-              
-            } catch (error) {
-              console.log(error);
-            }
-          }
-        },
-        mounted() {
-            this.getForms()
+            goToSinglePage: function (formseq_id) {
+                window.location.assign("./Vendor_form_sequence.html?id=" + formseq_id + "/wf=" + this.workflow_id)
+            },
         }
+        // methods: {
+        //     async getForms() {
+        //         try {
+        //             //get workflow id
+        //             const url = window.location.href;
+        //             const queryParams = new URLSearchParams(window.location.search)
+        //             const wfid = queryParams.get('id');
+
+        //             const response = await axios.get("http://localhost:5000/workflows/" + wfid);
+        //             this.workflow = response.data;
+        //             this.workflow_id = wfid
+        //             this.forms = response.data.formSequences
+        //             console.log(this.forms)
+
+        //         } catch (error) {
+        //             console.log(error);
+        //         }
+        //     }
+        // },
     })
 
 
     const vm = app.$mount('#app')
-    
-                                                    
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+
 </html>
