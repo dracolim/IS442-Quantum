@@ -100,22 +100,10 @@
             <ul
                 class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                 <li>
-                    <a href="./Vendor_home.html"
-                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded 
-                    hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                    Home</a>
-                </li>
-                <li>
                     <a href="./Vendor_workflow.html"
                     class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded 
                     hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                        Workflows</a>
-                </li>
-                <li>
-                    <a href="#"
-                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 
-                    rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
-                    aria-current="page">Forms</a>
+                       Pending Workflows</a>
                 </li>
             </ul>
         </div>
@@ -129,7 +117,7 @@
                 <!-- FORM START -->
         <div style="background-color: #b4d1df">
             <!-- back button -->
-            <button type="button" v-on:click="goBackToAllForms()"
+            <button type="button" v-on:click="back()"
                 class=" ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-med text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Back
             </button>
             <div class="flex justify-center pb-4">
@@ -140,31 +128,50 @@
                     <p class="mb-3 font-normal text-gray-700">Form ID: {{fid}}</p>
                 </div>
             </div>
-            <div v-for="(value, key) in formDetails.formQuestions">
-                <div class="flex justify-center mt-2 pb-4">
-                    <!-- Forms -->
-                    <div class="w-7/12 p-6 bg-white border border-gray-200 rounded-lg shadow">
-                        <h5 class="mb-2 text-l font-bold tracking-tight text-gray-900">
-                            {{value.question.inputLabel}}</h5>
-                        <!-- options -->
-                        <!-- text -->
-                        <input
-                            v-if="value.question.inputType == 'text' || value.question.inputType == 'textarea' ||value.question.inputType == 'date' || value.question.inputType == 'email' || value.question.inputType == 'file' || value.question.inputType == 'number' " 
-                            class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full" :type="value.question.inputType" :required="value.question.isRequired" v-model="value.inputValue">
+            <form>
+                <div v-for="(section, idx) in formDetails.sections">
+                    <div class="flex justify-center mt-2 pb-3">
+                        <div class="w-7/12 p-5 mb-2 bg-white border border-gray-200 rounded-lg shadow">
+                            <!--- SECTION TITLE -->
+                            <div class="font-bold mb-4 py-3 text-center bg-sky-600 text-white rounded">{{section.title}}
+                            </div>
+                            <!-- SECTION DESCRIPTION -->
+                            <div class="rounded-lg bg-gray-100 py-4 mb-2 px-4 text-center">
+                                <p class="font-bold">
+                                    Description:
+                                </p>
+                                {{section.description}}
+                            </div>
 
-                        <!-- NON text -->
-                        <div v-else v-for="option in questionOptions[value.question.questionId]">
-                            <div class="flex items-center mb-4">
-                                <input :id ="option.id" class="bg-gray-50 border border-gray-300" :type="value.question.inputType" :name="value.question.questionId" :required="value.question.isRequired" :value = "option.label" v-on:change="updateCheckboxValue(value.inputValue, option.id)">
-                                <label for="option.id" :id ="option.id"
-                                    class="ml-2 text-sm font-medium text-gray-900" :name="value.question.questionId">{{option.label}}</label>
+                            <div v-for="(value, key) in section.questions">
+                                <h5 class="mb-2.5 text-medium font-normal tracking-tight text-gray-900">
+                                            {{value.inputLabel}}</h5>
+                                        <!-- options -->
+                                        <!-- text -->
+                                        <div
+                                            v-if="value.inputType == 'text' || value.inputType == 'textarea' ||value.inputType == 'Date' || value.inputType == 'email' ||   value.inputType == 'file' || value.inputType ==     'number' "> <input
+                                            class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500  w-full" :type="value.inputType" :required="value.isRequired"   v-model="value.inputValue">
+
+                                        </div>
+                                        <!-- NON text -->
+                                        <div v-else> 
+                                            <div v-for="option in questionOptions[value.questionId]">
+                                                <div class="flex items-center mb-4">
+                                                    <input :id ="option.id" class="bg-gray-50 border border-gray-300" :type="value.inputType" :name="value.questionId" :required="value.isRequired" :value = "option.   label"     v-on:change="updateCheckboxValue(value.inputValue, option.id)">
+                                                    <label for="option.id" :id ="option.id"
+                                                        class="ml-2 text-sm font-medium text-gray-900" :name="value.questionId">{{option.label}}</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
             <div class="flex justify-center pb-4">
-                <button type="button" v-on:click="submit()"
+                <button type="button" v-on:click="submitForm()"
                 class="ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-me text-xs  leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700   focus:shadow-focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 
                 ease-in-out">Submit
                 </button>
@@ -188,7 +195,7 @@
           fid: 0,
           fname: "",
           questionOptions: {},
-          requiredQuestions: {}
+          unansweredQuestions: []
 
         }
       },
@@ -207,43 +214,52 @@
             this.formDetails = response.data;
             this.fname = response.data.formName;
             this.fid = idValue;
-            if (this.formDetails.formQuestions.length > 0) {
-                this.formDetails.formQuestions.forEach(qn => {
-                    //qn.formQId = formId , questionId
-                    //qn.question = attribute, inputLabel, inputType, isRequired, questionId
-                    if (qn.question.inputType == 'Radio' || qn.question.inputType == 'checkbox') {
-                        this.questionOptions[qn.question.questionId]= qn.question.questionProperties;
-                    }
-                    if (qn.question.isRequired == true) {
-                        this.requiredQuestions[qn.question.questionId] = qn.question.inputLabel;
-                    }
-
+            if (this.formDetails.sections.length > 0) {
+                this.formDetails.sections.forEach(section => {
+                   if (section.questions.length > 0){
+                        section.questions.forEach(qn => {
+                            if (qn.inputType == 'Radio' || qn.inputType == 'checkbox') {
+                                this.questionOptions[qn.questionId]= qn.questionProperties; 
+                            }
+                        })
+                   }
               });
-              //console.log(this.questionOptions)
+              //console.log(this.requiredQuestions)
+             
 
             }
           } catch (error) {
             console.log(error);
           }
         },
-        goBackToAllForms(){
-            window.location.assign("./Vendor_form.html")
+        back(){
+            window.location.assign("./Vendor_workflow.html")
         },
-        checkRequiredFields(){
-            if (this.requiredQuestions.length > 0) {
-                this.requiredQuestions.forEach(qn => {
-                    
-                }
 
-                )
+        checkRequiredFields(){
+            this.unansweredQuestions = []
+            if (this.formDetails.sections.length > 0) {
+                this.formDetails.sections.forEach(section => {
+                if (section.questions.length > 0){
+                     section.questions.forEach(qn => {
+                    if (qn.isRequired == true && qn.inputValue == null) {
+                        this.unansweredQuestions.push(qn.questionId + qn.inputLabel) 
+                    }
+                    })
+                }
+                })
+            }
+            if (this.unansweredQuestions.length == 0){
+                console.log(true)
+                return true
+            }else{
+                console.log(this.unansweredQuestions)
+                return this.unansweredQuestions
             }
         },
         updateCheckboxValue(inputValue, optionId) {
              if (inputValue === null) {
                inputValue = []
-             }
-             if (!Array.isArray(inputValue)) {
-               inputValue = [inputValue]
              }
              index = inputValue.indexOf(optionId)
              if (index == -1) {
@@ -252,11 +268,18 @@
                inputValue.splice(index, 1)
              }
              //console.log(inputValue)
-             return inputValue
+             return JSON.stringify(inputValue)
+
+            },
+
+        submitForm(){
+            if (!this.checkRequiredFields()){
+                console.log(this.checkRequiredFields)
+            }else{
+                alert("submission successful")
+                window.location.assign("./Vendor_workflow.html")
             }
-       
-       
-       
+        }
        
       },
       mounted() {

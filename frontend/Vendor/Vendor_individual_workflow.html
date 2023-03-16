@@ -127,13 +127,9 @@
                     class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
                         <a href="#"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
-                            aria-current="page">Pending Workflows</a>
-                    </li>
-                    <li>
-                        <a href="./Vendor_form.html"
-                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                            Forms</a>
+                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 
+                        rounded md:bg-transparent md:text-sky-600 md:p-0 dark:text-white"
+                        aria-current="page">Pending Workflows</a>
                     </li>
                 </ul>
             </div>
@@ -144,6 +140,14 @@
 
         <div class="container mx-auto">
             <div class="flex flex-wrap -mx-4 mb-12">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg mx-8 mt-3">
+                    <table class="w-full text-sm text-left text-gray-500">
+                        <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
+                            Pending Workflows
+                            <p class="mt-1 text-sm font-normal text-gray-500">
+                                <span onclick="document.location = 'Vendor_workflow.html'" class='text-sky-600'>Workflows</span>
+                            </p>
+                        </caption>
 
                 <div v-for="(value, idx) in all_forms">
                     <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4">
@@ -201,10 +205,12 @@
                     const responseOne = responses[0].data
                     const responseTwo = responses[1].data
 
+                    console.log(responseOne, responseTwo)
+
                     this.all_workflows = responseOne
                     this.full_data = responseTwo
                     this.all_forms = responseTwo.formSequences
-                    console.log(responseTwo.formSequences)
+                    //console.log(responseTwo.formSequences)
 
                 })).catch(errors => {
                     console.log(errors)
