@@ -199,7 +199,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key) in AllWorkflow" style = "cursor: pointer;">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key) in AllWorkflow">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                             v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.workFlowId}}
@@ -269,8 +269,8 @@
             </table>
         </div>
 
-        <!-- Button for assign new workflow -->
-        <div class="mx-8 mt-5 pb-12">
+        <!-- Button for Creating Account -->
+        <div class="mx-8 mt-5">
             <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
                 class="inline-flex items-center float-right  px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
@@ -279,7 +279,6 @@
                 </svg> Assign New WorkFlow
             </button>
         </div>
-        <div class = "pb-12"></div>
 
         <!-- CREATE NEW WORKFLOW modal -->
         <div id="authentication-modal" tabindex="-1" aria-hidden="true"

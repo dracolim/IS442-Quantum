@@ -186,7 +186,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style = "cursor: pointer;" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white border-gray-200 hover:bg-gray-100"
+                    <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white border-gray-200 hover:bg-gray-100"
                         v-for="(value,key) in all_forms">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap " v-on:click="goToSinglepage(value.formId)">
                             {{value.formId}}
@@ -221,7 +221,7 @@
             </table>
         </div>
 
-        <div class="mx-8 mt-5 pb-12">
+        <div class="mx-8 mt-5">
         <button type="button" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"
                 class="inline-flex items-center float-right  px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
                 <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 36 36">
@@ -230,8 +230,6 @@
                 </svg> Create New Forms
         </button>
         </div>
-
-        <div class = "pb-12"></div>
 
         <!-- main modal -->
         <div class="modal fade fixed top-0 left-0 hidden w-full h-full outline-none overflow-x-hidden overflow-y-auto"

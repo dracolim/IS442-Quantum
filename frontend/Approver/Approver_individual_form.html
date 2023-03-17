@@ -461,28 +461,10 @@
                             <div v-if="SectionIdError == false">
                                 <label for="NewSectionId" class="block mb-2 text-sm font-medium text-gray-900">Section
                                     ID</label>
-                                <!-- NEW -->
-                                <button type="button" @click="sectionNewExisting('new')" 
-                                    class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Add
-                                    New Sections</button>
-                                <!-- EXIST BUTTON NOT DISABLED -->
-                                <button type="button" @click="sectionNewExisting('existing')"  v-if = "all_section_ids.length != 0"
-                                    class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 ">Add
-                                    to Existing Sections</button>
-                                <!-- EXIST BUTTON DISABLED -->
-                                <button type="button" @click="sectionNewExisting('existing')"  v-if = "all_section_ids.length == 0"
-                                    class="cursor-not-allowed  text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 " disabled>Add
-                                    to Existing Sections</button>
-                                <!-- NEW SECTION ID -->
-                                <input v-if="addExisting == 'new'" type="number" id="NewSectionId"
-                                    v-model="NewSectionId" min="1" @change="checkSectionId()" 
-                                    class="bg-gray-50 border border-gray-300 text-gray-600 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    disabled>
-                                <!-- EXISTING SECTION ID -->
-                                <select v-if="addExisting == 'existing'" id="NewSectionId" v-model="NewSectionId" min="1" @change="checkSectionId()"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                                    <option v-for = "value of all_section_ids" :value = "value">{{value}}</option>
-                                </select>
+                                <input type="number" id="NewSectionId" v-model="NewSectionId" min="1"
+                                    @change="checkSectionId()"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    required>
                             </div>
 
                             <!-- ERROR HANDLING -->
@@ -500,7 +482,8 @@
                             </div>
 
                             <!-- SECTION TITLE -->
-                            <div v-if="addExisting == 'new' && SectionIdError == false">
+                            <div
+                                v-if="all_section_ids.includes(parseInt(NewSectionId)) == false && NewSectionId != '' && SectionIdError == false">
                                 <label for="NewSectionTitle"
                                     class="block mb-2 text-sm font-medium text-gray-900">Section Title</label>
                                 <input type="text" v-model="NewSectionTitle" name="NewSectionTitle" id="NewSectionTitle"
@@ -509,7 +492,8 @@
                             </div>
 
                             <!-- SECTION DESCRIPTION -->
-                            <div v-if="addExisting == 'new' && SectionIdError == false">
+                            <div
+                                v-if="all_section_ids.includes(parseInt(NewSectionId)) == false && NewSectionId != '' && SectionIdError == false">
                                 <label for="NewSectionDescription"
                                     class="block mb-2 text-sm font-medium text-gray-900">Section Description</label>
                                 <input type="text" v-model="NewSectionDescription" name="NewSectionDescription"
@@ -685,7 +669,6 @@
                 totalOptions: 0,
                 labelOptions: [],
                 //CREATE NEW FIELD
-                addExisting: "",
                 NewFieldType: "",
                 NewFieldName: "",
                 NewisRequired: false,
@@ -785,6 +768,7 @@
                         for (each of this.combined) {
                             this.varSectionId[each.question.questionId] = each.sectionId
                         }
+
                         console.log(this.combined)
 
                     })).catch(errors => {
@@ -792,18 +776,6 @@
                     })
             },
             methods: {
-                sectionNewExisting(status){
-                    this.addExisting = status;
-                    var biggest = 0
-                    if (status == 'new'){
-                        for (each of this.all_section_ids_in_DB){
-                            if (each > biggest){
-                                biggest = each
-                            }
-                        }
-                    }
-                    this.NewSectionId = biggest + 1
-                },
                 goToSinglepage: function () {
                     window.location.assign("./Approver_overview_form.html?id=" + this.form_id)
                 },
@@ -1077,8 +1049,8 @@
                     for (each of this.all_sections_in_DB) {
                         if (each.sectionId == section_id) {
                             var questions = each.questions;
-                            for (i in questions) {
-                                questions.splice(i, 1);
+                            for (i in questions){
+                                questions.splice(i,1);
                                 break
                             }
                             var section = each
@@ -1230,7 +1202,7 @@
                             console.log(this.form_sections)
                         } else {
                             this.form_sections.push({
-                                // "sectionId": this.NewSectionId,
+                                "sectionId": this.NewSectionId,
                                 "title": this.NewSectionTitle,
                                 "description": this.NewSectionDescription,
                                 "questions": [question]
@@ -1265,7 +1237,6 @@
                     this.raw_form = "";
                     this.temp_question_id = "";
                     this.error_message = "";
-                    this.addExisting = "";
                 },
                 checkSectionId() {
                     console.log(this.form_sections)
@@ -1287,6 +1258,20 @@
                     }
 
                 },
+                // checkFieldName() {
+                //     var all_questions_in_this_form = this.all_questions
+                //     this.inputLabelError = false;
+                //     for (each_question of all_questions_in_this_form) {
+                //         if (each_question.inputLabel == this.NewFieldName) {
+                //             // error message stating similar input label exist 
+                //             this.inputLabelError = true;
+                //             document.getElementById("addFieldButton").disabled = true
+                //         }
+                //     }
+                //     if (this.inputLabelError == false) {
+                //         document.getElementById("addFieldButton").disabled = false
+                //     }
+                // },
             }
         })
     </script>

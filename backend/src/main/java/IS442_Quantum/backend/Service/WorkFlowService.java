@@ -66,7 +66,6 @@ public class WorkFlowService {
 
             newFormSequence.setWorkFlow(workFlow);
             newFormSequence.setForm(formService.getFormById(fs.getForm().getFormId()));
-            newFormSequence.setSeqNo(fs.getSeqNo());
 
             FormSequenceStatus currStatus = FormSequenceStatus.REQUESTED;
             FormSequenceStatus newStatus = fs.getStatus();
@@ -98,8 +97,18 @@ public class WorkFlowService {
         String companyName = workflow.getVendor().getCompanyName();
         String formName = formSequence.getForm().getFormName();
 
+        // Not Started to Pending: Vendor to Admin
+        if (currStatus == FormSequenceStatus.REQUESTED && newStatus == FormSequenceStatus.PENDING){
+
+            formSequence.setStatus(newStatus);
+            String email = workflow.getAdmin().getEmailAddress();
+            String emailSubject = "New Form Submission from " + email;
+            String emailBody = "You have a new form submission from " + companyName + " for the following Form: " + formName;
+
+            emailNotificationService.sendEmail(email, emailSubject, emailBody);
+
         // Pending to Requested: Vendor to Admin
-        if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.REQUESTED){
+        } else if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.REQUESTED){
 
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
@@ -158,11 +167,7 @@ public class WorkFlowService {
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
-        } else if (currStatus == newStatus) {
-
-                formSequence.setStatus(newStatus);
-
-        // Trigger only if it's new vendor without any current status
+        // Trigger only if it's new vendor
         } else {
             formSequence.setStatus(FormSequenceStatus.REQUESTED);
             String email = workflow.getVendor().getEmailAddress();
@@ -196,6 +201,7 @@ public class WorkFlowService {
 
             // update vendor
             setUser(eWorkFlow, userService.findByUserId(workFlowBody.getVendor().getUserId()));
+
 
             // Add formSequence
             updateFormSequence(eWorkFlow, workFlowBody);
