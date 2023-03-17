@@ -295,7 +295,8 @@
                     </div>
                     <div
                         class="flex flex-shrink-0 flex-wrap items-center justify-end rounded-b-md border-t-2 border-neutral-100 border-opacity-100 p-4">
-                        <button type="button" @click="assignNewForm()" data-te-ripple-init data-te-ripple-color="light" data-te-modal-dismiss
+                        <button type="button" @click="assignNewForm()" data-te-ripple-init data-te-ripple-color="light"
+                            data-te-modal-dismiss
                             class="w-full text-white bg-sky-600 hover:bg-sky-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
                     </div>
                 </div>
@@ -319,6 +320,7 @@
             to_show_forms: [],
             workflow_data: "",
             existing_form_ids: [],
+            existing_form_names: [],
             checked: [],
             form_name: "",
             assignForms: {},
@@ -345,15 +347,23 @@
                     for (i in this.forms_sequences) {
                         var form = this.forms_sequences[i].form
                         var form_id = form.formId
+                        console.log(form_id)
+                        var form_name = form.formName
                         if (!(this.existing_form_ids.includes(form_id))) {
                             this.existing_form_ids.push(form_id)
                         }
+                        if (!(this.existing_form_names.includes(form_name))) {
+                            this.existing_form_names.push(form_name)
+                        }
                     }
+
+                    console.log(this.existing_form_names)
 
                     //to display forms that in NOT in workflow (assign new forms modal)
                     for (each of this.all_forms) {
-                        if (!(this.existing_form_ids.includes(each.formId))) {
+                        if (!(this.existing_form_names.includes(each.formName))) {
                             this.to_show_forms.push(each)
+                            this.existing_form_names.push(each.formName)
                         }
                     }
                     console.log(this.to_show_forms)
@@ -369,10 +379,21 @@
             },
             updateFormSequence(id) {
                 var URL = this.localhost + "/form/clone/" + id
-                axios.get(URL)
+                axios.post(URL)
                     .then(response => {
+                        var seqNo = 0;
+
                         var newForm = response.data
-                        this.forms_sequences.push(response.data)
+                        // console.log(newForm)
+                        var temp = {}
+                        temp["form"] = newForm;
+                        seqNo += 1
+                        temp["seqNo"] = seqNo;
+                        temp['status'] = "NOT_STARTED"
+                        this.forms_sequences.push(temp)
+                        console.log(this.forms_sequences)
+                        // this.forms_sequences.push(response.data)
+                        return newForm
                     }).catch(error => {
                         console.log(error.message)
                     })
@@ -393,7 +414,10 @@
                     })
             },
             assignNewForm() {
+                var new_workflow = {}
                 var approver = this.workflow_data.approver
+                var admin = this.workflow_data.admin
+                var vendor = this.workflow_data.vendor
 
                 var seqNo = 0;
                 for (j in this.forms_sequences) {
@@ -405,36 +429,38 @@
                     if (this.assignForms[i] == true) {
                         for (each of this.all_forms) {
                             if (each.formId == i) {
-                                var temp = {}
-                                temp["form"] = each;
-                                seqNo += 1
-                                temp["seqNo"] = seqNo;
-                                temp['status'] = "NOT_STARTED"
-                                this.forms_sequences.push(temp)
+                                this.updateFormSequence(i)
                             }
                         }
                     }
                 }
 
+                // new_workflow['workFlowId'] = this.workflow_id
+                // new_workflow['formSequences'] = this.forms_sequences
+                // new_workflow['approver'] = approver
+                // new_workflow['admin'] = admin
+                // new_workflow['vendor'] = vendor
                 this.workflow_data['formSequences'] = this.forms_sequences
-                this.workflow_data['approver'] = {
-                    'userid': 6
-                }
+                this.workflow_data['approver'] = approver
+                this.workflow_data['admin'] = admin
+                this.workflow_data['vendor'] = vendor
+
+                console.log(this.workflow_data)
+                // console.log(JSON.stringify(this.workflow_data))
 
                 // update workflow with assigned forms
-                const API_URL3 = this.localhost + "/workflows/" + this.workflow_id;
+                const API_URL3 = this.localhost + "/workflows/" + this.workflow_id ;
 
                 axios.put(API_URL3, this.workflow_data)
                     .then(response => {
                         console.log(response.data)
-                        document.location.reload();
+                        // document.location.reload();
                     })
                     .catch(error => {
                         console.log(error.message)
                     })
 
-                // clear
-                this.closeAssignForm();
+                // this.closeAssignForm();
             },
             closeAssignForm() {
                 this.assignForms = {};
