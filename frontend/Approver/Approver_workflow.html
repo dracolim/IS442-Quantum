@@ -199,7 +199,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key) in AllWorkflow">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key) in AllWorkflow" style = "cursor: pointer;">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                             v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.workFlowId}}
