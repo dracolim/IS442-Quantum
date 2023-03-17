@@ -204,33 +204,53 @@
                                 {{value.inputLabel}}</h5>
                             <!-- options -->
                             <!-- text -->
-                            <input v-model = "value.inputValue"
+                            <input v-model="allAnswers[value.questionId]"
                                 v-if="value.inputType == 'text' || value.inputType == 'Date' || value.inputType == 'email' || value.inputType == 'file' || value.inputType == 'number' "
                                 class="text-gray-600 mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
                                 :type="value.inputType" :required="value.isRequired">
                             <!-- TEXT AREA -->
-                            <textarea v-model = "value.inputValue" v-else-if="value.inputType == 'textarea'" id="message" rows="4" 
-                                class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" :required="value.isRequired">
+                            <textarea v-model="allAnswers[value.questionId]" v-else-if="value.inputType == 'textarea'"
+                                id="message" rows="4"
+                                class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                :required="value.isRequired">
                             </textarea>
-                            <!-- NON text -->
-                            <div v-else v-for="value3 in question_options[value.questionId]">
+                            <!-- NON text-->
+                            <!-- RADIO -->
+                            <div v-else-if="value.inputType == 'Radio'"
+                                v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
-                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300" 
-                                        :type="value.inputType" :name="value.questionId" :required="value.isRequired"
-                                        value="value3.label">
+                                    <input :id="value3.id" class="bg-gray-50 border border-gray-300"
+                                        v-model="allAnswers[value.questionId]" type="radio" :name="value.questionId"
+                                        :required="value.isRequired" :value="value3.label">
                                     <label for="value3.id" :id="value3.id"
                                         class="ml-2 text-sm font-medium text-gray-900"
                                         :name="value.questionId">{{value3.label}}</label>
                                 </div>
                             </div>
-                            <!-- RADIO -->
-
 
                             <!-- CHECKBOX -->
+                            <div v-else-if="value.inputType == 'checkbox'"
+                                v-for="value3 in question_options[value.questionId]">
+                                <div class="flex items-center mb-4">
+                                    <input class="bg-gray-50 border border-gray-300" v-model="allAnswers[value3.id]"
+                                        type='checkbox' :required="value.isRequired" :value="value3.label">
+                                    <label for="value3.id"
+                                        class="ml-2 text-sm font-medium text-gray-900">{{value3.label}}</label>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="flex flex-col items-center justify-center">
+                <button type="button" id="submitButton" @click="submitForm()"
+                    class="flex inline-flex items-center mr-5 px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-sm leading-tight rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                    Submit Form
+                </button>
+            </div>
+
 
             <!-- FOOTER -->
             <div class="pb-12" style="background-color: #b4d1df" class="h-screen"></div>
@@ -244,6 +264,7 @@
         data: {
             localhost: "http://localhost:5000",
             all_forms: "",
+            all_questions: "",
             form_sequence_id: null,
             workflow_id: null,
             form: "",
@@ -256,18 +277,51 @@
             form_sections: "",
             combined: [],
             all_section_ids: [],
-            all_answers: [],
+            allAnswers: {},
+            workflow_raw_data: "",
+            //user
+            user_id: "",
+            userName: "",
+            emailAddress: "",
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
-            var dash_idx = query.indexOf("/")
-            this.form_sequence_id = query.substring(0, dash_idx);
-            this.workflow_id = query.substring(dash_idx + 4, )
+            var first_dash_idx = query.indexOf("/")
+
+            this.form_sequence_id = query.substring(0, first_dash_idx);
+            this.workflow_id = query.substring(first_dash_idx + 4, )
+            
+            const URL3 = this.localhost + "/users/userType/" + "APPROVER"
+            axios.get(URL3)
+                .then(response => {
+
+                    for (each of response.data) {
+                        if (each.userId == this.user_id) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
+                            console.log(this.userName)
+                        }
+                    }
+
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+
+            const URL = this.localhost + "/questions"
+            axios.get(URL)
+                .then(response => {
+                    this.all_questions = response.data
+                })
+                .catch(error => {
+                    console.error(error);
+                })
 
             const API_URL2 = this.localhost + "/workflows/" + this.workflow_id;
             axios.get(API_URL2)
                 .then(response => {
                     // console.log(response.data)
+                    this.workflow_raw_data = response.data;
                     this.all_form_sequences = response.data.formSequences;
 
                     for (each of this.all_form_sequences) {
@@ -297,6 +351,22 @@
                         }
                         var questions = each.questions;
                         for (each_question of questions) {
+                            //checkbox 
+                            if (each_question.inputType == "checkbox"){
+                                console.log(each_question)
+                                var list = each_question.inputValue.split(",")
+                                for (each_property of each_question.questionProperties){
+                                    var qp_id = each_property.id
+                                    var qp_label = each_property.label
+                                    if (list.includes(qp_label)){
+                                        this.allAnswers[qp_id] = qp_label;
+                                    }
+                                }
+                            }
+                            else{
+                                this.allAnswers[each_question.questionId] = each_question.inputValue || "";
+                            }
+                            
                             var temp = {}
                             temp['sectionId'] = section_id
                             temp['question'] = each_question
@@ -304,6 +374,9 @@
                         }
                     }
 
+                    console.log(this.allAnswers)
+
+                    // QUESTION PROPERTIES
                     for (each of this.form_sections) {
                         var questions = each.questions
                         for (each_question of questions) {
@@ -322,15 +395,6 @@
                         }
                     }
 
-                    // GET ALL VALUES
-                    for (each of this.form_sections) {
-                        var questions = each.questions
-                        for (i in questions) {
-                            this.all_answers.push(questions[i].inputValue)
-                        }
-                    }
-                    
-                    console.log(this.all_answers)
                     console.log(this.question_options)
                 })
                 .catch(error => {
@@ -342,6 +406,69 @@
                 console.log(id)
                 window.location.assign("../Admin/Admin_individual_pendingwf.html?id=" + this.workflow_id)
             },
+            submitForm() {
+                console.log(this.allAnswers)
+                var checkboxID = []
+                for (i in this.allAnswers) {
+                    console.log(this.allAnswers[i])
+                    // checkbox questionpropertyID
+                    if (this.allAnswers[i] == true) {
+                        checkboxID.push(i)
+                        delete this.allAnswers[i];
+                    }
+                }
+                // get question ID for checkbox IDs
+                var question_ans = {}
+                for (each of this.all_questions) {
+                    if ("questionProperties" in each) {
+                        for (each_qp of each.questionProperties) {
+                            for (i in checkboxID) {
+                                if (each_qp.id == checkboxID[i]) {
+                                    if (!(each.questionId in question_ans)) {
+                                        question_ans[each.questionId] = [each_qp.label]
+                                    } else {
+                                        question_ans[each.questionId].push(each_qp.label)
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+                console.log(this.allAnswers)
+                console.log(question_ans)
+
+                //combine all questions
+                var allQnA = Object.assign(this.allAnswers, question_ans);
+                console.log(allQnA)
+
+                for (each of this.form_sections) {
+                    for (question of each.questions) {
+                        if (question.questionId in allQnA) {
+                            question['inputValue'] = allQnA[question.questionId].toString();
+                        }
+                    }
+                }
+
+                console.log(this.form_sections)
+                for (each of this.all_form_sequences) {
+                    if (each.formSequenceId == this.form_sequence_id) {
+                        each.form['sections'] = this.form_sections;
+                        var form = each.form
+                        var form_id = each.form.formId
+
+                        var URL = this.localhost + "/form/" + form_id
+                        axios.put(URL, form)
+                            .then(response => {
+                                console.log(response.data)
+                                document.location.reload();
+                            })
+                            .catch(error => {
+                                console.log(error.message)
+                            })
+                    }
+                }
+            }
         }
     })
 </script>
