@@ -341,13 +341,13 @@
 
                     this.workflow_data = responseOne;
                     this.forms_sequences = responseOne.formSequences;
+                    console.log(this.forms_sequences)
                     this.all_forms = responseTwo;
 
                     //check for exisiting form IDs
                     for (i in this.forms_sequences) {
                         var form = this.forms_sequences[i].form
                         var form_id = form.formId
-                        console.log(form_id)
                         var form_name = form.formName
                         if (!(this.existing_form_ids.includes(form_id))) {
                             this.existing_form_ids.push(form_id)
@@ -377,90 +377,50 @@
                 console.log(id)
                 window.location.assign("./Approver_individual_form.html?id=" + id)
             },
-            updateFormSequence(id) {
-                var URL = this.localhost + "/form/clone/" + id
-                axios.post(URL)
-                    .then(response => {
-                        var seqNo = 0;
-
-                        var newForm = response.data
-                        // console.log(newForm)
-                        var temp = {}
-                        temp["form"] = newForm;
-                        seqNo += 1
-                        temp["seqNo"] = seqNo;
-                        temp['status'] = "NOT_STARTED"
-                        this.forms_sequences.push(temp)
-                        console.log(this.forms_sequences)
-                        // this.forms_sequences.push(response.data)
-                        return newForm
-                    }).catch(error => {
-                        console.log(error.message)
-                    })
-            },
-            addForms() {
-                this.checked.forEach(i => {
-                    updateFormSequence(i)
-                })
-                var URL = this.localhost + "/workflows/" + this.workflow_id
-                axios.put(URL, {
-                        "formSequences": this.forms_sequences
-                    }).then(response => {
-                        alert("Form(s) has been added")
-                        document.location.reload();
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    })
-            },
             assignNewForm() {
-                var new_workflow = {}
                 var approver = this.workflow_data.approver
                 var admin = this.workflow_data.admin
                 var vendor = this.workflow_data.vendor
 
-                var seqNo = 0;
-                for (j in this.forms_sequences) {
-                    var form_block = this.forms_sequences[j]
-                    seqNo = form_block.seqNo
-                }
-
+                console.log(this.assignForms)
                 for (i in this.assignForms) {
                     if (this.assignForms[i] == true) {
-                        for (each of this.all_forms) {
-                            if (each.formId == i) {
-                                this.updateFormSequence(i)
-                            }
-                        }
+                        var URL = this.localhost + "/form/clone/" + i
+                        axios.post(URL)
+                            .then(response => {
+                                var seqNo = 0;
+                                var newForm = response.data
+                                console.log(newForm)
+
+                                var temp = {}
+                                temp["form"] = newForm;
+                                seqNo += 1
+                                temp["seqNo"] = seqNo;
+                                temp['status'] = "NOT_STARTED"
+
+                                this.forms_sequences = [temp]
+                                this.workflow_data['formSequences'] = this.forms_sequences
+                                this.workflow_data['approver'] = approver
+                                this.workflow_data['admin'] = admin
+                                this.workflow_data['vendor'] = vendor
+
+                                // update workflow with assigned forms
+                                const API_URL3 = this.localhost + "/workflows/" + this.workflow_id;
+
+                                axios.put(API_URL3, this.workflow_data)
+                                    .then(response => {
+                                        alert("Loading...")
+                                        document.location.reload();
+                                    })
+                                    .catch(error => {
+                                        console.log(error.message)
+                                    })
+
+                            }).catch(error => {
+                                console.log(error.message)
+                            })
                     }
                 }
-
-                // new_workflow['workFlowId'] = this.workflow_id
-                // new_workflow['formSequences'] = this.forms_sequences
-                // new_workflow['approver'] = approver
-                // new_workflow['admin'] = admin
-                // new_workflow['vendor'] = vendor
-                this.workflow_data['formSequences'] = this.forms_sequences
-                this.workflow_data['approver'] = approver
-                this.workflow_data['admin'] = admin
-                this.workflow_data['vendor'] = vendor
-
-                console.log(this.workflow_data)
-                // console.log(JSON.stringify(this.workflow_data))
-
-                // update workflow with assigned forms
-                const API_URL3 = this.localhost + "/workflows/" + this.workflow_id ;
-
-                axios.put(API_URL3, this.workflow_data)
-                    .then(response => {
-                        console.log(response.data)
-                        // document.location.reload();
-                    })
-                    .catch(error => {
-                        console.log(error.message)
-                    })
-
-                // this.closeAssignForm();
             },
             closeAssignForm() {
                 this.assignForms = {};

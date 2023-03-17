@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <!-- Links -->
+    <!-- Links -->
     <!-- flowbite -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <!-- Tailwind -->
@@ -232,17 +232,20 @@
                             <button v-if="value.userType == 'VENDOR'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateVendorModalScrollable" data-te-ripple-init
                                 data-te-ripple-color="light">
-                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500"
+                                    width="28"></iconify-icon>
                             </button>
                             <button v-if="value.userType == 'ADMIN'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateAdminModalScrollable" data-te-ripple-init
                                 data-te-ripple-color="light">
-                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500"
+                                    width="28"></iconify-icon>
                             </button>
                             <button v-if="value.userType == 'APPROVER'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateApproverModalScrollable"
                                 data-te-ripple-init data-te-ripple-color="light">
-                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500"
+                                    width="28"></iconify-icon>
                             </button>
                         </td>
                         <td class="px-6 py-4" style="text-align: center;">
@@ -279,6 +282,8 @@
                 Create Vendor Account
             </button>
         </div>
+
+        <div class="pb-12"></div>
 
         <!-- FORM MODAL FOR VENDOR -->
         <div data-te-modal-init
@@ -317,7 +322,8 @@
                                                     class="block text-sm font-medium text-gray-900 ">User Name</label>
                                                 <input v-model="userName" type="text" name="user_name" id="user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.userName" class="mt-2 text-xs text-red-600">{{ errors.userName }}</div>
+                                                <div v-if="errors.userName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.userName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -327,7 +333,8 @@
                                                     id="Vendor_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.password" class="mt-2 text-xs text-red-600">{{ errors.password }}</div>
+                                                <div v-if="errors.password" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.password }}</div>
                                             </div>
 
                                         </div>
@@ -343,7 +350,8 @@
                                                 <input v-model="companyName" type="text" name="company_name"
                                                     id="company_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">{{ errors.companyName }}</div>
+                                                <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -355,7 +363,9 @@
                                                     name="Registration_no" id="Registration_no"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyRegistrationNo" class="mt-2 text-xs text-red-600">{{ errors.companyRegistrationNo }}</div>
+                                                <div v-if="errors.companyRegistrationNo"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.companyRegistrationNo }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -366,7 +376,8 @@
                                                     id="Company_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyEmail" class="mt-2 text-xs text-red-600">{{ errors.companyEmail }}</div>
+                                                <div v-if="errors.companyEmail" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -376,7 +387,9 @@
                                                 <input v-model="companyOfficeAddress" type="text" name="address"
                                                     id="address" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                                                     value="" placeholder="" />
-                                                    <div v-if="errors.companyOfficeAddress" class="mt-2 text-xs text-red-600">{{ errors.companyOfficeAddress }}</div>
+                                                <div v-if="errors.companyOfficeAddress"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.companyOfficeAddress }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -385,7 +398,8 @@
                                                 <input v-model="companyTel" type="text" name="tel" id="tel"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyTel" class="mt-2 text-xs text-red-600">{{ errors.companyTel }}</div>
+                                                <div v-if="errors.companyTel" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyTel }}</div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -394,7 +408,8 @@
                                                 <input v-model="companyFax" type="text" name="fax" id="fax"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyFax" class="mt-2 text-xs text-red-600">{{ errors.companyFax }}</div>
+                                                <div v-if="errors.companyFax" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyFax }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -416,7 +431,8 @@
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                <div v-if="errors.businessType" class="mt-2 text-xs text-red-600">{{ errors.businessType }}</div>
+                                                <div v-if="errors.businessType" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.businessType }}</div>
 
                                             </div>
 
@@ -426,7 +442,8 @@
                                                 <input type="text"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     v-model="businessTypeOthers" placeholder="" />
-                                                    <div v-if="errors.businessTypeOthers" class="mt-2 text-xs text-red-600">{{ errors.businessTypeOthers }}</div>
+                                                <div v-if="errors.businessTypeOthers" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.businessTypeOthers }}</div>
 
                                             </div>
 
@@ -546,7 +563,8 @@
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_user_name" id="Update_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.userName" class="mt-2 text-xs text-red-600">{{ errors.userName }}</div>
+                                                <div v-if="errors.userName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.userName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -556,7 +574,8 @@
                                                     name="Admin_password" id="Admin_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.password" class="mt-2 text-xs text-red-600">{{ errors.password }}</div>
+                                                <div v-if="errors.password" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.password }}</div>
                                             </div>
 
                                         </div>
@@ -572,7 +591,8 @@
                                                 <input v-model="specificUserCompanyName" type="text"
                                                     name="Update_company_name" id="Update_company_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">{{ errors.companyName }}</div>
+                                                <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -584,7 +604,9 @@
                                                     name="Update_Registration_no" id="Update_Registration_no"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyRegistrationNo" class="mt-2 text-xs text-red-600">{{ errors.companyRegistrationNo }}</div>
+                                                <div v-if="errors.companyRegistrationNo"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.companyRegistrationNo }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -595,7 +617,8 @@
                                                     name="Update_Company_email" id="Update_Company_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyEmail" class="mt-2 text-xs text-red-600">{{ errors.companyEmail }}</div>
+                                                <div v-if="errors.companyEmail" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -606,7 +629,9 @@
                                                     name="Update_address" id="Update_address"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyOfficeAddress" class="mt-2 text-xs text-red-600">{{ errors.companyOfficeAddress }}</div>
+                                                <div v-if="errors.companyOfficeAddress"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.companyOfficeAddress }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -616,7 +641,8 @@
                                                     id="Update_tel"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyTel" class="mt-2 text-xs text-red-600">{{ errors.companyTel }}</div>
+                                                <div v-if="errors.companyTel" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyTel }}</div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -626,7 +652,8 @@
                                                     id="Update_fax"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyFax" class="mt-2 text-xs text-red-600">{{ errors.companyFax }}</div>
+                                                <div v-if="errors.companyFax" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyFax }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -648,7 +675,8 @@
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                <div v-if="errors.businessType" class="mt-2 text-xs text-red-600">{{ errors.businessType }}</div>
+                                                <div v-if="errors.businessType" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.businessType }}</div>
 
                                             </div>
 
@@ -658,7 +686,8 @@
                                                 <input type="text"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     v-model="specificUserBusinessTypeOthers" placeholder="" />
-                                                    <div v-if="errors.businessTypeOthers" class="mt-2 text-xs text-red-600">{{ errors.businessTypeOthers }}</div>
+                                                <div v-if="errors.businessTypeOthers" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.businessTypeOthers }}</div>
                                             </div>
 
                                             <!-- TYPE OF BUSINESS LICENSE menu -->
@@ -710,7 +739,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            
+
                                         </div>
 
                                     </div>
@@ -778,7 +807,8 @@
                                                 <input v-model="adminUserName" type="text" name="Admin_user_name"
                                                     id="Admin_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.adminUserName" class="mt-2 text-xs text-red-600">{{ errors.adminUserName }}</div>
+                                                <div v-if="errors.adminUserName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -788,7 +818,8 @@
                                                     id="Admin_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.adminEmail" class="mt-2 text-xs text-red-600">{{ errors.adminEmail }}</div>
+                                                <div v-if="errors.adminEmail" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -798,7 +829,8 @@
                                                     id="password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.adminPassword" class="mt-2 text-xs text-red-600">{{ errors.adminPassword }}</div>
+                                                <div v-if="errors.adminPassword" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminPassword }}</div>
                                             </div>
 
                                         </div>
@@ -870,7 +902,8 @@
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_Admin_user_name" id="Update_Admin_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.adminUserUserName" class="mt-2 text-xs text-red-600">{{ errors.adminUserUserName }}</div>
+                                                <div v-if="errors.adminUserUserName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminUserUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -880,7 +913,9 @@
                                                     name="Update_Admin_email" id="Update_Admin_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.adminUserCompanyEmail" class="mt-2 text-xs text-red-600">{{ errors.adminUserCompanyEmail }}</div>
+                                                <div v-if="errors.adminUserCompanyEmail"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.adminUserCompanyEmail }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -890,7 +925,8 @@
                                                     name="Update_password" id="Update_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.adminUserPassword" class="mt-2 text-xs text-red-600">{{ errors.adminUserPassword }}</div>
+                                                <div v-if="errors.adminUserPassword" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminUserPassword }}</div>
                                             </div>
 
                                         </div>
@@ -965,7 +1001,8 @@
                                                 <input v-model="approverUserName" type="text" name="Approver_user_name"
                                                     id="Approver_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.approverUserName" class="mt-2 text-xs text-red-600">{{ errors.approverUserName }}</div>
+                                                <div v-if="errors.approverUserName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.approverUserName }}</div>
 
                                             </div>
 
@@ -976,7 +1013,7 @@
                                                     id="Approver_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.approverEmail">{{ errors.approverEmail }}</div>
+                                                <div v-if="errors.approverEmail">{{ errors.approverEmail }}</div>
 
                                             </div>
 
@@ -987,7 +1024,7 @@
                                                     name="Approver_password" id="Approver_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.approverPassword">{{ errors.approverPassword }}</div>
+                                                <div v-if="errors.approverPassword">{{ errors.approverPassword }}</div>
 
                                             </div>
 
@@ -1063,7 +1100,9 @@
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_Approver_user_name" id="Update_Approver_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.approverUserUserName" class="mt-2 text-xs text-red-600">{{ errors.approverUserUserName }}</div>
+                                                <div v-if="errors.approverUserUserName"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.approverUserUserName }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -1073,7 +1112,9 @@
                                                     name="Update_Approver_email" id="Update_Approver_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.approverUserCompanyEmail" class="mt-2 text-xs text-red-600">{{ errors.approverUserCompanyEmail }}</div>
+                                                <div v-if="errors.approverUserCompanyEmail"
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ errors.approverUserCompanyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -1083,7 +1124,9 @@
                                                     name="Update_approver_password" id="Update_approver_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.approverUserPassword" class="mt-2 text-xs text-red-600">{{ errors.approverUserPassword }}</div>
+                                                <div v-if="errors.approverUserPassword"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.approverUserPassword }}
+                                                </div>
                                             </div>
 
                                         </div>
@@ -1119,9 +1162,10 @@
             </div>
 
         </div>
+    </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
 
 <script>
@@ -1184,168 +1228,169 @@
             async createVendorAcc() {
                 if (this.businessType != "Others") {
 
-                this.errors = {};
-                this.hasErrors = false;
+                    this.errors = {};
+                    this.hasErrors = false;
 
-                if (!this.userName) {
-                    this.errors.userName = 'User Name is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.userName) {
+                        this.errors.userName = 'User Name is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyEmail) {
-                    this.errors.companyEmail = 'Email is required';
-                    this.hasErrors = true;
-                } else if (!this.validEmail(this.companyEmail)) {
-                    this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyEmail) {
+                        this.errors.companyEmail = 'Email is required';
+                        this.hasErrors = true;
+                    } else if (!this.validEmail(this.companyEmail)) {
+                        this.errors.companyEmail =
+                            'Email is invalid (missing @ or information before/after)';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.password) {
-                    this.errors.password = 'Password is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.password) {
+                        this.errors.password = 'Password is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyName) {
-                    this.errors.companyName = 'Company Name is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyName) {
+                        this.errors.companyName = 'Company Name is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyRegistrationNo) {
-                    this.errors.companyRegistrationNo = 'Company Registration Number is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyRegistrationNo) {
+                        this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyOfficeAddress) {
-                    this.errors.companyOfficeAddress = 'Company Office Address is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyOfficeAddress) {
+                        this.errors.companyOfficeAddress = 'Company Office Address is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyTel) {
-                    this.errors.companyTel = 'Company Tel is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyTel) {
+                        this.errors.companyTel = 'Company Tel is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyFax) {
-                    this.errors.companyFax = 'Company Fax is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyFax) {
+                        this.errors.companyFax = 'Company Fax is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.businessType) {
-                    this.errors.businessType = 'Business Type is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.businessType) {
+                        this.errors.businessType = 'Business Type is required';
+                        this.hasErrors = true;
+                    }
 
-                if (this.hasErrors) {
-                    alert("Vendor Account WAS NOT created successfully, please try again")
-                    return;
-                }
-
-                console.log('reached here')
-                await axios
-                    .post("http://localhost:5000/users/vendor", {
-                        "userType": 'VENDOR',
-                        "userName": this.userName,
-                        "emailAddress": this.companyEmail,
-                        "password": this.password,
-                        "companyName": this.companyName,
-                        "officeAddress": this.companyOfficeAddress,
-                        "officeTel": this.companyTel,
-                        "officeFax": this.companyFax,
-                        "registrationNo": this.companyRegistrationNo,
-                        "businessType": this.businessType
-                        // "evaluationId": '123456789test'
-                    })
-                    .then((response) => {
-                        console.log("reached here")
-                        alert("Vendor Account has been successfully created")
-                        document.location.reload();
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-                    
-                }
-                else {
-
-                this.errors = {};
-                this.hasErrors = false;
-
-                if (!this.userName) {
-                    this.errors.userName = 'User Name is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyEmail) {
-                    this.errors.companyEmail = 'Email is required';
-                    this.hasErrors = true;
-                } else if (!this.validEmail(this.companyEmail)) {
-                    this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
-                    this.hasErrors = true;
-                }
-
-                if (!this.password) {
-                    this.errors.password = 'Password is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyName) {
-                    this.errors.companyName = 'Company Name is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyRegistrationNo) {
-                    this.errors.companyRegistrationNo = 'Company Registration Number is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyOfficeAddress) {
-                    this.errors.companyOfficeAddress = 'Company Office Address is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyTel) {
-                    this.errors.companyTel = 'Company Tel is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyFax) {
-                    this.errors.companyFax = 'Company Fax is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.businessTypeOthers) {
-                    this.errors.businessTypeOthers = 'Business Type is required under Please Specify';
-                    this.hasErrors = true;
-                }
-
-                if (this.hasErrors) {
-                    alert("Vendor Account WAS NOT created successfully, please try again")
-                    return;
-                }
+                    if (this.hasErrors) {
+                        alert("Vendor Account WAS NOT created successfully, please try again")
+                        return;
+                    }
 
                     console.log('reached here')
                     await axios
-                    .post("http://localhost:5000/users/vendor", {
-                        "userType": 'VENDOR',
-                        "userName": this.userName,
-                        "emailAddress": this.companyEmail,
-                        "password": this.password,
-                        "companyName": this.companyName,
-                        "officeAddress": this.companyOfficeAddress,
-                        "officeTel": this.companyTel,
-                        "officeFax": this.companyFax,
-                        "registrationNo": this.companyRegistrationNo,
-                        "businessType": this.businessTypeOthers
-                        // "evaluationId": '123456789test'
-                    })
-                    .then((response) => {
-                        console.log("reached here")
-                        alert("Vendor Account has been successfully created")
-                        document.location.reload();
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+                        .post("http://localhost:5000/users/vendor", {
+                            "userType": 'VENDOR',
+                            "userName": this.userName,
+                            "emailAddress": this.companyEmail,
+                            "password": this.password,
+                            "companyName": this.companyName,
+                            "officeAddress": this.companyOfficeAddress,
+                            "officeTel": this.companyTel,
+                            "officeFax": this.companyFax,
+                            "registrationNo": this.companyRegistrationNo,
+                            "businessType": this.businessType
+                            // "evaluationId": '123456789test'
+                        })
+                        .then((response) => {
+                            console.log("reached here")
+                            alert("Vendor Account has been successfully created")
+                            document.location.reload();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+
+                } else {
+
+                    this.errors = {};
+                    this.hasErrors = false;
+
+                    if (!this.userName) {
+                        this.errors.userName = 'User Name is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyEmail) {
+                        this.errors.companyEmail = 'Email is required';
+                        this.hasErrors = true;
+                    } else if (!this.validEmail(this.companyEmail)) {
+                        this.errors.companyEmail =
+                            'Email is invalid (missing @ or information before/after)';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.password) {
+                        this.errors.password = 'Password is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyName) {
+                        this.errors.companyName = 'Company Name is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyRegistrationNo) {
+                        this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyOfficeAddress) {
+                        this.errors.companyOfficeAddress = 'Company Office Address is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyTel) {
+                        this.errors.companyTel = 'Company Tel is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyFax) {
+                        this.errors.companyFax = 'Company Fax is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.businessTypeOthers) {
+                        this.errors.businessTypeOthers = 'Business Type is required under Please Specify';
+                        this.hasErrors = true;
+                    }
+
+                    if (this.hasErrors) {
+                        alert("Vendor Account WAS NOT created successfully, please try again")
+                        return;
+                    }
+
+                    console.log('reached here')
+                    await axios
+                        .post("http://localhost:5000/users/vendor", {
+                            "userType": 'VENDOR',
+                            "userName": this.userName,
+                            "emailAddress": this.companyEmail,
+                            "password": this.password,
+                            "companyName": this.companyName,
+                            "officeAddress": this.companyOfficeAddress,
+                            "officeTel": this.companyTel,
+                            "officeFax": this.companyFax,
+                            "registrationNo": this.companyRegistrationNo,
+                            "businessType": this.businessTypeOthers
+                            // "evaluationId": '123456789test'
+                        })
+                        .then((response) => {
+                            console.log("reached here")
+                            alert("Vendor Account has been successfully created")
+                            document.location.reload();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
 
                 }
 
@@ -1472,7 +1517,7 @@
                         this.specificUserCompanyTel = response.data.officeTel
                         this.specificUserCompanyFax = response.data.officeFax
                         this.specificUserBusinessType = response.data.businessType
-                        
+
                         console.log(this.specificUser)
                     })
                     .catch(error => {
@@ -1543,9 +1588,9 @@
                     }
 
                     if (!this.businessTypeOthers) {
-                    this.errors.businessTypeOthers = 'Business Type is required under Please Specify';
-                    this.hasErrors = true;
-                }
+                        this.errors.businessTypeOthers = 'Business Type is required under Please Specify';
+                        this.hasErrors = true;
+                    }
 
                     if (this.hasErrors) {
                         alert("Vendor Account WAS NOT updated successfully, please try again")
@@ -1563,54 +1608,52 @@
                     if (this.specificUserBusinessType != "Others") {
 
                         axios.put(UPDATE_ACC_API_URL, {
-                            "userId": this.specificUserUserId,
-                            "userType": this.specificUserUserType,
-                            "userName": this.specificUserUserName,
-                            "emailAddress": this.specificUserCompanyEmail,
-                            "password": this.specificUserPassword,
-                            "companyName": this.specificUserCompanyName,
-                            "officeAddress": this.specificUserCompanyOfficeAddress,
-                            "officeTel": this.specificUserCompanyTel,
-                            "officeFax": this.specificUserCompanyFax,
-                            "registrationNo": this.specificUserCompanyRegistrationNo,
-                            "businessType": this.specificUserBusinessType,
-                            // "evaluationId": '',
-                            // "workFlows": []
-                        })
-                        .then(response => {
-                            alert("Vendor Account has been successfully updated")
-                            document.location.reload();
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
-                    }
-
-                    else {
+                                "userId": this.specificUserUserId,
+                                "userType": this.specificUserUserType,
+                                "userName": this.specificUserUserName,
+                                "emailAddress": this.specificUserCompanyEmail,
+                                "password": this.specificUserPassword,
+                                "companyName": this.specificUserCompanyName,
+                                "officeAddress": this.specificUserCompanyOfficeAddress,
+                                "officeTel": this.specificUserCompanyTel,
+                                "officeFax": this.specificUserCompanyFax,
+                                "registrationNo": this.specificUserCompanyRegistrationNo,
+                                "businessType": this.specificUserBusinessType,
+                                // "evaluationId": '',
+                                // "workFlows": []
+                            })
+                            .then(response => {
+                                alert("Vendor Account has been successfully updated")
+                                document.location.reload();
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            })
+                    } else {
 
                         axios.put(UPDATE_ACC_API_URL, {
-                            "userId": this.specificUserUserId,
-                            "userType": this.specificUserUserType,
-                            "userName": this.specificUserUserName,
-                            "emailAddress": this.specificUserCompanyEmail,
-                            "password": this.specificUserPassword,
-                            "companyName": this.specificUserCompanyName,
-                            "officeAddress": this.specificUserCompanyOfficeAddress,
-                            "officeTel": this.specificUserCompanyTel,
-                            "officeFax": this.specificUserCompanyFax,
-                            "registrationNo": this.specificUserCompanyRegistrationNo,
-                            "businessType": this.specificUserBusinessTypeOthers,
-                            // "evaluationId": '',
-                            // "workFlows": []
-                        })
-                        .then(response => {
-                            alert("Account has been successfully updated")
-                            document.location.reload();
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
-                        
+                                "userId": this.specificUserUserId,
+                                "userType": this.specificUserUserType,
+                                "userName": this.specificUserUserName,
+                                "emailAddress": this.specificUserCompanyEmail,
+                                "password": this.specificUserPassword,
+                                "companyName": this.specificUserCompanyName,
+                                "officeAddress": this.specificUserCompanyOfficeAddress,
+                                "officeTel": this.specificUserCompanyTel,
+                                "officeFax": this.specificUserCompanyFax,
+                                "registrationNo": this.specificUserCompanyRegistrationNo,
+                                "businessType": this.specificUserBusinessTypeOthers,
+                                // "evaluationId": '',
+                                // "workFlows": []
+                            })
+                            .then(response => {
+                                alert("Account has been successfully updated")
+                                document.location.reload();
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            })
+
                     }
 
                 }
@@ -1628,7 +1671,8 @@
                         this.errors.adminUserCompanyEmail = 'Email is required';
                         this.hasErrors = true;
                     } else if (!this.validEmail(this.specificUserCompanyEmail)) {
-                        this.errors.adminUserCompanyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.errors.adminUserCompanyEmail =
+                            'Email is invalid (missing @ or information before/after)';
                         this.hasErrors = true;
                     }
 
@@ -1672,7 +1716,8 @@
                         this.errors.approverUserCompanyEmail = 'Email is required';
                         this.hasErrors = true;
                     } else if (!this.validEmail(this.specificUserCompanyEmail)) {
-                        this.errors.approverUserCompanyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.errors.approverUserCompanyEmail =
+                            'Email is invalid (missing @ or information before/after)';
                         this.hasErrors = true;
                     }
 
