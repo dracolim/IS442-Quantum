@@ -1496,121 +1496,239 @@
 
                 if (this.specificUserUserType == "VENDOR") {
 
-                    this.errors = {};
-                    this.hasErrors = false;
+                    if (this.businessType != "Others") {
 
-                    if (!this.specificUserUserName) {
-                        this.errors.userName = 'User Name is required';
-                        this.hasErrors = true;
-                    }
+                        this.errors = {};
+                        this.hasErrors = false;
 
-                    if (!this.specificUserCompanyEmail) {
-                        this.errors.companyEmail = 'Email is required';
-                        this.hasErrors = true;
-                    } else if (!this.validEmail(this.specificUserCompanyEmail)) {
-                        this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
-                        this.hasErrors = true;
-                    }
+                        if (!this.specificUserUserName) {
+                            this.errors.userName = 'User Name is required';
+                            this.hasErrors = true;
+                        }
 
-                    if (!this.specificUserPassword) {
-                        this.errors.password = 'Password is required';
-                        this.hasErrors = true;
-                    }
+                        if (!this.specificUserCompanyEmail) {
+                            this.errors.companyEmail = 'Email is required';
+                            this.hasErrors = true;
+                        } else if (!this.validEmail(this.specificUserCompanyEmail)) {
+                            this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                            this.hasErrors = true;
+                        }
 
-                    if (!this.specificUserCompanyName) {
-                        this.errors.companyName = 'Company Name is required';
-                        this.hasErrors = true;
-                    }
+                        if (!this.specificUserPassword) {
+                            this.errors.password = 'Password is required';
+                            this.hasErrors = true;
+                        }
 
-                    if (!this.specificUserCompanyRegistrationNo) {
-                        this.errors.companyRegistrationNo = 'Company Registration Number is required';
-                        this.hasErrors = true;
-                    }
+                        if (!this.specificUserCompanyName) {
+                            this.errors.companyName = 'Company Name is required';
+                            this.hasErrors = true;
+                        }
 
-                    if (!this.specificUserCompanyOfficeAddress) {
-                        this.errors.companyOfficeAddress = 'Company Office Address is required';
-                        this.hasErrors = true;
-                    }
+                        if (!this.specificUserCompanyRegistrationNo) {
+                            this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                            this.hasErrors = true;
+                        }
 
-                    if (!this.specificUserCompanyTel) {
-                        this.errors.companyTel = 'Company Tel is required';
-                        this.hasErrors = true;
-                    }
+                        if (!this.specificUserCompanyOfficeAddress) {
+                            this.errors.companyOfficeAddress = 'Company Office Address is required';
+                            this.hasErrors = true;
+                        }
 
-                    if (!this.specificUserCompanyFax) {
-                        this.errors.companyFax = 'Company Fax is required';
-                        this.hasErrors = true;
-                    }
+                        if (!this.specificUserCompanyTel) {
+                            this.errors.companyTel = 'Company Tel is required';
+                            this.hasErrors = true;
+                        }
 
-                    if (!this.businessTypeOthers) {
-                    this.errors.businessTypeOthers = 'Business Type is required under Please Specify';
-                    this.hasErrors = true;
-                }
+                        if (!this.specificUserCompanyFax) {
+                            this.errors.companyFax = 'Company Fax is required';
+                            this.hasErrors = true;
+                        }
 
-                    if (this.hasErrors) {
-                        alert("Vendor Account WAS NOT updated successfully, please try again")
-                        return;
-                    }
+                        if (this.hasErrors) {
+                            alert("Vendor Account WAS NOT updated successfully, please try again")
+                            return;
+                        }
 
-                    console.log('reached here2')
-                    console.log(this.specificUserUserId)
-                    console.log(this.specificUserUserType)
+                        console.log('reached here2')
+                        console.log(this.specificUserUserId)
+                        console.log(this.specificUserUserType)
 
-                    const UPDATE_ACC_API_URL = this.localhost + "/users/update/vendor"
-                    console.log("SEE HERE")
-                    console.log(this.specificUserUserName)
+                        const UPDATE_ACC_API_URL = this.localhost + "/users/update/vendor"
+                        console.log("SEE HERE")
+                        console.log(this.specificUserUserName)
 
-                    if (this.specificUserBusinessType != "Others") {
+                        if (this.specificUserBusinessType != "Others") {
 
-                        axios.put(UPDATE_ACC_API_URL, {
-                            "userId": this.specificUserUserId,
-                            "userType": this.specificUserUserType,
-                            "userName": this.specificUserUserName,
-                            "emailAddress": this.specificUserCompanyEmail,
-                            "password": this.specificUserPassword,
-                            "companyName": this.specificUserCompanyName,
-                            "officeAddress": this.specificUserCompanyOfficeAddress,
-                            "officeTel": this.specificUserCompanyTel,
-                            "officeFax": this.specificUserCompanyFax,
-                            "registrationNo": this.specificUserCompanyRegistrationNo,
-                            "businessType": this.specificUserBusinessType,
-                            // "evaluationId": '',
-                            // "workFlows": []
-                        })
-                        .then(response => {
-                            alert("Vendor Account has been successfully updated")
-                            document.location.reload();
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
+                            axios.put(UPDATE_ACC_API_URL, {
+                                "userId": this.specificUserUserId,
+                                "userType": this.specificUserUserType,
+                                "userName": this.specificUserUserName,
+                                "emailAddress": this.specificUserCompanyEmail,
+                                "password": this.specificUserPassword,
+                                "companyName": this.specificUserCompanyName,
+                                "officeAddress": this.specificUserCompanyOfficeAddress,
+                                "officeTel": this.specificUserCompanyTel,
+                                "officeFax": this.specificUserCompanyFax,
+                                "registrationNo": this.specificUserCompanyRegistrationNo,
+                                "businessType": this.specificUserBusinessType,
+                                // "evaluationId": '',
+                                // "workFlows": []
+                            })
+                            .then(response => {
+                                alert("Vendor Account has been successfully updated")
+                                document.location.reload();
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            })
+                        }
+
+                        else {
+
+                            axios.put(UPDATE_ACC_API_URL, {
+                                "userId": this.specificUserUserId,
+                                "userType": this.specificUserUserType,
+                                "userName": this.specificUserUserName,
+                                "emailAddress": this.specificUserCompanyEmail,
+                                "password": this.specificUserPassword,
+                                "companyName": this.specificUserCompanyName,
+                                "officeAddress": this.specificUserCompanyOfficeAddress,
+                                "officeTel": this.specificUserCompanyTel,
+                                "officeFax": this.specificUserCompanyFax,
+                                "registrationNo": this.specificUserCompanyRegistrationNo,
+                                "businessType": this.specificUserBusinessTypeOthers,
+                                // "evaluationId": '',
+                                // "workFlows": []
+                            })
+                            .then(response => {
+                                alert("Account has been successfully updated")
+                                document.location.reload();
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            })
+                            
+                        }
                     }
 
                     else {
 
-                        axios.put(UPDATE_ACC_API_URL, {
-                            "userId": this.specificUserUserId,
-                            "userType": this.specificUserUserType,
-                            "userName": this.specificUserUserName,
-                            "emailAddress": this.specificUserCompanyEmail,
-                            "password": this.specificUserPassword,
-                            "companyName": this.specificUserCompanyName,
-                            "officeAddress": this.specificUserCompanyOfficeAddress,
-                            "officeTel": this.specificUserCompanyTel,
-                            "officeFax": this.specificUserCompanyFax,
-                            "registrationNo": this.specificUserCompanyRegistrationNo,
-                            "businessType": this.specificUserBusinessTypeOthers,
-                            // "evaluationId": '',
-                            // "workFlows": []
-                        })
-                        .then(response => {
-                            alert("Account has been successfully updated")
-                            document.location.reload();
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        })
-                        
+                        this.errors = {};
+                        this.hasErrors = false;
+
+                        if (!this.specificUserUserName) {
+                            this.errors.userName = 'User Name is required';
+                            this.hasErrors = true;
+                        }
+
+                        if (!this.specificUserCompanyEmail) {
+                            this.errors.companyEmail = 'Email is required';
+                            this.hasErrors = true;
+                        } else if (!this.validEmail(this.specificUserCompanyEmail)) {
+                            this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                            this.hasErrors = true;
+                        }
+
+                        if (!this.specificUserPassword) {
+                            this.errors.password = 'Password is required';
+                            this.hasErrors = true;
+                        }
+
+                        if (!this.specificUserCompanyName) {
+                            this.errors.companyName = 'Company Name is required';
+                            this.hasErrors = true;
+                        }
+
+                        if (!this.specificUserCompanyRegistrationNo) {
+                            this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                            this.hasErrors = true;
+                        }
+
+                        if (!this.specificUserCompanyOfficeAddress) {
+                            this.errors.companyOfficeAddress = 'Company Office Address is required';
+                            this.hasErrors = true;
+                        }
+
+                        if (!this.specificUserCompanyTel) {
+                            this.errors.companyTel = 'Company Tel is required';
+                            this.hasErrors = true;
+                        }
+
+                        if (!this.specificUserCompanyFax) {
+                            this.errors.companyFax = 'Company Fax is required';
+                            this.hasErrors = true;
+                        }
+
+                        if (!this.businessTypeOthers) {
+                            this.errors.businessTypeOthers = 'Business Type is required under Please Specify';
+                            this.hasErrors = true;
+                        }
+
+                        if (this.hasErrors) {
+                            alert("Vendor Account WAS NOT updated successfully, please try again")
+                            return;
+                        }
+
+                        console.log('reached here2')
+                        console.log(this.specificUserUserId)
+                        console.log(this.specificUserUserType)
+
+                        const UPDATE_ACC_API_URL = this.localhost + "/users/update/vendor"
+                        console.log("SEE HERE")
+                        console.log(this.specificUserUserName)
+
+                        if (this.specificUserBusinessType != "Others") {
+
+                            axios.put(UPDATE_ACC_API_URL, {
+                                "userId": this.specificUserUserId,
+                                "userType": this.specificUserUserType,
+                                "userName": this.specificUserUserName,
+                                "emailAddress": this.specificUserCompanyEmail,
+                                "password": this.specificUserPassword,
+                                "companyName": this.specificUserCompanyName,
+                                "officeAddress": this.specificUserCompanyOfficeAddress,
+                                "officeTel": this.specificUserCompanyTel,
+                                "officeFax": this.specificUserCompanyFax,
+                                "registrationNo": this.specificUserCompanyRegistrationNo,
+                                "businessType": this.specificUserBusinessType,
+                                // "evaluationId": '',
+                                // "workFlows": []
+                            })
+                            .then(response => {
+                                alert("Vendor Account has been successfully updated")
+                                document.location.reload();
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            })
+                        }
+
+                        else {
+
+                            axios.put(UPDATE_ACC_API_URL, {
+                                "userId": this.specificUserUserId,
+                                "userType": this.specificUserUserType,
+                                "userName": this.specificUserUserName,
+                                "emailAddress": this.specificUserCompanyEmail,
+                                "password": this.specificUserPassword,
+                                "companyName": this.specificUserCompanyName,
+                                "officeAddress": this.specificUserCompanyOfficeAddress,
+                                "officeTel": this.specificUserCompanyTel,
+                                "officeFax": this.specificUserCompanyFax,
+                                "registrationNo": this.specificUserCompanyRegistrationNo,
+                                "businessType": this.specificUserBusinessTypeOthers,
+                                // "evaluationId": '',
+                                // "workFlows": []
+                            })
+                            .then(response => {
+                                alert("Account has been successfully updated")
+                                document.location.reload();
+                            })
+                            .catch(error => {
+                                console.error(error);
+                            })
+                            
+                        }                        
                     }
 
                 }
