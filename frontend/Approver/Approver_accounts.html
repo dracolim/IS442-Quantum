@@ -1120,6 +1120,72 @@
 
         </div>
 
+        <!-- CREATE/UPDATE SUCCESSFUL NOTIFICATION -->
+        <div class="h-80 py-8"> 
+            <div class="mx-auto flex justify-center sm:justify-end h-full">
+                <!--code for notification starts--> 
+                <div role="alert" class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden" id="notification" style="position: fixed; top: 10px; right: 10px;">
+                    <div class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                        <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg" alt="check icon"/>
+                    </div>
+                    <div class="flex flex-col justify-center xl:-ml-4 pl-4 xl:pl-1 sm:w-3/5 pt-4 sm:pb-4 pb-2">
+                        <h1 class="text-lg text-gray-800 light:text-gray-100 font-semibold pb-1">Action Completed</h1>
+                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have successfully created/updated the user.</p>
+                    </div>
+                    <div class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
+                        <a href="" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
+                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
+                        </a>
+                    </div>
+                </div>
+                <!--code for notification ends-->
+            </div>
+        </div>
+
+        <!-- CREATE/UPDATE FAILED NOTIFICATION -->
+        <div class="h-80 py-8"> 
+            <div class="mx-auto flex justify-center sm:justify-end h-full">
+                <!--code for notification starts--> 
+                <div role="alert" class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden" id="failednotification" style="position: fixed; top: 10px; right: 10px;">
+                    <div class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-red-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                        <span>Error</span>
+                    </div>
+                    <div class="flex flex-col justify-center xl:-ml-4 pl-4 xl:pl-1 sm:w-3/5 pt-4 sm:pb-4 pb-2">
+                        <h1 class="text-lg text-gray-800 light:text-gray-100 font-semibold pb-1">Action Failed</h1>
+                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have failed to create/update the user. Please try again.</p>
+                    </div>
+                    <div class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
+                        <a href="javascript:void(0)" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
+                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer"></span>
+                        </a>
+                    </div>
+                </div>
+                <!--code for notification ends-->
+            </div>
+        </div>
+
+        <!-- DELETION SUCCESSFUL NOTIFICATION -->
+        <div class="h-80 py-8"> 
+            <div class="mx-auto flex justify-center sm:justify-end h-full">
+                <!--code for notification starts--> 
+                <div role="alert" class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden" id="deletenotification" style="position: fixed; top: 10px; right: 10px;">
+                    <div class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                        <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg" alt="check icon"/>
+                    </div>
+                    <div class="flex flex-col justify-center xl:-ml-4 pl-4 xl:pl-1 sm:w-3/5 pt-4 sm:pb-4 pb-2">
+                        <h1 class="text-lg text-gray-800 light:text-gray-100 font-semibold pb-1">Action Completed</h1>
+                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have successfully deleted the user.</p>
+                    </div>
+                    <div class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
+                        <a href="" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
+                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
+                        </a>
+                    </div>
+                </div>
+                <!--code for notification ends-->
+            </div>
+        </div>       
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
@@ -1184,175 +1250,173 @@
             async createVendorAcc() {
                 if (this.businessType != "Others") {
 
-                this.errors = {};
-                this.hasErrors = false;
+                    this.errors = {};
+                    this.hasErrors = false;
 
-                if (!this.userName) {
-                    this.errors.userName = 'User Name is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.userName) {
+                        this.errors.userName = 'User Name is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyEmail) {
-                    this.errors.companyEmail = 'Email is required';
-                    this.hasErrors = true;
-                } else if (!this.validEmail(this.companyEmail)) {
-                    this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyEmail) {
+                        this.errors.companyEmail = 'Email is required';
+                        this.hasErrors = true;
+                    } else if (!this.validEmail(this.companyEmail)) {
+                        this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.password) {
-                    this.errors.password = 'Password is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.password) {
+                        this.errors.password = 'Password is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyName) {
-                    this.errors.companyName = 'Company Name is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyName) {
+                        this.errors.companyName = 'Company Name is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyRegistrationNo) {
-                    this.errors.companyRegistrationNo = 'Company Registration Number is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyRegistrationNo) {
+                        this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyOfficeAddress) {
-                    this.errors.companyOfficeAddress = 'Company Office Address is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyOfficeAddress) {
+                        this.errors.companyOfficeAddress = 'Company Office Address is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyTel) {
-                    this.errors.companyTel = 'Company Tel is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyTel) {
+                        this.errors.companyTel = 'Company Tel is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.companyFax) {
-                    this.errors.companyFax = 'Company Fax is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.companyFax) {
+                        this.errors.companyFax = 'Company Fax is required';
+                        this.hasErrors = true;
+                    }
 
-                if (!this.businessType) {
-                    this.errors.businessType = 'Business Type is required';
-                    this.hasErrors = true;
-                }
+                    if (!this.businessType) {
+                        this.errors.businessType = 'Business Type is required';
+                        this.hasErrors = true;
+                    }
 
-                if (this.hasErrors) {
-                    alert("Vendor Account WAS NOT created successfully, please try again")
-                    return;
-                }
-
-                console.log('reached here')
-                await axios
-                    .post("http://localhost:5000/users/vendor", {
-                        "userType": 'VENDOR',
-                        "userName": this.userName,
-                        "emailAddress": this.companyEmail,
-                        "password": this.password,
-                        "companyName": this.companyName,
-                        "officeAddress": this.companyOfficeAddress,
-                        "officeTel": this.companyTel,
-                        "officeFax": this.companyFax,
-                        "registrationNo": this.companyRegistrationNo,
-                        "businessType": this.businessType
-                        // "evaluationId": '123456789test'
-                    })
-                    .then((response) => {
-                        console.log("reached here")
-                        alert("Vendor Account has been successfully created")
-                        document.location.reload();
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
-                    
-                }
-                else {
-
-                this.errors = {};
-                this.hasErrors = false;
-
-                if (!this.userName) {
-                    this.errors.userName = 'User Name is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyEmail) {
-                    this.errors.companyEmail = 'Email is required';
-                    this.hasErrors = true;
-                } else if (!this.validEmail(this.companyEmail)) {
-                    this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
-                    this.hasErrors = true;
-                }
-
-                if (!this.password) {
-                    this.errors.password = 'Password is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyName) {
-                    this.errors.companyName = 'Company Name is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyRegistrationNo) {
-                    this.errors.companyRegistrationNo = 'Company Registration Number is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyOfficeAddress) {
-                    this.errors.companyOfficeAddress = 'Company Office Address is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyTel) {
-                    this.errors.companyTel = 'Company Tel is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.companyFax) {
-                    this.errors.companyFax = 'Company Fax is required';
-                    this.hasErrors = true;
-                }
-
-                if (!this.businessTypeOthers) {
-                    this.errors.businessTypeOthers = 'Business Type is required under Please Specify';
-                    this.hasErrors = true;
-                }
-
-                if (this.hasErrors) {
-                    alert("Vendor Account WAS NOT created successfully, please try again")
-                    return;
-                }
+                    if (this.hasErrors) {
+                        this.showFailedNoti();
+                        return;
+                    }
 
                     console.log('reached here')
                     await axios
-                    .post("http://localhost:5000/users/vendor", {
-                        "userType": 'VENDOR',
-                        "userName": this.userName,
-                        "emailAddress": this.companyEmail,
-                        "password": this.password,
-                        "companyName": this.companyName,
-                        "officeAddress": this.companyOfficeAddress,
-                        "officeTel": this.companyTel,
-                        "officeFax": this.companyFax,
-                        "registrationNo": this.companyRegistrationNo,
-                        "businessType": this.businessTypeOthers
-                        // "evaluationId": '123456789test'
-                    })
-                    .then((response) => {
-                        console.log("reached here")
-                        alert("Vendor Account has been successfully created")
-                        document.location.reload();
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+                        .post("http://localhost:5000/users/vendor", {
+                            "userType": 'VENDOR',
+                            "userName": this.userName,
+                            "emailAddress": this.companyEmail,
+                            "password": this.password,
+                            "companyName": this.companyName,
+                            "officeAddress": this.companyOfficeAddress,
+                            "officeTel": this.companyTel,
+                            "officeFax": this.companyFax,
+                            "registrationNo": this.companyRegistrationNo,
+                            "businessType": this.businessType
+                            // "evaluationId": '123456789test'
+                        })
+                        .then((response) => {
+                            var Notification = document.getElementById("failednotification");
+                            Notification.classList.add("hidden");
+                            this.showSuccessNoti();                        
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                    
+                }
+
+                else {
+
+                    this.errors = {};
+                    this.hasErrors = false;
+
+                    if (!this.userName) {
+                        this.errors.userName = 'User Name is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyEmail) {
+                        this.errors.companyEmail = 'Email is required';
+                        this.hasErrors = true;
+                    } else if (!this.validEmail(this.companyEmail)) {
+                        this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.password) {
+                        this.errors.password = 'Password is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyName) {
+                        this.errors.companyName = 'Company Name is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyRegistrationNo) {
+                        this.errors.companyRegistrationNo = 'Company Registration Number is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyOfficeAddress) {
+                        this.errors.companyOfficeAddress = 'Company Office Address is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyTel) {
+                        this.errors.companyTel = 'Company Tel is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.companyFax) {
+                        this.errors.companyFax = 'Company Fax is required';
+                        this.hasErrors = true;
+                    }
+
+                    if (!this.businessTypeOthers) {
+                        this.errors.businessTypeOthers = 'Business Type is required under Please Specify';
+                        this.hasErrors = true;
+                    }
+
+                    if (this.hasErrors) {
+                        alert("Vendor Account WAS NOT created successfully, please try again")
+                        return;
+                    }
+
+                        await axios
+                        .post("http://localhost:5000/users/vendor", {
+                            "userType": 'VENDOR',
+                            "userName": this.userName,
+                            "emailAddress": this.companyEmail,
+                            "password": this.password,
+                            "companyName": this.companyName,
+                            "officeAddress": this.companyOfficeAddress,
+                            "officeTel": this.companyTel,
+                            "officeFax": this.companyFax,
+                            "registrationNo": this.companyRegistrationNo,
+                            "businessType": this.businessTypeOthers
+                            // "evaluationId": '123456789test'
+                        })
+                        .then((response) => {
+                            this.showSuccessNoti();
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
 
                 }
 
 
             },
             async createAdminAcc() {
-                console.log('reached here')
+
                 this.errors = {};
                 this.hasErrors = false;
 
@@ -1375,7 +1439,7 @@
                 }
 
                 if (this.hasErrors) {
-                    alert("Admin Account WAS NOT created successfully, please try again")
+                    this.showFailedNoti();
                     return;
                 }
 
@@ -1387,28 +1451,17 @@
                         "password": this.adminPassword,
                     })
                     .then((response) => {
-                        console.log("reached here")
-                        alert("Admin Account has been successfully created")
-                        document.location.reload();
+                        var Notification = document.getElementById("failednotification");
+                        Notification.classList.add("hidden");
+                        this.showSuccessNoti();                   
                     })
                     .catch((error) => {
                         console.log(error);
                     });
 
             },
-            validEmail(email) {
-                // Regular expression to validate email format
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                // Check if the email matches the regular expression
-                if (!emailRegex.test(email)) {
-                    return false;
-                }
-
-                return true;
-            },
             async createApproverAcc() {
-                console.log('reached here')
+
                 this.errors = {};
                 this.hasErrors = false;
 
@@ -1431,25 +1484,37 @@
                 }
 
                 if (this.hasErrors) {
-                    alert("Approver Account WAS NOT created successfully, please try again")
+                    this.showFailedNoti();
                     return;
                 }
+
                 await axios
                     .post("http://localhost:5000/users/approver", {
                         "userType": 'APPROVER',
                         "userName": this.approverUserName,
-                        "emailAddress": this.approverPassword,
-                        "password": this.approverEmail,
+                        "emailAddress": this.approverEmail,
+                        "password": this.approverPassword,
                     })
                     .then((response) => {
-                        console.log("reached here")
-                        alert("Approver Account has been successfully created")
-                        document.location.reload();
+                        var Notification = document.getElementById("failednotification");
+                        Notification.classList.add("hidden");
+                        this.showSuccessNoti();                        
                     })
                     .catch((error) => {
                         console.log(error);
                     });
 
+            },
+            validEmail(email) {
+                // Regular expression to validate email format
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                // Check if the email matches the regular expression
+                if (!emailRegex.test(email)) {
+                    return false;
+                }
+
+                return true;
             },
             getRowObject(userId) {
                 console.log("it works")
@@ -1484,16 +1549,13 @@
 
                 axios.delete(DELETE_ACC_API_URL) //need check if this is correct link first
                     .then(response => {
-                        alert("Account has been successfully deleted")
-                        document.location.reload();
+                        this.showDeletionNoti();                        
                     })
                     .catch(error => {
                         console.error(error);
                     })
             },
             updateAcc() {
-                console.log('reached here')
-
                 if (this.specificUserUserType == "VENDOR") {
 
                     if (this.businessType != "Others") {
@@ -1545,17 +1607,11 @@
                         }
 
                         if (this.hasErrors) {
-                            alert("Vendor Account WAS NOT updated successfully, please try again")
+                            this.showFailedNoti();
                             return;
                         }
 
-                        console.log('reached here2')
-                        console.log(this.specificUserUserId)
-                        console.log(this.specificUserUserType)
-
                         const UPDATE_ACC_API_URL = this.localhost + "/users/update/vendor"
-                        console.log("SEE HERE")
-                        console.log(this.specificUserUserName)
 
                         if (this.specificUserBusinessType != "Others") {
 
@@ -1575,8 +1631,9 @@
                                 // "workFlows": []
                             })
                             .then(response => {
-                                alert("Vendor Account has been successfully updated")
-                                document.location.reload();
+                                var Notification = document.getElementById("failednotification");
+                                Notification.classList.add("hidden");
+                                this.showSuccessNoti();                      
                             })
                             .catch(error => {
                                 console.error(error);
@@ -1601,8 +1658,9 @@
                                 // "workFlows": []
                             })
                             .then(response => {
-                                alert("Account has been successfully updated")
-                                document.location.reload();
+                                var Notification = document.getElementById("failednotification");
+                                Notification.classList.add("hidden");
+                                this.showSuccessNoti();                        
                             })
                             .catch(error => {
                                 console.error(error);
@@ -1665,17 +1723,11 @@
                         }
 
                         if (this.hasErrors) {
-                            alert("Vendor Account WAS NOT updated successfully, please try again")
+                            this.showFailedNoti();
                             return;
                         }
 
-                        console.log('reached here2')
-                        console.log(this.specificUserUserId)
-                        console.log(this.specificUserUserType)
-
                         const UPDATE_ACC_API_URL = this.localhost + "/users/update/vendor"
-                        console.log("SEE HERE")
-                        console.log(this.specificUserUserName)
 
                         if (this.specificUserBusinessType != "Others") {
 
@@ -1695,8 +1747,9 @@
                                 // "workFlows": []
                             })
                             .then(response => {
-                                alert("Vendor Account has been successfully updated")
-                                document.location.reload();
+                                var Notification = document.getElementById("failednotification");
+                                Notification.classList.add("hidden");
+                                this.showSuccessNoti();
                             })
                             .catch(error => {
                                 console.error(error);
@@ -1721,8 +1774,9 @@
                                 // "workFlows": []
                             })
                             .then(response => {
-                                alert("Account has been successfully updated")
-                                document.location.reload();
+                                var Notification = document.getElementById("failednotification");
+                                Notification.classList.add("hidden");
+                                this.showSuccessNoti();
                             })
                             .catch(error => {
                                 console.error(error);
@@ -1756,7 +1810,7 @@
                     }
 
                     if (this.hasErrors) {
-                        alert("Admin Account WAS NOT updated successfully, please try again")
+                        this.showFailedNoti();
                         return;
                     }
 
@@ -1769,12 +1823,14 @@
                             "password": this.specificUserPassword,
                         })
                         .then(response => {
-                            alert("Admin Account has been successfully updated")
-                            document.location.reload();
+                            var Notification = document.getElementById("failednotification");
+                            Notification.classList.add("hidden");
+                            this.showSuccessNoti(); 
                         })
                         .catch(error => {
                             console.error(error);
                         })
+
                 }
                 if (this.specificUserUserType == "APPROVER") {
 
@@ -1800,7 +1856,7 @@
                     }
 
                     if (this.hasErrors) {
-                        alert("Approver Account WAS NOT updated successfully, please try again")
+                        this.showFailedNoti();
                         return;
                     }
 
@@ -1813,16 +1869,35 @@
                             "password": this.specificUserPassword,
                         })
                         .then(response => {
-                            alert("Approver Account has been successfully updated")
-                            document.location.reload();
+                            var Notification = document.getElementById("failednotification");
+                            Notification.classList.add("hidden");
+                            this.showSuccessNoti(); 
                         })
                         .catch(error => {
                             console.error(error);
                         })
+
                 }
-
-
+            },
+            showSuccessNoti() {
+                var Notification = document.getElementById("notification");
+                Notification.style.transform = "translateX(150%)";
+                Notification.classList.remove("hidden");
+                Notification.style.transform = "translateX(0%)";
+            },
+            showFailedNoti() {
+                var Notification = document.getElementById("failednotification");
+                Notification.style.transform = "translateX(150%)";
+                Notification.classList.remove("hidden");
+                Notification.style.transform = "translateX(0%)";
+            },
+            showDeletionNoti() {
+                var Notification = document.getElementById("deletenotification");
+                Notification.style.transform = "translateX(150%)";
+                Notification.classList.remove("hidden");
+                Notification.style.transform = "translateX(0%)";
             }
+
         }
     })
 </script>
