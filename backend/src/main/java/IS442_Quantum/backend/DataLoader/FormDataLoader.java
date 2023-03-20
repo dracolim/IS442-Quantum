@@ -2,6 +2,7 @@ package IS442_Quantum.backend.DataLoader;
 
 import IS442_Quantum.backend.Enums.FormSequenceStatus;
 import IS442_Quantum.backend.Enums.UserTypes;
+import IS442_Quantum.backend.Enums.WorkFlowStatus;
 import IS442_Quantum.backend.Model.*;
 import IS442_Quantum.backend.Repository.*;
 import jakarta.persistence.EntityManager;
@@ -472,7 +473,7 @@ public class FormDataLoader implements ApplicationRunner {
         workFlow1.setWfName("workflow1");
         workFlow1.setWfDateline(new Date(2020,1,1));
         workFlow1.setWfLastSubmit(new Date(2020,1,1));
-        workFlow1.setValidated(false);
+        workFlow1.setWorkFlowStatus(IS442_Quantum.backend.Enums.WorkFlowStatus.IN_PROGRESS);
         workFlow1.setVendor(vendor1);
         workFlow1.setAdmin(admin1);
         workFlow1.setApprover(approver1);
@@ -481,7 +482,7 @@ public class FormDataLoader implements ApplicationRunner {
         workFlow2.setWfName("workflow2");
         workFlow2.setWfDateline(new Date(2020,1,1));
         workFlow2.setWfLastSubmit(new Date(2020,1,1));
-        workFlow2.setValidated(false);
+        workFlow2.setWorkFlowStatus(IS442_Quantum.backend.Enums.WorkFlowStatus.IN_PROGRESS);
         workFlow2.setVendor(vendor2);
         workFlow2.setAdmin(admin2);
         workFlow2.setApprover(approver1);

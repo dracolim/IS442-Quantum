@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.ArrayList;
 
 public interface WorkFlowRepository extends JpaRepository<WorkFlow, Long>  {
-    @Query("SELECT w FROM WorkFlow w WHERE w.isValidated = false")
+    @Query("SELECT w FROM WorkFlow w WHERE w.workFlowStatus =IS442_Quantum.backend.Enums.WorkFlowStatus.IN_PROGRESS")
     ArrayList<WorkFlow> findPendingWorkFlow();
 
 
