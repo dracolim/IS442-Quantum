@@ -1,6 +1,7 @@
 package IS442_Quantum.backend.Service;
 
 import IS442_Quantum.backend.Enums.FormSequenceStatus;
+import IS442_Quantum.backend.Enums.WorkFlowStatus;
 import IS442_Quantum.backend.Model.*;
 import IS442_Quantum.backend.Repository.FormSequenceRepository;
 import IS442_Quantum.backend.Repository.WorkFlowRepository;
@@ -31,7 +32,7 @@ public class WorkFlowService {
 
     public WorkFlow createWorkFlow(WorkFlow workFlowBody){
         WorkFlow newWorkFlow = new WorkFlow();
-        newWorkFlow.setValidated(workFlowBody.isValidated());
+        newWorkFlow.setWorkFlowStatus(IS442_Quantum.backend.Enums.WorkFlowStatus.IN_PROGRESS);
         newWorkFlow.setWfName(workFlowBody.getWfName());
         newWorkFlow.setWfDateline(workFlowBody.getWfDateline());
         newWorkFlow.setWfLastSubmit(workFlowBody.getWfLastSubmit());
@@ -57,8 +58,10 @@ public class WorkFlowService {
         return workFlowRepository.findById(id);
     }
 
-    public void updateFormSequence(WorkFlow workFlow, WorkFlow workFlowBody){
+    public boolean updateFormSequence(WorkFlow workFlow, WorkFlow workFlowBody){
         Collection<FormSequence> formSequences = new ArrayList<>();
+        int numberOfFormSequence = 0;
+        int numberOfCompletedFormSequence = 0;
 
         for(FormSequence fs : workFlowBody.getFormSequences()){
 
@@ -71,6 +74,7 @@ public class WorkFlowService {
             FormSequenceStatus newStatus = fs.getStatus();
 
             // Get current form status based on FormId and seqNo
+            numberOfFormSequence++;
             if (workFlow.getFormSequences()!=null){
                     for(FormSequence f : workFlow.getFormSequences()){
                     if(f.getForm().getFormId() == fs.getForm().getFormId()){
@@ -79,14 +83,26 @@ public class WorkFlowService {
                     }
                 }
             }
+            if(newStatus.equals(FormSequenceStatus.APPROVED)){
+                numberOfCompletedFormSequence++;
+            }
+
 
             // this method update the status and trigger notification logic
             updateFormStatus(newFormSequence, fs, workFlow, currStatus, newStatus);
 
             formSequences.add(newFormSequence);
+
         }
 
         workFlow.setFormSequences(formSequences);
+
+
+        if(numberOfFormSequence == numberOfCompletedFormSequence && numberOfFormSequence != 0){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
@@ -172,7 +188,7 @@ public class WorkFlowService {
 
             WorkFlow eWorkFlow = optionalWorkFlow.get();
             eWorkFlow.setWfName(workFlowBody.getWfName());
-            eWorkFlow.setValidated(workFlowBody.isValidated());
+            eWorkFlow.setWorkFlowStatus(workFlowBody.getWorkFlowStatus());
             eWorkFlow.setWfDateline(workFlowBody.getWfDateline());
             eWorkFlow.setWfLastSubmit(workFlowBody.getWfLastSubmit());
 
@@ -187,7 +203,11 @@ public class WorkFlowService {
 
 
             // Add formSequence
-            updateFormSequence(eWorkFlow, workFlowBody);
+            if(updateFormSequence(eWorkFlow, workFlowBody)){
+                eWorkFlow.setWorkFlowStatus(WorkFlowStatus.COMPLETED);
+            }else{
+                eWorkFlow.setWorkFlowStatus(WorkFlowStatus.IN_PROGRESS);
+            }
 
             return workFlowRepository.save(eWorkFlow);
         }else {

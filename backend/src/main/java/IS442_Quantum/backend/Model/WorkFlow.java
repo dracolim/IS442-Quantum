@@ -1,5 +1,6 @@
 package IS442_Quantum.backend.Model;
 
+import IS442_Quantum.backend.Enums.WorkFlowStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -26,8 +27,10 @@ public class WorkFlow {
     private Date wfDateline;
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date wfLastSubmit;
-    @JsonProperty
-    private boolean isValidated;
+
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(50) default 'IN_PROGRESS'")
+    private WorkFlowStatus workFlowStatus;
 
     @OneToMany(mappedBy="workFlow", cascade={CascadeType.ALL})
     private Collection<FormSequence> formSequences = new ArrayList<>();
