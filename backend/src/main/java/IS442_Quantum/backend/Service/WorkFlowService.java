@@ -107,14 +107,20 @@ public class WorkFlowService {
     }
 
     // update status and trigger notification
-    public void updateFormStatus(FormSequence formSequence, FormSequence formSequenceBody, WorkFlow workflow, FormSequenceStatus currStatus, FormSequenceStatus newStatus){
+    public void updateFormStatus(FormSequence formSequence, FormSequence formSequenceBody, WorkFlow workflow, FormSequenceStatus currStatus, FormSequenceStatus newStatus) {
 
         // retrieve basic information
         String companyName = workflow.getVendor().getCompanyName();
         String formName = formSequence.getForm().getFormName();
 
+
+        // do nothing if status is the same
+        if (currStatus == newStatus) {
+
+            formSequence.setStatus(currStatus);
+
         // Not Started to Pending: Vendor to Admin
-        if (currStatus == FormSequenceStatus.REQUESTED && newStatus == FormSequenceStatus.PENDING){
+        } else if (currStatus == FormSequenceStatus.REQUESTED && newStatus == FormSequenceStatus.PENDING){
 
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
@@ -174,12 +180,12 @@ public class WorkFlowService {
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
         // Rejected to Deleted: Admin to Vendor
-        } else if (currStatus == FormSequenceStatus.REJECTED && newStatus == FormSequenceStatus.DELETED){
+        } else if (currStatus == FormSequenceStatus.REJECTED && newStatus == FormSequenceStatus.DELETED) {
 
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form deleted [" + formName + "]";
-            String emailBody = "The following form has been deleted: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
+            String emailBody = "The following form has been deleted: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName();
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
