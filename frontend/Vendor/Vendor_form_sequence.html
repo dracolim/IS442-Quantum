@@ -310,6 +310,7 @@
                 .then(response => {
                     // console.log(response.data)
                     this.workflow_raw_data = response.data;
+                    console.log(this.workflow_raw_data)
                     this.all_form_sequences = response.data.formSequences;
 
                     for (each of this.all_form_sequences) {
@@ -341,20 +342,18 @@
                         for (each_question of questions) {
                             //checkbox 
                             if (each_question.inputType == "checkbox") {
-                                console.log(each_question)
                                 if (each_question.inputValue != null) {
                                     var list = each_question.inputValue.split(",")
-                                }
-                                else{
+                                } else {
                                     var list = []
                                 }
                                 console.log(list)
                                 for (each_property of each_question.questionProperties) {
-                                        var qp_id = each_property.id
-                                        var qp_label = each_property.label
-                                        if (list.includes(qp_label)) {
-                                            this.allAnswers[qp_id] = qp_label;
-                                        }
+                                    var qp_id = each_property.id
+                                    var qp_label = each_property.label
+                                    if (list.includes(qp_label)) {
+                                        this.allAnswers[qp_id] = qp_label;
+                                    }
                                 }
                             } else {
                                 this.allAnswers[each_question.questionId] = each_question.inputValue ||
@@ -430,7 +429,7 @@
                     }
                 }
                 console.log(this.allAnswers)
-                console.log(question_ans)
+                // console.log(question_ans)
 
                 //combine all questions
                 var allQnA = Object.assign(this.allAnswers, question_ans);
@@ -447,6 +446,7 @@
                 console.log(this.form_sections)
                 for (each of this.all_form_sequences) {
                     if (each.formSequenceId == this.form_sequence_id) {
+                        each["status"] = "PENDING"
                         each.form['sections'] = this.form_sections;
                         var form = each.form
                         var form_id = each.form.formId
@@ -455,8 +455,21 @@
                         axios.put(URL, form)
                             .then(response => {
                                 console.log(response.data)
-                                alert("Form submitteed successfully!")
-                                document.location.reload();
+
+                                // UPDATE STATUS IN FORM SEQUENCE
+                                this.workflow_raw_data['formSequences'] = this.all_form_sequences
+                                console.log(this.workflow_raw_data)
+
+                                const API_URL2 = this.localhost + "/workflows/" + this.workflow_id;
+                                axios.put(API_URL2 , this.workflow_raw_data)
+                                    .then(response => {
+                                        console.log(response.data)
+                                        alert("Form submitteed successfully!")
+                                        // document.location.reload();
+                                    })
+                                    .catch(error => {
+                                        console.log(error.message)
+                                    })
                             })
                             .catch(error => {
                                 console.log(error.message)
