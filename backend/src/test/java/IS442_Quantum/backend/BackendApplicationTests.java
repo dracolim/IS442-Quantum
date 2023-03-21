@@ -38,7 +38,6 @@ class BackendApplicationTests {
 		workflow1.setWfName("Workflow1");
 		workflow1.setWfDateline(new Date());
 		workflow1.setWfLastSubmit(new Date());
-		workflow1.setValidated(true);
 
 
 		vendor1.addWorkflow(workflow1);

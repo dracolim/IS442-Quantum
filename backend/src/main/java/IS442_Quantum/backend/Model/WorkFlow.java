@@ -57,7 +57,4 @@ public class WorkFlow {
         formSequence.setWorkFlow(null);
     }
 
-//    public boolean isValidated() {
-//        return isValidated;
-//    }
 }
