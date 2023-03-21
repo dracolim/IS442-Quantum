@@ -143,9 +143,8 @@
     <div style="background-color: #b4d1df" class="h-screen">
         <div class="px-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-5">
             <!--Card 1-->
-            <div v-for="(value,idx) of formSequences" @click="goToSinglePage(value.formSequenceId)"
-                class="mt-10 mb-12 rounded overflow-hidden shadow-lg transform transition duration-500 hover:scale-110"
-                style="background-color: white">
+            <div style="cursor: pointer;background-color: white" v-for="(value,idx) of formSequences" @click="goToSinglePage(value.formSequenceId)"
+                class="flex flex-col justify-between mt-10 mb-12 rounded overflow-hidden shadow-lg transform transition duration-500 hover:scale-110">
                 <img class="object-cover w-full px-3 py-3 object-cover h-56"
                     src="../Images/New Vendor Assessment Form.PNG">
                 <div class="px-6 py-4">

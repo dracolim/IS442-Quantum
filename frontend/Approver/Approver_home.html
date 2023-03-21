@@ -193,7 +193,7 @@
                 </thead>
                 <tbody>
                     <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_pending_workflows"
-                        @click="goToSinglepage(value.workFlowId)">
+                        @click="goToSinglepage(value.workFlowId)" style="cursor: pointer;">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.vendor.userId}}
                         </td>
@@ -212,11 +212,16 @@
                         <td class="px-6 py-4">
                             {{value.wfLastSubmit}}
                         </td>
-                        <td class="px-6 py-4 text-red-600 font-medium" v-if="value.isValidated == false">
+                        
+
+                        <td class="px-6 py-4 text-red-600 font-medium" v-if="value.workFlowStatus == 'IN_PROGRESS'">
                             INCOMPLETE
                         </td>
-                        <td class="px-6 py-4 text-green-600 font-medium" v-if="value.isValidated == true">
-                            Completed
+                        <td class="px-6 py-4 text-green-600 font-medium" v-else-if="value.workFlowStatus == 'COMPLETED'">
+                            COMPLETED
+                        </td>
+                        <td class="px-6 py-4 text-green-600 font-medium" v-else-if="value.workFlowStatus == 'REJECTED'">
+                            REJECTED
                         </td>
                     </tr>
                 </tbody>

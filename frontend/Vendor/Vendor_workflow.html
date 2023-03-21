@@ -165,7 +165,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value, idx) in all_workflows" @click="goToSinglepage(value.workFlowId)">
+                    <tr style="cursor: pointer;" class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value, idx) in all_workflows" @click="goToSinglepage(value.workFlowId)">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.workFlowId}}
                         </th>
