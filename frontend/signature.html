@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Vue Signature Pad</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="component.js"></script>
+
+
+  </head>
+  <body>
+    <div id="app">
+        <div class="wrapper">
+            <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
+        </div>
+      
+        <button id="save-png" v-on:click="saveSignature">Save</button>
+        <button id="clear" v-on:click="clearSignature">Clear</button>
+
+</div>
+    <script>
+    
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+          signaturePad: null,
+          isErase: false
+          
+        },
+        mounted: function() {
+        var canvas = document.getElementById('signature-pad');
+        if (!canvas) {
+          console.error("Could not find canvas element with id 'signature-pad'");
+        } else {
+        var signaturePad = new SignaturePad(canvas, {
+          backgroundColor: 'rgb(255, 255, 255)'
+        });
+        
+        this.$data.signaturePad = signaturePad;
+      }
+    },
+
+        methods: {
+          saveSignature: function() {
+            if (this.signaturePad.isEmpty()) {
+              return alert("Please provide a signature first.");
+            }
+            
+            var data = this.signaturePad.toDataURL('image/png');
+            // console.log(data)
+            console.log(data.replace(/^data:image\/?[A-z]*;base64,/));
+        },
+          clearSignature: function() {
+            this.signaturePad.clear();
+            
+            if(this.isErase){
+              this.changeEraseMode();
+            }else{
+              this.setDrawMode();
+            }
+        },
+        setDrawMode: function() {
+          this.signaturePad.penColor = 'black';
+          this.signaturePad.penWidth = 2;
+          this.signaturePad.globalCompositeOperation = 'source-over';
+        },
+        setEraseMode: function() {
+          this.signaturePad.penColor = 'white';
+          this.signaturePad.globalCompositeOperation = 'destination-out';
+        }
+      }})
+    </script>
+  </body>
+</html>
+
