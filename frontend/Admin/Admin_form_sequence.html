@@ -416,7 +416,7 @@
                 for (i in this.allAnswers) {
                     console.log(this.allAnswers[i])
                     // checkbox questionpropertyID
-                    if (this.allAnswers[i] == true) {
+                    if (this.allAnswers[i] === true) {
                         checkboxID.push(i)
                         delete this.allAnswers[i];
                     }
@@ -465,6 +465,7 @@
                         axios.put(URL, form)
                             .then(response => {
                                 console.log(response.data)
+                                alert("Form submitteed successfully!")
                                 document.location.reload();
                             })
                             .catch(error => {

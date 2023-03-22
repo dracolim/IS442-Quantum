@@ -192,7 +192,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_pending_workflows"
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_validated_workflows"
                         @click="goToSinglepage(value.workFlowId)" style="cursor: pointer;">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.vendor.userId}}
@@ -236,6 +236,8 @@
         data: {
             localhost: "http://localhost:5000",
             all_pending_workflows: "",
+            all_workflows: "",
+            all_validated_workflows: [],
             userName: "",
             emailAddress: "",
             user_id: "",
@@ -246,6 +248,7 @@
 
             const API_URL = this.localhost + "/workflows/pending";
             const API_URL2 = this.localhost + "/users/userType/" + "APPROVER"
+            const API_URL3 = this.localhost + "/workflows";
 
             axios.get(API_URL)
                 .then(response => {
@@ -261,6 +264,20 @@
                         if (each.userId == this.user_id) {
                             this.userName = each.userName
                             this.emailAddress = each.emailAddress
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+            axios.get(API_URL3)
+                .then(response => {
+                    this.all_workflows = response.data
+                    for (each of this.all_workflows){
+                        for (each_fs of each.formSequences){
+                            if (each_fs.status == "VALIDATED" && !(this.all_validated_workflows.includes(each))){
+                                this.all_validated_workflows.push(each)
+                            }
                         }
                     }
                 })

@@ -132,7 +132,7 @@
                     </li>
                     <li>
                         <a href="../Approver/Approver_workflow.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
                             Workflows</a>
                     </li>
                     <li>
@@ -142,7 +142,7 @@
                     </li>
                     <li>
                         <a href="../Approver/Approver_form.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                             Forms</a>
                     </li>
                 </ul>
@@ -158,11 +158,15 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Workflows
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Approver_workflow.html'" class='text-sky-600'>Workflows </span>
+                        <span onclick="document.location = 'Approver_workflow.html'" class='text-sky-600'>Workflows
+                        </span>
                     </p>
                 </caption>
                 <thead class="text-sm text-white bg-sky-600">
                     <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
                         <th scope="col" class="px-6 py-3">
                             Workflow ID
                         </th>
@@ -184,9 +188,7 @@
                         <th scope="col" class="px-6 py-3">
                             Assigned Admin
                         </th>
-                        <!-- <th scope="col" class="px-6 py-3">
-                            Validated
-                        </th> -->
+                        
                         <th scope="col" class="px-6 py-3">
                             Check Sequence
                         </th>
@@ -199,11 +201,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key) in AllWorkflow" style="cursor: pointer;">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,key) in AllWorkflow"
+                        style="cursor: pointer;">
+                        <!-- workflow status -->
+                        <td v-if="value.workFlowStatus == 'IN_PROGRESS'" class="px-6 py-4 text-orange-600 font-medium">
+                            IN PROGRESS
+                        </td>
+                        <td v-if="value.workFlowStatus == 'COMPLETED'" class="px-6 py-4 text-green-600 font-medium">
+                            {{value.workFlowStatus}}
+                        </td>
+                        <td v-if="value.workFlowStatus == 'REJECTED'" class="px-6 py-4 text-red-600 font-medium">
+                            {{value.workFlowStatus}}
+                        </td>
+
+                        <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap"
                             v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.workFlowId}}
-                        </th>
+                        </td>
                         <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
                             {{value.wfName}}
                         </td>
@@ -237,15 +251,12 @@
                                 Admin not assigned
                             </div>
                         </td>
-                        <!-- <td class="px-6 py-4" v-on:click="goToSequencePage(value.workFlowId)">
-                            {{value.isValidated}}
-                        </td> -->
-
+                        
                         <!-- CHECK SEQUENCE -->
                         <td style="text-align: center;">
                             <button v-on:click="goToSequencePage(value.workFlowId)" type="button">
                                 <iconify-icon icon="mdi:file-document" width="28" height="28"
-                                    class="hover:text-sky-600"></iconify-icon>
+                                    class="hover:text-red-600"></iconify-icon>
                             </button>
                         </td>
                         <!-- EDIT WORKFLOW -->

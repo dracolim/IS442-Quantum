@@ -169,6 +169,9 @@
                 <thead class="text-sm text-white bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Work Flow ID
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -193,25 +196,33 @@
                 </thead>
                 <tbody>
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
-                        v-for="(value,key) in forms_sequences">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        v-for="(value,key) in forms_sequences" style="cursor: pointer;">
+                        <!-- STATUS -->
+                        <td @click="goToSinglePage(value.formSequenceId)" v-if = "value.status == 'APPROVED'" class="px-6 py-4 text-green-600 font-medium">
+                            {{value.status}}
+                        </td>
+                        <td @click="goToSinglePage(value.formSequenceId)" v-else class="px-6 py-4 text-red-600 font-medium">
+                            {{value.status}}
+                        </td>
+                        <td @click="goToSinglePage(value.formSequenceId)" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{workflow_id}}
-                        </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        </td>
+                        <td @click="goToSinglePage(value.formSequenceId)" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.form.formId}}
-                        </th>
-                        <td class="px-6 py-4">
+                        </td>
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.formSequenceId}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.form.formName}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.form.dateSubmitted}}
                         </td>
-                        <td class="px-6 py-4">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.form.lastEdited}}
                         </td>
+                        
                         <!-- delete form -->
                         <td class="px-6 py-4" style="text-align: center;">
                             <button @click="deleteForm(value.form.formId)">
@@ -372,9 +383,9 @@
                 })
         },
         methods: {
-            goToFormPage: function (id) {
+            goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("./Approver_individual_form.html?id=" + id)
+                window.location.assign("./Admin_form_sequences2.html?id=" + id + "/wf=" + this.workflow_id)
             },
             assignNewForm() {
                 var approver = this.workflow_data.approver
