@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Service
 public class FormSequenceService {
@@ -15,4 +16,10 @@ public class FormSequenceService {
     public Collection<FormSequence> getAll(){
         return formSequenceRepository.findAll();
     }
+
+    public  void deleteFormSequenceByID(Long id){ formSequenceRepository.deleteById(id);}
+
+    public Optional<FormSequence> getFormSequenceByID(Long id){return formSequenceRepository.findById(id);}
+
+    public boolean checkFormSequence(Long id){return formSequenceRepository.existsById(id);}
 }
