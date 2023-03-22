@@ -10,7 +10,7 @@
 
 
 
-<ins> ### Vendor <ins>
+### <ins> Vendor <ins>
 #### Homepage
 <code>Vendor_workflow.html</code>
   - This is the Vendor's homepage
