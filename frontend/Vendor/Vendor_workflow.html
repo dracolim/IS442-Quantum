@@ -223,9 +223,8 @@
                     for(each of all_workflows){
                         console.log(each.vendor.userId)
                         console.log(this.user_id)
-                        if (each.vendor.userId == this.user_id)
+                        if (each.vendor.userId == this.user_id && each.workFlowStatus == "IN_PROGRESS") 
                         {
-                            console.log("adlfkajgdhfasd")
                             this.all_workflows.push(each)
                         }
                     }
