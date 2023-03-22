@@ -58,10 +58,11 @@ public class WorkFlowService {
         return workFlowRepository.findById(id);
     }
 
-    public boolean updateFormSequence(WorkFlow workFlow, WorkFlow workFlowBody){
+    public void updateFormSequence(WorkFlow workFlow, WorkFlow workFlowBody){
         Collection<FormSequence> formSequences = new ArrayList<>();
         int numberOfFormSequence = 0;
         int numberOfCompletedFormSequence = 0;
+        int numberOfRejectedFormSequence = 0;
 
         for(FormSequence fs : workFlowBody.getFormSequences()){
 
@@ -86,6 +87,10 @@ public class WorkFlowService {
             if(newStatus.equals(FormSequenceStatus.APPROVED)){
                 numberOfCompletedFormSequence++;
             }
+            if(newStatus.equals(FormSequenceStatus.REJECTED)){
+                numberOfRejectedFormSequence++;
+            }
+
 
 
             // this method update the status and trigger notification logic
@@ -99,9 +104,11 @@ public class WorkFlowService {
 
 
         if(numberOfFormSequence == numberOfCompletedFormSequence && numberOfFormSequence != 0){
-            return true;
+            workFlow.setWorkFlowStatus(WorkFlowStatus.COMPLETED);
+        }else if(numberOfFormSequence == numberOfRejectedFormSequence){
+            workFlow.setWorkFlowStatus(WorkFlowStatus.REJECTED);
         }else{
-            return false;
+            workFlow.setWorkFlowStatus(WorkFlowStatus.IN_PROGRESS);
         }
 
     }
@@ -226,11 +233,7 @@ public class WorkFlowService {
 
 
             // Add formSequence
-            if(updateFormSequence(eWorkFlow, workFlowBody)){
-                eWorkFlow.setWorkFlowStatus(WorkFlowStatus.COMPLETED);
-            }else{
-                eWorkFlow.setWorkFlowStatus(WorkFlowStatus.IN_PROGRESS);
-            }
+            updateFormSequence(eWorkFlow, workFlowBody);
 
             return workFlowRepository.save(eWorkFlow);
         }else {
