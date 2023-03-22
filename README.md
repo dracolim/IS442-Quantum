@@ -1,4 +1,4 @@
-# IS442-Quantum
+# IS442 TEAM 8 Quantum
 
 ## Login Page
 <code>login_home.html</code>
