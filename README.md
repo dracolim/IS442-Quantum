@@ -11,9 +11,10 @@
 
 
 ### Vendor
-<ins>Homepage<ins> <br>
+#### Homepage
 <code>Vendor_workflow.html</code>
-  - This page displays all the pending workflows (workflows with status: IN PROGRESS) that requires vendors to fill in the forms. 
+  - This is the Vendor's homepage
+  - It displays all the pending workflows (workflows with status: IN PROGRESS) that requires vendors to fill in the forms. 
   - Vendors can either click on the table row or the icon in the forms column to go to the respective workflow page
 <img width="500" alt="Screenshot 2023-03-22 at 3 39 45 PM" src="https://user-images.githubusercontent.com/85498185/226833043-4b2ede44-e280-4d6b-bcb5-caf39c75f75c.png">
 
