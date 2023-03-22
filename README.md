@@ -43,11 +43,11 @@
   
 <ins>Steps to validate form<ins> <br>
 1. At <code>Admin_individual_pendingwf.html</code>, Admins can select "APPROVED" or "NOT APPROVED" from the dropdown menu in the Approval column. <br>
-<img width="500" alt="Screenshot 2023-03-22 at 4 08 44 PM" src="https://user-images.githubusercontent.com/85498185/226839314-c6493a63-46f0-4c8d-8d26-254b44ba38ab.png"> <br>
+<img width="500" alt="Screenshot 2023-03-22 at 4 16 23 PM" src="https://user-images.githubusercontent.com/85498185/226840559-a2719df8-4454-4daf-9cf2-502b81be6db7.png"><br>
 2. **Scenario 1:** if Admins selects "APPROVED", the status (Status column) will change from "PENDING" to "VALIDATED"
-<img width="500" alt="Screenshot 2023-03-22 at 4 08 58 PM" src="https://user-images.githubusercontent.com/85498185/226839300-3c774c66-36f4-4a77-8755-c3980f97c751.png"> <br>
+<img width="500" alt="Screenshot 2023-03-22 at 4 17 37 PM" src="https://user-images.githubusercontent.com/85498185/226840879-a51671a7-17f3-45fa-936a-0f6b6ea5bad8.png"> <br>
 3. **Scenario 2:** if Admins selects "NOT APPROVED", the status (Status column) will change from "PENDING" to "REQUESTED"
-<img width="500" alt="Screenshot 2023-03-22 at 4 15 14 PM" src="https://user-images.githubusercontent.com/85498185/226840328-b8fe5b11-1f30-4b35-b2d1-d2152cf4682c.png">
+  <img width="500" alt="Screenshot 2023-03-22 at 4 15 14 PM" src="https://user-images.githubusercontent.com/85498185/226840328-b8fe5b11-1f30-4b35-b2d1-d2152cf4682c.png">
 
   
   
