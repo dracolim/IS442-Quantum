@@ -170,6 +170,9 @@
                 <thead class="text-sm text-white bg-sky-600">
                     <tr>
                         <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Work Flow ID
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -187,6 +190,7 @@
                         <th scope="col" class="px-6 py-3">
                             Last Edited
                         </th>
+                       
                         <th scope="col" class="px-6 py-3">
                             Delete
                         </th>
@@ -195,12 +199,19 @@
                 <tbody>
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
                         v-for="(value,key) in forms_sequences">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        <!-- STATUS -->
+                        <td v-if = "value.status == 'APPROVED'" class="px-6 py-4 text-green-600 font-medium">
+                            {{value.status}}
+                        </td>
+                        <td v-else class="px-6 py-4 text-red-600 font-medium">
+                            {{value.status}}
+                        </td>
+                        <td  class="px-6 py-4 font-medium text-gray-900 ">
                             {{workflow_id}}
-                        </th>
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        </td>
+                        <td class="px-6 py-4 font-medium text-gray-900">
                             {{value.form.formId}}
-                        </th>
+                        </td>
                         <td class="px-6 py-4">
                             {{value.formSequenceId}}
                         </td>
@@ -213,6 +224,7 @@
                         <td class="px-6 py-4">
                             {{value.form.lastEdited}}
                         </td>
+                        
                         <!-- delete form -->
                         <td class="px-6 py-4" style="text-align: center;">
                             <button @click="deleteForm(value.form.formId)">
