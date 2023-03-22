@@ -17,13 +17,13 @@
   - Vendors can either click on the table row or the icon in the forms column to go to the respective workflow page
 <img width="500" alt="Screenshot 2023-03-22 at 3 39 45 PM" src="https://user-images.githubusercontent.com/85498185/226833043-4b2ede44-e280-4d6b-bcb5-caf39c75f75c.png">
 
-## Select individual workflow
+### Select individual workflow
 <ins>Steps to select individual workflow<ins> <br>
  1. From <code>Vendor_workflow.html</code>, Vendors can either click on the table row or the icon in the forms column.
  2. After selecting, it will bring the vendors to <code>Vendor_form.html</code> where it will display all the forms that belongs to that particular workflow <br>
 <img width="500" alt="Screenshot 2023-03-22 at 3 46 24 PM" src="https://user-images.githubusercontent.com/85498185/226834370-784b628d-95b3-433d-9418-884ad689e994.png">
 
-## Select individual form
+### Select individual form
 <ins>Steps to select individual form<ins> <br>
  1. From <code>Vendor_workflow.html</code>, Vendors can either click on the table row or the icon in the forms column.
  2. After selecting, it will bring the vendors to <code>Vendor_form.html</code> where it will display all the forms that belongs to that particular workflow <br>
