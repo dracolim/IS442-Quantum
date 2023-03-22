@@ -216,7 +216,7 @@
                                 :type="value.inputType" :required="value.isRequired">
 
                             <!-- SIGNATURE -->
-                            <div v-else-if="value.inputType == 'signature'" @mouseover="signatureShow()">
+                            <div v-else-if="value.inputType == 'signature'">
                                 <div class="wrapper">
                                     <canvas id="signature-pad" class="signature-pad" width=400 height=200></canvas>
                                 </div>
@@ -325,6 +325,9 @@
                     console.error(error);
                 })
 
+        },
+        created: function(){
+            this.signatureShow()
         },
         methods: {
             signatureShow() {
