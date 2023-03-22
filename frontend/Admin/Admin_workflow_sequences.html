@@ -198,16 +198,20 @@
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
                         v-for="(value,key) in forms_sequences" style="cursor: pointer;">
                         <!-- STATUS -->
-                        <td @click="goToSinglePage(value.formSequenceId)" v-if = "value.status == 'APPROVED'" class="px-6 py-4 text-green-600 font-medium">
+                        <td @click="goToSinglePage(value.formSequenceId)" v-if="value.status == 'APPROVED'"
+                            class="px-6 py-4 text-green-600 font-medium">
                             {{value.status}}
                         </td>
-                        <td @click="goToSinglePage(value.formSequenceId)" v-else class="px-6 py-4 text-red-600 font-medium">
+                        <td @click="goToSinglePage(value.formSequenceId)" v-else
+                            class="px-6 py-4 text-red-600 font-medium">
                             {{value.status}}
                         </td>
-                        <td @click="goToSinglePage(value.formSequenceId)" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        <td @click="goToSinglePage(value.formSequenceId)" scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{workflow_id}}
                         </td>
-                        <td @click="goToSinglePage(value.formSequenceId)" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                        <td @click="goToSinglePage(value.formSequenceId)" scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.form.formId}}
                         </td>
                         <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
@@ -222,7 +226,7 @@
                         <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.form.lastEdited}}
                         </td>
-                        
+
                         <!-- delete form -->
                         <td class="px-6 py-4" style="text-align: center;">
                             <button @click="deleteForm(value.form.formId)">
@@ -440,17 +444,12 @@
                 var formSequences = this.workflow_data.formSequences
                 for (i in formSequences) {
                     if (formSequences[i].form.formId == form_id) {
-                        formSequences.splice(i, 1)
+                        var form_sequence_id = formSequences[i].formSequenceId
                     }
                 }
+                const API_URL3 = this.localhost + "/formsequences/" + form_sequence_id;
 
-                this.workflow_data['formSequences'] = formSequences
-                console.log(this.workflow_data)
-
-                // update workflow with assigned forms
-                const API_URL3 = this.localhost + "/workflows/" + this.workflow_id;
-
-                axios.put(API_URL3, this.workflow_data)
+                axios.delete(API_URL3, this.workflow_data)
                     .then(response => {
                         alert("Delete Successfully!")
                         console.log(response.data)

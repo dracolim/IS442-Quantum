@@ -190,9 +190,9 @@
                         <th scope="col" class="px-6 py-3">
                             Last Edited
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <!-- <th scope="col" class="px-6 py-3">
                             Export
-                        </th>
+                        </th> -->
                         <th scope="col" class="px-6 py-3">
                             Delete
                         </th>
@@ -202,28 +202,30 @@
                     <tr data-bs-toggle="modal" data-bs-target="#exampleModalScrollable" class="bg-white"
                         v-for="(value,key) in forms_sequences" style="cursor: pointer;">
                         <!-- STATUS -->
-                        <td  @click="goToSinglePage(value.formSequenceId)" v-if = "value.status == 'APPROVED'" class="px-6 py-4 text-green-600 font-medium">
+                        <td @click="goToSinglePage(value.formSequenceId)" v-if="value.status == 'APPROVED'"
+                            class="px-6 py-4 text-green-600 font-medium">
                             {{value.status}}
                         </td>
-                        <td  @click="goToSinglePage(value.formSequenceId)" v-else class="px-6 py-4 text-red-600 font-medium">
+                        <td @click="goToSinglePage(value.formSequenceId)" v-else
+                            class="px-6 py-4 text-red-600 font-medium">
                             {{value.status}}
                         </td>
-                        <td  @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4 font-medium text-gray-900 ">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4 font-medium text-gray-900 ">
                             {{workflow_id}}
                         </td>
-                        <td  @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4 font-medium text-gray-900">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4 font-medium text-gray-900">
                             {{value.form.formId}}
                         </td>
-                        <td  @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.formSequenceId}}
                         </td>
-                        <td  @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.form.formName}}
                         </td>
-                        <td  @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.form.dateSubmitted}}
                         </td>
-                        <td  @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
+                        <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.form.lastEdited}}
                         </td>
                         <!-- export form -->
@@ -394,7 +396,8 @@
         methods: {
             goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("./Approver_form_sequence2.html?id=" + id + "/wf=" + this.workflow_id)
+                window.location.assign("./Approver_form_sequence2.html?id=" + id + "/wf=" + this
+                    .workflow_id)
             },
             assignNewForm() {
                 var approver = this.workflow_data.approver
@@ -449,17 +452,12 @@
                 var formSequences = this.workflow_data.formSequences
                 for (i in formSequences) {
                     if (formSequences[i].form.formId == form_id) {
-                        formSequences.splice(i, 1)
+                        var form_sequence_id = formSequences[i].formSequenceId
                     }
                 }
+                const API_URL3 = this.localhost + "/formsequences/" + form_sequence_id;
 
-                this.workflow_data['formSequences'] = formSequences
-                console.log(this.workflow_data)
-
-                // update workflow with assigned forms
-                const API_URL3 = this.localhost + "/workflows/" + this.workflow_id;
-
-                axios.put(API_URL3, this.workflow_data)
+                axios.delete(API_URL3, this.workflow_data)
                     .then(response => {
                         alert("Delete Successfully!")
                         console.log(response.data)
