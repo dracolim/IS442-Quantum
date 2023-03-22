@@ -42,7 +42,7 @@
 <img width="500" alt="Screenshot 2023-03-22 at 4 11 49 PM" src="https://user-images.githubusercontent.com/85498185/226839542-5fa05a22-7d8d-4095-b3f6-83d5ed761da7.png"><br>
   
 <ins>Steps to validate form<ins> <br>
-1. At <code>Admin_individual_pendingwf.html</code>, Admins can select "APPROVED" or "NOT APPROVED" from the dropdown menu in the Approval column. 
+1. At <code>Admin_individual_pendingwf.html</code>, Admins can select "APPROVED" or "NOT APPROVED" from the dropdown menu in the Approval column. <br>
 <img width="500" alt="Screenshot 2023-03-22 at 4 08 44 PM" src="https://user-images.githubusercontent.com/85498185/226839314-c6493a63-46f0-4c8d-8d26-254b44ba38ab.png"> <br>
 2. **Scenario 1:** if Admins selects "APPROVED", the status (Status column) will change from "PENDING" to "VALIDATED"
 <img width="500" alt="Screenshot 2023-03-22 at 4 08 58 PM" src="https://user-images.githubusercontent.com/85498185/226839300-3c774c66-36f4-4a77-8755-c3980f97c751.png"> <br>
