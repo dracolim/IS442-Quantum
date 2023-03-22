@@ -171,10 +171,23 @@
 
         <!-- FORM START -->
         <div style="background-color: #b4d1df">
-            <!-- back button -->
-            <button type="button" v-on:click="goToSinglePage(workflow_id)"
-                class=" ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Back
-            </button>
+            <div class = "flex mb-2 justify-between">
+                <!-- back button -->
+                <button type="button" v-on:click="goToSinglePage(workflow_id)"
+                    class="ml-12 inline-flex items-center mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 uppercase active:shadow-lg transition duration-150 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" class="mr-2"><path fill="currentColor" d="m12 20l-8-8l8-8l1.425 1.4l-5.6 5.6H20v2H7.825l5.6 5.6Z"/></svg>
+                    Back
+                </button>
+                <!-- export button -->
+                <button type="button" v-on:click="ExportForm()"
+                    class="mr-12 inline-flex items-center ml-4 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 256 256" class="mr-2">
+                        <path fill="currentColor"
+                            d="M220 112v96a20 20 0 0 1-20 20H56a20 20 0 0 1-20-20v-96a20 20 0 0 1 20-20h24a12 12 0 0 1 0 24H60v88h136v-88h-20a12 12 0 0 1 0-24h24a20 20 0 0 1 20 20ZM96.49 72.49L116 53v83a12 12 0 0 0 24 0V53l19.51 19.52a12 12 0 1 0 17-17l-40-40a12 12 0 0 0-17 0l-40 40a12 12 0 1 0 17 17Z" />
+                        </svg>
+                    Export
+                </button>
+            </div>
             <div class="flex justify-center pb-4">
                 <!-- Form Title -->
                 <div class="w-7/12 p-6 bg-white border border-gray-200 rounded-lg shadow">
@@ -238,6 +251,7 @@
                                         class="ml-2 text-sm font-medium text-gray-900">{{value3.label}}</label>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -285,12 +299,11 @@
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
-            console.log(query)
             var first_dash_idx = query.indexOf("/")
 
             this.form_sequence_id = query.substring(0, first_dash_idx);
             this.workflow_id = query.substring(first_dash_idx + 4, )
-            
+
             const URL3 = this.localhost + "/users/userType/" + "APPROVER"
             axios.get(URL3)
                 .then(response => {
@@ -352,25 +365,25 @@
                         var questions = each.questions;
                         for (each_question of questions) {
                             //checkbox 
-                            if (each_question.inputType == "checkbox"){
+                            if (each_question.inputType == "checkbox") {
                                 console.log(each_question)
                                 if (each_question.inputValue != null) {
                                     var list = each_question.inputValue.split(",")
                                 } else {
                                     var list = []
                                 }
-                                for (each_property of each_question.questionProperties){
+                                for (each_property of each_question.questionProperties) {
                                     var qp_id = each_property.id
                                     var qp_label = each_property.label
-                                    if (list.includes(qp_label)){
+                                    if (list.includes(qp_label)) {
                                         this.allAnswers[qp_id] = qp_label;
                                     }
                                 }
+                            } else {
+                                this.allAnswers[each_question.questionId] = each_question.inputValue ||
+                                    "";
                             }
-                            else{
-                                this.allAnswers[each_question.questionId] = each_question.inputValue || "";
-                            }
-                            
+
                             var temp = {}
                             temp['sectionId'] = section_id
                             temp['question'] = each_question
@@ -408,7 +421,7 @@
         methods: {
             goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("../Approver/Approver_individual_pendingwf.html?id=" + this.workflow_id)
+                window.location.assign("../Admin/Admin_workflow_sequences.html?id=" + this.workflow_id)
             },
             submitForm() {
                 console.log(this.allAnswers)
