@@ -46,8 +46,8 @@
 <img width="500" alt="Screenshot 2023-03-22 at 4 08 44 PM" src="https://user-images.githubusercontent.com/85498185/226839314-c6493a63-46f0-4c8d-8d26-254b44ba38ab.png"> <br>
 2. **Scenario 1:** if Admins selects "APPROVED", the status (Status column) will change from "PENDING" to "VALIDATED"
 <img width="500" alt="Screenshot 2023-03-22 at 4 08 58 PM" src="https://user-images.githubusercontent.com/85498185/226839300-3c774c66-36f4-4a77-8755-c3980f97c751.png"> <br>
-3. **Scenario 2:** if Admins selects "NOT APPROVED", the status (Status column) will change from "PENDING" to "REQUESTED" <br>
-<img width="500" alt="Screenshot 2023-03-22 at 4 09 43 PM" src="https://user-images.githubusercontent.com/85498185/226839058-22a95efb-d1b6-4ef3-9307-87c4d2258072.png"> 
+3. **Scenario 2:** if Admins selects "NOT APPROVED", the status (Status column) will change from "PENDING" to "REQUESTED"
+  <img width="500" alt="Screenshot 2023-03-22 at 4 09 43 PM" src="https://user-images.githubusercontent.com/85498185/226839058-22a95efb-d1b6-4ef3-9307-87c4d2258072.png"> 
 
   
   
