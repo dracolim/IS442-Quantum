@@ -49,7 +49,7 @@ public class Question {
         this.attribute = question.getAttribute();
         this.inputLabel = question.getInputLabel();
         this.isRequired = question.getIsRequired();
-        this.inputValue = question.getInputValue();
+        this.inputValue = null;
         for(QuestionProperty questionProperty : question.getQuestionProperties()){
             addQuestionProperties(new QuestionProperty(questionProperty));
         }

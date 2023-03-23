@@ -2,7 +2,6 @@ package IS442_Quantum.backend.DataLoader;
 
 import IS442_Quantum.backend.Enums.FormSequenceStatus;
 import IS442_Quantum.backend.Enums.UserTypes;
-import IS442_Quantum.backend.Enums.WorkFlowStatus;
 import IS442_Quantum.backend.Model.*;
 import IS442_Quantum.backend.Repository.*;
 import jakarta.persistence.EntityManager;
@@ -17,7 +16,7 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Component
-public class FormDataLoader implements ApplicationRunner {
+public class DataLoader implements ApplicationRunner {
 
     private final FormRepository formRepository;
 
@@ -36,7 +35,7 @@ public class FormDataLoader implements ApplicationRunner {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public FormDataLoader(
+    public DataLoader(
             FormRepository formRepository,
             QuestionRepository questionRepository,
             SectionRepository sectionRepository,
@@ -145,7 +144,6 @@ public class FormDataLoader implements ApplicationRunner {
         Question q9 = new Question();
         q9.setInputLabel("Evaluation");
         q9.setInputType("checkbox");
-        q9.setAttribute("disabled");
         q9.setIsRequired(true);
         q9.addList(new QuestionProperty("IS9001 Certification"));
         q9.addList(new QuestionProperty("Accreditation of Laboratory"));
@@ -158,16 +156,34 @@ public class FormDataLoader implements ApplicationRunner {
         Question q9a = new Question();
         q9a.setInputLabel("Certification Body");
         q9a.setInputType("text");
-        q9a.setAttribute("disabled");
         q9a.setIsRequired(true);
 
         Question q10 = new Question();
         q10.setInputLabel("Accreditation of Body");
         q10.setInputType("text");
-        q10.setAttribute("disabled");
         q10.setIsRequired(true);
 
-        questionRepository.saveAll(Arrays.asList(q1,q2,q3,q4,q5,q6,q7,q7a,q8,q9,q9a,q10));
+        Question q10a = new Question();
+        q10a.setInputLabel("Product Markings (e.g. PSB, UL, TUV, etc.)");
+        q10a.setInputType("text");
+        q10a.setIsRequired(true);
+
+        Question adminSignature1 = new Question();
+        adminSignature1.setInputLabel("Admin signature");
+        adminSignature1.setInputType("signature");
+        adminSignature1.setIsRequired(true);
+
+        Question approverSignature1 = new Question();
+        approverSignature1.setInputLabel("Approver signature");
+        approverSignature1.setInputType("signature");
+        approverSignature1.setIsRequired(true);
+
+        Question effectiveDateQn = new Question();
+        effectiveDateQn.setInputLabel("Effective Date:");
+        effectiveDateQn.setInputType("date");
+        effectiveDateQn.setIsRequired(true);
+
+        questionRepository.saveAll(Arrays.asList(q1,q2,q3,q4,q5,q6,q7,q7a,q8,q9,q9a,q10,q10a,adminSignature1,approverSignature1));
 
         // set new Form
         Form newVendorAssessmentForm = new Form();
@@ -187,18 +203,30 @@ public class FormDataLoader implements ApplicationRunner {
                 "General Information",
                 "General Information about the vendor company",
                 newVendorAssessmentForm,
-                questionSet1
+                questionSet1,
+                UserTypes.VENDOR
         );
 
 
         // create Section 2: Vendor Evaluation (to be filled by Quantum Leap)
-        Question[] questionSet2 = {q9, q9a, q10};
+        Question[] questionSet2 = {q9, q9a, q10, adminSignature1};
 
         setupSection(
-                "Evaluation",
-                "Vendor Evaluation (to be filled by Quantum Leap)",
+                "Admin Evaluation",
+                "Vendor Evaluation (to be filled by Quantum Leap Admin)",
                 newVendorAssessmentForm,
-                questionSet2
+                questionSet2,
+                UserTypes.ADMIN
+        );
+
+        Question[] questionSet3 ={approverSignature1, effectiveDateQn};
+
+        setupSection(
+                "Approver Evaluation",
+                "Vendor Evaluation (to be filled by Quantum Leap Approver)",
+                newVendorAssessmentForm,
+                questionSet3,
+                UserTypes.APPROVER
         );
 
         formRepository.save(newVendorAssessmentForm);
@@ -325,7 +353,8 @@ public class FormDataLoader implements ApplicationRunner {
                 "General Information",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet3
+                questionSet3,
+                UserTypes.VENDOR
         );
 
         // create Section 1: Safety & Health Policy and Organisation
@@ -335,7 +364,8 @@ public class FormDataLoader implements ApplicationRunner {
                 "Safety & Health Policy and Organisation",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet4
+                questionSet4,
+                UserTypes.VENDOR
         );
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
@@ -346,7 +376,8 @@ public class FormDataLoader implements ApplicationRunner {
                 "Tool Box Meeting",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet5
+                questionSet5,
+                UserTypes.VENDOR
         );
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
@@ -357,7 +388,8 @@ public class FormDataLoader implements ApplicationRunner {
                 "Safety Training",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet6
+                questionSet6,
+                UserTypes.VENDOR
         );
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
@@ -368,7 +400,8 @@ public class FormDataLoader implements ApplicationRunner {
                 "Safety & Health Rules & Safe Work Procedures/ Risk Assessment",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet7
+                questionSet7,
+                UserTypes.VENDOR
         );
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
@@ -379,7 +412,8 @@ public class FormDataLoader implements ApplicationRunner {
                 "Safety & Health Inspection & Equipment",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet8
+                questionSet8,
+                UserTypes.VENDOR
         );
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
@@ -390,7 +424,8 @@ public class FormDataLoader implements ApplicationRunner {
                 "Responsible Personnel",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet9
+                questionSet9,
+                UserTypes.VENDOR
         );
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
@@ -401,7 +436,8 @@ public class FormDataLoader implements ApplicationRunner {
                 "Accident Analysis",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet10
+                questionSet10,
+                UserTypes.VENDOR
         );
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
@@ -516,11 +552,12 @@ public class FormDataLoader implements ApplicationRunner {
 
     }
 
-    public void setupSection(String title, String description, Form form, Question[] questions){
+    public void setupSection(String title, String description, Form form, Question[] questions, UserTypes usertype){
         Section newSection = new Section();
         newSection.setTitle(title);
         newSection.setDescription(description);
         newSection.setForm(form);
+        newSection.setUsertype(usertype);
 
         for (Question q : questions){
             newSection.getQuestions().add(q);
