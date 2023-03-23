@@ -1,5 +1,6 @@
 package IS442_Quantum.backend.Model;
 
+import IS442_Quantum.backend.Enums.UserTypes;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -23,6 +24,9 @@ public class Section {
 
     private String title;
     private String description;
+
+    @Enumerated(EnumType.STRING)
+    private UserTypes userType;
 
     @ManyToOne
     @JoinColumn(name="form_id", nullable = false)

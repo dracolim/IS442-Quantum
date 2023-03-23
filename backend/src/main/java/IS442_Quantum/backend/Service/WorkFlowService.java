@@ -105,7 +105,7 @@ public class WorkFlowService {
 
         if(numberOfFormSequence == numberOfCompletedFormSequence && numberOfFormSequence != 0){
             workFlow.setWorkFlowStatus(WorkFlowStatus.COMPLETED);
-        }else if(numberOfFormSequence == numberOfRejectedFormSequence){
+        }else if(numberOfFormSequence == numberOfRejectedFormSequence && numberOfFormSequence != 0){
             workFlow.setWorkFlowStatus(WorkFlowStatus.REJECTED);
         }else{
             workFlow.setWorkFlowStatus(WorkFlowStatus.IN_PROGRESS);
