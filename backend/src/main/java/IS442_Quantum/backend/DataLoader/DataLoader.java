@@ -180,7 +180,7 @@ public class DataLoader implements ApplicationRunner {
 
         Question effectiveDateQn = new Question();
         effectiveDateQn.setInputLabel("Effective Date:");
-        effectiveDateQn.setInputType("date");
+        effectiveDateQn.setInputType("Date");
         effectiveDateQn.setIsRequired(true);
 
         questionRepository.saveAll(Arrays.asList(q1,q2,q3,q4,q5,q6,q7,q7a,q8,q9,q9a,q10,q10a,adminSignature1,approverSignature1));
