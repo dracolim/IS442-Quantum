@@ -24,6 +24,7 @@ public class Question {
     private Boolean isRequired;
 
     @Lob
+    @Column(length=3000)
     private String inputValue;
 
     @OneToMany(mappedBy ="question", cascade = {CascadeType.ALL}, orphanRemoval = true)
