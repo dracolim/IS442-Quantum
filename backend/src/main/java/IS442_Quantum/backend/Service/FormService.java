@@ -47,9 +47,12 @@ public class FormService {
         form.setDateSubmitted(formBody.getDateSubmitted());
         form.setLastEdited(formBody.getLastEdited());
 
+        form.getSections().clear();
+
         // Add section
         for(Section section : formBody.getSections()){
-            Section newSection = sectionService.findBySectionId(section.getSectionId()) != null ? sectionService.findBySectionId(section.getSectionId()) : new Section();
+//            Section newSection = sectionService.findBySectionId(section.getSectionId()) != null ? sectionService.findBySectionId(section.getSectionId()) : new Section();
+            Section newSection = new Section();
             newSection.setTitle(section.getTitle());
             newSection.setDescription(section.getDescription());
             newSection.setUserType(section.getUserType());
@@ -59,7 +62,8 @@ public class FormService {
 
             // add questions to the newly generated section
             for (Question question : section.getQuestions()){
-                Question newQuestion = question.getQuestionId() != null ? questionService.findByQuestionId(question.getQuestionId()) : questionService.createNewQuestion(question);
+//                Question newQuestion = question.getQuestionId() != null ? questionService.findByQuestionId(question.getQuestionId()) : questionService.createNewQuestion(question);
+                Question newQuestion = questionService.createNewQuestion(question);
                 newQuestion.setSection(newSection);
                 newQuestion.setInputValue(question.getInputValue());
                 newSection.getQuestions().add(newQuestion);
