@@ -219,11 +219,14 @@
                             <!-- <button type = "button" @click="signatureShow()" class = " ">Click to show Signature</button> -->
                             <div v-else-if="value.inputType == 'signature'"> <!-- click, thus it disappears -->
                                 <button @click="signatureShow()"  type="button" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Click to show Signature box</button>
-                                <div class="wrapper">
+                                
+                                <div class="wrapper" style = "visibility: hidden"> 
                                     <canvas id="signature-pad" class="signature-pad rounded-lg border border-gray-100" width=300 height=100></canvas>
-                                </div>
-                                <button type = "button" id="save-png" v-on:click="saveSignature" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Save</button>
+                                    <button type = "button" id="save-png" v-on:click="saveSignature" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Save</button>
                                 <button type = "button" id="clear" v-on:click="clearSignature" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Clear</button>
+                                </div>
+                                <!-- <button type = "button" id="save-png" v-on:click="saveSignature" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Save</button>
+                                <button type = "button" id="clear" v-on:click="clearSignature" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Clear</button> -->
                             </div>
 
                             <!-- NON text -->
