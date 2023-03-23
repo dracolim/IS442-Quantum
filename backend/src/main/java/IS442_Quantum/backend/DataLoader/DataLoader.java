@@ -347,13 +347,13 @@ public class DataLoader implements ApplicationRunner {
         subcontractorSafetyHealthEvaluationForm.setLastEdited(formDate);
 
         // create Section 1: Safety & Health Policy and Organisation
-        Question[] questionSet3 = {f2q1,f2q2,f2q3,f2q4};
+        Question[] questionSet2a = {f2q1,f2q2,f2q3,f2q4};
 
         setupSection(
                 "General Information",
                 "",
                 subcontractorSafetyHealthEvaluationForm,
-                questionSet3,
+                questionSet2a,
                 UserTypes.VENDOR
         );
 
