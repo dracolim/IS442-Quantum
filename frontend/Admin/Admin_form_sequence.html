@@ -230,15 +230,13 @@
                                         class="w-full signature-pad rounded-lg border border-gray-100" width="600"
                                         height=100></canvas>
                                     <div class="flex items-center mt-4 justify-center">
-                                        <!-- <button type="button" id="save-png" v-on:click="saveSignature"
-                                            class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Save</button> -->
                                         <button type="button" id="clear" v-on:click="clearSignature(value.questionId)"
                                             class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Clear</button>
                                     </div>
                                 </div>
 
                                 <div style = "display: none;" id = "toShowSignature">
-                                    <img :id="value.questionId">
+                                    <img>
                                 </div>
 
                             </div>
@@ -527,6 +525,7 @@
                     var signaturePad = new SignaturePad(canvas, {
                         backgroundColor: 'rgb(255, 255, 255)'
                     });
+                    console.log(signaturePad)
 
                     this.$data.signaturePad[question_id] = signaturePad;
                     document.getElementById("wholeSignature").style.display = 'block';
@@ -534,8 +533,13 @@
                 } else {
                     var image = new Image();
                     var displayPad = document.getElementById(question_id);
-                    displayPad.setAttribute('src', "data:image/jpg;base64," + this.allAnswers[question_id]);
-                    document.getElementById("toShowSignature").style.display = 'block';
+                    console.log(displayPad);
+                    // displayPad.fromDataURL("data:image/png;base64," + this.allAnswers[question_id]);
+
+                    // displayPad.setAttribute('src', "data:image/jpg;base64," + this.allAnswers[question_id]);
+                    // document.getElementById("toShowSignature").style.display = 'block';
+
+                    
                 }
 
             },
@@ -569,5 +573,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
 </html>
