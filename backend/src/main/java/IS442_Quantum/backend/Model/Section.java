@@ -26,7 +26,6 @@ public class Section {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "userType", insertable = false, updatable = false)
     private UserTypes usertype;
 
     @ManyToOne

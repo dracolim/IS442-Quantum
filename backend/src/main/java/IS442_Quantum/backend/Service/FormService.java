@@ -52,6 +52,7 @@ public class FormService {
             Section newSection = sectionService.findBySectionId(section.getSectionId()) != null ? sectionService.findBySectionId(section.getSectionId()) : new Section();
             newSection.setTitle(section.getTitle());
             newSection.setDescription(section.getDescription());
+            newSection.setUsertype(section.getUsertype());
             newSection.setForm(form);
 
             newSection.getQuestions().clear();
