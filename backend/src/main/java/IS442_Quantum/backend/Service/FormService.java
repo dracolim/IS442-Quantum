@@ -58,7 +58,7 @@ public class FormService {
             newSection.setUserType(section.getUserType());
             newSection.setForm(form);
 
-            newSection.getQuestions().clear();
+//            newSection.getQuestions().clear();
 
             // add questions to the newly generated section
             for (Question question : section.getQuestions()){
