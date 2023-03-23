@@ -22,6 +22,8 @@ public class Question {
     private String attribute;
     private String inputLabel;
     private Boolean isRequired;
+
+    @Lob
     private String inputValue;
 
     @OneToMany(mappedBy ="question", cascade = {CascadeType.ALL}, orphanRemoval = true)
