@@ -557,7 +557,7 @@ public class DataLoader implements ApplicationRunner {
         newSection.setTitle(title);
         newSection.setDescription(description);
         newSection.setForm(form);
-        newSection.setUsertype(usertype);
+        newSection.setUserType(usertype);
 
         for (Question q : questions){
             newSection.getQuestions().add(q);
