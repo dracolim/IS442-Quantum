@@ -26,7 +26,7 @@ public class Section {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    private UserTypes usertype;
+    private UserTypes userType;
 
     @ManyToOne
     @JoinColumn(name="form_id", nullable = false)
