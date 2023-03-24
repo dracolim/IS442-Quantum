@@ -35,6 +35,7 @@ public class SectionService {
         Section newSection = new Section();
         newSection.setTitle(sectionBody.getTitle());
         newSection.setDescription(sectionBody.getDescription());
+        newSection.setUserType(sectionBody.getUserType());
 
         // add questions to section
         addNewQuestions(formId, newSection, sectionBody);
@@ -59,6 +60,7 @@ public class SectionService {
         for (Question question : sectionBody.getQuestions()){
             Question newQuestion = questionService.createNewQuestion(question);
             newQuestion.setSection(newSection);
+            newQuestion.setInputValue(question.getInputValue());
             newSection.getQuestions().add(newQuestion);
         }
 

@@ -33,7 +33,7 @@ public class Section {
     @JsonIgnore
     private Form form;
 
-    @OneToMany(mappedBy="section", cascade={CascadeType.ALL}, orphanRemoval = true)
+    @OneToMany(mappedBy="section", cascade={CascadeType.ALL})
     private Collection<Question> questions = new ArrayList<>();
 
     // copy constructor

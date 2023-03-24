@@ -5,6 +5,7 @@ import IS442_Quantum.backend.Model.Question;
 import IS442_Quantum.backend.Model.QuestionProperty;
 import IS442_Quantum.backend.Model.Section;
 import IS442_Quantum.backend.Repository.FormRepository;
+import IS442_Quantum.backend.Repository.SectionRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class FormService {
     private final QuestionService questionService;
     private final SectionService sectionService;
 
-    public FormService(FormRepository formRepository, QuestionService questionService, SectionService sectionService) {
+    public FormService(FormRepository formRepository, QuestionService questionService, SectionService sectionService, SectionRepository sectionRepository) {
         this.formRepository = formRepository;
         this.questionService = questionService;
         this.sectionService = sectionService;
@@ -47,12 +48,11 @@ public class FormService {
         form.setDateSubmitted(formBody.getDateSubmitted());
         form.setLastEdited(formBody.getLastEdited());
 
+        formRepository.save(form);
+
         // Add section
         for(Section section : formBody.getSections()){
-            Section newSection = sectionService.findBySectionId(section.getSectionId()) != null ? sectionService.findBySectionId(section.getSectionId()) : new Section();
-            newSection.setTitle(section.getTitle());
-            newSection.setDescription(section.getDescription());
-            newSection.setUserType(section.getUserType());
+            Section newSection = sectionService.findBySectionId(section.getSectionId()) != null ? sectionService.findBySectionId(section.getSectionId()) : sectionService.createNewSection(form.getFormId(),section);
             newSection.setForm(form);
 
             // add questions to the newly generated section
