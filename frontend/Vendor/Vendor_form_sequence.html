@@ -437,22 +437,25 @@
             submitForm() {
                 console.log(this.allAnswers)
                 // check if isRequired all fields are NOT EMPTY
-                var error_count = 0
-                for (i in this.requiredFields) {
-                    var Qid = i
-                    if (this.allAnswers[Qid] == "" || this.allAnswers[Qid] == undefined) {
-                        this.error_message[Qid] = "This field cannot be empty";
-                        error_count += 1
-                    }
-                }
+                // var error_count = 0
+                // console.log(this.requiredFields)
+                // for (i in this.requiredFields) {
+                //     var Qid = this.requiredFields[i]
+                //     if (this.allAnswers[Qid] == "" || this.allAnswers[Qid] == undefined) {
+                //         console.log("adlfkajhdf")
+                //         this.error_message[Qid] = "This field cannot be empty";
+                //         error_count += 1
+                //     }
+                // }
 
-                if (error_count != 0){
-                    document.getElementById("submitButton").disabled = true;
-                    return
-                }
-                else{
-                    document.getElementById("submitButton").disabled = false;
-                }
+                // if (error_count != 0){
+                //     document.getElementById("submitButton").disabled = true;
+                //     document.location.reload();
+                //     return
+                // }
+                // else{
+                //     document.getElementById("submitButton").disabled = false;
+                // }
                 
 
                 var checkboxID = []
