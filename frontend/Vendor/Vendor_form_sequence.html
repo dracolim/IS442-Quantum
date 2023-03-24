@@ -405,6 +405,7 @@
                             }
                             //add some empty error message
                             this.error_message[each_question.questionId] = "";
+
                             //checkbox
                             if (each_question.inputType == "checkbox") {
                                 // set an empty array
@@ -413,19 +414,18 @@
                                 if (each_question.inputValue != null) {
                                     var list = each_question.inputValue.split(",")
                                     // ['Limited Company', 'Partnership Agreement']
-                                } else {
-                                    // var list = []
+                                } 
+                                else{
                                     this.allAnswers[each_question.questionId] = {};
                                 }
-                                console.log(list)
                                 for (each_property of each_question.questionProperties) {
                                     var qp_id = each_property.id
                                     var qp_label = each_property.label
                                     if (list.includes(qp_label)) {
                                         this.allAnswers[each_question.questionId][qp_id] = qp_label;
+                                        console.log(this.allAnswers)
                                     }
                                 }
-                                console.log(this.allAnswers)
                             } else {
                                 this.allAnswers[each_question.questionId] = each_question.inputValue ||
                                     "";
@@ -472,28 +472,7 @@
                     .user_id)
             },
             submitForm() {
-                // check if isRequired all fields are NOT EMPTY
-                // var error_count = 0
-                // console.log(this.requiredFields)
-                // for (i in this.requiredFields) {
-                //     var Qid = this.requiredFields[i]
-                //     if (this.allAnswers[Qid] == "" || this.allAnswers[Qid] == undefined) {
-                //         console.log("adlfkajhdf")
-                //         this.error_message[Qid] = "This field cannot be empty";
-                //         error_count += 1
-                //     }
-                // }
-
-                // if (error_count != 0){
-                //     document.getElementById("submitButton").disabled = true;
-                //     document.location.reload();
-                //     return
-                // }
-                // else{
-                //     document.getElementById("submitButton").disabled = false;
-                // }
-
-                // SIGMATURE 
+                // SIGNATURE 
                 console.log(this.signaturePad)
                 for (i in this.signaturePad) {
                     var question_id = i
