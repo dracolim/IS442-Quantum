@@ -491,11 +491,15 @@
                         delete this.allAnswers[i];
                     }
                 }
+                console.log(checkboxID)
+
+                
+
                 // get question ID for checkbox IDs
                 var question_ans = {}
                 for (each of this.all_questions) {
                     if ("questionProperties" in each) {
-                        for (each_qp of each.questionProperties) {
+                        for (each_qp of each.questionProperties) { //checking by the question properties ID
                             for (i in checkboxID) {
                                 if (each_qp.id == checkboxID[i]) {
                                     if (!(each.questionId in question_ans)) {
@@ -509,6 +513,7 @@
                         }
                     }
                 }
+
                 console.log(this.allAnswers)
                 console.log(question_ans)
 

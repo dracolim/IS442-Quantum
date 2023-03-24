@@ -247,8 +247,9 @@
                             <div v-else-if="value.inputType.toLowerCase() == 'checkbox'"
                                 v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
-                                    <input class="bg-gray-50 border border-gray-300" v-model="allAnswers[value.questionId][value3.id]"
-                                        type='checkbox' :required="value.isRequired" :value="value3.label">
+                                    <input class="bg-gray-50 border border-gray-300"
+                                        v-model="allAnswers[value.questionId][value3.id]" type='checkbox'
+                                        :required="value.isRequired" :value="value3.label">
                                     <label for="value3.id"
                                         class="ml-2 text-sm font-medium text-gray-900">{{value3.label}}</label>
                                 </div>
@@ -410,7 +411,7 @@
                                 this.allAnswers[each_question.questionId] = {};
 
                                 if (each_question.inputValue != null) {
-                                    var list = each_question.inputValue.split(",") 
+                                    var list = each_question.inputValue.split(",")
                                     // ['Limited Company', 'Partnership Agreement']
                                 } else {
                                     // var list = []
@@ -447,7 +448,8 @@
                             if (!(question_id in this.question_options)) {
                                 if (each_question.inputType == "text" || each_question.inputType ==
                                     "textarea" || each_question.inputType == "email" || each_question
-                                    .inputType.toLowerCase() == "date"  || each_question.inputType == "file" ||
+                                    .inputType.toLowerCase() == "date" || each_question.inputType ==
+                                    "file" ||
                                     each_question.inputType == "number") {
                                     this.question_options[question_id] = ""
                                 } else {
@@ -490,7 +492,7 @@
                 // else{
                 //     document.getElementById("submitButton").disabled = false;
                 // }
-                
+
                 // SIGMATURE 
                 console.log(this.signaturePad)
                 for (i in this.signaturePad) {
@@ -503,62 +505,39 @@
                     this.allAnswers[i] = base64
                 }
 
-                console.log(this.allAnswers)
-
                 // CHECKBOX
                 var checkboxID = []
                 for (i in this.allAnswers) {
                     // checkbox questionpropertyID
-                    for (j in  this.allAnswers[i]){
-                        if (this.allAnswers[i][j] == true && !(i in checkboxID)){
+                    for (j in this.allAnswers[i]) {
+                        if (this.allAnswers[i][j] == true && !(checkboxID.includes(i))) {
                             checkboxID.push(i);
                         }
                     }
-                    // if (this.allAnswers[i] === true) {
-                    //     checkboxID.push(i)
-                    //     delete this.allAnswers[i];
-                    // }
                 }
-
+                console.log(this.allAnswers)
                 console.log(checkboxID)
-                
-                // get question ID for checkbox IDs
-                var question_ans = {}
-                for (each of this.all_questions) {
-                    if ("questionProperties" in each) {
-                        for (each_qp of each.questionProperties) {
-                            for (i in checkboxID) {
-                                if (each_qp.id == checkboxID[i]) {
-                                    if (!(each.questionId in question_ans)) {
-                                        question_ans[each.questionId] = [each_qp.label]
-                                    } else {
-                                        question_ans[each.questionId].push(each_qp.label)
-                                    }
-                                }
 
+                for (each of this.all_questions) {
+                    for (i of checkboxID) {
+                        var q_id = i
+                        if (q_id == each.questionId) {
+                            var input_value = []
+                            console.log(this.allAnswers[q_id]) //{49: true, 50: true}
+                            var question_properties = each.questionProperties;
+                            for (each in this.allAnswers[q_id]) {
+                                var qp_id = each
+                                if (this.allAnswers[q_id][qp_id] == true) {
+                                    var value = question_properties[qp_id]
+                                    input_value.push(valie);
+                                }
                             }
                         }
+                        this.allAnswers[q_id] = input_value
                     }
                 }
-                console.log(question_ans)
-
 
                 console.log(this.allAnswers)
-                // console.log(question_ans)
-
-
-
-                //combine all questions
-                var allQnA = Object.assign(this.allAnswers, question_ans);
-                console.log(allQnA)
-
-                for (each of this.form_sections) {
-                    for (question of each.questions) {
-                        if (question.questionId in allQnA) {
-                            question['inputValue'] = allQnA[question.questionId].toString();
-                        }
-                    }
-                }
 
                 console.log(this.form_sections)
                 for (each of this.all_form_sequences) {
