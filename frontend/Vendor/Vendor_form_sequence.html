@@ -247,14 +247,16 @@
                             <div v-else-if="value.inputType.toLowerCase() == 'checkbox'"
                                 v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
+
                                     <input class="bg-gray-50 border border-gray-300" v-model="allAnswers[value3.id]"
                                         type='checkbox' :required="value.isRequired" :value="value3.label">
                                     <label for="value3.id"
                                         class="ml-2 text-sm font-medium text-gray-900">{{value3.label}}</label>
+                                        
                                 </div>
                             </div>
 
-                            <!--ERROR MESSAGE-->
+                            <!-- ERROR MESSAGE -->
                             <div v-if="error_message[value.questionId] != '' "
                                 class="flex p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
                                 role="alert">
@@ -404,7 +406,6 @@
                             }
                             //add some empty error message
                             this.error_message[each_question.questionId] = "";
-                            //checkbox 
                             if (each_question.inputType == "checkbox") {
                                 if (each_question.inputValue != null) {
                                     var list = each_question.inputValue.split(",")
@@ -419,6 +420,7 @@
                                         this.allAnswers[qp_id] = qp_label;
                                     }
                                 }
+                                console.log(this.allAnswers)
                             } else {
                                 this.allAnswers[each_question.questionId] = each_question.inputValue ||
                                     "";
@@ -496,6 +498,7 @@
                     this.allAnswers[i] = base64
                     console.log(this.allAnswers)
                 }
+
                 console.log(this.allAnswers)
                 var checkboxID = []
                 for (i in this.allAnswers) {

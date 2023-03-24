@@ -983,44 +983,15 @@
                     document.location.reload();
                 },
                 deleteQuestion: function (question_id) {
-                    // get the section ID
-                    for (j in this.form_sections) {
-                        for (i in this.form_sections[j].questions) {
-                            if (this.form_sections[j].questions[i].questionId == question_id) {
-                                var section_id = this.form_sections[j].sectionId
-                            }
-                        }
-                    }
-
-                    // get the question details
-                    for (each of this.all_questions) {
-                        if (each.questionId == question_id) {
-                            var question = each;
-                        }
-                    }
-                    // add the question to the section
-                    for (each of this.all_sections_in_DB) {
-                        if (each.sectionId == section_id) {
-                            var questions = each.questions;
-                            for (i in questions) {
-                                questions.splice(i, 1);
-                                break
-                            }
-                            var section = each
-                        }
-                    }
-
-                    var URL2 = this.localhost + "/form/" + this.form_id + "/section/" + section_id;
-                    axios.put(URL2, section)
-                        .then(response => {
+                    var URL = this.localhost + "/question/" + question_id;
+                    axios.delete(URL , question_id)
+                    .then(response => {
                             console.log(response.data)
                             document.location.reload();
                         })
                         .catch(error => {
                             console.log(error.message)
                         })
-
-
                 },
                 openUpdateModal(question_id) {
                     this.updateID = question_id;
@@ -1050,7 +1021,7 @@
                     this.show = true;
                 },
                 checkUpdateLabel() {
-                    console.log(this.varLabels)
+                    // console.log(this.varLabels)
 
                     var all_new_labels = []
                     for (i in this.varLabels) {
@@ -1098,7 +1069,8 @@
                                 var all_labels = []
                                 for (i in this.varLabels) {
                                     if (this.varLabels[i].toLowerCase() == 'others' || this.varLabels[i]
-                                        .toLowerCase() == "other") {
+                                        .toLowerCase() == "other" ) {
+                                            console.log("alkdfjhasdkjfhasdf")
                                         //check whether exists already
                                         if (!(new_label in this.all_question_input_labels)) {
                                             // post a new question
@@ -1148,8 +1120,10 @@
 
                                 var data = each;
                                 console.log(data)
+                                complete = true;
                             }
                         }
+                        
                         var URL2 = this.localhost + '/question/' + this.updateID
                         axios.put(URL2, data)
                             .then(response => {
