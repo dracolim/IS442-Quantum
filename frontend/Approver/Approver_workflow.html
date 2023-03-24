@@ -62,7 +62,7 @@
                     style="height: 80px ; width: 200px;" />
 
                 <div class="flex md:order-2">
-                    <a href="../Admin/Admin_home.html" style="margin-right: 10px;">
+                    <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
                         <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
                         </iconify-icon>
                     </a>
@@ -76,7 +76,7 @@
                                 height="40">
                             </iconify-icon>
                         </a>
-                        Tim Klemmer
+                        {{userName}}
                         <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -89,8 +89,8 @@
                     <div id="dropdownAvatarName"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                         <div class="px-4 py-3 text-sm text-gray-900 ">
-                            <div class="font-bold">Admin</div>
-                            <div class="truncate">Tim.Klemmer@quantum.com</div>
+                            <div class="font-bold">{{userName}}</div>
+                            <div class="truncate">{{emailAddress}}</div>
                         </div>
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
@@ -99,7 +99,8 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="../login_home.html"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -542,6 +543,11 @@
             EditisValidated: "",
             ValidateToShow: "",
 
+            //LOCALSTORAGE
+            user_id:"",
+            userName: "",
+            emailAddress: "",
+
         },
         mounted: async function () {
             // Fetch individual workflow
@@ -549,6 +555,9 @@
             // this.userId = query;
 
             // const API_URL = this.localhost + "/workflows"+this.userId;
+
+            this.user_id = localStorage.userId;
+
             const API_URL = this.localhost + "/workflows";
             const API_URL2 = this.localhost + "/users/userType/VENDOR";
             const API_URL3 = this.localhost + "/users/userType/ADMIN";
@@ -572,6 +581,12 @@
                     this.all_vendors = responseTwo;
                     this.all_approvers = responseFour;
                     this.all_admins = responseThree;
+                    for (each of responseFour) {
+                        if (each.userId == this.user_id) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
+                        }
+                    }
                 }))
 
         },

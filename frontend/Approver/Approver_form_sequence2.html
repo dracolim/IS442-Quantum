@@ -103,7 +103,7 @@
                                 height="40">
                             </iconify-icon>
                         </a>
-                        Tim Klemmer
+                        {{userName}}
                         <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -116,8 +116,8 @@
                     <div id="dropdownAvatarName"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                         <div class="px-4 py-3 text-sm text-gray-900 ">
-                            <div class="font-bold">Approver</div>
-                            <div class="truncate">Tim.Klemmer@quantum.com</div>
+                            <div class="font-bold">{{userName}}</div>
+                            <div class="truncate">{{emailAddress}}</div>
                         </div>
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
@@ -126,7 +126,8 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="../login_home.html"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -328,18 +329,41 @@
             user_id: "",
             userName: "",
             emailAddress: "",
+
             //SIGNATURE
             signaturePad: {},
             isErase: false,
             signatureIds: [],
+
+            //LOCALSTORAGE
+            userName: "",
+            emailAddress: "",
+            userId:""
+
         },
         mounted: async function () {
+            this.userId = localStorage.userId;
+
             var query = window.location.search.substring(4);
             console.log(query)
             var first_dash_idx = query.indexOf("/")
 
             this.form_sequence_id = query.substring(0, first_dash_idx);
             this.workflow_id = query.substring(first_dash_idx + 4, )
+
+            const API_URL_LOCALSTORAGE = this.localhost + "/users/userType/" + "APPROVER"
+            axios.get(API_URL_LOCALSTORAGE)
+                .then(response => {
+                    for (each of response.data) {
+                        if (each.userId == this.userId) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                })
 
             const URL3 = this.localhost + "/users/userType/" + "APPROVER"
             axios.get(URL3)

@@ -153,15 +153,16 @@
                         for (each of this.users) {
                             if (each.emailAddress == this.email && each.password == this.password.toString()) {
                                 var userType = each.userType
+                                localStorage.userId = each.userId
                                 if (userType == 'VENDOR') {
                                     console.log("adkfjadfad")
-                                    window.location.assign("./Vendor/Vendor_workflow.html?id=" + each.userId)
+                                    window.location.assign("./Vendor/Vendor_workflow.html")
                                 }
                                 if (userType == "APPROVER") {
-                                    window.location.assign("./Approver/Approver_home.html?id=" + each.userId)
+                                    window.location.assign("./Approver/Approver_home.html")
                                 }
                                 if (userType == 'ADMIN') {
-                                    window.location.assign("./Admin/Admin_home.html?id=" + each.userId)
+                                    window.location.assign("./Admin/Admin_home.html")
                                 }
                             } else if (each.emailAddress == this.email && each.password != this.password
                                 .toString()) {

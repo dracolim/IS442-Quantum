@@ -238,13 +238,16 @@
             all_pending_workflows: "",
             all_workflows: "",
             all_validated_workflows: [],
+            //LOCALSTORAGE
             userName: "",
             emailAddress: "",
             user_id: "",
         },
         mounted: async function () {
-            var query = window.location.search.substring(4);
-            this.user_id = query;
+            // var query = window.location.search.substring(4);
+            // this.user_id = query;
+            // LOCALSTORAGE
+            this.user_id = localStorage.userId;
 
             const API_URL = this.localhost + "/workflows/pending";
             const API_URL2 = this.localhost + "/users/userType/" + "APPROVER"
