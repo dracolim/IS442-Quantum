@@ -220,26 +220,28 @@
                             </textarea>
                             <!-- NON text-->
                             <!-- SIGNATURE -->
-                            <div v-else-if="value.inputType == 'signature'">
+                            <div v-else-if="value.inputType == 'signature' && value.inputValue == null ">
                                 <button @click="signatureShow(value.questionId)" type="button" id="signatureButton"
                                     class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Click
-                                    to show Signature box</button>
+                                    to Enable Signature</button>
 
-                                <div style="display: none;" id="wholeSignature">
+                                <div style="display: block;">
                                     <canvas :id="value.questionId"
                                         class="w-full signature-pad rounded-lg border border-gray-100" width="600"
-                                        height=100></canvas>
-                                    <div class="flex items-center mt-4 justify-center">
+                                        height=120></canvas>
+                                    <div class="flex items-center mt-2 justify-center">
                                         <button type="button" id="clear" v-on:click="clearSignature(value.questionId)"
                                             class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Clear</button>
                                     </div>
                                 </div>
-
-                                <div style = "display: none;" id = "toShowSignature">
-                                    <img>
-                                </div>
-
                             </div>
+
+                                <!-- TO SHOW SIGNATURE -->
+                            <div v-else-if="value.inputType == 'signature' && value.inputValue != '' ">
+                                <img :src="`data:image/png;base64,${allAnswers[value.questionId]}`" >
+                            </div>
+
+
                             <!-- RADIO -->
                             <div v-else-if="value.inputType == 'Radio'"
                                 v-for="value3 in question_options[value.questionId]">
@@ -359,7 +361,13 @@
                         }
                     }
 
-                    this.form_sections = this.form.sections
+                    var temp_form_sections = []
+                    for (each of this.form.sections){
+                        if (!(each.title.toLowerCase().includes("approver"))){
+                            temp_form_sections.push(each)
+                        }
+                    }
+                    this.form_sections = temp_form_sections
                     this.form_name = this.form.formName
                     this.form_id = this.form.formId
 
@@ -417,7 +425,7 @@
                             if (!(question_id in this.question_options)) {
                                 if (each_question.inputType == "text" || each_question.inputType ==
                                     "textarea" || each_question.inputType == "email" || each_question
-                                    .inputType == "date" || each_question.inputType == "file" ||
+                                    .inputType.toLowerCase() == "date" || each_question.inputType == "file" ||
                                     each_question.inputType == "number") {
                                     this.question_options[question_id] = ""
                                 } else {
@@ -451,9 +459,6 @@
                     this.allAnswers[i] = base64
                     console.log(this.allAnswers)
                 }
-
-
-
                 console.log(this.allAnswers)
                 var checkboxID = []
                 for (i in this.allAnswers) {
@@ -509,7 +514,7 @@
                             .then(response => {
                                 console.log(response.data)
                                 alert("Form submitteed successfully!")
-                                //document.location.reload();
+                                document.location.reload();
                             })
                             .catch(error => {
                                 console.log(error.message)
@@ -521,6 +526,8 @@
                 // SIGNATURE
                 var canvas = document.getElementById(question_id);
                 console.log(this.allAnswers[question_id])
+                console.log(question_id)
+                console.log(canvas)
                 if (this.allAnswers[question_id] == undefined || this.allAnswers[question_id] == "") {
                     var signaturePad = new SignaturePad(canvas, {
                         backgroundColor: 'rgb(255, 255, 255)'
@@ -528,23 +535,11 @@
                     console.log(signaturePad)
 
                     this.$data.signaturePad[question_id] = signaturePad;
-                    document.getElementById("wholeSignature").style.display = 'block';
-                    document.getElementById("signatureButton").style.display = "none";
-                } else {
-                    var image = new Image();
-                    var displayPad = document.getElementById(question_id);
-                    console.log(displayPad);
-                    // displayPad.fromDataURL("data:image/png;base64," + this.allAnswers[question_id]);
-
-                    // displayPad.setAttribute('src', "data:image/jpg;base64," + this.allAnswers[question_id]);
-                    // document.getElementById("toShowSignature").style.display = 'block';
-
-                    
                 }
 
             },
             clearSignature: function (question_id) {
-                this.signaturePad.clear();
+                this.signaturePad[question_id].clear();
 
                 if (this.isErase) {
                     this.changeEraseMode();
