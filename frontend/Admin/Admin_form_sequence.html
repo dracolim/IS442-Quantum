@@ -235,7 +235,6 @@
                                     </div>
                                 </div>
                             </div>
-
                                 <!-- TO SHOW SIGNATURE -->
                             <div v-else-if="value.inputType == 'signature' && value.inputValue != '' ">
                                 <img :src="`data:image/png;base64,${allAnswers[value.questionId]}`" >
@@ -243,7 +242,7 @@
 
 
                             <!-- RADIO -->
-                            <div v-else-if="value.inputType == 'Radio'"
+                            <div v-else-if="value.inputType.toLowerCase() == 'radio'"
                                 v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
                                     <input :id="value3.id" class="bg-gray-50 border border-gray-300"
@@ -256,7 +255,7 @@
                             </div>
 
                             <!-- CHECKBOX -->
-                            <div v-else-if="value.inputType == 'checkbox'"
+                            <div v-else-if="value.inputType.toLowerCase() == 'checkbox'"
                                 v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
                                     <input class="bg-gray-50 border border-gray-300" v-model="allAnswers[value3.id]"
