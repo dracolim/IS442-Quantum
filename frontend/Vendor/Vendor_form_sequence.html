@@ -509,8 +509,8 @@
                 var checkboxID = []
                 for (i in this.allAnswers) {
                     // checkbox questionpropertyID
-                    for (each of this.allAnswers[i]){
-                        if (each == true){
+                    for (j in  this.allAnswers[i]){
+                        if (this.allAnswers[i][j] == true && !(i in checkboxID)){
                             checkboxID.push(i);
                         }
                     }
@@ -519,6 +519,8 @@
                     //     delete this.allAnswers[i];
                     // }
                 }
+
+                console.log(checkboxID)
                 
                 // get question ID for checkbox IDs
                 var question_ans = {}
@@ -538,6 +540,7 @@
                         }
                     }
                 }
+                console.log(question_ans)
 
 
                 console.log(this.allAnswers)
