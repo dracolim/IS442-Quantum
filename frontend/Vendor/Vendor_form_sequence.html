@@ -16,6 +16,10 @@
     <!-- VUE 2 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- VUE SIGNATURE PAD -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="../component.js"></script>
     <!-- tailwind elements -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet"
@@ -206,8 +210,28 @@
                                 :required="value.isRequired">
                             </textarea>
                             <!-- NON text-->
+                            <!-- SIGNATURE -->
+                            <div v-else-if="value.inputType == 'signature' && value.inputValue == null ">
+                                <button @click="signatureShow(value.questionId)" type="button" id="signatureButton"
+                                    class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Click
+                                    to Enable Signature</button>
+
+                                <div style="display: block;">
+                                    <canvas :id="value.questionId"
+                                        class="w-full signature-pad rounded-lg border border-gray-100" width="600"
+                                        height=120></canvas>
+                                    <div class="flex items-center mt-2 justify-center">
+                                        <button type="button" id="clear" v-on:click="clearSignature(value.questionId)"
+                                            class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TO SHOW SIGNATURE -->
+                            <div v-else-if="value.inputType == 'signature' && value.inputValue != '' ">
+                                <img :src="`data:image/png;base64,${allAnswers[value.questionId]}`">
+                            </div>
                             <!-- RADIO -->
-                            <div v-else-if="value.inputType == 'Radio'"
+                            <div v-else-if="value.inputType.toLowerCase() == 'radio'"
                                 v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
                                     <input :id="value3.id" class="bg-gray-50 border border-gray-300"
@@ -220,7 +244,7 @@
                             </div>
 
                             <!-- CHECKBOX -->
-                            <div v-else-if="value.inputType == 'checkbox'"
+                            <div v-else-if="value.inputType.toLowerCase() == 'checkbox'"
                                 v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
                                     <input class="bg-gray-50 border border-gray-300" v-model="allAnswers[value3.id]"
@@ -231,7 +255,8 @@
                             </div>
 
                             <!--ERROR MESSAGE-->
-                            <div v-if = "error_message[value.questionId] != '' " class="flex p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                            <div v-if="error_message[value.questionId] != '' "
+                                class="flex p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
                                 role="alert">
                                 <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
                                     viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -291,6 +316,10 @@
             emailAddress: "",
             //error
             error_message: {},
+            //SIGNATURE
+            signaturePad: {},
+            isErase: false,
+            signatureIds: [],
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
@@ -412,7 +441,7 @@
                             if (!(question_id in this.question_options)) {
                                 if (each_question.inputType == "text" || each_question.inputType ==
                                     "textarea" || each_question.inputType == "email" || each_question
-                                    .inputType == "date" || each_question.inputType == "file" ||
+                                    .inputType.toLowerCase() == "date"  || each_question.inputType == "file" ||
                                     each_question.inputType == "number") {
                                     this.question_options[question_id] = ""
                                 } else {
@@ -435,7 +464,6 @@
                     .user_id)
             },
             submitForm() {
-                console.log(this.allAnswers)
                 // check if isRequired all fields are NOT EMPTY
                 // var error_count = 0
                 // console.log(this.requiredFields)
@@ -456,8 +484,19 @@
                 // else{
                 //     document.getElementById("submitButton").disabled = false;
                 // }
-                
 
+                console.log(this.signaturePad)
+                for (i in this.signaturePad) {
+                    var question_id = i
+                    var signature_pad = this.signaturePad[i]
+                    var data = signature_pad.toDataURL('image/png');
+                    var base64_extra = data.replace(/^data:image\/?[A-z]*;base64,/);
+                    var base64 = base64_extra.slice(9, );
+
+                    this.allAnswers[i] = base64
+                    console.log(this.allAnswers)
+                }
+                console.log(this.allAnswers)
                 var checkboxID = []
                 for (i in this.allAnswers) {
                     // checkbox questionpropertyID
@@ -532,6 +571,44 @@
                             })
                     }
                 }
+            },
+            signatureShow(question_id) {
+                // SIGNATURE
+                var canvas = document.getElementById(question_id);
+                console.log(this.allAnswers[question_id])
+                console.log(question_id)
+                console.log(canvas)
+                if (this.allAnswers[question_id] == undefined || this.allAnswers[question_id] == "") {
+                    var signaturePad = new SignaturePad(canvas, {
+                        backgroundColor: 'rgb(255, 255, 255)'
+                    });
+                    console.log(signaturePad)
+
+                    this.$data.signaturePad[question_id] = signaturePad;
+                }
+
+            },
+            clearSignature: function (question_id) {
+                this.signaturePad[question_id].clear();
+
+                if (this.isErase) {
+                    this.changeEraseMode();
+                } else {
+                    this.setDrawMode();
+                }
+            },
+            setDrawMode: function () {
+                this.signaturePad.penColor = 'black';
+                this.signaturePad.penWidth = 2;
+                this.signaturePad.globalCompositeOperation = 'source-over';
+            },
+            setEraseMode: function () {
+                this.signaturePad.penColor = 'white';
+                this.signaturePad.globalCompositeOperation = 'destination-out';
+            },
+            resizeCanvas() {
+                CANVAS.style.width = BARS.length + "px";
+                CANVAS.width = BARS.length;
             }
         }
     })
@@ -541,5 +618,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
 </html>

@@ -16,6 +16,10 @@
     <!-- VUE 2 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- VUE SIGNATURE PAD -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+    <script src="../component.js"></script>
     <!-- tailwind elements -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet"
@@ -199,29 +203,67 @@
                             </p>
                             {{value2.description}}
                         </div>
-                        <!-- QUESTIONS IN EACH SECTION -->
                         <div v-for="(value, idx) in value2.questions">
                             <h5 class="mb-2.5 text-medium font-normal tracking-tight text-gray-900">
                                 {{value.inputLabel}}</h5>
-                            <!-- options -->
+                            <!-- QUESTION TYPES -->
                             <!-- text -->
-                            <input
-                                v-if="value.inputType == 'text' || value.inputType == 'Date' || value.inputType == 'email' || value.inputType == 'file' || value.inputType == 'number' "
-                                class="mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                            <input v-model="allAnswers[value.questionId]"
+                                v-if="value.inputType == 'text' || value.inputType == 'Date' || value.inputType == 'email' || value.inputType == 'file' "
+                                class="text-gray-600 mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
                                 :type="value.inputType" :required="value.isRequired">
+                            <!-- NUMBER -->
+                            <input v-model="allAnswers[value.questionId]" v-if="value.inputType == 'number' "
+                                class="text-gray-600 mb-3 rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500 w-full"
+                                type="number" :required="value.isRequired">
                             <!-- TEXT AREA -->
-                            <textarea v-else-if="value.inputType == 'textarea'" id="message" rows="4" 
-                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" :required="value.isRequired">
+                            <textarea v-model="allAnswers[value.questionId]" v-else-if="value.inputType == 'textarea'"
+                                id="message" rows="4"
+                                class="block p-2.5 w-full text-sm text-gray-600 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                :required="value.isRequired">
                             </textarea>
-                            <!-- NON text -->
-                            <div v-else v-for="value3 in question_options[value.questionId]">
+                            <!-- NON text-->
+                            <!-- SIGNATURE -->
+                            <div v-else-if="value.inputType == 'signature' && value.inputValue == null ">
+                                <button @click="signatureShow(value.questionId)" type="button" id="signatureButton"
+                                    class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Click
+                                    to Enable Signature</button>
+
+                                <div style="display: block;">
+                                    <canvas :id="value.questionId"
+                                        class="w-full signature-pad rounded-lg border border-gray-100" width="600"
+                                        height=120></canvas>
+                                    <div class="flex items-center mt-2 justify-center">
+                                        <button type="button" id="clear" v-on:click="clearSignature(value.questionId)"
+                                            class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- TO SHOW SIGNATURE -->
+                            <div v-else-if="value.inputType == 'signature' && value.inputValue != '' ">
+                                <img :src="`data:image/png;base64,${allAnswers[value.questionId]}`">
+                            </div>
+                            <!-- RADIO -->
+                            <div v-else-if="value.inputType.toLowerCase() == 'radio'"
+                                v-for="value3 in question_options[value.questionId]">
                                 <div class="flex items-center mb-4">
                                     <input :id="value3.id" class="bg-gray-50 border border-gray-300"
-                                        :type="value.inputType" :name="value.questionId" :required="value.isRequired"
-                                        value="value3.label">
+                                        v-model="allAnswers[value.questionId]" type="radio" :name="value.questionId"
+                                        :required="value.isRequired" :value="value3.label">
                                     <label for="value3.id" :id="value3.id"
                                         class="ml-2 text-sm font-medium text-gray-900"
                                         :name="value.questionId">{{value3.label}}</label>
+                                </div>
+                            </div>
+
+                            <!-- CHECKBOX -->
+                            <div v-else-if="value.inputType.toLowerCase() == 'checkbox'"
+                                v-for="value3 in question_options[value.questionId]">
+                                <div class="flex items-center mb-4">
+                                    <input class="bg-gray-50 border border-gray-300" v-model="allAnswers[value3.id]"
+                                        type='checkbox' :required="value.isRequired" :value="value3.label">
+                                    <label for="value3.id"
+                                        class="ml-2 text-sm font-medium text-gray-900">{{value3.label}}</label>
                                 </div>
                             </div>
                         </div>
@@ -250,6 +292,19 @@
             form_sections: "",
             combined: [],
             all_section_ids: [],
+            allAnswers: {},
+            workflow_raw_data: "",
+            requiredFields: [],
+            //user
+            user_id: "",
+            userName: "",
+            emailAddress: "",
+            //error
+            error_message: {},
+            //SIGNATURE
+            signaturePad: {},
+            isErase: false,
+            signatureIds: [],
         },
         mounted: async function () {
             var query = window.location.search.substring(4);
@@ -279,12 +334,39 @@
                         }
                         var questions = each.questions;
                         for (each_question of questions) {
+                            //required?
+                            if (each_question.isRequired == true) {
+                                this.requiredFields.push(each_question.questionId);
+                            }
+                            //add some empty error message
+                            this.error_message[each_question.questionId] = "";
+                            //checkbox 
+                            if (each_question.inputType == "checkbox") {
+                                if (each_question.inputValue != null) {
+                                    var list = each_question.inputValue.split(",")
+                                } else {
+                                    var list = []
+                                }
+                                console.log(list)
+                                for (each_property of each_question.questionProperties) {
+                                    var qp_id = each_property.id
+                                    var qp_label = each_property.label
+                                    if (list.includes(qp_label)) {
+                                        this.allAnswers[qp_id] = qp_label;
+                                    }
+                                }
+                            } else {
+                                this.allAnswers[each_question.questionId] = each_question.inputValue ||
+                                    "";
+                            }
+
                             var temp = {}
                             temp['sectionId'] = section_id
                             temp['question'] = each_question
                             this.combined.push(temp)
                         }
                     }
+                    console.log(this.allAnswers)
 
                     for (each of this.form_sections) {
                         var questions = each.questions
@@ -293,7 +375,8 @@
                             if (!(question_id in this.question_options)) {
                                 if (each_question.inputType == "text" || each_question.inputType ==
                                     "textarea" || each_question.inputType == "email" || each_question
-                                    .inputType == "date" || each_question.inputType == "file" ||
+                                    .inputType.toLowerCase() == "date" || each_question.inputType ==
+                                    "file" ||
                                     each_question.inputType == "number") {
                                     this.question_options[question_id] = ""
                                 } else {
@@ -316,6 +399,43 @@
             goToSinglepage: function () {
                 window.location.assign("./Approver_individual_form.html?id=" + this.form_id)
             },
+            signatureShow(question_id) {
+                // SIGNATURE
+                var canvas = document.getElementById(question_id);
+                console.log(this.allAnswers[question_id])
+                console.log(question_id)
+                console.log(canvas)
+                if (this.allAnswers[question_id] == undefined || this.allAnswers[question_id] == "") {
+                    var signaturePad = new SignaturePad(canvas, {
+                        backgroundColor: 'rgb(255, 255, 255)'
+                    });
+                    console.log(signaturePad)
+
+                    this.$data.signaturePad[question_id] = signaturePad;
+                }
+            },
+            clearSignature: function (question_id) {
+                this.signaturePad[question_id].clear();
+
+                if (this.isErase) {
+                    this.changeEraseMode();
+                } else {
+                    this.setDrawMode();
+                }
+            },
+            setDrawMode: function () {
+                this.signaturePad.penColor = 'black';
+                this.signaturePad.penWidth = 2;
+                this.signaturePad.globalCompositeOperation = 'source-over';
+            },
+            setEraseMode: function () {
+                this.signaturePad.penColor = 'white';
+                this.signaturePad.globalCompositeOperation = 'destination-out';
+            },
+            resizeCanvas() {
+                CANVAS.style.width = BARS.length + "px";
+                CANVAS.width = BARS.length;
+            }
         }
     })
 </script>
@@ -324,5 +444,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
 
 </html>
