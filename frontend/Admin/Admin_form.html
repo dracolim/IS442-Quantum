@@ -62,7 +62,7 @@
                     style="height: 80px ; width: 200px;" />
 
                 <div class="flex md:order-2">
-                    <a href="../Admin/Admin_home.html" style="margin-right: 10px;">
+                    <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
                         <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
                         </iconify-icon>
                     </a>
@@ -76,7 +76,7 @@
                                 height="40">
                             </iconify-icon>
                         </a>
-                        Tim Klemmer
+                        {{userName}}
                         <svg class="w-4 h-4 mx-1.5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -89,8 +89,8 @@
                     <div id="dropdownAvatarName"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                         <div class="px-4 py-3 text-sm text-gray-900 ">
-                            <div class="font-bold">Approver</div>
-                            <div class="truncate">Tim.Klemmer@quantum.com</div>
+                            <div class="font-bold">{{userName}}</div>
+                            <div class="truncate">{{emailAddress}}</div>
                         </div>
                         <ul class="py-2 text-sm text-gray-700 "
                             aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
@@ -99,7 +99,8 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="../login_home.html"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -318,18 +319,48 @@
             localhost: "http://localhost:5000",
             all_forms: "",
             form_name: "",
+
+            //LOCALSTORAGE
+            userName: "",
+            emailAddress: "",
+            userId: "",
         },
         mounted: async function () {
-            const API_URL = this.localhost + "/forms";
+            this.userId = localStorage.userId;
 
-            axios.get(API_URL)
-                .then(response => {
-                    this.all_forms = response.data;
+            const API_URL = this.localhost + "/forms";
+            const API_URL_LOCALSTORAGE = this.localhost + "/users/userType/" + "ADMIN"
+
+            const requestOne = axios.get(API_URL);
+            const requestTwo = axios.get(API_URL_LOCALSTORAGE);
+
+            axios.all([requestOne, requestTwo])
+                .then(axios.spread((...responses) => {
+                    const responseOne = responses[0].data
+                    const responseTwo = responses[1].data
+
+
+                    this.all_forms = responseOne
                     console.log(this.all_forms)
+
+                    for (each of responseTwo) {
+                        if (each.userId == this.userId) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
+                        }
+                    }
+            })).catch(errors => {
+                    console.log(errors)
                 })
-                .catch(error => {
-                    console.error(error);
-                })
+
+            // axios.get(API_URL)
+            //     .then(response => {
+            //         this.all_forms = response.data;
+            //         console.log(this.all_forms)
+            //     })
+            //     .catch(error => {
+            //         console.error(error);
+            //     })
         },
         methods: {
             goToSinglepage: function (id) {
