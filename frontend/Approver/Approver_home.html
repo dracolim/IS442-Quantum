@@ -244,19 +244,24 @@
             user_id: "",
         },
         mounted: async function () {
-            // var query = window.location.search.substring(4);
-            // this.user_id = query;
             // LOCALSTORAGE
             this.user_id = localStorage.userId;
 
-            const API_URL = this.localhost + "/workflows/pending";
+            const API_URL = this.localhost + "/workflows/pending"; // wf status with in_prorgress
             const API_URL2 = this.localhost + "/users/userType/" + "APPROVER"
             const API_URL3 = this.localhost + "/workflows";
 
             axios.get(API_URL)
                 .then(response => {
                     this.all_pending_workflows = response.data
-                    console.log(this.all_pending_workflows)
+                    for (each of this.all_pending_workflows){
+                        var form_seq = each.formSequences;
+                        for (each_form_seq of form_seq){
+                            if (each_form_seq.status == "VALIDATED"){
+                                this.all_validated_workflows.push(each)
+                            }
+                        }
+                    }
                 })
                 .catch(error => {
                     console.error(error);
@@ -273,20 +278,21 @@
                 .catch(error => {
                     console.error(error);
                 })
-            axios.get(API_URL3)
-                .then(response => {
-                    this.all_workflows = response.data
-                    for (each of this.all_workflows){
-                        for (each_fs of each.formSequences){
-                            if (each_fs.status == "VALIDATED" && !(this.all_validated_workflows.includes(each))){
-                                this.all_validated_workflows.push(each)
-                            }
-                        }
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                })
+            // axios.get(API_URL3)
+            //     .then(response => {
+            //         this.all_workflows = response.data
+            //         for (each of this.all_workflows){
+            //             for (each_fs of each.formSequences){
+            //                 if (each_fs.status == "VALIDATED" && !(this.all_validated_workflows.includes(each))){
+            //                     this.all_validated_workflows.push(each)
+            //                 }
+            //             }
+            //         }
+            //     })
+            //     .catch(error => {
+            //         console.error(error);
+            //     })
+            console.log(this.all_validated_workflows)
 
         },
         methods: {
