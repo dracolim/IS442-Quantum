@@ -188,11 +188,13 @@
 
         },
         mounted: async function () {
-            
             var query = window.location.search.substring(4);
+            
             var slashidx = query.indexOf("/")
             this.workflow_id = query.substring(0, slashidx);
+
             this.user_id = query.substring(slashidx + 8, );
+            
 
             const API_URL = this.localhost + "/workflows/" + this.workflow_id;
             const API_URL2 = this.localhost + "/users/userType/" + "VENDOR"
