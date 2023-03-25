@@ -507,26 +507,25 @@
                 console.log(this.allAnswers)
                 console.log(checkboxID) // 44 : [49,50] =  q_id: [qp_id,qp_id]
 
-                for (each of this.all_questions) {
-                    for (i in checkboxID) {
-                        var q_id = i
-                        var qp_list = checkboxID[i].map(str => {
+                for (i in checkboxID) {
+                    var q_id = i
+                    var qp_list = checkboxID[i].map(str => {
                             return Number(str);
                         });
-                        if (each.questionId == q_id) {
+                    for (each of this.all_questions) {
+                        if (q_id == each.questionId) {
                             var input_value = {}
                             var question_properties = each.questionProperties;
                             for (each_qp of question_properties) {
                                 if (qp_list.includes(each_qp.id)) {
                                     input_value[each_qp.id] = each_qp.label
+                                    console.log(input_value)
                                 }
                             }
                         }
                         this.allAnswers[q_id] = input_value
-                        break
                     }
                 }
-
                 console.log(this.allAnswers)
 
                 //combine all questions

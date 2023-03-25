@@ -307,16 +307,17 @@
             all_section_ids: [],
             allAnswers: {},
             workflow_raw_data: "",
-
+            requiredFields: [],
+            //user
+            user_id: "",
+            userName: "",
+            emailAddress: "",
+            //error
+            error_message: {},
             //SIGNATURE
             signaturePad: {},
             isErase: false,
             signatureIds: [],
-
-            //LOCALSTORAGE
-            userName: "",
-            emailAddress: "",
-            userId: "",
         },
         mounted: async function () {
             this.userId = localStorage.userId;
@@ -386,7 +387,6 @@
                     });
                     this.form_sections = sections;
 
-
                     for (each of this.form_sections) {
                         var section_id = each.sectionId;
                         if (!(this.all_section_ids.includes(section_id))) {
@@ -394,20 +394,30 @@
                         }
                         var questions = each.questions;
                         for (each_question of questions) {
-                            //checkbox 
+                            //required?
+                            if (each_question.isRequired == true) {
+                                this.requiredFields.push(each_question.questionId);
+                            }
+                            //add some empty error message
+                            this.error_message[each_question.questionId] = "";
+
+                            //checkbox
                             if (each_question.inputType == "checkbox") {
-                                console.log(each_question)
+                                // set an empty array
+                                this.allAnswers[each_question.questionId] = {};
+
                                 if (each_question.inputValue != null) {
                                     var list = each_question.inputValue.split(",")
-                                } else {
-                                    var list = []
-                                }
-                                for (each_property of each_question.questionProperties) {
-                                    var qp_id = each_property.id
-                                    var qp_label = each_property.label
-                                    if (list.includes(qp_label)) {
-                                        this.allAnswers[qp_id] = qp_label;
+                                    // ['Limited Company', 'Partnership Agreement']
+                                    for (each_property of each_question.questionProperties) {
+                                        var qp_id = each_property.id
+                                        var qp_label = each_property.label
+                                        if (list.includes(qp_label)) {
+                                            this.allAnswers[each_question.questionId][qp_id] = qp_label;
+                                        }
                                     }
+                                } else {
+                                    this.allAnswers[each_question.questionId] = {};
                                 }
                             } else {
                                 this.allAnswers[each_question.questionId] = each_question.inputValue ||
@@ -420,7 +430,6 @@
                             this.combined.push(temp)
                         }
                     }
-
                     console.log(this.allAnswers)
 
                     // QUESTION PROPERTIES
@@ -454,6 +463,7 @@
                 window.location.assign("../Admin/Admin_individual_pendingwf.html?id=" + this.workflow_id)
             },
             submitForm() {
+                // SIGNATURE 
                 console.log(this.signaturePad)
                 for (i in this.signaturePad) {
                     var question_id = i
@@ -463,54 +473,68 @@
                     var base64 = base64_extra.slice(9, );
 
                     this.allAnswers[i] = base64
-                    console.log(this.allAnswers)
                 }
-                console.log(this.allAnswers)
-                var checkboxID = []
-                for (i in this.allAnswers) {
-                    console.log(this.allAnswers[i])
-                    // checkbox questionpropertyID
-                    if (this.allAnswers[i] === true) {
-                        checkboxID.push(i)
-                        delete this.allAnswers[i];
-                    }
-                }
-                // get question ID for checkbox IDs
-                var question_ans = {}
-                for (each of this.all_questions) {
-                    if ("questionProperties" in each) {
-                        for (each_qp of each.questionProperties) {
-                            for (i in checkboxID) {
-                                if (each_qp.id == checkboxID[i]) {
-                                    if (!(each.questionId in question_ans)) {
-                                        question_ans[each.questionId] = [each_qp.label]
-                                    } else {
-                                        question_ans[each.questionId].push(each_qp.label)
-                                    }
-                                }
 
+                // CHECKBOX
+                var checkboxID = {}
+                for (i in this.allAnswers) {
+                    // checkbox questionpropertyID
+                    for (j in this.allAnswers[i]) {
+                        if (typeof (this.allAnswers[i]) == "object") {
+                            if ((this.allAnswers[i][j] === true || this.allAnswers[i][j] != "") && !(i in
+                                    checkboxID) && this.allAnswers[i][j] !== false) {
+                                checkboxID[i] = [j]
+                            } else if ((this.allAnswers[i][j] === true || this.allAnswers[i][j] != "") && (i in
+                                    checkboxID) && this.allAnswers[i][j] !== false) {
+                                checkboxID[i].push(j)
                             }
                         }
                     }
                 }
+
                 console.log(this.allAnswers)
-                console.log(question_ans)
+                console.log(checkboxID) // 44 : [49,50] =  q_id: [qp_id,qp_id]
+
+                for (i in checkboxID) {
+                    var q_id = i
+                    var qp_list = checkboxID[i].map(str => {
+                            return Number(str);
+                        });
+                    for (each of this.all_questions) {
+                        if (q_id == each.questionId) {
+                            var input_value = {}
+                            var question_properties = each.questionProperties;
+                            for (each_qp of question_properties) {
+                                if (qp_list.includes(each_qp.id)) {
+                                    input_value[each_qp.id] = each_qp.label
+                                    console.log(input_value)
+                                }
+                            }
+                        }
+                        this.allAnswers[q_id] = input_value
+                    }
+                }
+
+                console.log(this.allAnswers)
 
                 //combine all questions
-                var allQnA = Object.assign(this.allAnswers, question_ans);
-                console.log(allQnA)
-
                 for (each of this.form_sections) {
                     for (question of each.questions) {
-                        if (question.questionId in allQnA) {
-                            question['inputValue'] = allQnA[question.questionId].toString();
+                        console.log(typeof (this.allAnswers[question.questionId]))
+                        if (question.questionId in this.allAnswers) {
+                            if (typeof (this.allAnswers[question.questionId]) == "object") {
+                                question['inputValue'] = this.toString(this.allAnswers[question.questionId]);
+                            }
+                            else{
+                                question['inputValue'] = this.allAnswers[question.questionId]
+                            }
                         }
                     }
                 }
 
-                console.log(this.form_sections)
                 for (each of this.all_form_sequences) {
                     if (each.formSequenceId == this.form_sequence_id) {
+                        each["status"] = "PENDING"
                         each.form['sections'] = this.form_sections;
                         var form = each.form
                         var form_id = each.form.formId
@@ -519,14 +543,42 @@
                         axios.put(URL, form)
                             .then(response => {
                                 console.log(response.data)
-                                alert("Form submitteed successfully!")
-                                document.location.reload();
+
+                                // UPDATE STATUS IN FORM SEQUENCE
+                                this.workflow_raw_data['formSequences'] = this.all_form_sequences
+                                console.log(this.workflow_raw_data)
+
+                                const API_URL2 = this.localhost + "/workflows/" + this.workflow_id;
+                                axios.put(API_URL2, this.workflow_raw_data)
+                                    .then(response => {
+                                        console.log(response.data)
+                                        alert("Form submitteed successfully!")
+                                        document.location.reload();
+                                    })
+                                    .catch(error => {
+                                        console.log(error.message)
+                                    })
                             })
                             .catch(error => {
                                 console.log(error.message)
                             })
                     }
                 }
+            },
+            toString(object) {
+                var string = ""
+                var length = Object.keys(object).length
+                var last_value = object[Object.keys(object)[Object.keys(object).length - 1]]
+
+                for (i in object) {
+                    var value = object[i]
+                    if (value == last_value) {
+                        string += value
+                    } else {
+                        string += value + ","
+                    }
+                }
+                return string
             },
             signatureShow(question_id) {
                 // SIGNATURE

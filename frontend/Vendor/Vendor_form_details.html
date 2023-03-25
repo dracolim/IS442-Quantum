@@ -22,7 +22,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tw-elements/dist/css/index.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
-                   
+
     <title>Quantum</title>
 </head>
 
@@ -67,13 +67,11 @@
                     <ul class="py-2 text-sm text-gray-700 "
                         aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
                         <li>
-                            <a href="#"
-                                class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
+                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
                         </li>
                     </ul>
                     <div class="py-2">
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                             out</a>
                     </div>
                 </div>
@@ -100,10 +98,9 @@
             <ul
                 class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                 <li>
-                    <a href="./Vendor_workflow.html"
-                    class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded 
+                    <a href="./Vendor_workflow.html" class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded 
                     hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
-                       Pending Workflows</a>
+                        Pending Workflows</a>
                 </li>
             </ul>
         </div>
@@ -114,7 +111,7 @@
 
     <!--Form Template-->
     <div id="app">
-                <!-- FORM START -->
+        <!-- FORM START -->
         <div style="background-color: #b4d1df">
             <!-- back button -->
             <button type="button" v-on:click="back()"
@@ -145,151 +142,148 @@
 
                             <div v-for="(value, key) in section.questions">
                                 <h5 class="mb-2.5 text-medium font-normal tracking-tight text-gray-900">
-                                            {{value.inputLabel}}</h5>
-                                        <!-- options -->
-                                        <!-- text -->
-                                        <div
-                                            v-if="value.inputType == 'text' || value.inputType == 'textarea' ||value.inputType == 'Date' || value.inputType == 'email' ||   value.inputType == 'file' || value.inputType ==     'number' "> <input
-                                            class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500  w-full" :type="value.inputType" :required="value.isRequired"   v-model="value.inputValue">
+                                    {{value.inputLabel}}</h5>
+                                <!-- options -->
+                                <!-- text -->
+                                <div
+                                    v-if="value.inputType == 'text' || value.inputType == 'textarea' ||value.inputType == 'Date' || value.inputType == 'email' ||   value.inputType == 'file' || value.inputType ==     'number' ">
+                                    <input
+                                        class="rounded-lg bg-gray-50 border border-gray-300 placeholder-gray-900 focus:placeholder-gray-500  w-full"
+                                        :type="value.inputType" :required="value.isRequired" v-model="value.inputValue">
 
-                                        </div>
-                                        <!-- NON text -->
-                                        <div v-else> 
-                                            <div v-for="option in questionOptions[value.questionId]">
-                                                <div class="flex items-center mb-4">
-                                                    <input :id ="option.id" class="bg-gray-50 border border-gray-300" :type="value.inputType" :name="value.questionId" :required="value.isRequired" :value = "option.   label"     v-on:change="updateCheckboxValue(value.inputValue, option.id)">
-                                                    <label for="option.id" :id ="option.id"
-                                                        class="ml-2 text-sm font-medium text-gray-900" :name="value.questionId">{{option.label}}</label>
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <!-- NON text -->
+                                <div v-else>
+                                    <div v-for="option in questionOptions[value.questionId]">
+                                        <div class="flex items-center mb-4">
+                                            <input :id="option.id" class="bg-gray-50 border border-gray-300"
+                                                :type="value.inputType" :name="value.questionId"
+                                                :required="value.isRequired" :value="option.   label"
+                                                v-on:change="updateCheckboxValue(value.inputValue, option.id)">
+                                            <label for="option.id" :id="option.id"
+                                                class="ml-2 text-sm font-medium text-gray-900"
+                                                :name="value.questionId">{{option.label}}</label>
                                         </div>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </form>
-            <div class="flex justify-center pb-4">
-                <button type="button" v-on:click="submitForm()"
-                class="ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-me text-xs  leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700   focus:shadow-focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 
-                ease-in-out">Submit
-                </button>
-            </div>
-           
-           
-           
-            <!-- FOOTER -->
-            <div class="pb-12"></div>
         </div>
     </div>
+    </form>
+    <div class="flex justify-center pb-4">
+        <button type="button" v-on:click="submitForm()" class="ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-me text-xs  leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700   focus:shadow-focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 
+                ease-in-out">Submit
+        </button>
+    </div>
+    <!-- FOOTER -->
+    <div class="pb-12"></div>
+    </div>
+    </div>
 
-    
+
 </body>
 <script>
     const app = new Vue({
-      el: '#app',
-      data() {
-        return {
-          formDetails: [],
-          fid: 0,
-          fname: "",
-          questionOptions: {},
-          unansweredQuestions: []
-
-        }
-      },
-
-
-      methods: {
-        async getFormDetails() {
-          try {
-            //Get form ID
-            const url = window.location.href;
-            const queryParams = new URLSearchParams(window.location.search)
-            const idValue = queryParams.get('id');
-
-            //Get form details
-            const response = await axios.get("http://localhost:5000/form/"+ idValue);
-            this.formDetails = response.data;
-            this.fname = response.data.formName;
-            this.fid = idValue;
-            if (this.formDetails.sections.length > 0) {
-                this.formDetails.sections.forEach(section => {
-                   if (section.questions.length > 0){
-                        section.questions.forEach(qn => {
-                            if (qn.inputType == 'Radio' || qn.inputType == 'checkbox') {
-                                this.questionOptions[qn.questionId]= qn.questionProperties; 
-                            }
-                        })
-                   }
-              });
-              //console.log(this.requiredQuestions)
-             
+        el: '#app',
+        data() {
+            return {
+                formDetails: [],
+                fid: 0,
+                fname: "",
+                questionOptions: {},
+                unansweredQuestions: []
 
             }
-          } catch (error) {
-            console.log(error);
-          }
         },
-        back(){
-            window.location.assign("./Vendor_workflow.html")
-        },
+        methods: {
+            async getFormDetails() {
+                try {
+                    //Get form ID
+                    const url = window.location.href;
+                    const queryParams = new URLSearchParams(window.location.search)
+                    const idValue = queryParams.get('id');
 
-        checkRequiredFields(){
-            this.unansweredQuestions = []
-            if (this.formDetails.sections.length > 0) {
-                this.formDetails.sections.forEach(section => {
-                if (section.questions.length > 0){
-                     section.questions.forEach(qn => {
-                    if (qn.isRequired == true && qn.inputValue == null) {
-                        this.unansweredQuestions.push(qn.questionId + qn.inputLabel) 
+                    //Get form details
+                    const response = await axios.get("http://localhost:5000/form/" + idValue);
+                    this.formDetails = response.data;
+                    this.fname = response.data.formName;
+                    this.fid = idValue;
+                    if (this.formDetails.sections.length > 0) {
+                        this.formDetails.sections.forEach(section => {
+                            if (section.questions.length > 0) {
+                                section.questions.forEach(qn => {
+                                    if (qn.inputType == 'Radio' || qn.inputType ==
+                                        'checkbox') {
+                                        this.questionOptions[qn.questionId] = qn
+                                            .questionProperties;
+                                    }
+                                })
+                            }
+                        });
                     }
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            back() {
+                window.location.assign("./Vendor_workflow.html")
+            },
+
+            checkRequiredFields() {
+                this.unansweredQuestions = []
+                if (this.formDetails.sections.length > 0) {
+                    this.formDetails.sections.forEach(section => {
+                        if (section.questions.length > 0) {
+                            section.questions.forEach(qn => {
+                                if (qn.isRequired == true && qn.inputValue == null) {
+                                    this.unansweredQuestions.push(qn.questionId + qn.inputLabel)
+                                }
+                            })
+                        }
                     })
                 }
-                })
-            }
-            if (this.unansweredQuestions.length == 0){
-                console.log(true)
-                return true
-            }else{
-                console.log(this.unansweredQuestions)
-                return this.unansweredQuestions
-            }
-        },
-        updateCheckboxValue(inputValue, optionId) {
-             if (inputValue === null) {
-               inputValue = []
-             }
-             index = inputValue.indexOf(optionId)
-             if (index == -1) {
-               inputValue.push(optionId)
-             } else {
-               inputValue.splice(index, 1)
-             }
-             //console.log(inputValue)
-             return JSON.stringify(inputValue)
+                if (this.unansweredQuestions.length == 0) {
+                    console.log(true)
+                    return true
+                } else {
+                    console.log(this.unansweredQuestions)
+                    return this.unansweredQuestions
+                }
+            },
+            updateCheckboxValue(inputValue, optionId) {
+                if (inputValue === null) {
+                    inputValue = []
+                }
+                index = inputValue.indexOf(optionId)
+                if (index == -1) {
+                    inputValue.push(optionId)
+                } else {
+                    inputValue.splice(index, 1)
+                }
+                //console.log(inputValue)
+                return JSON.stringify(inputValue)
 
             },
 
-        submitForm(){
-            if (!this.checkRequiredFields()){
-                console.log(this.checkRequiredFields)
-            }else{
-                alert("submission successful")
-                window.location.assign("./Vendor_workflow.html")
+            submitForm() {
+                if (!this.checkRequiredFields()) {
+                    console.log(this.checkRequiredFields)
+                } else {
+                    alert("submission successful")
+                    window.location.assign("./Vendor_workflow.html")
+                }
             }
+
+        },
+        mounted() {
+            this.getFormDetails();
         }
-       
-      },
-      mounted() {
-        this.getFormDetails();
-      }
     })
 
     const vm = app.$mount('#app')
-
-
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
@@ -300,4 +294,5 @@
 2. Error handling
 3. pull workflows
 -->
+
 </html>

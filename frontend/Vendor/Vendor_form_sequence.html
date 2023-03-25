@@ -112,7 +112,7 @@
                     <div id="dropdownAvatarName"
                         class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                         <div class="px-4 py-3 text-sm text-gray-900 ">
-                            <div class="font-bold">Approver</div>
+                            <div class="font-bold">Vendor</div>
                             <div class="truncate">{{emailAddress}}
                             </div>
                         </div>
@@ -321,8 +321,15 @@
             signaturePad: {},
             isErase: false,
             signatureIds: [],
+            //LOCALSTORAGE
+            userName: "",
+            emailAddress: "",
+            user_id: ""
         },
         mounted: async function () {
+            // LOCALSTORAGE
+            this.user_id = localStorage.userId;
+
             var query = window.location.search.substring(4);
             var first_dash_idx = query.indexOf("/")
 
@@ -502,23 +509,24 @@
                 console.log(this.allAnswers)
                 console.log(checkboxID) // 44 : [49,50] =  q_id: [qp_id,qp_id]
 
-                for (each of this.all_questions) {
-                    for (i in checkboxID) {
-                        var q_id = i
-                        var qp_list = checkboxID[i].map(str => {
+
+                for (i in checkboxID) {
+                    var q_id = i
+                    var qp_list = checkboxID[i].map(str => {
                             return Number(str);
                         });
-                        if (each.questionId == q_id) {
+                    for (each of this.all_questions) {
+                        if (q_id == each.questionId) {
                             var input_value = {}
                             var question_properties = each.questionProperties;
                             for (each_qp of question_properties) {
                                 if (qp_list.includes(each_qp.id)) {
                                     input_value[each_qp.id] = each_qp.label
+                                    console.log(input_value)
                                 }
                             }
                         }
                         this.allAnswers[q_id] = input_value
-                        break
                     }
                 }
 
@@ -527,12 +535,10 @@
                 //combine all questions
                 for (each of this.form_sections) {
                     for (question of each.questions) {
-                        console.log(typeof (this.allAnswers[question.questionId]))
                         if (question.questionId in this.allAnswers) {
                             if (typeof (this.allAnswers[question.questionId]) == "object") {
                                 question['inputValue'] = this.toString(this.allAnswers[question.questionId]);
-                            }
-                            else{
+                            } else {
                                 question['inputValue'] = this.allAnswers[question.questionId]
                             }
                         }
@@ -560,7 +566,7 @@
                                     .then(response => {
                                         console.log(response.data)
                                         alert("Form submitteed successfully!")
-                                        document.location.reload();
+                                        //document.location.reload();
                                     })
                                     .catch(error => {
                                         console.log(error.message)

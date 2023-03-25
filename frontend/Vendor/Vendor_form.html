@@ -81,7 +81,7 @@
                 <div id="dropdownAvatarName"
                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-50 ">
                     <div class="px-4 py-3 text-sm text-gray-900 ">
-                        <div class="font-bold">User</div>
+                        <div class="font-bold">Vendor</div>
                         <div class="truncate">{{emailAddress}}</div>
                     </div>
                     <ul class="py-2 text-sm text-gray-700 "
@@ -188,6 +188,9 @@
 
         },
         mounted: async function () {
+            // LOCALSTORAGE
+            this.user_id = localStorage.userId;
+            
             var query = window.location.search.substring(4);
             var slashidx = query.indexOf("/")
             this.workflow_id = query.substring(0, slashidx);

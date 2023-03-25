@@ -99,7 +99,8 @@
                             </li>
                         </ul>
                         <div class="py-2">
-                            <a href="../login_home.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
+                            <a href="../login_home.html"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                                 out</a>
                         </div>
                     </div>
@@ -142,7 +143,8 @@
                 <caption class="p-5 text-lg font-semibold text-left text-gray-900 bg-white ">
                     Pending Workflows
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <span onclick="document.location = 'Vendor_workflow.html'" class='text-sky-600'>Pending Workflows</span>
+                        <span onclick="document.location = 'Vendor_workflow.html'" class='text-sky-600'>Pending
+                            Workflows</span>
                     </p>
                 </caption>
                 <thead class="text-sm text-white bg-sky-600">
@@ -165,7 +167,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="cursor: pointer;" class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value, idx) in all_workflows" @click="goToSinglepage(value.workFlowId)">
+                    <tr style="cursor: pointer;" class="bg-white border-gray-200 hover:bg-gray-100"
+                        v-for="(value, idx) in all_workflows" @click="goToSinglepage(value.workFlowId)">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.workFlowId}}
                         </th>
@@ -206,25 +209,26 @@
         data: {
             localhost: "http://localhost:5000",
             all_workflows: [],
+            //LOCALSTORAGE
             userName: "",
             emailAddress: "",
             user_id: "",
         },
         mounted: async function () {
-            var query = window.location.search.substring(4);
-            this.user_id = query.toString();
-
+            // LOCALSTORAGE
+            this.user_id = localStorage.userId;
+            
             const API_URL = this.localhost + "/workflows";
             const API_URL2 = this.localhost + "/users/userType/" + "VENDOR"
 
             axios.get(API_URL)
                 .then(response => {
                     var all_workflows = response.data;
-                    for(each of all_workflows){
+                    for (each of all_workflows) {
                         console.log(each.vendor.userId)
                         console.log(this.user_id)
-                        if (each.vendor.userId == this.user_id && each.workFlowStatus == "IN_PROGRESS") 
-                        {
+                        if (each.vendor.userId == this.user_id && each.workFlowStatus ==
+                            "IN_PROGRESS") {
                             this.all_workflows.push(each)
                         }
                     }
