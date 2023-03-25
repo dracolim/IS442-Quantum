@@ -156,7 +156,7 @@
                                 var userType = each.userType
                                 localStorage.userId = each.userId
                                 if (userType == 'VENDOR') {
-                                    window.location.assign("./Vendor/Vendor_workflow.html")
+                                    window.location.assign("./Vendor/Vendor_workflow.html?id=" + each.userId)
                                 }
                                 if (userType == "APPROVER") {
                                     window.location.assign("./Approver/Approver_home.html")
