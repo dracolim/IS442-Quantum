@@ -49,7 +49,58 @@
 3. **Scenario 2:** if Admins selects "NOT APPROVED", the status (Status column) will change from "PENDING" to "REQUESTED"
 <img width="500" style ="margin-left = 10px" alt="Screenshot 2023-03-22 at 4 15 14 PM" src="https://user-images.githubusercontent.com/85498185/226840328-b8fe5b11-1f30-4b35-b2d1-d2152cf4682c.png"> <br>
 
+### Accounts Page
+<code>Admin_accounts.html</code>
+  - This is the Admin's view of the accounts page
+  - It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
+  - An Admin can create an account of any 1 of the 3 types by clicking either "CREATE VENDOR ACCOUNT", "CREATE APPROVER ACCOUNT" or "CREATE ADMIN ACCOUNT".
+  - An Admin can delete any existing accounts by clicking the delete button that is represented by a trash can icon.
+  - An Admin can update any existing accounts by clicking the update button that is represented by a paper & pen icon.
+  <img width="500" alt="admin accounts page" src="https://user-images.githubusercontent.com/89073137/227719987-8377f9fe-bb4d-42a9-8e30-492aa51d4a0f.PNG">
 
+### Creating an Account
+<ins>Steps to create a vendor account<ins> <br>
+<ins>For creating Admin & Approver accounts, click the appropriate "CREATE _____ ACCOUNT" under step 1 and follow the rest of the steps. <ins> <br>
+1. At <code>Admin_accounts.html</code>, Admins can click on "CREATE VENDOR ACCOUNT" located at the bottom right corner. <br>
+2. After clicking, a modal will appear that will allow the Admin to enter the necessary details to create the account. <br>
+3. After filling in the information, the Admin can click on the blue Save button that's located at the bottom of the modal. <br>
+4. If no fields are left empty and all fields are valid, the account is now successfully created. 
+<img width="500" alt="create vendor account admin" src="https://user-images.githubusercontent.com/89073137/227720523-07292b23-a87c-4c08-b2c8-00e853ddae75.PNG"><br>
+
+### Updating an Account
+<ins>Steps to update an account<ins> <br>
+<ins>Example given is for updating Vendor account, but the steps apply to all 3 types of accounts<ins> <br>
+1. At <code>Admin_accounts.html</code>, under a particular account, Admins can click on the update button (represented by a paper & pen icon) associated to the account to update account information. <br>
+2. After clicking, a modal will appear that will allow the Admin to edit the necessary details to update the account. <br>
+3. After filling in the information, the Admin can click on the blue Save button that's located at the bottom of the modal. <br>
+4. If no fields are left empty and all fields are valid, the account is now successfully updated. 
+<img width="500" alt="update account" src="https://user-images.githubusercontent.com/89073137/227721067-9af61ef8-09ba-4dc4-8fd1-6a12fb88ed4f.PNG"><br>
   
-  
+
 ## Approver
+### Accounts Page
+<code>Approver_accounts.html</code>
+  - This is the Approver's view of the accounts page
+  - It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
+  - An Approver can create an account of any 1 of the 3 types by clicking either "CREATE VENDOR ACCOUNT", "CREATE APPROVER ACCOUNT" or "CREATE ADMIN ACCOUNT".
+  - An Approver can delete any existing accounts by clicking the delete button that is represented by a trash can icon.
+  - An Approver can update any existing accounts by clicking the update button that is represented by a paper & pen icon.
+  <img width="500" alt="approver accounts page" src="https://user-images.githubusercontent.com/89073137/227721315-9edcf2d7-d687-4173-b3c3-d0ca6562cff2.PNG">
+
+### Creating an Account
+<ins>Steps to create a vendor account<ins> <br>
+<ins>For creating Admin & Approver accounts, click the appropriate "CREATE _____ ACCOUNT" under step 1 and follow the rest of the steps. <ins> <br>
+1. At <code>Approver_accounts.html</code>, Approver can click on "CREATE VENDOR ACCOUNT" located at the bottom right corner. <br>
+2. After clicking, a modal will appear that will allow the Approver to enter the necessary details to create the account. <br>
+3. After filling in the information, the Approver can click on the blue Save button that's located at the bottom of the modal. <br>
+4. If no fields are left empty and all fields are valid, the account is now successfully created. 
+<img width="500" alt="create vendor account approver" src="https://user-images.githubusercontent.com/89073137/227721392-5bad9965-3f55-43f8-b13e-ae31abcf8c79.PNG"><br>
+
+### Updating an Account
+<ins>Steps to update an account<ins> <br>
+<ins>Example given is for updating Vendor account, but the steps apply to all 3 types of accounts<ins> <br>
+1. At <code>Approver_accounts.html</code>, under a particular account, Approver can click on the update button (represented by a paper & pen icon) associated to the account to update account information. <br>
+2. After clicking, a modal will appear that will allow the Approver to edit the necessary details to update the account. <br>
+3. After filling in the information, the Approver can click on the blue Save button that's located at the bottom of the modal. <br>
+4. If no fields are left empty and all fields are valid, the account is now successfully updated. 
+<img width="500" alt="update account approver" src="https://user-images.githubusercontent.com/89073137/227721449-9b02b12e-2299-423d-87a2-5c044e124d77.PNG"><br>
