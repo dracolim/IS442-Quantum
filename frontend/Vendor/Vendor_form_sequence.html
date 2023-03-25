@@ -321,15 +321,8 @@
             signaturePad: {},
             isErase: false,
             signatureIds: [],
-            //LOCALSTORAGE
-            userName: "",
-            emailAddress: "",
-            user_id: ""
         },
         mounted: async function () {
-            // LOCALSTORAGE
-            this.user_id = localStorage.userId;
-
             var query = window.location.search.substring(4);
             var first_dash_idx = query.indexOf("/")
 

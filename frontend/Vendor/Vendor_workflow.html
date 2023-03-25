@@ -215,9 +215,6 @@
             user_id: "",
         },
         mounted: async function () {
-            // LOCALSTORAGE
-            this.user_id = localStorage.userId;
-            
             const API_URL = this.localhost + "/workflows";
             const API_URL2 = this.localhost + "/users/userType/" + "VENDOR"
 
