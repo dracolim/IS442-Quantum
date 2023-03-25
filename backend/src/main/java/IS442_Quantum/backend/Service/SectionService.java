@@ -58,7 +58,7 @@ public class SectionService {
 
         // add questions to section
         for (Question question : sectionBody.getQuestions()){
-            Question newQuestion = questionService.createNewQuestion(question);
+            Question newQuestion = question.getQuestionId() != null ? questionService.findByQuestionId(question.getQuestionId()) : questionService.createNewQuestion(question);
             newQuestion.setSection(newSection);
             newQuestion.setInputValue(question.getInputValue());
             newSection.getQuestions().add(newQuestion);
@@ -75,7 +75,7 @@ public class SectionService {
         if(sectionBody.getQuestions() != null){
             section.getQuestions().clear();
             for (Question question : sectionBody.getQuestions()){
-                Question newQuestion = questionService.checkQuestionById(question.getQuestionId()) ? questionService.findByQuestionId(question.getQuestionId()) : questionService.createNewQuestion(question);
+                Question newQuestion = question.getQuestionId() != null ? questionService.editQuestionById(question.getQuestionId(), question) : questionService.createNewQuestion(question);
                 newQuestion.setSection(section);
                 section.getQuestions().add(newQuestion);
             }
