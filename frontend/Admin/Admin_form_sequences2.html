@@ -292,14 +292,6 @@
                 </div>
             </div>
 
-            <div class="flex flex-col items-center justify-center">
-                <button type="button" id="submitButton" @click="submitForm()"
-                    class="flex inline-flex items-center mr-5 px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-sm leading-tight rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">
-                    Submit Form
-                </button>
-            </div>
-
-
             <!-- FOOTER -->
             <div class="pb-12" style="background-color: #b4d1df" class="h-screen"></div>
         </div>
@@ -471,86 +463,6 @@
             goToSinglePage: function (id) {
                 console.log(id)
                 window.location.assign("../Admin/Admin_workflow_sequences.html?id=" + this.workflow_id)
-            },
-            submitForm() {
-                console.log(this.signaturePad)
-                for (i in this.signaturePad) {
-                    var question_id = i
-                    var signature_pad = this.signaturePad[i]
-                    var data = signature_pad.toDataURL('image/png');
-                    var base64_extra = data.replace(/^data:image\/?[A-z]*;base64,/);
-                    var base64 = base64_extra.slice(9, );
-
-                    this.allAnswers[i] = base64
-                    console.log(this.allAnswers)
-                }
-                console.log(this.allAnswers)
-                var checkboxID = []
-                for (i in this.allAnswers) {
-                    console.log(this.allAnswers[i])
-                    // checkbox questionpropertyID
-                    if (this.allAnswers[i] === true) {
-                        checkboxID.push(i)
-                        delete this.allAnswers[i];
-                    }
-                }
-                console.log(checkboxID)
-
-                
-
-                // get question ID for checkbox IDs
-                var question_ans = {}
-                for (each of this.all_questions) {
-                    if ("questionProperties" in each) {
-                        for (each_qp of each.questionProperties) { //checking by the question properties ID
-                            for (i in checkboxID) {
-                                if (each_qp.id == checkboxID[i]) {
-                                    if (!(each.questionId in question_ans)) {
-                                        question_ans[each.questionId] = [each_qp.label]
-                                    } else {
-                                        question_ans[each.questionId].push(each_qp.label)
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                }
-
-                console.log(this.allAnswers)
-                console.log(question_ans)
-
-                //combine all questions
-                var allQnA = Object.assign(this.allAnswers, question_ans);
-                console.log(allQnA)
-
-                for (each of this.form_sections) {
-                    for (question of each.questions) {
-                        if (question.questionId in allQnA) {
-                            question['inputValue'] = allQnA[question.questionId].toString();
-                        }
-                    }
-                }
-
-                console.log(this.form_sections)
-                for (each of this.all_form_sequences) {
-                    if (each.formSequenceId == this.form_sequence_id) {
-                        each.form['sections'] = this.form_sections;
-                        var form = each.form
-                        var form_id = each.form.formId
-
-                        var URL = this.localhost + "/form/" + form_id
-                        axios.put(URL, form)
-                            .then(response => {
-                                console.log(response.data)
-                                alert("Form submitteed successfully!")
-                                //document.location.reload();
-                            })
-                            .catch(error => {
-                                console.log(error.message)
-                            })
-                    }
-                }
             },
             exportForm() {
                 var divContents = document.getElementById("dvContainer")

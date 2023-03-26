@@ -228,8 +228,7 @@
                         if (each.vendor.userId == this.user_id) {
                             var formSeq = each.formSequences;
                             for (each_seq of formSeq){
-                                if (each_seq.status == "REQUESTED" && this.all
-){
+                                if (each_seq.status == "REQUESTED" && !(this.all_workflows.includes(each))){
                                     this.all_workflows.push(each)
                                 }
                             }
