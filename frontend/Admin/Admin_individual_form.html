@@ -308,7 +308,8 @@
                                 <option v-if="value.question.inputType != 'email'" value="email">Email</option>
                                 <option v-if="value.question.inputType != 'file'" value="file">File</option>
                                 <option v-if="value.question.inputType != 'number'" value="number">Number</option>
-                                <option v-if="value.question.inputType != 'signature'" value="signature">Signature</option>
+                                <option v-if="value.question.inputType != 'signature'" value="signature">Signature
+                                </option>
                             </select>
                         </td>
 
@@ -697,7 +698,7 @@
                 form_sections: "",
                 combined: [],
 
-                
+
                 //LOCALSTORAGE
                 userName: "",
                 emailAddress: "",
@@ -739,9 +740,9 @@
                         }
 
                         for (each of responseFive) {
-                        if (each.userId == this.userId) {
-                            this.userName = each.userName
-                            this.emailAddress = each.emailAddress
+                            if (each.userId == this.userId) {
+                                this.userName = each.userName
+                                this.emailAddress = each.emailAddress
                             }
                         }
 
@@ -1003,8 +1004,8 @@
                 },
                 deleteQuestion: function (question_id) {
                     var URL = this.localhost + "/question/" + question_id;
-                    axios.delete(URL , question_id)
-                    .then(response => {
+                    axios.delete(URL, question_id)
+                        .then(response => {
                             console.log(response.data)
                             document.location.reload();
                         })
@@ -1088,10 +1089,12 @@
                                 var all_labels = []
                                 for (i in this.varLabels) {
                                     if (this.varLabels[i].toLowerCase() == 'others' || this.varLabels[i]
-                                        .toLowerCase() == "other" ) {
-                                            console.log("alkdfjhasdkjfhasdf")
+                                        .toLowerCase() == "other") {
                                         //check whether exists already
-                                        if (!(new_label in this.all_question_input_labels)) {
+                                        console.log(this.all_question_input_labels)
+                                        var new_label = "(Others) " + each.inputLabel;
+                                        if (!(this.all_question_input_labels.includes(new_label))) {
+                                            console.log("does not exist")
                                             // post a new question
                                             var URL = this.localhost + '/question'
                                             var new_label = "(Others) " + each.inputLabel;
@@ -1142,7 +1145,7 @@
                                 complete = true;
                             }
                         }
-                        
+
                         var URL2 = this.localhost + '/question/' + this.updateID
                         axios.put(URL2, data)
                             .then(response => {
@@ -1163,7 +1166,7 @@
                     var questionProperties = this.NewOptions;
 
                     if (section_id == "" || inputLabel == "" || inputType == "") {
-                        document.getElementById("addFieldButton").disabled = false
+                        document.getElementById("addFieldButton").disabled = true;
                         this.error_message = "Fields cannot be Empty!"
                     } else {
                         var all_questions_in_this_form = this.all_questions

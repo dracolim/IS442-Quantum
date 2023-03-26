@@ -1105,7 +1105,8 @@
                                     if (this.varLabels[i].toLowerCase() == 'others' || this.varLabels[i]
                                         .toLowerCase() == "other") {
                                         //check whether exists already
-                                        if (!(new_label in this.all_question_input_labels)) {
+                                        var new_label = "(Others) " + each.inputLabel;
+                                        if (!(this.all_question_input_labels.includes(new_label))) {
                                             // post a new question
                                             var URL = this.localhost + '/question'
                                             var new_label = "(Others) " + each.inputLabel;
