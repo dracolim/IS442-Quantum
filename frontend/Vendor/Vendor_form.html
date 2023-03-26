@@ -56,7 +56,7 @@
                 style="height: 80px ; width: 200px;" />
 
             <div class="flex md:order-2">
-                <a v-bind:href="'../Vendor/Vendor_workflow/' + user_id" style="margin-right: 10px;">
+                <a v-bind:href="'../Vendor/Vendor_workflow.html?id=' + user_id" style="margin-right: 10px;">
                     <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40"></iconify-icon>
                 </a>
 
@@ -84,12 +84,6 @@
                         <div class="font-bold">Vendor</div>
                         <div class="truncate">{{emailAddress}}</div>
                     </div>
-                    <ul class="py-2 text-sm text-gray-700 "
-                        aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-                        <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
-                        </li>
-                    </ul>
                     <div class="py-2">
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
                             out</a>
