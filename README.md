@@ -1,6 +1,11 @@
 # IS442 TEAM 8 Quantum
 
-## Login Page
+## Users
+1. Vendor [link](#vendor)
+2. Admin [link](#admin)
+3. Approver [link](#approver)
+
+### Login Page
 <code>login_home.html</code>
 * Users can login to their respective accounts with their email and password. There are total 3 user types (Approver, Admin, Vendor).
 * This login page will idenitfy which users belongs to which user type, and bring them to their respective homepage. <br>
