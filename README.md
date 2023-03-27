@@ -36,14 +36,14 @@
 
   
 ## Admin
-### Homepage
+### Homepage (Pending Workflows Page)
 <code>Admin_home.html</code>
 * This is the Admin's homepage
-* It displays all the pending workflows (workflow with status: IN PROGRESS) that requires the Admins to validate the form after Vendors have submitted the form 
+* It displays all the pending workflows (workflow with status: IN PROGRESS) that requires the Admins to validate the form after Vendor's submission 
 * Admins can click on the table row to go to the respective pending workflows page <code>Admin_individual_pendingwf.html</code> <br>
 <img width="500" alt="Screenshot 2023-03-27 at 3 04 45 PM" src="https://user-images.githubusercontent.com/85498185/227865390-993ffda1-6b2f-48ba-b5a1-fad8544872fd.png">
 
-### Select individual pending workflow & Validate the forms
+### Select individual pending workflow , Validate and Submit Forms
 <ins>Steps to select individual workflow<ins> <br>
 1. From <code>Admin_home.html</code>, Admins can click on the table row
 2. After selecting, it will bring the Admins to <code>Admin_individual_pendingwf.html</code> where it will display all the forms that belong to that pending workflow <br>
@@ -56,6 +56,23 @@
 <img width="500" alt="Screenshot 2023-03-22 at 4 17 37 PM" src="https://user-images.githubusercontent.com/85498185/226840879-a51671a7-17f3-45fa-936a-0f6b6ea5bad8.png"> <br>
 3. **Scenario 2:** if Admins selects "NOT APPROVED", the status (Status column) will change from "PENDING" to "REQUESTED" <br>
 <img width="500" style ="margin-left = 10px" alt="Screenshot 2023-03-22 at 4 15 14 PM" src="https://user-images.githubusercontent.com/85498185/226840328-b8fe5b11-1f30-4b35-b2d1-d2152cf4682c.png"> <br>
+
+<ins>Steps to submit form<ins> <br>
+1. At <code>Admin_individual_pendingwf.html</code>, Admin can click on the table row to select the forms they want to view or submit
+2. After selecting, it will bring the Admins to <code>Admin_form_sequence.html</code> where it will display all the questions from that form
+3. Admin can now check the form as well as fill in the required questions (eg: Admin Evaluation) and submit form. <br>
+<img width="500" alt="Screenshot 2023-03-27 at 3 14 51 PM" src="https://user-images.githubusercontent.com/85498185/227867641-6b40c7d9-0b21-4afa-beab-8fa5d82dd7d9.png">
+
+### Workflows Page
+<code>Admin_workflow.html</code>
+* This is the Admin's overview of all the existed workflows 
+* This page will show all the completed, in-progress and rejected workflows 
+* Admin can either check sequence, edit and delete workflows
+<img width="500" alt="Screenshot 2023-03-27 at 3 19 00 PM" src="https://user-images.githubusercontent.com/85498185/227868548-49eca8e8-92fc-4666-8699-7945e219a90b.png">
+
+
+
+
 
 ### Accounts Page
 <code>Admin_accounts.html</code>
