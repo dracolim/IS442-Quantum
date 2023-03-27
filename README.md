@@ -1,9 +1,22 @@
-# IS442 TEAM 8 Quantum
+# IS442 x Quantum Project by Team 8
 
-## Users
-1. Vendor [link](#vendor)
-2. Admin [link](#admin)
-3. Approver [link](#approver)
+![example workflow](https://img.shields.io/badge/Build%20In-HTML%2C%20CSS%20%2C%20Vue.js%2C%20Java-brightgreen)
+![example workflow](https://img.shields.io/badge/Build%20With-Spring%20Boot-blue)
+![example workflow](https://img.shields.io/badge/Database-SQL-red)
+
+#### Group Memebers
+* Lim Bei Ling Cheryl
+* Faisal Samudra
+* Cher Kheem Thong
+* Wisely Kwek
+* Liao JiaXiong
+* Natalie Chan
+* FuWei Tian
+
+## Type of Users
+1. Vendor [ [link](#vendor) ]
+2. Admin [ [link](#admin) ]
+3. Approver [ [link](#approver) ]
 
 ### Login Page
 <code>login_home.html</code>
