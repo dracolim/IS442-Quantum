@@ -13,7 +13,7 @@
   - This is the Vendor's homepage
   - It displays all the pending workflows (workflows with status: IN PROGRESS) that requires Vendors to fill in the forms. 
   - Vendors can either click on the table row or the icon in the forms column to go to the respective workflow page 
-* <img width="500" alt="Screenshot 2023-03-27 at 2 49 09 PM" src="https://user-images.githubusercontent.com/85498185/227862206-9779825d-acae-4d3e-8ff8-cb879d5599c2.png">
+<img align="left" width="500" alt="Screenshot 2023-03-27 at 2 49 09 PM" src="https://user-images.githubusercontent.com/85498185/227862206-9779825d-acae-4d3e-8ff8-cb879d5599c2.png">
 
 
 ### Select individual workflow
