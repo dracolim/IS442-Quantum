@@ -97,6 +97,7 @@
 1. At <code>Admin_workflow.html</code>, click on the icon in the "Delete" column. 
 2. After clicking, it will delete the workflow
 
+### Workflow Sequence Page
 <code>Admin_workflow_sequences.html</code>
 
 #### Assign New Forms to Workflow
@@ -117,12 +118,14 @@
 2. It will lead to <code>Admin_form_sequences2.html</code>, where it will show all the questions and answers from the fomr
 3. Admin CANNOT submit or edit form. If Admin would like to do so, they have to go to [click on this link](#admin-submit-forms)
 
+### Form Sequences 2 Page
 <code>Admin_form_sequences2.html</code>
 
 #### Export Form
 <ins>Steps to Export Form</ins><br>
-1. At <code>Admin_form_sequences2.html</code>, click on "EXPORT" button, at the ri
-
+1. At <code>Admin_form_sequences2.html</code>, click on "EXPORT" button
+2. The form PDF will be automatically downloaded to the desktop
+<img width="500" alt="Screenshot 2023-03-27 at 4 07 33 PM" src="https://user-images.githubusercontent.com/85498185/227880137-d8ac5024-c366-4836-ab93-221fee2512e7.png">
 
 
 
