@@ -43,12 +43,13 @@
 * Admins can click on the table row to go to the respective pending workflows page <code>Admin_individual_pendingwf.html</code> <br>
 <img width="500" alt="Screenshot 2023-03-27 at 3 04 45 PM" src="https://user-images.githubusercontent.com/85498185/227865390-993ffda1-6b2f-48ba-b5a1-fad8544872fd.png">
 
-### Select individual pending workflow , Validate and Submit Forms
+#### Select individual pending workflow 
 <ins>Steps to select individual workflow<ins> <br>
 1. From <code>Admin_home.html</code>, Admins can click on the table row
 2. After selecting, it will bring the Admins to <code>Admin_individual_pendingwf.html</code> where it will display all the forms that belong to that pending workflow <br>
 <img width="500" alt="Screenshot 2023-03-27 at 3 07 43 PM" src="https://user-images.githubusercontent.com/85498185/227866026-3068f666-c4ac-446e-8155-0781b12b62a2.png">
-  
+
+#### Validate Forms
 <ins>Steps to validate form<ins> <br>
 1. At <code>Admin_individual_pendingwf.html</code>, Admins can select "APPROVED" or "NOT APPROVED" from the dropdown menu in the Approval column. <br>
 <img width="500" alt="Screenshot 2023-03-22 at 4 16 23 PM" src="https://user-images.githubusercontent.com/85498185/226840559-a2719df8-4454-4daf-9cf2-502b81be6db7.png"><br>
@@ -57,6 +58,7 @@
 3. **Scenario 2:** if Admins selects "NOT APPROVED", the status (Status column) will change from "PENDING" to "REQUESTED" <br>
 <img width="500" style ="margin-left = 10px" alt="Screenshot 2023-03-22 at 4 15 14 PM" src="https://user-images.githubusercontent.com/85498185/226840328-b8fe5b11-1f30-4b35-b2d1-d2152cf4682c.png"> <br>
 
+#### Submit Forms
 <ins>Steps to submit form<ins> <br>
 1. At <code>Admin_individual_pendingwf.html</code>, Admin can click on the table row to select the forms they want to view or submit
 2. After selecting, it will bring the Admins to <code>Admin_form_sequence.html</code> where it will display all the questions from that form
@@ -83,7 +85,7 @@
 *  An Admin can update any existing accounts by clicking the update button that is represented by a paper & pen icon. <br>
 <img width="500" alt="admin accounts page" src="https://user-images.githubusercontent.com/89073137/227719987-8377f9fe-bb4d-42a9-8e30-492aa51d4a0f.PNG">
 
-### Creating an Account
+#### Creating an Account
 <ins>Steps to create a vendor account<ins> <br>
 <ins>For creating Admin & Approver accounts, click the appropriate "CREATE _____ ACCOUNT" under step 1 and follow the rest of the steps. <ins> <br>
 1. At <code>Admin_accounts.html</code>, Admins can click on "CREATE VENDOR ACCOUNT" located at the bottom right corner. <br>
@@ -92,7 +94,7 @@
 4. If no fields are left empty and all fields are valid, the account is now successfully created. 
 <img width="500" alt="create vendor account admin" src="https://user-images.githubusercontent.com/89073137/227720523-07292b23-a87c-4c08-b2c8-00e853ddae75.PNG"><br>
 
-### Updating an Account
+#### Updating an Account
 <ins>Steps to update an account<ins> <br>
 <ins>Example given is for updating Vendor account, but the steps apply to all 3 types of accounts<ins> <br>
 1. At <code>Admin_accounts.html</code>, under a particular account, Admins can click on the update button (represented by a paper & pen icon) associated to the account to update account information. <br>
@@ -112,7 +114,7 @@
 * An Approver can update any existing accounts by clicking the update button that is represented by a paper & pen icon. <br>
 <img width="500" alt="approver accounts page" src="https://user-images.githubusercontent.com/89073137/227721315-9edcf2d7-d687-4173-b3c3-d0ca6562cff2.PNG">
 
-### Creating an Account
+#### Creating an Account
 <ins>Steps to create a vendor account<ins> <br>
 <ins>For creating Admin & Approver accounts, click the appropriate "CREATE _____ ACCOUNT" under step 1 and follow the rest of the steps. <ins> <br>
 1. At <code>Approver_accounts.html</code>, Approver can click on "CREATE VENDOR ACCOUNT" located at the bottom right corner. <br>
@@ -121,7 +123,7 @@
 4. If no fields are left empty and all fields are valid, the account is now successfully created. 
 <img width="500" alt="create vendor account approver" src="https://user-images.githubusercontent.com/89073137/227721392-5bad9965-3f55-43f8-b13e-ae31abcf8c79.PNG"><br>
 
-### Updating an Account
+#### Updating an Account
 <ins>Steps to update an account<ins> <br>
 <ins>Example given is for updating Vendor account, but the steps apply to all 3 types of accounts<ins> <br>
 1. At <code>Approver_accounts.html</code>, under a particular account, Approver can click on the update button (represented by a paper & pen icon) associated to the account to update account information. <br>
