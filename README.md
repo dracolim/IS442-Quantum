@@ -32,7 +32,7 @@
 <img width="500" alt="Screenshot 2023-03-27 at 2 57 19 PM" src="https://user-images.githubusercontent.com/85498185/227863829-a4dfc614-5c81-42c3-a13c-2b1159c6d747.png">
   
 ## Admin
-### Homepage (Pending Workflows Page)
+### Homepage (Pending Workflows Tab)
 <code>Admin_home.html</code>
 * This is the Admin's homepage
 * It displays all the pending workflows (workflow with status: IN PROGRESS) that requires the Admins to validate the form after Vendor's submission 
@@ -61,7 +61,7 @@
 3. Admin can check the form as well as fill in the required questions (eg: Admin Evaluation) and submit form. <br>
 <img width="500" alt="Screenshot 2023-03-27 at 3 14 51 PM" src="https://user-images.githubusercontent.com/85498185/227867641-6b40c7d9-0b21-4afa-beab-8fa5d82dd7d9.png">
 
-### Workflows Page
+### Workflows Tab
 <code>Admin_workflow.html</code>
 * This is the Admin's overview of all the existed workflows 
 * This page will show all the completed, in-progress and rejected workflows 
@@ -123,7 +123,7 @@
 
 
 
-### Accounts Page
+### Accounts Tab
 <code>Admin_accounts.html</code>
 * This is the Admin's view of the accounts page
 * It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
@@ -152,7 +152,7 @@
   
 
 ## Approver
-### Accounts Page
+### Accounts Tab
 <code>Approver_accounts.html</code>
 * This is the Approver's view of the accounts page
 * It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
