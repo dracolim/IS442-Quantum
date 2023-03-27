@@ -24,7 +24,7 @@
     * By Default, if Vendor have not submitted form, the staus will be "INCOMPLETE"
     * If Vendor Submits form, the status will be changed from "INCOMPLETE" to "COMPLETED"
     * If Admin requests Vendor to submit/update form again, the status will be changed to "INCOMPLETE"
-<img width="500" height ="350" alt="Screenshot 2023-03-27 at 2 56 27 PM" src="https://user-images.githubusercontent.com/85498185/227863633-f3b29447-34a7-47e3-ac7c-1691238f3bed.png">
+<img width="500" height ="320" alt="Screenshot 2023-03-27 at 2 56 27 PM" src="https://user-images.githubusercontent.com/85498185/227863633-f3b29447-34a7-47e3-ac7c-1691238f3bed.png">
 
 
 ### Select individual form
