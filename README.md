@@ -106,17 +106,21 @@
 
 #### Delete Forms from Workflow
 <ins>Steps to Delete Form from Workflow</ins><br>
-1. At <code>Admin_workflow_sequences.html</code>, click on the icon in the "Delete" column. 
-2. After clicking, it will delete the form from workflow.
+1. From <code>Admin_workflow.html</code>, Admin can either click on the table rows or the document icon in the "check sequence" column
+2. At <code>Admin_workflow_sequences.html</code>, click on the icon in the "Delete" column. 
+3. After clicking, it will delete the form from workflow.
 
 #### View Form
 <ins>Steps to View Form</ins><br>
-1. At <code>Admin_workflow_sequences.html</code>, click on the any table rows. 
-2. It will lead to <code>Admin_form_sequences2.html</code>, where it will show all the questions and answers from the fomr
-3. Admin CANNOT submit or edit form. If Admin would like to do so, they have to go to [click on this link](#admin-submit-forms)
+1. From <code>Admin_workflow.html</code>, Admin can either click on the table rows or the document icon in the "check sequence" column
+2. At <code>Admin_workflow_sequences.html</code>, click on the any table rows. 
+3. It will lead to <code>Admin_form_sequences2.html</code>, where it will show all the questions and answers from the fomr
+4. Admin CANNOT submit or edit form. If Admin would like to do so, they have to go to [click on this link](#admin-submit-forms)
 
 #### Export Form
 <ins>Steps to Export Form</ins><br>
+1. From <code>Admin_workflow.html</code>, Admin can either click on the table rows or the document icon in the "check sequence" column
+2. From <code>Admin_workflow_sequences.html</code>, click on the any table rows. 
 1. At <code>Admin_form_sequences2.html</code>, click on "EXPORT" button
 2. The form PDF will be automatically downloaded to the desktop
 <img width="500" alt="Screenshot 2023-03-27 at 4 07 33 PM" src="https://user-images.githubusercontent.com/85498185/227880137-d8ac5024-c366-4836-ab93-221fee2512e7.png">
