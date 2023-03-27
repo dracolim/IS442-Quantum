@@ -57,8 +57,8 @@
 #### Admin Submit Forms
 <ins>Steps to submit form<ins> <br>
 1. At <code>Admin_individual_pendingwf.html</code>, Admin can click on the table row to select the forms they want to view or submit
-2. After selecting, it will bring the Admins to <code>Admin_form_sequence.html</code> where it will display all the questions from that form
-3. Admin can now check the form as well as fill in the required questions (eg: Admin Evaluation) and submit form. <br>
+2. After selecting, it will bring the Admins to <code>Admin_form_sequence.html</code> where it will display all the questions and answers submitted from that form
+3. Admin can check the form as well as fill in the required questions (eg: Admin Evaluation) and submit form. <br>
 <img width="500" alt="Screenshot 2023-03-27 at 3 14 51 PM" src="https://user-images.githubusercontent.com/85498185/227867641-6b40c7d9-0b21-4afa-beab-8fa5d82dd7d9.png">
 
 ### Workflows Page
@@ -97,9 +97,6 @@
 1. At <code>Admin_workflow.html</code>, click on the icon in the "Delete" column. 
 2. After clicking, it will delete the workflow
 
-### Workflow Sequence Page
-<code>Admin_workflow_sequences.html</code>
-
 #### Assign New Forms to Workflow
 <ins>Steps to Assign New Forms to Workflow</ins><br>
 1. From <code>Admin_workflow.html</code>, Admin can either click on the table rows or the document icon in the "check sequence" column
@@ -117,9 +114,6 @@
 1. At <code>Admin_workflow_sequences.html</code>, click on the any table rows. 
 2. It will lead to <code>Admin_form_sequences2.html</code>, where it will show all the questions and answers from the fomr
 3. Admin CANNOT submit or edit form. If Admin would like to do so, they have to go to [click on this link](#admin-submit-forms)
-
-### Form Sequences 2 Page
-<code>Admin_form_sequences2.html</code>
 
 #### Export Form
 <ins>Steps to Export Form</ins><br>
