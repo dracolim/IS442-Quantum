@@ -21,9 +21,9 @@
  1. From <code>Vendor_workflow.html</code>, Vendors can either click on the table row or the icon in the forms column.
  2. After selecting, it will bring the vendors to <code>Vendor_form.html</code> where it will display all the forms that belongs to that particular workflow <br>
  3. **Form Status:** "COMPLETED" and "INCOMPLETE"
-    a. By Default, if Vendor have not submitted form, the staus will be "INCOMPLETE"
-    b. If Vendor Submits form, the status will be changed from "INCOMPLETE" to "COMPLETED"
-    c. If Admin requests Vendor to submit/update form again, the status will be changed to "INCOMPLETE"
+    * By Default, if Vendor have not submitted form, the staus will be "INCOMPLETE"
+    * If Vendor Submits form, the status will be changed from "INCOMPLETE" to "COMPLETED"
+    * If Admin requests Vendor to submit/update form again, the status will be changed to "INCOMPLETE"
 <img width="500" alt="Screenshot 2023-03-27 at 2 56 27 PM" src="https://user-images.githubusercontent.com/85498185/227863633-f3b29447-34a7-47e3-ac7c-1691238f3bed.png">
 
 
