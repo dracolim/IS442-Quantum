@@ -3,16 +3,18 @@
 ## Login Page
 <code>login_home.html</code>
 - Users can login to their respective accounts with their email and password. There are total 3 user types (Approver, Admin, Vendor).
-- This login page will idenitfy which users belongs to which user type, and bring them to their respective homepage.
-<img width="500" alt="Screenshot 2022-11-07 at 3 45 34 PM" src="https://user-images.githubusercontent.com/85498185/226831963-780d0e49-0cdd-4c74-bebc-4f1453796850.png">
+- This login page will idenitfy which users belongs to which user type, and bring them to their respective homepage. <br>
+<img width="500" alt="Screenshot 2023-03-27 at 2 41 29 PM" src="https://user-images.githubusercontent.com/85498185/227860749-a10d9b96-cd32-45f3-be2f-09d655c5e450.png">
+
 
 ## Vendor 
 ### Homepage
 <code>Vendor_workflow.html</code>
   - This is the Vendor's homepage
   - It displays all the pending workflows (workflows with status: IN PROGRESS) that requires Vendors to fill in the forms. 
-  - Vendors can either click on the table row or the icon in the forms column to go to the respective workflow page
-<img width="500" alt="Screenshot 2023-03-22 at 3 39 45 PM" src="https://user-images.githubusercontent.com/85498185/226833043-4b2ede44-e280-4d6b-bcb5-caf39c75f75c.png">
+  - Vendors can either click on the table row or the icon in the forms column to go to the respective workflow page <br>
+<img width="500" alt="Screenshot 2023-03-27 at 2 48 09 PM" src="https://user-images.githubusercontent.com/85498185/227862015-054d201e-2093-43e1-bfb1-6dab8bfc3141.png">
+
 
 ### Select individual workflow
 <ins>Steps to select individual workflow<ins> <br>
