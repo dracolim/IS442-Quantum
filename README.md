@@ -201,7 +201,7 @@
   * **Field Type**: Click on the dropdown and select the field types 
   * **Required**: Click on the dropdown and select the option (True: it is required; False: It is not required)
   * **Input Options**:
-      * "Edit Options" will only appear if the field types are either Radio or Checkbox
+      * "Edit Options" will only appear if the field types are either <ins>Radio<ins> or <ins>Checkbox<ins>
       * To Edit the Options:
         1. Click on the "Edit Options"; A pop up will be shown on the screen
         2. Select the Number of Input Options
