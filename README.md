@@ -6,7 +6,6 @@
 * This login page will idenitfy which users belongs to which user type, and bring them to their respective homepage. <br>
 <img width="500" alt="Screenshot 2023-03-27 at 2 41 29 PM" src="https://user-images.githubusercontent.com/85498185/227860749-a10d9b96-cd32-45f3-be2f-09d655c5e450.png">
 
-
 ## Vendor 
 ### Homepage
 <code>Vendor_workflow.html</code>
@@ -15,8 +14,7 @@
 * Vendors can either click on the table row or the icon in the forms column to go to the respective workflow page. <br>
 <img width="500" alt="Screenshot 2023-03-27 at 2 49 09 PM" src="https://user-images.githubusercontent.com/85498185/227862206-9779825d-acae-4d3e-8ff8-cb879d5599c2.png">
 
-
-### Select individual workflow
+#### Select individual workflow
 <ins>Steps to select individual workflow<ins> <br>
  1. From <code>Vendor_workflow.html</code>, Vendors can either click on the table row or the icon in the forms column.
  2. After selecting, it will bring the vendors to <code>Vendor_form.html</code> where it will display all the forms that belongs to that particular workflow <br>
@@ -26,14 +24,12 @@
     * If Admin requests Vendor to submit/update form again, the status will be changed to "INCOMPLETE"
 <img width="500" height ="320" alt="Screenshot 2023-03-27 at 2 56 27 PM" src="https://user-images.githubusercontent.com/85498185/227863633-f3b29447-34a7-47e3-ac7c-1691238f3bed.png">
 
-
-### Select individual form
+#### Select individual form
 <ins>Steps to select individual form<ins> <br>
  1. From <code>Vendor_workflow.html</code>, Vendors can either click on the table row or the icon in the forms column.
  2. After selecting, it will bring the vendors to <code>Vendor_form.html</code> where it will display all the forms that belongs to that particular workflow <br>
  3. From <code>Vendor_form.html</code>, select any forms that is displayed. It will lead to the <code>Vendor_form_sequence.html</code> where all the questions from the form will be shownn <br>
 <img width="500" alt="Screenshot 2023-03-27 at 2 57 19 PM" src="https://user-images.githubusercontent.com/85498185/227863829-a4dfc614-5c81-42c3-a13c-2b1159c6d747.png">
-
   
 ## Admin
 ### Homepage (Pending Workflows Page)
@@ -72,6 +68,29 @@
 * Admin can either check sequence, edit and delete workflows
 <img width="500" alt="Screenshot 2023-03-27 at 3 19 00 PM" src="https://user-images.githubusercontent.com/85498185/227868548-49eca8e8-92fc-4666-8699-7945e219a90b.png">
 
+#### Assign New Workflow 
+<ins>Steps to Assign New Workflow</ins><br>
+1. At <code>Admin_workflow.html</code>, click on "Assign new workflow" button. A pop up will be shown on the screen.
+2. Fill in the required details and submit
+3. Once submitted, the new workflow will be shown on the table.
+4. **Error Handling**:
+  * Scenario 1: Empty Inputs
+<img width="500" alt="Screenshot 2023-03-27 at 3 38 56 PM" src="https://user-images.githubusercontent.com/85498185/227873294-26aae6b5-6c21-41d5-8502-034d78a16032.png">
+
+
+#### Check Sequence 
+<ins>Steps to Check Workflow Sequence</ins><br>
+1. From <code>Admin_workflow.html</code>, Admin can either click on the table rows or the document icon in the "check sequence" column
+2. It will lead to <code>Admin_workflow_sequences.html</code>, where it will show all the forms and it's statuses that belongs to that workflow <br>
+3. At <code>Admin_workflow_sequences.html</code>, Admin can also 
+  * click on the table row to see the form with all the questions and input values 
+  * Delete form 
+<img width="500" alt="Screenshot 2023-03-27 at 3 32 52 PM" src="https://user-images.githubusercontent.com/85498185/227871805-731e95a4-2b6d-4073-b35f-de8a55b327cc.png">
+
+#### Edit Workflow 
+
+
+#### Delete Workflow
 
 
 
@@ -82,7 +101,7 @@
 * It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
 * An Admin can create an account of any 1 of the 3 types by clicking either "CREATE VENDOR ACCOUNT", "CREATE APPROVER ACCOUNT" or "CREATE ADMIN ACCOUNT".
 * An Admin can delete any existing accounts by clicking the delete button that is represented by a trash can icon.
-*  An Admin can update any existing accounts by clicking the update button that is represented by a paper & pen icon. <br>
+*  An Admin can update any existing accounts by clicking the update button that is represented by a document & pen icon. <br>
 <img width="500" alt="admin accounts page" src="https://user-images.githubusercontent.com/89073137/227719987-8377f9fe-bb4d-42a9-8e30-492aa51d4a0f.PNG">
 
 #### Creating an Account
@@ -97,7 +116,7 @@
 #### Updating an Account
 <ins>Steps to update an account<ins> <br>
 <ins>Example given is for updating Vendor account, but the steps apply to all 3 types of accounts<ins> <br>
-1. At <code>Admin_accounts.html</code>, under a particular account, Admins can click on the update button (represented by a paper & pen icon) associated to the account to update account information. <br>
+1. At <code>Admin_accounts.html</code>, under a particular account, Admins can click on the update button (represented by a document & pen icon) associated to the account to update account information. <br>
 2. After clicking, a modal will appear that will allow the Admin to edit the necessary details to update the account. <br>
 3. After filling in the information, the Admin can click on the blue Save button that's located at the bottom of the modal. <br>
 4. If no fields are left empty and all fields are valid, the account is now successfully updated. 
@@ -111,7 +130,7 @@
 * It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
 * An Approver can create an account of any 1 of the 3 types by clicking either "CREATE VENDOR ACCOUNT", "CREATE APPROVER ACCOUNT" or "CREATE ADMIN ACCOUNT".
 * An Approver can delete any existing accounts by clicking the delete button that is represented by a trash can icon.
-* An Approver can update any existing accounts by clicking the update button that is represented by a paper & pen icon. <br>
+* An Approver can update any existing accounts by clicking the update button that is represented by a document & pen icon. <br>
 <img width="500" alt="approver accounts page" src="https://user-images.githubusercontent.com/89073137/227721315-9edcf2d7-d687-4173-b3c3-d0ca6562cff2.PNG">
 
 #### Creating an Account
@@ -126,7 +145,7 @@
 #### Updating an Account
 <ins>Steps to update an account<ins> <br>
 <ins>Example given is for updating Vendor account, but the steps apply to all 3 types of accounts<ins> <br>
-1. At <code>Approver_accounts.html</code>, under a particular account, Approver can click on the update button (represented by a paper & pen icon) associated to the account to update account information. <br>
+1. At <code>Approver_accounts.html</code>, under a particular account, Approver can click on the update button (represented by a document & pen icon) associated to the account to update account information. <br>
 2. After clicking, a modal will appear that will allow the Approver to edit the necessary details to update the account. <br>
 3. After filling in the information, the Approver can click on the blue Save button that's located at the bottom of the modal. <br>
 4. If no fields are left empty and all fields are valid, the account is now successfully updated. 
