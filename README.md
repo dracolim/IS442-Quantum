@@ -54,7 +54,7 @@
 3. **Scenario 2:** if Admins selects "NOT APPROVED", the status (Status column) will change from "PENDING" to "REQUESTED" <br>
 <img width="500" style ="margin-left = 10px" alt="Screenshot 2023-03-22 at 4 15 14 PM" src="https://user-images.githubusercontent.com/85498185/226840328-b8fe5b11-1f30-4b35-b2d1-d2152cf4682c.png"> <br>
 
-#### Submit Forms
+#### Admin Submit Forms
 <ins>Steps to submit form<ins> <br>
 1. At <code>Admin_individual_pendingwf.html</code>, Admin can click on the table row to select the forms they want to view or submit
 2. After selecting, it will bring the Admins to <code>Admin_form_sequence.html</code> where it will display all the questions from that form
@@ -77,20 +77,51 @@
     * Scenario 1: Empty Inputs
 <img width="500" alt="Screenshot 2023-03-27 at 3 38 56 PM" src="https://user-images.githubusercontent.com/85498185/227873294-26aae6b5-6c21-41d5-8502-034d78a16032.png">
 
-
 #### Check Sequence 
 <ins>Steps to Check Workflow Sequence</ins><br>
 1. From <code>Admin_workflow.html</code>, Admin can either click on the table rows or the document icon in the "check sequence" column
 2. It will lead to <code>Admin_workflow_sequences.html</code>, where it will show all the forms and it's statuses that belongs to that workflow <br>
-3. At <code>Admin_workflow_sequences.html</code>, Admin can also 
-    * click on the table row to see the form with all the questions and input values 
-    * Delete form 
 <img width="500" alt="Screenshot 2023-03-27 at 3 32 52 PM" src="https://user-images.githubusercontent.com/85498185/227871805-731e95a4-2b6d-4073-b35f-de8a55b327cc.png">
 
 #### Edit Workflow 
-
+<ins>Steps to Edit Workflow</ins><br>
+1. At <code>Admin_workflow.html</code>, click on the icon in the "Edit" column. A pop up will be shown on the screen.
+2. Edit the required fields and submit 
+3. Once submitted, the workflow will be updated with the new details
+4. **Error Handling**:
+    * Scenario 1: Empty Inputs
+<img width="500" alt="Screenshot 2023-03-27 at 3 44 37 PM" src="https://user-images.githubusercontent.com/85498185/227874539-51851af3-650a-4930-958d-cecf6ae2202f.png">
 
 #### Delete Workflow
+<ins>Steps to Delete Workflow</ins><br>
+1. At <code>Admin_workflow.html</code>, click on the icon in the "Delete" column. 
+2. After clicking, it will delete the workflow
+
+<code>Admin_workflow_sequences.html</code>
+
+#### Assign New Forms to Workflow
+<ins>Steps to Assign New Forms to Workflow</ins><br>
+1. From <code>Admin_workflow.html</code>, Admin can either click on the table rows or the document icon in the "check sequence" column
+2. From <code>Admin_workflow_sequences.html</code>, click on "ASSIGN NEW FORMS" button, a pop up will be shown on the screen
+3. Select on the forms, and click "Submit" button. The forms will then be added to the workflow.
+<img width="500" alt="Screenshot 2023-03-27 at 3 50 52 PM" src="https://user-images.githubusercontent.com/85498185/227875948-715c1223-7b3f-450e-8f02-9324433c7fe4.png">
+
+#### Delete Forms from Workflow
+<ins>Steps to Delete Form from Workflow</ins><br>
+1. At <code>Admin_workflow_sequences.html</code>, click on the icon in the "Delete" column. 
+2. After clicking, it will delete the form from workflow.
+
+#### View Form
+<ins>Steps to View Form</ins><br>
+1. At <code>Admin_workflow_sequences.html</code>, click on the any table rows. 
+2. It will lead to <code>Admin_form_sequences2.html</code>, where it will show all the questions and answers from the fomr
+3. Admin CANNOT submit or edit form. If Admin would like to do so, they have to go to [click on this link](#admin-submit-forms)
+
+<code>Admin_form_sequences2.html</code>
+
+#### Export Form
+<ins>Steps to Export Form</ins><br>
+1. At <code>Admin_form_sequences2.html</code>, click on "EXPORT" button, at the ri
 
 
 
