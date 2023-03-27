@@ -199,6 +199,7 @@
 3. At <code>Admin_Individual_form.html</code>,
   * **Field Name**: Click on the Input from "FIELD NAME" column and edit accordingly
   * **Field Type**: Click on the dropdown and select the field types 
+  * **Required**: Click on the dropdown and select the option (True: it is required; False: It is not required)
   * **Input Options**:
       * "Edit Options" will only appear if the field types are either Radio or Checkbox
       * To Edit the Options:
@@ -208,9 +209,8 @@
         4. The options input will be shown; fill it in and click submit
         5. The new options will be shown in the "INPUT OPTIONS" column
         5. **Error Handling**: 
-          * Scenario 1: Input cannot be empty
-          * Scenario 2: Input cannot be the same 
-  * **Required**: Click on the dropdown and select the option (True: it is required; False: It is not required)
+            * Scenario 1: Input cannot be empty
+            * Scenario 2: Input cannot be the same 
 <img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png">
 
 #### Delete Field
@@ -226,13 +226,12 @@
 3. At <code>Admin_Individual_form.html</code>, click on "CREATE NEW FIELDS" button. A pop up will be shown
 4. Admin can either add the new field to a existing section or to a new section.
     * If Admin wants to add new field to the new section, click on "Add New Sections" button. A New Section ID will automatically be assigned, and the Section Title and Description will be shown for Admin to fill in
-    <img width="500" alt="Screenshot 2023-03-27 at 5 06 10 PM" src="https://user-images.githubusercontent.com/85498185/227895611-05ffb825-e388-4829-8559-345a6d548129.png">
+    <img width="500" alt="Screenshot 2023-03-27 at 5 06 10 PM" src="https://user-images.githubusercontent.com/85498185/227895611-05ffb825-e388-4829-8559-345a6d548129.png"> <br>
     * If Admin wants to add new field to an existing section, click on "Add Existing Sections"
-    <img width="500" alt="Screenshot 2023-03-27 at 5 07 13 PM" src="https://user-images.githubusercontent.com/85498185/227895896-d53d475f-c42c-4394-a6ed-5523e171727a.png">
+    <img width="500" alt="Screenshot 2023-03-27 at 5 07 13 PM" src="https://user-images.githubusercontent.com/85498185/227895896-d53d475f-c42c-4394-a6ed-5523e171727a.png"> <br>
     * However, if there is no existing sections, the "Add to Existing Sections" button will be disabled.
 5. **Error Handling**: 
     * Scenario 1: Input cannot be empty
-<img width="500" alt="Screenshot 2023-03-27 at 5 03 21 PM" src="https://user-images.githubusercontent.com/85498185/227894801-02b242bd-c00f-4b5a-9563-655d6ef0df0c.png">
 
 #### View Form Format
 <ins>Steps to View Form Format<ins><br>
