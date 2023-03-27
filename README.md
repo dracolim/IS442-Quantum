@@ -2,17 +2,17 @@
 
 ## Login Page
 <code>login_home.html</code>
-- Users can login to their respective accounts with their email and password. There are total 3 user types (Approver, Admin, Vendor).
-- This login page will idenitfy which users belongs to which user type, and bring them to their respective homepage. <br>
+* Users can login to their respective accounts with their email and password. There are total 3 user types (Approver, Admin, Vendor).
+* This login page will idenitfy which users belongs to which user type, and bring them to their respective homepage. <br>
 <img width="500" alt="Screenshot 2023-03-27 at 2 41 29 PM" src="https://user-images.githubusercontent.com/85498185/227860749-a10d9b96-cd32-45f3-be2f-09d655c5e450.png">
 
 
 ## Vendor 
 ### Homepage
 <code>Vendor_workflow.html</code>
-  - This is the Vendor's homepage
-  - It displays all the pending workflows (workflows with status: IN PROGRESS) that requires Vendors to fill in the forms. 
-  - Vendors can either click on the table row or the icon in the forms column to go to the respective workflow page. <br>
+* This is the Vendor's homepage
+* It displays all the pending workflows (workflows with status: IN PROGRESS) that requires Vendors to fill in the forms. 
+* Vendors can either click on the table row or the icon in the forms column to go to the respective workflow page. <br>
 <img width="500" alt="Screenshot 2023-03-27 at 2 49 09 PM" src="https://user-images.githubusercontent.com/85498185/227862206-9779825d-acae-4d3e-8ff8-cb879d5599c2.png">
 
 
@@ -38,16 +38,16 @@
 ## Admin
 ### Homepage
 <code>Admin_home.html</code>
-  - This is the Admin's homepage
-  - It displays all the pending workflows (workflow with status: IN PROGRESS) that requires the Admins to validate the form after Vendors have submitted the form 
-  - Admins can click on the table row to go to the respective pending workflows page <code>Admin_individual_pendingwf.html</code>
-<img width="500" alt="Screenshot 2023-03-22 at 3 59 43 PM" src="https://user-images.githubusercontent.com/85498185/226837019-2c93739d-0aa8-440e-bd03-580274e29048.png">
+* This is the Admin's homepage
+* It displays all the pending workflows (workflow with status: IN PROGRESS) that requires the Admins to validate the form after Vendors have submitted the form 
+* Admins can click on the table row to go to the respective pending workflows page <code>Admin_individual_pendingwf.html</code> <br>
+<img width="500" alt="Screenshot 2023-03-27 at 3 04 45 PM" src="https://user-images.githubusercontent.com/85498185/227865390-993ffda1-6b2f-48ba-b5a1-fad8544872fd.png">
 
 ### Select individual pending workflow & Validate the forms
 <ins>Steps to select individual workflow<ins> <br>
 1. From <code>Admin_home.html</code>, Admins can click on the table row
 2. After selecting, it will bring the Admins to <code>Admin_individual_pendingwf.html</code> where it will display all the forms that belong to that pending workflow <br>
-<img width="500" alt="Screenshot 2023-03-22 at 4 11 49 PM" src="https://user-images.githubusercontent.com/85498185/226839542-5fa05a22-7d8d-4095-b3f6-83d5ed761da7.png"><br>
+<img width="500" alt="Screenshot 2023-03-27 at 3 07 43 PM" src="https://user-images.githubusercontent.com/85498185/227866026-3068f666-c4ac-446e-8155-0781b12b62a2.png">
   
 <ins>Steps to validate form<ins> <br>
 1. At <code>Admin_individual_pendingwf.html</code>, Admins can select "APPROVED" or "NOT APPROVED" from the dropdown menu in the Approval column. <br>
@@ -59,12 +59,12 @@
 
 ### Accounts Page
 <code>Admin_accounts.html</code>
-  - This is the Admin's view of the accounts page
-  - It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
-  - An Admin can create an account of any 1 of the 3 types by clicking either "CREATE VENDOR ACCOUNT", "CREATE APPROVER ACCOUNT" or "CREATE ADMIN ACCOUNT".
-  - An Admin can delete any existing accounts by clicking the delete button that is represented by a trash can icon.
-  - An Admin can update any existing accounts by clicking the update button that is represented by a paper & pen icon.
-  <img width="500" alt="admin accounts page" src="https://user-images.githubusercontent.com/89073137/227719987-8377f9fe-bb4d-42a9-8e30-492aa51d4a0f.PNG">
+* This is the Admin's view of the accounts page
+* It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
+* An Admin can create an account of any 1 of the 3 types by clicking either "CREATE VENDOR ACCOUNT", "CREATE APPROVER ACCOUNT" or "CREATE ADMIN ACCOUNT".
+* An Admin can delete any existing accounts by clicking the delete button that is represented by a trash can icon.
+*  An Admin can update any existing accounts by clicking the update button that is represented by a paper & pen icon. <br>
+<img width="500" alt="admin accounts page" src="https://user-images.githubusercontent.com/89073137/227719987-8377f9fe-bb4d-42a9-8e30-492aa51d4a0f.PNG">
 
 ### Creating an Account
 <ins>Steps to create a vendor account<ins> <br>
@@ -88,12 +88,12 @@
 ## Approver
 ### Accounts Page
 <code>Approver_accounts.html</code>
-  - This is the Approver's view of the accounts page
-  - It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
-  - An Approver can create an account of any 1 of the 3 types by clicking either "CREATE VENDOR ACCOUNT", "CREATE APPROVER ACCOUNT" or "CREATE ADMIN ACCOUNT".
-  - An Approver can delete any existing accounts by clicking the delete button that is represented by a trash can icon.
-  - An Approver can update any existing accounts by clicking the update button that is represented by a paper & pen icon.
-  <img width="500" alt="approver accounts page" src="https://user-images.githubusercontent.com/89073137/227721315-9edcf2d7-d687-4173-b3c3-d0ca6562cff2.PNG">
+* This is the Approver's view of the accounts page
+* It displays all the accounts of all 3 types (Admin, Approver & Vendor) registered in the system.
+* An Approver can create an account of any 1 of the 3 types by clicking either "CREATE VENDOR ACCOUNT", "CREATE APPROVER ACCOUNT" or "CREATE ADMIN ACCOUNT".
+* An Approver can delete any existing accounts by clicking the delete button that is represented by a trash can icon.
+* An Approver can update any existing accounts by clicking the update button that is represented by a paper & pen icon. <br>
+<img width="500" alt="approver accounts page" src="https://user-images.githubusercontent.com/89073137/227721315-9edcf2d7-d687-4173-b3c3-d0ca6562cff2.PNG">
 
 ### Creating an Account
 <ins>Steps to create a vendor account<ins> <br>
