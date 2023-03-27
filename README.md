@@ -263,6 +263,12 @@
 4. It will lead to <code>Admin_overview_form.html</code>, where Admin can get an overview of how the form will look like
 <img width="500" alt="Screenshot 2023-03-27 at 5 10 38 PM" src="https://user-images.githubusercontent.com/85498185/227896652-bcec39b7-51ef-41e0-9a24-b646bc09a9f2.png">
 
+#### (EXTRA) Adjust Table Column Size
+<ins>Steps to Adjust Table Column Size<ins><br>
+1. At <code>Admin_Individual_form.html</code>, click and drag the lines in between the columns (applicable for table header and row 1)
+2. Once it is dragged, the table column will change its size accordingly
+<img width="500" alt="Screenshot 2023-03-27 at 6 10 38 PM" src="https://user-images.githubusercontent.com/85498185/227912594-1b4ba8eb-5f42-48a9-9a23-4422c46dadca.png">
+
 ## Approver
 ### Homepage (Validated Workflows Tab)
 <code>Approver_home.html</code>
@@ -478,3 +484,8 @@
 4. It will lead to <code>Approver_overview_form.html</code>, where Approver can get an overview of how the form will look like
 <img width="500" alt="Screenshot 2023-03-27 at 5 10 38 PM" src="https://user-images.githubusercontent.com/85498185/227896652-bcec39b7-51ef-41e0-9a24-b646bc09a9f2.png">
 
+#### (EXTRA) Adjust Table Column Size
+<ins>Steps to Adjust Table Column Size<ins><br>
+1. At <code>Admin_Individual_form.html</code>, click and drag the lines in between the columns (applicable for table header and row 1)
+2. Once it is dragged, the table column will change its size accordingly
+<img width="500" alt="Screenshot 2023-03-27 at 6 10 38 PM" src="https://user-images.githubusercontent.com/85498185/227912594-1b4ba8eb-5f42-48a9-9a23-4422c46dadca.png">
