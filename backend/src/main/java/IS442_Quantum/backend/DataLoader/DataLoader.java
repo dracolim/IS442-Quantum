@@ -132,7 +132,7 @@ public class DataLoader implements ApplicationRunner {
         q7.addList(new QuestionProperty("Others"));
 
         Question q7a = new Question();
-        q7a.setInputLabel("Nature of Business (others)");
+        q7a.setInputLabel("(Others) Nature of Business ");
         q7a.setInputType("text");
         q7a.setIsRequired(false);
 
