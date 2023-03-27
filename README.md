@@ -74,7 +74,7 @@
 2. Fill in the required details and submit
 3. Once submitted, the new workflow will be shown on the table.
 4. **Error Handling**:
-  * Scenario 1: Empty Inputs
+    * Scenario 1: Empty Inputs
 <img width="500" alt="Screenshot 2023-03-27 at 3 38 56 PM" src="https://user-images.githubusercontent.com/85498185/227873294-26aae6b5-6c21-41d5-8502-034d78a16032.png">
 
 
@@ -83,8 +83,8 @@
 1. From <code>Admin_workflow.html</code>, Admin can either click on the table rows or the document icon in the "check sequence" column
 2. It will lead to <code>Admin_workflow_sequences.html</code>, where it will show all the forms and it's statuses that belongs to that workflow <br>
 3. At <code>Admin_workflow_sequences.html</code>, Admin can also 
-  * click on the table row to see the form with all the questions and input values 
-  * Delete form 
+    * click on the table row to see the form with all the questions and input values 
+    * Delete form 
 <img width="500" alt="Screenshot 2023-03-27 at 3 32 52 PM" src="https://user-images.githubusercontent.com/85498185/227871805-731e95a4-2b6d-4073-b35f-de8a55b327cc.png">
 
 #### Edit Workflow 
