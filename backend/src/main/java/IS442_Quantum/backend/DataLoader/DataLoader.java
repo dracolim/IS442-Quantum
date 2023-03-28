@@ -909,7 +909,7 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void add1To5Checkbox(Question q) {
-        q.setInputType("Checkbox");
+        q.setInputType("Radio");
         q.addList(new QuestionProperty("1 Poor"));
         q.addList(new QuestionProperty("2 Below Average"));
         q.addList(new QuestionProperty("3 Average"));
