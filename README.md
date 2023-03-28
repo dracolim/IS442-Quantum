@@ -233,7 +233,7 @@
         5. **Error Handling**: 
             * Scenario 1: Input cannot be empty
             * Scenario 2: Input cannot be the same 
-        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) __[Field Name]___ " question and added to the section that belongs to that question.
+        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) ____[Field Name]___ " question and added to the section that belongs to that question.
 <img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png">
 
 #### Delete Field
@@ -455,7 +455,7 @@
         5. **Error Handling**: 
             * Scenario 1: Input cannot be empty
             * Scenario 2: Input cannot be the same 
-        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) __[Field Name]___ " question and added to the section that belongs to that question.
+        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) ____[Field Name]___ " question and added to the section that belongs to that question.
 <img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png">
 
 #### Delete Field
