@@ -233,6 +233,7 @@
         5. **Error Handling**: 
             * Scenario 1: Input cannot be empty
             * Scenario 2: Input cannot be the same 
+        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) __[Field Name]___ " question and added to the section that belongs to that question.
 <img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png">
 
 #### Delete Field
@@ -454,6 +455,7 @@
         5. **Error Handling**: 
             * Scenario 1: Input cannot be empty
             * Scenario 2: Input cannot be the same 
+        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) __[Field Name]___ " question and added to the section that belongs to that question.
 <img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png">
 
 #### Delete Field
@@ -486,6 +488,6 @@
 
 #### (EXTRA) Adjust Table Column Size
 <ins>Steps to Adjust Table Column Size<ins><br>
-1. At <code>Admin_Individual_form.html</code>, click and drag the lines in between the columns (applicable for table header and row 1 only)
+1. At <code>Approver_Individual_form.html</code>, click and drag the lines in between the columns (applicable for table header and row 1 only)
 2. Once it is dragged, the table column will change its size accordingly
 <img width="500" alt="Screenshot 2023-03-27 at 6 10 38 PM" src="https://user-images.githubusercontent.com/85498185/227912594-1b4ba8eb-5f42-48a9-9a23-4422c46dadca.png">
