@@ -801,7 +801,7 @@ public class DataLoader implements ApplicationRunner {
         // ------------------------------- Create Vendors -------------------------------
         Vendor vendor1 = new Vendor();
         vendor1.setUserName("Vendor1");
-        vendor1.setEmailAddress("lancelimzuyong9@gmail.com");
+        vendor1.setEmailAddress("dracomalfoycl8@gmail.com");
         vendor1.setPassword("123456");
         vendor1.setCompanyName("Vendor1 Company");
         vendor1.setOfficeAddress("Vendor1 Office Address");
@@ -839,7 +839,7 @@ public class DataLoader implements ApplicationRunner {
         // ------------------------------- Create Admins ------------------------------
         Admin admin1 = new Admin();
         admin1.setUserName("Admin1");
-        admin1.setEmailAddress("lancelimzuyong9@gmail.com");
+        admin1.setEmailAddress("wejustclimb@gmail.com");
         admin1.setPassword("123456");
 
         Admin admin2 = new Admin();

@@ -481,6 +481,18 @@
             },
             submitForm() {
                 this.error = false;
+                // SIGNATURE 
+                console.log(this.signaturePad)
+                for (i in this.signaturePad) {
+                    var question_id = i
+                    var signature_pad = this.signaturePad[i]
+                    var data = signature_pad.toDataURL('image/png');
+                    var base64_extra = data.replace(/^data:image\/?[A-z]*;base64,/);
+                    var base64 = base64_extra.slice(9, );
+
+                    this.allAnswers[i] = base64
+                }
+                
                 // CHECK FOR ERROR MESSAGE
                 console.log(this.allAnswers);
                 for (i in this.allAnswers) {
@@ -502,17 +514,6 @@
                     this.$forceUpdate()
                     alert("Form cannot have Empty Fields");
                 } else {
-                // SIGNATURE 
-                console.log(this.signaturePad)
-                for (i in this.signaturePad) {
-                    var question_id = i
-                    var signature_pad = this.signaturePad[i]
-                    var data = signature_pad.toDataURL('image/png');
-                    var base64_extra = data.replace(/^data:image\/?[A-z]*;base64,/);
-                    var base64 = base64_extra.slice(9, );
-
-                    this.allAnswers[i] = base64
-                }
 
                 // CHECKBOX
                 var checkboxID = {}
