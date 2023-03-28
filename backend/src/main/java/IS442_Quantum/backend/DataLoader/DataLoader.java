@@ -83,6 +83,11 @@ public class DataLoader implements ApplicationRunner {
         entityManager.createNativeQuery(resetFormSequenceRepositoryQuery).executeUpdate();
         entityManager.createNativeQuery(resetWorkFlowRepositoryQuery).executeUpdate();
         entityManager.createNativeQuery(resetQuestionPropertyQuery).executeUpdate();
+
+
+
+
+
         // ------------------------ New Vendor Assessment Form --------------------------
 
         // add questions
@@ -230,6 +235,9 @@ public class DataLoader implements ApplicationRunner {
         );
 
         formRepository.save(newVendorAssessmentForm);
+
+
+
 
         // --------- Subcontractor's Safety & Health pre-evaluation -------------
 
@@ -442,6 +450,354 @@ public class DataLoader implements ApplicationRunner {
 
         formRepository.save(subcontractorSafetyHealthEvaluationForm);
 
+        // -------------- f05
+
+        Form form_f05 = new Form();
+        form_f05.setFormName("Subcontractor's Safety & Health Pre-Evaluation");
+
+        form_f05.setDateSubmitted(formDate);
+        form_f05.setLastEdited(formDate);
+
+        Question f5q1 = new Question();
+        f5q1.setInputLabel("Name of Subcontractor");
+        f5q1.setInputType("text");
+        f5q1.setIsRequired(true);
+
+        Question f5q2 = new Question();
+        f5q2.setInputLabel("Trade");
+        f5q2.setInputType("text");
+        f5q2.setIsRequired(true);
+
+        Question f5q3 = new Question();
+        f5q3.setInputLabel("Project / Worksite");
+        f5q3.setInputType("text");
+        f5q3.setIsRequired(true);
+
+        Question f5q4 = new Question();
+        f5q4.setInputLabel("Date of Evaluation");
+        f5q4.setInputType("Date");
+
+        // section on general information
+        Question[] f5section1 = {f5q1,f5q2,f5q3,f5q4};
+
+        setupSection(
+                "General Information",
+                "",
+                form_f05,
+                f5section1,
+                UserTypes.VENDOR
+        );
+
+        formRepository.save(form_f05);
+
+        // Participation in safety
+
+        Question f5q5 = new Question();
+        f5q5.setInputLabel("Attendance in Safety Meeting");
+        add1To5Checkbox(f5q5);
+        f5q5.setIsRequired(true);
+
+        Question f5q6 = new Question();
+        f5q6.setInputLabel("Toolbox Meeting");
+        add1To5Checkbox(f5q6);
+        f5q6.setIsRequired(true);
+
+        Question f5q7 = new Question();
+        f5q7.setInputLabel("Compliance to Rules & Regulation");
+        add1To5Checkbox(f5q7);
+        f5q7.setIsRequired(true);
+
+        Question f5q8 = new Question();
+        f5q8.setInputLabel("Safety Promotional Activities");
+        add1To5Checkbox(f5q8);
+        f5q8.setIsRequired(true);
+
+        Question f5q9 = new Question();
+        f5q9.setInputLabel("Document Submission");
+        add1To5Checkbox(f5q9);
+        f5q9.setIsRequired(true);
+
+        Question f5q10 = new Question();
+        f5q10.setInputLabel("Participation Safety Score");
+        f5q10.setInputType("number");
+        f5q10.setIsRequired(true);
+
+        Question[] f5section2 = {f5q5,f5q6,f5q7,f5q8,f5q9,f5q10};
+
+        setupSection(
+                "Part I: Participation In Safety",
+                "Participation In Safety",
+                form_f05,
+                f5section2,
+                UserTypes.VENDOR
+        );
+
+        formRepository.save(form_f05);
+
+        // Part II: safety training and competencies
+        Question f5q11 = new Question();
+        f5q11.setInputLabel("Statutory Safety Training Course");
+        add1To5Checkbox(f5q11);
+        f5q11.setIsRequired(true);
+
+        Question f5q12 = new Question();
+        f5q12.setInputLabel("Safety trade Course");
+        add1To5Checkbox(f5q12);
+        f5q12.setIsRequired(true);
+
+        Question f5q13 = new Question();
+        f5q13.setInputLabel("Mass Safety Walk");
+        add1To5Checkbox(f5q13);
+        f5q13.setIsRequired(true);
+
+        Question f5q14 = new Question();
+        f5q14.setInputLabel("WSH Safety Coordinator / Supervisor");
+        add1To5Checkbox(f5q14);
+        f5q14.setIsRequired(true);
+
+        Question f5q15 = new Question();
+        f5q15.setInputLabel("Other Safety Training");
+        add1To5Checkbox(f5q15);
+        f5q15.setIsRequired(true);
+
+        Question f5q16 = new Question();
+        f5q16.setInputLabel("Safety Training and Competencies Score");
+        f5q16.setInputType("number");
+        f5q16.setIsRequired(true);
+
+        Question[] f5section3 = {f5q11,f5q12,f5q13,f5q14,f5q15,f5q16};
+
+        setupSection(
+                "Part II: Safety Training and Competencies (Percentage of Attendance)",
+                "Safety Training and Competencies",
+                form_f05,
+                f5section3,
+                UserTypes.VENDOR
+        );
+
+        formRepository.save(form_f05);
+
+
+        // Part III: Accident / Incident Preview
+
+        Question f5q17 = new Question();
+        f5q17.setInputLabel("Effort in Accident Prevention");
+        add1To5Checkbox(f5q17);
+        f5q17.setIsRequired(true);
+
+        Question f5q18 = new Question();
+        f5q18.setInputLabel("Safety Work Practice / Permit to Work");
+        add1To5Checkbox(f5q18);
+        f5q18.setIsRequired(true);
+
+        Question f5q19 = new Question();
+        f5q19.setInputLabel("Incident Severity & Frequency Rate");
+        add1To5Checkbox(f5q19);
+        f5q19.setIsRequired(true);
+
+        Question f5q20 = new Question();
+        f5q20.setInputLabel("Safety Offence");
+        add1To5Checkbox(f5q20);
+        f5q20.setIsRequired(true);
+
+        Question f5q21 = new Question();
+        f5q21.setInputLabel("Safety Inspection And Rectification");
+        add1To5Checkbox(f5q21);
+        f5q21.setIsRequired(true);
+
+        Question f5q22 = new Question();
+        f5q22.setInputLabel("Accident / Incident Preview Score");
+        f5q22.setInputType("number");
+        f5q22.setIsRequired(true);
+
+        Question[] f5section4 = {f5q17,f5q18,f5q19,f5q20,f5q21,f5q22};
+
+        setupSection(
+                "Part III: Accident / Incident Preview",
+                "Accident / Incident Preview",
+                form_f05,
+                f5section4,
+                UserTypes.VENDOR
+        );
+
+        formRepository.save(form_f05);
+
+        // Part IV: Maintenance of Equipment
+        Question f5q23 = new Question();
+        f5q23.setInputLabel("Explosive Powered Tool / Cutting Tool");
+        add1To5Checkbox(f5q23);
+        f5q23.setIsRequired(true);
+
+        Question f5q24 = new Question();
+        f5q24.setInputLabel("Ladder");
+        add1To5Checkbox(f5q24);
+        f5q24.setIsRequired(true);
+
+        Question f5q25 = new Question();
+        f5q25.setInputLabel("Lifting Gear / Appliance / Machine");
+        add1To5Checkbox(f5q25);
+        f5q25.setIsRequired(true);
+
+        Question f5q26 = new Question();
+        f5q26.setInputLabel("Electrical Equipment / Compressor");
+        add1To5Checkbox(f5q26);
+        f5q26.setIsRequired(true);
+
+        Question f5q27 = new Question();
+        f5q27.setInputLabel("Other Machineries");
+        add1To5Checkbox(f5q27);
+        f5q27.setIsRequired(true);
+
+        Question f5q28 = new Question();
+        f5q28.setInputLabel("Maintenance of Equipment Score");
+        f5q28.setInputType("number");
+        f5q28.setIsRequired(true);
+
+        Question[] f5section5 = {f5q23,f5q24,f5q25,f5q26,f5q27,f5q28};
+
+        setupSection(
+                "Part IV: Maintenance of Equipment",
+                "Maintenance of Equipment",
+                form_f05,
+                f5section5,
+                UserTypes.VENDOR
+        );
+
+        formRepository.save(form_f05);
+
+        // Part V: General Housekeeping and Others
+        Question f5q29 = new Question();
+        f5q29.setInputLabel("Subcon Snr. Mgmt Commitment to HS");
+        add1To5Checkbox(f5q29);
+        f5q29.setIsRequired(true);
+
+        Question f5q30 = new Question();
+        f5q30.setInputLabel("Compliance with PPE");
+        add1To5Checkbox(f5q30);
+        f5q30.setIsRequired(true);
+
+        Question f5q31 = new Question();
+        f5q31.setInputLabel("Housekeeping & Cleanliness at Site");
+        add1To5Checkbox(f5q31);
+        f5q31.setIsRequired(true);
+
+        Question f5q32 = new Question();
+        f5q32.setInputLabel("Housekeeping & Cleanliness at Store");
+        add1To5Checkbox(f5q32);
+        f5q32.setIsRequired(true);
+
+        Question f5q33 = new Question();
+        f5q33.setInputLabel("Housekeeping & Cleanliness at Quarter");
+        add1To5Checkbox(f5q33);
+        f5q33.setIsRequired(true);
+
+        Question f5q34 = new Question();
+        f5q34.setInputLabel("General Housekeeping and Others Score");
+        f5q34.setInputType("number");
+        f5q34.setIsRequired(true);
+
+        Question[] f5section6 = {f5q29,f5q30,f5q31,f5q32,f5q33,f5q34};
+
+        setupSection(
+                "Part V: General Housekeeping and Others",
+                "General Housekeeping and Others",
+                form_f05,
+                f5section6,
+                UserTypes.VENDOR
+        );
+
+        formRepository.save(form_f05);
+
+
+        // Total Score
+        Question f5q35 = new Question();
+        f5q35.setInputLabel("Total Score");
+        f5q35.setInputType("number");
+        f5q35.setIsRequired(true);
+
+        // overall performance standard
+        Question f5q36 = new Question();
+        addPerformanceStandard(f5q36);
+        f5q36.setIsRequired(true);
+
+        // comments
+        Question f5q37 = new Question();
+        f5q37.setInputLabel("Comments");
+        f5q37.setInputType("text");
+
+        Question[] f5section7 = {f5q35,f5q36,f5q37};
+
+        setupSection(
+                "Total Score",
+                "Total Score",
+                form_f05,
+                f5section7,
+                UserTypes.VENDOR
+        );
+
+        formRepository.save(form_f05);
+
+        // Evaluation by Admin
+
+        Question safetyCoordinatorName = new Question();
+        safetyCoordinatorName.setInputLabel("Safety Coordinator");
+        safetyCoordinatorName.setInputType("text");
+        safetyCoordinatorName.setIsRequired(true);
+
+        Question safetyCoordinatorSignature = new Question();
+        safetyCoordinatorSignature.setInputLabel("Safety Coordinator Signature");
+        safetyCoordinatorSignature.setInputType("signature");
+        safetyCoordinatorName.setIsRequired(true);
+
+        Question safetyCoordinatorDate = new Question();
+        safetyCoordinatorDate.setInputLabel("Safety Coordinator Date");
+        safetyCoordinatorDate.setInputType("Date");
+        safetyCoordinatorName.setIsRequired(true);
+
+        Question[] evaluatorSection = {safetyCoordinatorName,safetyCoordinatorSignature,safetyCoordinatorDate};
+
+        setupSection(
+                "Evaluation by Admin",
+                "Evaluation by Admin",
+                form_f05,
+                evaluatorSection,
+                UserTypes.ADMIN
+        );
+
+        formRepository.save(form_f05);
+
+        // Evaluation by Approver
+
+        Question directorName = new Question();
+        directorName.setInputLabel("Director Name");
+        directorName.setInputType("text");
+        directorName.setIsRequired(true);
+
+        Question directorSignature = new Question();
+        directorSignature.setInputLabel("Director Signature");
+        directorSignature.setInputType("signature");
+        directorSignature.setIsRequired(true);
+
+        Question directorDate = new Question();
+        directorDate.setInputLabel("Director Date");
+        directorDate.setInputType("Date");
+        directorDate.setIsRequired(true);
+
+        Question[] approverSection = {directorName,directorSignature,directorDate};
+
+        setupSection(
+                "Evaluation by Approver",
+                "Evaluation by Approver",
+                form_f05,
+                approverSection,
+                UserTypes.APPROVER
+        );
+
+        formRepository.save(form_f05);
+
+
+
+
         // ------------------------------- Create Vendors -------------------------------
         Vendor vendor1 = new Vendor();
         vendor1.setUserName("Vendor1");
@@ -550,6 +906,24 @@ public class DataLoader implements ApplicationRunner {
         q.addList(new QuestionProperty(("Yes")));
         q.addList(new QuestionProperty(("No")));
 
+    }
+
+    public void add1To5Checkbox(Question q) {
+        q.setInputType("Checkbox");
+        q.addList(new QuestionProperty("1 Poor"));
+        q.addList(new QuestionProperty("2 Below Average"));
+        q.addList(new QuestionProperty("3 Average"));
+        q.addList(new QuestionProperty("4 Above Average"));
+        q.addList(new QuestionProperty("5 Good"));
+    }
+
+    public void addPerformanceStandard(Question q) {
+        q.setInputType("Radio");
+        q.addList(new QuestionProperty("Poor"));
+        q.addList(new QuestionProperty("Below Average"));
+        q.addList(new QuestionProperty("Average"));
+        q.addList(new QuestionProperty("Above Average"));
+        q.addList(new QuestionProperty("Good"));
     }
 
     public void setupSection(String title, String description, Form form, Question[] questions, UserTypes usertype){
