@@ -131,11 +131,11 @@ public class WorkFlowService {
         // Not Started to Pending: Vendor to Admin
         } else if (currStatus == FormSequenceStatus.REQUESTED && newStatus == FormSequenceStatus.PENDING){
 
-            System.out.println("Not Started to Pending: Vendor to Admin email triggered");
+            System.out.println("Requested to Pending: Vendor to Admin email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "New Form Submission from " + email;
-            String emailBody = "You have a new form submission from " + companyName + " for the following Form: " + formName;
+            String emailBody = "Dear Admin,\n\nYou have a new form submission from " + companyName + " for the following Form:\n" + formName+ "\n\nPlease login to the system to review the form.\n\nRegards,\nQuantum Leap Vendor Management System";
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -146,7 +146,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form requires attention [" + formName + "]";
-            String emailBody = "Dear " + companyName + ",\n\nThe following form requires attention: \n" + formName + " Kindly update the information and resubmit \n\nRegards,\nQuantum Leap Incorporation Admin";
+            String emailBody = "Dear " + companyName + ",\n\nThe following form requires attention:\n" + formName + "\n\nKindly update the information and resubmit.\n\nThank you for your kind understanding.\n\nRegards,\nQuantum Leap Vendor Management System";
 
             emailNotificationService.sendEmail(email, emailSubject , emailBody);
 
@@ -157,7 +157,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form updated [" + formName + "]";
-            String emailBody = "Dear Admin, \n\nThe following form has been updated: \n" + formName + " Kindly review the information and mark as validated/requested\n\nRegards,\nQuantum Leap Incorporation Admin";
+            String emailBody = "Dear Admin, \n\nThe following form has been updated: \n" + formName + "\n\nKindly review the information and mark as validated/requested\n\nRegards,\nQuantum Leap Vendor Management System";
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -167,8 +167,8 @@ public class WorkFlowService {
             System.out.println("Pending to Validated: Admin to Approver email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getApprover().getEmailAddress();
-            String emailSubject = "Form validated [" + formName + "] please approve/reject";
-            String emailBody = "Dear approver,\n\nPlease approve/reject the following form:\n" + workflow.getWfName() + "\n\nWorkflow:\n" + workflow.getWfName() + "\n\nRegards,\nQuantum Leap Incorporation Admin" ;
+            String emailSubject = "Form validated [" + formName + "] please approve/reject the form in the application.";
+            String emailBody = "Dear Approver,\n\nPlease approve/reject the following form:\n" + workflow.getWfName() + "\n\nWorkflow:\n" + workflow.getWfName() + "\n\nRegards,\nQuantum Leap Vendor Management System" ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -179,7 +179,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "Form rejected [" + formName + "]";
-            String emailBody = "The following form has been rejected by approver:\n " + formName + "\n\n Workflow:\n" + workflow.getWfName() ;
+            String emailBody = "Dear Admin,\n\nThe following form has been rejected by approver:\n" + formName + "\n\n Workflow:\n" + workflow.getWfName() + "\n\nRegards,\nQuantum Leap Vendor Management System";
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -190,7 +190,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "Form approved [" + formName + "]";
-            String emailBody = "Dear Admin, \n\nThe following form has been approved by approver:\n" + formName + "\n\n Workflow:\n" + workflow.getWfName() ;
+            String emailBody = "Dear Admin,\n\nThe following form has been approved by approver:\n" + formName + "\n\n Workflow:\n" + workflow.getWfName()+ "\n\nRegards,\nQuantum Leap Vendor Management System";
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -201,7 +201,7 @@ public class WorkFlowService {
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form deleted [" + formName + "]";
-            String emailBody = "The following form has been deleted: \n" + formName + "\n\n Workflow:\n" + workflow.getWfName();
+            String emailBody = "Dear " + companyName + ",\n\nThe following form has been deleted: \n" + formName + "\n\nWorkflow:\n" + workflow.getWfName() + "\n\nRegards,\nQuantum Leap Vendor Management System";
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -211,7 +211,7 @@ public class WorkFlowService {
             System.out.println("New vendor email triggered");
             formSequence.setStatus(FormSequenceStatus.REQUESTED);
             String email = workflow.getVendor().getEmailAddress();
-            String emailSubject = "New workflow assigned " + email;
+            String emailSubject = "New workflow assigned " + email + "[" + formName + "]";
             String emailBody = "Dear " + companyName + ",\n\nThe following form requires attention:\n" + formName + "\n\nKindly update the information and submit through the application.\n\nThank you for your kind understanding.\n\nRegards,\nQuantum Leap Incorporation Admin" ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
