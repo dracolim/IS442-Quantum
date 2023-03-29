@@ -839,7 +839,7 @@ public class DataLoader implements ApplicationRunner {
         // ------------------------------- Create Admins ------------------------------
         Admin admin1 = new Admin();
         admin1.setUserName("Admin1");
-        admin1.setEmailAddress("wejustclimb@gmail.com");
+        admin1.setEmailAddress("isalsamudra@gmail.com");
         admin1.setPassword("123456");
 
         Admin admin2 = new Admin();
@@ -851,7 +851,7 @@ public class DataLoader implements ApplicationRunner {
         // ------------------------------- Create Approver ------------------------------
         Approver approver1 = new Approver();
         approver1.setUserName("Approver1");
-        approver1.setEmailAddress("lancelimzuyong9@gmail.com");
+        approver1.setEmailAddress("isalsamudra@gmail.com");
         approver1.setPassword("123456");
 
 

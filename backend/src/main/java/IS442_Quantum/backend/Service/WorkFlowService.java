@@ -71,7 +71,7 @@ public class WorkFlowService {
             newFormSequence.setWorkFlow(workFlow);
             newFormSequence.setForm(formService.getFormById(fs.getForm().getFormId()));
 
-            FormSequenceStatus currStatus = FormSequenceStatus.REQUESTED;
+            FormSequenceStatus currStatus = null;
             FormSequenceStatus newStatus = fs.getStatus();
 
             // Get current form status based on FormId and seqNo
@@ -91,7 +91,8 @@ public class WorkFlowService {
                 numberOfRejectedFormSequence++;
             }
 
-
+            System.out.println("currStatus: " + currStatus);
+            System.out.println("newStatus: " + newStatus);
 
             // this method update the status and trigger notification logic
             updateFormStatus(newFormSequence, fs, workFlow, currStatus, newStatus);
@@ -123,12 +124,14 @@ public class WorkFlowService {
 
         // do nothing if status is the same
         if (currStatus == newStatus) {
+            System.out.println("Status is the same, do nothing");
 
-            formSequence.setStatus(currStatus);
+            formSequence.setStatus(newStatus);
 
         // Not Started to Pending: Vendor to Admin
         } else if (currStatus == FormSequenceStatus.REQUESTED && newStatus == FormSequenceStatus.PENDING){
 
+            System.out.println("Not Started to Pending: Vendor to Admin email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "New Form Submission from " + email;
@@ -139,69 +142,77 @@ public class WorkFlowService {
         // Pending to Requested: Vendor to Admin
         } else if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.REQUESTED){
 
+            System.out.println("Pending to Requested: Vendor to Admin email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form requires attention [" + formName + "]";
-            String emailBody = "Dear " + companyName + ", \n\n The following form requires attention: \n " + formName + " Kindly update the information and resubmit \n\n Regards,\nQuantum Leap Incorporation Admin";
+            String emailBody = "Dear " + companyName + ",\n\nThe following form requires attention: \n" + formName + " Kindly update the information and resubmit \n\nRegards,\nQuantum Leap Incorporation Admin";
 
             emailNotificationService.sendEmail(email, emailSubject , emailBody);
 
         // Requested to Pending: Admin to Vendor
         } else if (currStatus == FormSequenceStatus.REQUESTED && newStatus == FormSequenceStatus.PENDING){
 
+            System.out.println("Requested to Pending: Admin to Vendor email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form updated [" + formName + "]";
-            String emailBody = "Dear Admin, \n\n The following form has been updated: \n " + formName + " Kindly review the information and mark as validated/requested \n\n Regards,\nQuantum Leap Incorporation Admin";
+            String emailBody = "Dear Admin, \n\nThe following form has been updated: \n" + formName + " Kindly review the information and mark as validated/requested\n\nRegards,\nQuantum Leap Incorporation Admin";
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
         // Pending to Validated: Admin to Approver
         } else if (currStatus == FormSequenceStatus.PENDING && newStatus == FormSequenceStatus.VALIDATED){
 
+            System.out.println("Pending to Validated: Admin to Approver email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getApprover().getEmailAddress();
             String emailSubject = "Form validated [" + formName + "] please approve/reject";
-            String emailBody = "Dear approver, \n\n Please approve/reject the following form: \n " + workflow.getWfName() + " \n\n Workflow: \n " + workflow.getWfName() + "\n\n Regards,\nQuantum Leap Incorporation Admin" ;
+            String emailBody = "Dear approver,\n\nPlease approve/reject the following form:\n" + workflow.getWfName() + "\n\nWorkflow:\n" + workflow.getWfName() + "\n\nRegards,\nQuantum Leap Incorporation Admin" ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
         // Validated to Rejected: Approver to Admin
         } else if (currStatus == FormSequenceStatus.VALIDATED && newStatus == FormSequenceStatus.REJECTED){
 
+            System.out.println("Validated to Rejected: Approver to Admin email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "Form rejected [" + formName + "]";
-            String emailBody = "The following form has been rejected by approver: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
+            String emailBody = "The following form has been rejected by approver:\n " + formName + "\n\n Workflow:\n" + workflow.getWfName() ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
         // Validated to Approved: Approver to Admin
         } else if (currStatus == FormSequenceStatus.VALIDATED && newStatus == FormSequenceStatus.APPROVED){
 
+            System.out.println("Validated to Approved: Approver to Admin email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getAdmin().getEmailAddress();
             String emailSubject = "Form approved [" + formName + "]";
-            String emailBody = "Dear Admin, \n\n The following form has been approved by approver: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName() ;
+            String emailBody = "Dear Admin, \n\nThe following form has been approved by approver:\n" + formName + "\n\n Workflow:\n" + workflow.getWfName() ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
         // Rejected to Deleted: Admin to Vendor
         } else if (currStatus == FormSequenceStatus.REJECTED && newStatus == FormSequenceStatus.DELETED) {
 
+            System.out.println("Rejected to Deleted: Admin to Vendor email triggered");
             formSequence.setStatus(newStatus);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "Form deleted [" + formName + "]";
-            String emailBody = "The following form has been deleted: \n " + formName + " \n\n Workflow: \n " + workflow.getWfName();
+            String emailBody = "The following form has been deleted: \n" + formName + "\n\n Workflow:\n" + workflow.getWfName();
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
         // Trigger only if it's new vendor
         } else {
+
+            System.out.println("New vendor email triggered");
             formSequence.setStatus(FormSequenceStatus.REQUESTED);
             String email = workflow.getVendor().getEmailAddress();
             String emailSubject = "New workflow assigned " + email;
-            String emailBody = "Dear " + companyName + ", \n\n The following form requires attention: \n " + formName + " Kindly update the information and submit \n\n Regards,\nQuantum Leap Incorporation Admin" ;
+            String emailBody = "Dear " + companyName + ",\n\nThe following form requires attention:\n" + formName + "\n\nKindly update the information and submit through the application.\n\nThank you for your kind understanding.\n\nRegards,\nQuantum Leap Incorporation Admin" ;
 
             emailNotificationService.sendEmail(email, emailSubject, emailBody);
 
@@ -230,7 +241,6 @@ public class WorkFlowService {
 
             // update vendor
             setUser(eWorkFlow, userService.findByUserId(workFlowBody.getVendor().getUserId()));
-
 
             // Add formSequence
             updateFormSequence(eWorkFlow, workFlowBody);

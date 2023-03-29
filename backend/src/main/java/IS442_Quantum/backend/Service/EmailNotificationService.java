@@ -21,6 +21,7 @@ public class EmailNotificationService {
             System.out.println("Email Sent Successfully!");
         } catch (Exception e) {
             System.out.println("Email Failed to Send!");
+            e.printStackTrace();
         } finally {
             System.out.println("Email Notification Service Executed");
         }
