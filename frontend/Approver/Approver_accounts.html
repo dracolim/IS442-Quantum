@@ -317,7 +317,8 @@
                                                 <label for="user_name"
                                                     class="block text-sm font-medium text-gray-900 ">User Name</label>
                                                 <input v-model="userName" type="text" name="user_name" id="user_name"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                value="" />
                                                     <div v-if="errors.userName" class="mt-2 text-xs text-red-600">{{ errors.userName }}</div>
                                             </div>
 
@@ -326,11 +327,12 @@
                                                     class="block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="password" type="password" name="Vendor_password"
                                                     id="Vendor_password"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value=""
                                                     placeholder="">
                                                     <div v-if="errors.password" class="mt-2 text-xs text-red-600">{{ errors.password }}</div>
                                             </div>
-
+                                            
                                         </div>
 
                                         <hr>
@@ -343,7 +345,7 @@
                                                     Name</label>
                                                 <input v-model="companyName" type="text" name="company_name"
                                                     id="company_name"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
                                                     <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">{{ errors.companyName }}</div>
                                             </div>
 
@@ -546,7 +548,7 @@
                                                     class="block text-sm font-medium text-gray-900 ">User Name</label>
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_user_name" id="Update_user_name"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
                                                     <div v-if="errors.userName" class="mt-2 text-xs text-red-600">{{ errors.userName }}</div>
                                             </div>
 
@@ -555,7 +557,7 @@
                                                     class="block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="specificUserPassword" type="password"
                                                     name="Admin_password" id="Admin_password"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
                                                     placeholder="">
                                                     <div v-if="errors.password" class="mt-2 text-xs text-red-600">{{ errors.password }}</div>
                                             </div>
