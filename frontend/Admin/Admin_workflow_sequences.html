@@ -343,7 +343,7 @@
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            userId:""
+            userId: ""
         },
         mounted: async function () {
             this.userId = localStorage.userId;
@@ -409,7 +409,17 @@
                 console.log(id)
                 window.location.assign("./Admin_form_sequences2.html?id=" + id + "/wf=" + this.workflow_id)
             },
-            assignNewForm() {
+            async updateWorkflow(API_URL3) {
+                await axios.put(API_URL3, this.workflow_data)
+                    .then(response => {
+                        alert("Loading...")
+                        document.location.reload();
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+            },
+            async assignNewForm() {
                 var approver = this.workflow_data.approver
                 var admin = this.workflow_data.admin
                 var vendor = this.workflow_data.vendor
@@ -418,7 +428,7 @@
                 for (i in this.assignForms) {
                     if (this.assignForms[i] == true) {
                         var URL = this.localhost + "/form/clone/" + i
-                        axios.post(URL)
+                        await axios.post(URL)
                             .then(response => {
                                 var seqNo = 0;
                                 var newForm = response.data
@@ -438,15 +448,7 @@
 
                                 // update workflow with assigned forms
                                 const API_URL3 = this.localhost + "/workflows/" + this.workflow_id;
-
-                                axios.put(API_URL3, this.workflow_data)
-                                    .then(response => {
-                                        alert("Loading...")
-                                        document.location.reload();
-                                    })
-                                    .catch(error => {
-                                        console.log(error.message)
-                                    })
+                                this.updateWorkflow(API_URL3);
 
                             }).catch(error => {
                                 console.log(error.message)

@@ -229,12 +229,6 @@
                         <td @click="goToSinglePage(value.formSequenceId)" class="px-6 py-4">
                             {{value.form.lastEdited}}
                         </td>
-                        <!-- export form -->
-                        <!-- <td class="px-6 py-4" style="text-align: center;">
-                            <button @click="ExportForm(value.form.formId)">
-                                <iconify-icon icon="ph:export-bold" width="28" height="28" class="hover:text-red-500"></iconify-icon>
-                            </button>
-                        </td> -->
                         <!-- delete form -->
                         <td class="px-6 py-4" style="text-align: center;">
                             <button @click="deleteForm(value.form.formId)">
@@ -350,7 +344,7 @@
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            userId:""
+            userId: ""
         },
         mounted: async function () {
             this.userId = localStorage.userId;
@@ -417,7 +411,17 @@
                 window.location.assign("./Approver_form_sequence2.html?id=" + id + "/wf=" + this
                     .workflow_id)
             },
-            assignNewForm() {
+            async updateWorkflow(API_URL3) {
+                await axios.put(API_URL3, this.workflow_data)
+                    .then(response => {
+                        alert("Loading...")
+                        document.location.reload();
+                    })
+                    .catch(error => {
+                        console.log(error.message)
+                    })
+            },
+            async assignNewForm() {
                 var approver = this.workflow_data.approver
                 var admin = this.workflow_data.admin
                 var vendor = this.workflow_data.vendor
@@ -446,15 +450,7 @@
 
                                 // update workflow with assigned forms
                                 const API_URL3 = this.localhost + "/workflows/" + this.workflow_id;
-
-                                axios.put(API_URL3, this.workflow_data)
-                                    .then(response => {
-                                        alert("Loading...")
-                                        document.location.reload();
-                                    })
-                                    .catch(error => {
-                                        console.log(error.message)
-                                    })
+                                this.updateWorkflow(API_URL3);
 
                             }).catch(error => {
                                 console.log(error.message)
