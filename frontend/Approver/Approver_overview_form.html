@@ -77,8 +77,8 @@
 
 <body>
     <div id='app'>
-         <!-- header -->
-         <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
+        <!-- header -->
+        <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
             <div class="container flex flex-wrap items-center justify-between mx-auto"
                 style="width: 100%; overflow: hidden;">
                 <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
@@ -179,7 +179,10 @@
         <div style="background-color: #b4d1df">
             <!-- back button -->
             <button type="button" v-on:click="goToSinglepage()"
-                class=" ml-8 mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out">Back
+                class="ml-12 inline-flex items-center mt-8 mb-2 inline-block px-6 py-2.5 bg-sky-600 hover:bg-sky-800  text-white font-medium text-xs leading-tight rounded shadow-md hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 uppercase active:shadow-lg transition duration-150 ease-in-out">
+                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" class="mr-2">
+                    <path fill="currentColor" d="m12 20l-8-8l8-8l1.425 1.4l-5.6 5.6H20v2H7.825l5.6 5.6Z" /></svg>
+                Back
             </button>
             <div class="flex justify-center pb-4">
                 <!-- Form Title -->
@@ -306,11 +309,11 @@
             signaturePad: {},
             isErase: false,
             signatureIds: [],
-            
+
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            userId:""
+            userId: ""
         },
         mounted: async function () {
             this.userId = localStorage.userId;
@@ -371,7 +374,8 @@
                                     }
                                 }
                             } else {
-                                this.allAnswers[each_question.questionId] = each_question.inputValue ||
+                                this.allAnswers[each_question.questionId] = each_question
+                                    .inputValue ||
                                     "";
                             }
 
@@ -389,7 +393,8 @@
                             var question_id = each_question.questionId;
                             if (!(question_id in this.question_options)) {
                                 if (each_question.inputType == "text" || each_question.inputType ==
-                                    "textarea" || each_question.inputType == "email" || each_question
+                                    "textarea" || each_question.inputType == "email" ||
+                                    each_question
                                     .inputType.toLowerCase() == "date" || each_question.inputType ==
                                     "file" ||
                                     each_question.inputType == "number") {
@@ -410,7 +415,7 @@
                             this.emailAddress = each.emailAddress
                         }
                     }
-            })).catch(errors => {
+                })).catch(errors => {
                     console.log(errors)
                 })
 

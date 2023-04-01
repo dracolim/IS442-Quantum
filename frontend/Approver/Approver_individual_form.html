@@ -715,7 +715,7 @@
                 //LOCALSTORAGE
                 userName: "",
                 emailAddress: "",
-                userId: ""
+                userId:""
             },
             mounted: async function () {
                 this.userId = localStorage.userId;
@@ -810,11 +810,11 @@
                         console.log(this.combined)
 
                         for (each of responseFive) {
-                            if (each.userId == this.userId) {
-                                this.userName = each.userName
-                                this.emailAddress = each.emailAddress
-                            }
+                        if (each.userId == this.userId) {
+                            this.userName = each.userName
+                            this.emailAddress = each.emailAddress
                         }
+                    }
 
                     })).catch(errors => {
                         console.log(errors)
@@ -1018,8 +1018,8 @@
                 },
                 deleteQuestion: function (question_id) {
                     var URL = this.localhost + "/question/" + question_id;
-                    axios.delete(URL, question_id)
-                        .then(response => {
+                    axios.delete(URL , question_id)
+                    .then(response => {
                             console.log(response.data)
                             document.location.reload();
                         })
@@ -1162,6 +1162,67 @@
 
                         this.closeUpdateModal();
                         document.location.reload();
+                    }
+                },
+                addNewField() {
+                    var section_id = this.NewSectionId;
+                    var inputLabel = this.NewFieldName;
+                    var inputType = this.NewFieldType;
+                    var isRequired = this.NewisRequired;
+                    var questionProperties = this.NewOptions;
+
+                    if (section_id == "" || inputLabel == "" || inputType == "") {
+                        document.getElementById("addFieldButton").disabled = true;
+                        this.error_message = "Fields cannot be Empty!"
+                    } else {
+                        var all_questions_in_this_form = this.all_questions
+                        var NewEditedOptions = []
+                        for (i in this.NewOptions) {
+                            let temp = {}
+                            temp['label'] = this.NewOptions[i]
+                            NewEditedOptions.push(temp)
+                        }
+
+                        console.log(NewEditedOptions)
+
+                        var question = {
+                            "inputType": this.NewFieldType,
+                            "attribute": null,
+                            "inputLabel": this.NewFieldName,
+                            "isRequired": this.NewisRequired,
+                            "questionProperties": NewEditedOptions
+                        }
+
+                        if (this.all_section_ids.includes(parseInt(this.NewSectionId))) {
+                            for (each_section of this.form_sections) {
+                                if (each_section.sectionId == this.NewSectionId) {
+                                    each_section.questions.push(question)
+                                }
+                            }
+                            console.log(this.form_sections)
+                        } else {
+                            this.form_sections.push({
+                                "sectionId": this.NewSectionId,
+                                "title": this.NewSectionTitle,
+                                "description": this.NewSectionDescription,
+                                "questions": [question]
+                            })
+                        }
+
+                        this.raw_form['sections'] = this.form_sections
+                        var URL = this.localhost + "/form/" + this.form_id;
+
+                        axios.put(URL, this.raw_form)
+                            .then(response => {
+                                console.log(response.data)
+                            })
+                            .catch(error => {
+                                console.log(error.message)
+                            })
+
+                        this.closeCreateModal()
+                        document.location.reload();
+
                     }
                 },
                 closeCreateModal() {
