@@ -592,8 +592,7 @@
                                         class="block mb-2 mt-2 text-sm font-medium text-gray-900">Options</label>
 
                                     <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="varLabels[n]"
-                                            @change="checkUpdateLabel()"
+                                        <input type="text" name="text" id="text" v-model="NewOptions[n]"  @change="checkUpdateLabel2()"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
                                             required>
                                     </div>
@@ -1062,6 +1061,32 @@
                     var all_new_labels = []
                     for (i in this.varLabels) {
                         all_new_labels.push(this.varLabels[i].toLowerCase().trim())
+                    }
+
+                    // disable until options all added
+                    if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")) {
+                        document.getElementById("updateLabelButton").disabled = false;
+                    }
+
+                    //check for duplicates in the new label
+                    let resultToReturn = false;
+                    resultToReturn = all_new_labels.some((element, index) => {
+                        return all_new_labels.indexOf(element) !== index
+                    });
+                    if (resultToReturn) {
+                        this.error_message = "Input Options cannot be the Same!"
+                        document.getElementById("updateLabelButton").disabled = true;
+                    } else {
+                        this.error_message = ""
+                        document.getElementById("updateLabelButton").disabled = false;
+                    }
+                },
+                checkUpdateLabel2() {
+                    // console.log(this.varLabels)
+
+                    var all_new_labels = []
+                    for (i in this.NewOptions) {
+                        all_new_labels.push(this.NewOptions[i].toLowerCase().trim())
                     }
 
                     // disable until options all added
