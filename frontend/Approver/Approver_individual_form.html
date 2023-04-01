@@ -592,7 +592,8 @@
                                         class="block mb-2 mt-2 text-sm font-medium text-gray-900">Options</label>
 
                                     <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="NewOptions[n]"
+                                        <input type="text" name="text" id="text" v-model="varLabels[n]"
+                                            @change="checkUpdateLabel()"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
                                             required>
                                     </div>
@@ -711,11 +712,12 @@
                 //NEW 
                 form_sections: "",
                 combined: [],
+                new_question_save: "",
 
                 //LOCALSTORAGE
                 userName: "",
                 emailAddress: "",
-                userId:""
+                userId: ""
             },
             mounted: async function () {
                 this.userId = localStorage.userId;
@@ -810,11 +812,11 @@
                         console.log(this.combined)
 
                         for (each of responseFive) {
-                        if (each.userId == this.userId) {
-                            this.userName = each.userName
-                            this.emailAddress = each.emailAddress
+                            if (each.userId == this.userId) {
+                                this.userName = each.userName
+                                this.emailAddress = each.emailAddress
+                            }
                         }
-                    }
 
                     })).catch(errors => {
                         console.log(errors)
@@ -1018,8 +1020,8 @@
                 },
                 deleteQuestion: function (question_id) {
                     var URL = this.localhost + "/question/" + question_id;
-                    axios.delete(URL , question_id)
-                    .then(response => {
+                    axios.delete(URL, question_id)
+                        .then(response => {
                             console.log(response.data)
                             document.location.reload();
                         })
@@ -1164,7 +1166,7 @@
                         document.location.reload();
                     }
                 },
-                addNewField() {
+                async addNewField() {
                     var section_id = this.NewSectionId;
                     var inputLabel = this.NewFieldName;
                     var inputType = this.NewFieldType;
@@ -1179,11 +1181,30 @@
                         var NewEditedOptions = []
                         for (i in this.NewOptions) {
                             let temp = {}
+
+                            if (this.NewOptions[i].toLowerCase() == 'others' || this.NewOptions[i]
+                                .toLowerCase() == "other") {
+                                //check whether exists already
+                                var new_label = "(Others) " + inputLabel;
+                                if (!(this.all_question_input_labels.includes(new_label))) {
+                                    // put to form ID (updateId is the questions Id)
+
+                                    for (each_fs of this.form_sections) {
+                                        if (each_fs.sectionId == section_id) {
+                                            var new_question = {
+                                                "inputType": "text",
+                                                "inputLabel": new_label,
+                                                "isRequired": false,
+                                            }
+                                            each_fs.questions.push(new_question)
+                                        }
+                                    }
+                                }
+                            }
                             temp['label'] = this.NewOptions[i]
                             NewEditedOptions.push(temp)
                         }
 
-                        console.log(NewEditedOptions)
 
                         var question = {
                             "inputType": this.NewFieldType,
@@ -1193,6 +1214,7 @@
                             "questionProperties": NewEditedOptions
                         }
 
+                        // if exist 
                         if (this.all_section_ids.includes(parseInt(this.NewSectionId))) {
                             for (each_section of this.form_sections) {
                                 if (each_section.sectionId == this.NewSectionId) {
@@ -1200,12 +1222,22 @@
                                 }
                             }
                             console.log(this.form_sections)
-                        } else {
+                        } else { // does not exist, hence new secitonId
+                            var new_question = {
+                                "inputType": "text",
+                                "inputLabel": new_label,
+                                "isRequired": false,
+                            }
+
+                            var question_list = []
+                            question_list.push(question)
+                            question_list.push(new_question)
+
                             this.form_sections.push({
                                 "sectionId": this.NewSectionId,
                                 "title": this.NewSectionTitle,
                                 "description": this.NewSectionDescription,
-                                "questions": [question]
+                                "questions": question_list
                             })
                         }
 
@@ -1222,7 +1254,6 @@
 
                         this.closeCreateModal()
                         document.location.reload();
-
                     }
                 },
                 closeCreateModal() {

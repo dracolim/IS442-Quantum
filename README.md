@@ -255,6 +255,8 @@
     * However, if there is no existing sections, the "Add to Existing Sections" button will be disabled.
 5. **Error Handling**: 
     * Scenario 1: Input cannot be empty
+    * Scenario 2: Input cannot be the same 
+6. (EXTRA) if "others" is added as an Input Options, it will automatically create a "(Others) ____[Field Name]___ " question and added to the section that belongs to that question.
 
 #### View Form Format
 <ins>Steps to View Form Format<ins><br>
@@ -477,6 +479,8 @@
     * However, if there is no existing sections, the "Add to Existing Sections" button will be disabled.
 5. **Error Handling**: 
     * Scenario 1: Input cannot be empty
+    * Scenario 2: Input cannot be the same 
+6. (EXTRA) if "others" is added as an Input Options, it will automatically create a "(Others) ____[Field Name]___ " question and added to the section that belongs to that question.
 
 #### View Form Format
 <ins>Steps to View Form Format<ins><br>
