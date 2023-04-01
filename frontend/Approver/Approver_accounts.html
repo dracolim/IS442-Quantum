@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <!-- Links -->
+    <!-- Links -->
     <!-- flowbite -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <!-- Tailwind -->
@@ -233,17 +233,20 @@
                             <button v-if="value.userType == 'VENDOR'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateVendorModalScrollable" data-te-ripple-init
                                 data-te-ripple-color="light">
-                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500"
+                                    width="28"></iconify-icon>
                             </button>
                             <button v-if="value.userType == 'ADMIN'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateAdminModalScrollable" data-te-ripple-init
                                 data-te-ripple-color="light">
-                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500"
+                                    width="28"></iconify-icon>
                             </button>
                             <button v-if="value.userType == 'APPROVER'" @click="getRowObject(value.userId)"
                                 data-te-toggle="modal" data-te-target="#updateApproverModalScrollable"
                                 data-te-ripple-init data-te-ripple-color="light">
-                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500" width="28" ></iconify-icon>
+                                <iconify-icon icon="material-symbols:edit-document-outline" class="hover:text-red-500"
+                                    width="28"></iconify-icon>
                             </button>
                         </td>
                         <td class="px-6 py-4" style="text-align: center;">
@@ -315,24 +318,26 @@
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
                                                 <label for="user_name"
-                                                    class="block text-sm font-medium text-gray-900 ">User Name</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User
+                                                    Name</label>
                                                 <input v-model="userName" type="text" name="user_name" id="user_name"
-                                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                value="" />
-                                                    <div v-if="errors.userName" class="mt-2 text-xs text-red-600">{{ errors.userName }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" />
+                                                <div v-if="errors.userName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.userName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label for="Vendor_password"
-                                                    class="block text-sm font-medium text-gray-900 ">Password</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="password" type="password" name="Vendor_password"
                                                     id="Vendor_password"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                    value=""
-                                                    placeholder="">
-                                                    <div v-if="errors.password" class="mt-2 text-xs text-red-600">{{ errors.password }}</div>
+                                                    value="" placeholder="">
+                                                <div v-if="errors.password" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.password }}</div>
                                             </div>
-                                            
+
                                         </div>
 
                                         <hr>
@@ -341,69 +346,79 @@
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
                                                 <label for="company_name"
-                                                    class="block text-sm font-medium text-gray-900 ">Company's
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Company's
                                                     Name</label>
                                                 <input v-model="companyName" type="text" name="company_name"
                                                     id="company_name"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
-                                                    <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">{{ errors.companyName }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" />
+                                                <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label for="Registration_no"
-                                                    class="block text-sm font-medium text-gray-900 ">Company
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Company
                                                     Registration
                                                     No</label>
                                                 <input v-model="companyRegistrationNo" type="text"
                                                     name="Registration_no" id="Registration_no"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    placeholder="" />
-                                                    <div v-if="errors.companyRegistrationNo" class="mt-2 text-xs text-red-600">{{ errors.companyRegistrationNo }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
+                                                <div v-if="errors.companyRegistrationNo"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.companyRegistrationNo }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label for="Company_email"
-                                                    class="block text-sm font-medium text-gray-900 ">Company
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Company
                                                     Email</label>
                                                 <input v-model="companyEmail" type="text" name="Company_email"
                                                     id="Company_email"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    placeholder="" />
-                                                    <div v-if="errors.companyEmail" class="mt-2 text-xs text-red-600">{{ errors.companyEmail }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
+                                                <div v-if="errors.companyEmail" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label for="address"
-                                                    class="block text-sm font-medium text-gray-900 ">Office
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Office
                                                     Address</label>
                                                 <input v-model="companyOfficeAddress" type="text" name="address"
-                                                    id="address" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                                                    id="address"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                     value="" placeholder="" />
-                                                    <div v-if="errors.companyOfficeAddress" class="mt-2 text-xs text-red-600">{{ errors.companyOfficeAddress }}</div>
+                                                <div v-if="errors.companyOfficeAddress"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.companyOfficeAddress }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-2">
                                                 <label for="tel"
-                                                    class="block text-sm font-medium text-gray-900 ">Tel</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Tel</label>
                                                 <input v-model="companyTel" type="text" name="tel" id="tel"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    placeholder="" />
-                                                    <div v-if="errors.companyTel" class="mt-2 text-xs text-red-600">{{ errors.companyTel }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
+                                                <div v-if="errors.companyTel" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyTel }}</div>
                                             </div>
 
                                             <div class="md:col-span-2">
                                                 <label for="fax"
-                                                    class="block text-sm font-medium text-gray-900 ">Fax</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Fax</label>
                                                 <input v-model="companyFax" type="text" name="fax" id="fax"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    placeholder="" />
-                                                    <div v-if="errors.companyFax" class="mt-2 text-xs text-red-600">{{ errors.companyFax }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
+                                                <div v-if="errors.companyFax" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyFax }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
-                                                <label class="block text-sm font-medium text-gray-900 ">Type
+                                                <label class="mb-1 block text-sm font-medium text-gray-900 ">Type
                                                     of Business</label>
-                                                <div
+                                                <!-- <div
                                                     class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
                                                     <span
                                                         class="ml-3 text-gray-400 appearance-none outline-none w-full bg-transparent">{{businessType}}</span>
@@ -418,22 +433,31 @@
                                                                 stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                                         </svg>
                                                     </button>
-                                                </div>
-                                                <div v-if="errors.businessType" class="mt-2 text-xs text-red-600">{{ errors.businessType }}</div>
+                                                </div> -->
 
+                                                <!-- TYPE OF BUSINESS LICENSE menu -->
+                                                <select id="countries" v-model="businessType"
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                                    <option value="Solo Proprietorship">Solo Proprietorship</option>
+                                                    <option value="Partnership Agreement">Partnership Agreement</option>
+                                                    <option value="Limited Company">Limited Company</option>
+                                                    <option value="Others">Others</option>
+                                                </select>
+                                                <div v-if="errors.businessType" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.businessType }}</div>
                                             </div>
 
                                             <div v-if="businessType == 'Others'" class="md:col-span-3">
-                                                <label class="block text-sm font-medium text-gray-900 ">Please
+                                                <label class="mb-1 block text-sm font-medium text-gray-900 ">Please
                                                     Specify</label>
                                                 <input type="text"
-                                                    class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
-                                                    v-model="businessTypeOthers" placeholder="" />
-                                                    <div v-if="errors.businessTypeOthers" class="mt-2 text-xs text-red-600">{{ errors.businessTypeOthers }}</div>
-
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" v-model="businessTypeOthers" placeholder="" />
+                                                <div v-if="errors.businessTypeOthers" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.businessTypeOthers }}</div>
                                             </div>
 
-                                            <!-- TYPE OF BUSINESS LICENSE menu -->
+                                            <!-- OLD
                                             <div id="dropdownRadioBgHover"
                                                 class="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow ">
                                                 <ul class="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
@@ -481,9 +505,8 @@
                                                         </div>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> -->
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -491,7 +514,6 @@
                     </div>
                     <div
                         class="modal-footer flex flex-shrink-0 flex-wrap items-center justify-end p-4 border-t border-gray-200 rounded-b-md">
-
                         <button @click="createVendorAcc" type="button" data-te-modal-dismiss
                             class="flex items-center px-5 py-2.5 font-medium tracking-wide text-white capitalize bg-sky-600 rounded-md hover:bg-sky-800  focus:outline-none focus:bg-skyy-900  transition duration-300 transform active:scale-95 ease-in-out">
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px"
@@ -548,8 +570,10 @@
                                                     class="block text-sm font-medium text-gray-900 ">User Name</label>
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_user_name" id="Update_user_name"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
-                                                    <div v-if="errors.userName" class="mt-2 text-xs text-red-600">{{ errors.userName }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" />
+                                                <div v-if="errors.userName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.userName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -557,9 +581,10 @@
                                                     class="block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="specificUserPassword" type="password"
                                                     name="Admin_password" id="Admin_password"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="">
-                                                    <div v-if="errors.password" class="mt-2 text-xs text-red-600">{{ errors.password }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="">
+                                                <div v-if="errors.password" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.password }}</div>
                                             </div>
 
                                         </div>
@@ -575,7 +600,8 @@
                                                 <input v-model="specificUserCompanyName" type="text"
                                                     name="Update_company_name" id="Update_company_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">{{ errors.companyName }}</div>
+                                                <div v-if="errors.companyName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -587,7 +613,9 @@
                                                     name="Update_Registration_no" id="Update_Registration_no"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyRegistrationNo" class="mt-2 text-xs text-red-600">{{ errors.companyRegistrationNo }}</div>
+                                                <div v-if="errors.companyRegistrationNo"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.companyRegistrationNo }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -598,7 +626,8 @@
                                                     name="Update_Company_email" id="Update_Company_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyEmail" class="mt-2 text-xs text-red-600">{{ errors.companyEmail }}</div>
+                                                <div v-if="errors.companyEmail" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -609,7 +638,9 @@
                                                     name="Update_address" id="Update_address"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyOfficeAddress" class="mt-2 text-xs text-red-600">{{ errors.companyOfficeAddress }}</div>
+                                                <div v-if="errors.companyOfficeAddress"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.companyOfficeAddress }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -619,7 +650,8 @@
                                                     id="Update_tel"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyTel" class="mt-2 text-xs text-red-600">{{ errors.companyTel }}</div>
+                                                <div v-if="errors.companyTel" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyTel }}</div>
                                             </div>
 
                                             <div class="md:col-span-2">
@@ -629,7 +661,8 @@
                                                     id="Update_fax"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.companyFax" class="mt-2 text-xs text-red-600">{{ errors.companyFax }}</div>
+                                                <div v-if="errors.companyFax" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.companyFax }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -651,7 +684,8 @@
                                                         </svg>
                                                     </button>
                                                 </div>
-                                                <div v-if="errors.businessType" class="mt-2 text-xs text-red-600">{{ errors.businessType }}</div>
+                                                <div v-if="errors.businessType" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.businessType }}</div>
 
                                             </div>
 
@@ -661,7 +695,8 @@
                                                 <input type="text"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     v-model="specificUserBusinessTypeOthers" placeholder="" />
-                                                    <div v-if="errors.businessTypeOthers" class="mt-2 text-xs text-red-600">{{ errors.businessTypeOthers }}</div>
+                                                <div v-if="errors.businessTypeOthers" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.businessTypeOthers }}</div>
                                             </div>
 
                                             <!-- TYPE OF BUSINESS LICENSE menu -->
@@ -713,7 +748,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            
+
                                         </div>
 
                                     </div>
@@ -781,7 +816,8 @@
                                                 <input v-model="adminUserName" type="text" name="Admin_user_name"
                                                     id="Admin_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.adminUserName" class="mt-2 text-xs text-red-600">{{ errors.adminUserName }}</div>
+                                                <div v-if="errors.adminUserName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -791,7 +827,8 @@
                                                     id="Admin_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.adminEmail" class="mt-2 text-xs text-red-600">{{ errors.adminEmail }}</div>
+                                                <div v-if="errors.adminEmail" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -801,7 +838,8 @@
                                                     id="password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.adminPassword" class="mt-2 text-xs text-red-600">{{ errors.adminPassword }}</div>
+                                                <div v-if="errors.adminPassword" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminPassword }}</div>
                                             </div>
 
                                         </div>
@@ -873,7 +911,8 @@
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_Admin_user_name" id="Update_Admin_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.adminUserUserName" class="mt-2 text-xs text-red-600">{{ errors.adminUserUserName }}</div>
+                                                <div v-if="errors.adminUserUserName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminUserUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -883,7 +922,9 @@
                                                     name="Update_Admin_email" id="Update_Admin_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.adminUserCompanyEmail" class="mt-2 text-xs text-red-600">{{ errors.adminUserCompanyEmail }}</div>
+                                                <div v-if="errors.adminUserCompanyEmail"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.adminUserCompanyEmail }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -893,7 +934,8 @@
                                                     name="Update_password" id="Update_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.adminUserPassword" class="mt-2 text-xs text-red-600">{{ errors.adminUserPassword }}</div>
+                                                <div v-if="errors.adminUserPassword" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.adminUserPassword }}</div>
                                             </div>
 
                                         </div>
@@ -968,7 +1010,8 @@
                                                 <input v-model="approverUserName" type="text" name="Approver_user_name"
                                                     id="Approver_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.approverUserName" class="mt-2 text-xs text-red-600">{{ errors.approverUserName }}</div>
+                                                <div v-if="errors.approverUserName" class="mt-2 text-xs text-red-600">
+                                                    {{ errors.approverUserName }}</div>
 
                                             </div>
 
@@ -979,7 +1022,7 @@
                                                     id="Approver_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.approverEmail">{{ errors.approverEmail }}</div>
+                                                <div v-if="errors.approverEmail">{{ errors.approverEmail }}</div>
 
                                             </div>
 
@@ -990,7 +1033,7 @@
                                                     name="Approver_password" id="Approver_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.approverPassword">{{ errors.approverPassword }}</div>
+                                                <div v-if="errors.approverPassword">{{ errors.approverPassword }}</div>
 
                                             </div>
 
@@ -1066,7 +1109,9 @@
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_Approver_user_name" id="Update_Approver_user_name"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" />
-                                                    <div v-if="errors.approverUserUserName" class="mt-2 text-xs text-red-600">{{ errors.approverUserUserName }}</div>
+                                                <div v-if="errors.approverUserUserName"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.approverUserUserName }}
+                                                </div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -1076,7 +1121,9 @@
                                                     name="Update_Approver_email" id="Update_Approver_email"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="" />
-                                                    <div v-if="errors.approverUserCompanyEmail" class="mt-2 text-xs text-red-600">{{ errors.approverUserCompanyEmail }}</div>
+                                                <div v-if="errors.approverUserCompanyEmail"
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ errors.approverUserCompanyEmail }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
@@ -1086,7 +1133,9 @@
                                                     name="Update_approver_password" id="Update_approver_password"
                                                     class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value=""
                                                     placeholder="">
-                                                    <div v-if="errors.approverUserPassword" class="mt-2 text-xs text-red-600">{{ errors.approverUserPassword }}</div>
+                                                <div v-if="errors.approverUserPassword"
+                                                    class="mt-2 text-xs text-red-600">{{ errors.approverUserPassword }}
+                                                </div>
                                             </div>
 
                                         </div>
@@ -1124,20 +1173,27 @@
         </div>
 
         <!-- CREATE/UPDATE SUCCESSFUL NOTIFICATION -->
-        <div class="h-80 py-8"> 
+        <div class="h-80 py-8">
             <div class="mx-auto flex justify-center sm:justify-end h-full">
-                <!--code for notification starts--> 
-                <div role="alert" class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden" id="notification" style="position: fixed; top: 10px; right: 10px;">
-                    <div class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
-                        <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg" alt="check icon"/>
+                <!--code for notification starts-->
+                <div role="alert"
+                    class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden"
+                    id="notification" style="position: fixed; top: 10px; right: 10px;">
+                    <div
+                        class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                        <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg"
+                            alt="check icon" />
                     </div>
                     <div class="flex flex-col justify-center xl:-ml-4 pl-4 xl:pl-1 sm:w-3/5 pt-4 sm:pb-4 pb-2">
                         <h1 class="text-lg text-gray-800 light:text-gray-100 font-semibold pb-1">Action Completed</h1>
-                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have successfully created/updated the user.</p>
+                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have successfully
+                            created/updated the user.</p>
                     </div>
-                    <div class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
+                    <div
+                        class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
                         <a href="" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
-                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
+                            <span
+                                class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
                         </a>
                     </div>
                 </div>
@@ -1146,20 +1202,25 @@
         </div>
 
         <!-- CREATE/UPDATE FAILED NOTIFICATION -->
-        <div class="h-80 py-8"> 
+        <div class="h-80 py-8">
             <div class="mx-auto flex justify-center sm:justify-end h-full">
-                <!--code for notification starts--> 
-                <div role="alert" class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden" id="failednotification" style="position: fixed; top: 10px; right: 10px;">
-                    <div class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-red-400 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                <!--code for notification starts-->
+                <div role="alert"
+                    class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden"
+                    id="failednotification" style="position: fixed; top: 10px; right: 10px;">
+                    <div
+                        class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-red-400 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
                         <span>Error</span>
                     </div>
                     <div class="flex flex-col justify-center xl:-ml-4 pl-4 xl:pl-1 sm:w-3/5 pt-4 sm:pb-4 pb-2">
                         <h1 class="text-lg text-gray-800 light:text-gray-100 font-semibold pb-1">Action Failed</h1>
-                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have failed to create/update the user. Please try again.</p>
+                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have failed to
+                            create/update the user. Please try again.</p>
                     </div>
-                    <div class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
+                    <div
+                        class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
                         <a href="javascript:void(0)" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
-                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer"></span>
+                            <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer"></span>
                         </a>
                     </div>
                 </div>
@@ -1168,30 +1229,37 @@
         </div>
 
         <!-- DELETION SUCCESSFUL NOTIFICATION -->
-        <div class="h-80 py-8"> 
+        <div class="h-80 py-8">
             <div class="mx-auto flex justify-center sm:justify-end h-full">
-                <!--code for notification starts--> 
-                <div role="alert" class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden" id="deletenotification" style="position: fixed; top: 10px; right: 10px;">
-                    <div class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
-                        <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg" alt="check icon"/>
+                <!--code for notification starts-->
+                <div role="alert"
+                    class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden"
+                    id="deletenotification" style="position: fixed; top: 10px; right: 10px;">
+                    <div
+                        class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                        <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg"
+                            alt="check icon" />
                     </div>
                     <div class="flex flex-col justify-center xl:-ml-4 pl-4 xl:pl-1 sm:w-3/5 pt-4 sm:pb-4 pb-2">
                         <h1 class="text-lg text-gray-800 light:text-gray-100 font-semibold pb-1">Action Completed</h1>
-                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have successfully deleted the user.</p>
+                        <p class="text-sm text-gray-600 light:text-gray-400 font-normal">You have successfully deleted
+                            the user.</p>
                     </div>
-                    <div class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
+                    <div
+                        class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
                         <a href="" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
-                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
+                            <span
+                                class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
                         </a>
                     </div>
                 </div>
                 <!--code for notification ends-->
             </div>
-        </div>       
+        </div>
     </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
 
 <script>
@@ -1240,7 +1308,7 @@
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            userId:""
+            userId: ""
 
 
         },
@@ -1266,7 +1334,7 @@
                             this.emailAddress = each.emailAddress
                         }
                     }
-            })).catch(errors => {
+                })).catch(errors => {
                     console.log(errors)
                 })
 
@@ -1281,6 +1349,7 @@
         },
         methods: {
             async createVendorAcc() {
+                console.log(this.businessType)
                 if (this.businessType != "Others") {
 
                     this.errors = {};
@@ -1295,7 +1364,8 @@
                         this.errors.companyEmail = 'Email is required';
                         this.hasErrors = true;
                     } else if (!this.validEmail(this.companyEmail)) {
-                        this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.errors.companyEmail =
+                            'Email is invalid (missing @ or information before/after)';
                         this.hasErrors = true;
                     }
 
@@ -1357,15 +1427,13 @@
                         .then((response) => {
                             var Notification = document.getElementById("failednotification");
                             Notification.classList.add("hidden");
-                            this.showSuccessNoti();                        
+                            this.showSuccessNoti();
                         })
                         .catch((error) => {
                             console.log(error);
                         });
-                    
-                }
 
-                else {
+                } else {
 
                     this.errors = {};
                     this.hasErrors = false;
@@ -1379,7 +1447,8 @@
                         this.errors.companyEmail = 'Email is required';
                         this.hasErrors = true;
                     } else if (!this.validEmail(this.companyEmail)) {
-                        this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.errors.companyEmail =
+                            'Email is invalid (missing @ or information before/after)';
                         this.hasErrors = true;
                     }
 
@@ -1423,7 +1492,7 @@
                         return;
                     }
 
-                        await axios
+                    await axios
                         .post("http://localhost:5000/users/vendor", {
                             "userType": 'VENDOR',
                             "userName": this.userName,
@@ -1486,7 +1555,7 @@
                     .then((response) => {
                         var Notification = document.getElementById("failednotification");
                         Notification.classList.add("hidden");
-                        this.showSuccessNoti();                   
+                        this.showSuccessNoti();
                     })
                     .catch((error) => {
                         console.log(error);
@@ -1531,7 +1600,7 @@
                     .then((response) => {
                         var Notification = document.getElementById("failednotification");
                         Notification.classList.add("hidden");
-                        this.showSuccessNoti();                        
+                        this.showSuccessNoti();
                     })
                     .catch((error) => {
                         console.log(error);
@@ -1570,7 +1639,7 @@
                         this.specificUserCompanyTel = response.data.officeTel
                         this.specificUserCompanyFax = response.data.officeFax
                         this.specificUserBusinessType = response.data.businessType
-                        
+
                         console.log(this.specificUser)
                     })
                     .catch(error => {
@@ -1582,7 +1651,7 @@
 
                 axios.delete(DELETE_ACC_API_URL) //need check if this is correct link first
                     .then(response => {
-                        this.showDeletionNoti();                        
+                        this.showDeletionNoti();
                     })
                     .catch(error => {
                         console.error(error);
@@ -1605,7 +1674,8 @@
                             this.errors.companyEmail = 'Email is required';
                             this.hasErrors = true;
                         } else if (!this.validEmail(this.specificUserCompanyEmail)) {
-                            this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                            this.errors.companyEmail =
+                                'Email is invalid (missing @ or information before/after)';
                             this.hasErrors = true;
                         }
 
@@ -1649,60 +1719,56 @@
                         if (this.specificUserBusinessType != "Others") {
 
                             axios.put(UPDATE_ACC_API_URL, {
-                                "userId": this.specificUserUserId,
-                                "userType": this.specificUserUserType,
-                                "userName": this.specificUserUserName,
-                                "emailAddress": this.specificUserCompanyEmail,
-                                "password": this.specificUserPassword,
-                                "companyName": this.specificUserCompanyName,
-                                "officeAddress": this.specificUserCompanyOfficeAddress,
-                                "officeTel": this.specificUserCompanyTel,
-                                "officeFax": this.specificUserCompanyFax,
-                                "registrationNo": this.specificUserCompanyRegistrationNo,
-                                "businessType": this.specificUserBusinessType,
-                                // "evaluationId": '',
-                                // "workFlows": []
-                            })
-                            .then(response => {
-                                var Notification = document.getElementById("failednotification");
-                                Notification.classList.add("hidden");
-                                this.showSuccessNoti();                      
-                            })
-                            .catch(error => {
-                                console.error(error);
-                            })
-                        }
-
-                        else {
+                                    "userId": this.specificUserUserId,
+                                    "userType": this.specificUserUserType,
+                                    "userName": this.specificUserUserName,
+                                    "emailAddress": this.specificUserCompanyEmail,
+                                    "password": this.specificUserPassword,
+                                    "companyName": this.specificUserCompanyName,
+                                    "officeAddress": this.specificUserCompanyOfficeAddress,
+                                    "officeTel": this.specificUserCompanyTel,
+                                    "officeFax": this.specificUserCompanyFax,
+                                    "registrationNo": this.specificUserCompanyRegistrationNo,
+                                    "businessType": this.specificUserBusinessType,
+                                    // "evaluationId": '',
+                                    // "workFlows": []
+                                })
+                                .then(response => {
+                                    var Notification = document.getElementById("failednotification");
+                                    Notification.classList.add("hidden");
+                                    this.showSuccessNoti();
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                })
+                        } else {
 
                             axios.put(UPDATE_ACC_API_URL, {
-                                "userId": this.specificUserUserId,
-                                "userType": this.specificUserUserType,
-                                "userName": this.specificUserUserName,
-                                "emailAddress": this.specificUserCompanyEmail,
-                                "password": this.specificUserPassword,
-                                "companyName": this.specificUserCompanyName,
-                                "officeAddress": this.specificUserCompanyOfficeAddress,
-                                "officeTel": this.specificUserCompanyTel,
-                                "officeFax": this.specificUserCompanyFax,
-                                "registrationNo": this.specificUserCompanyRegistrationNo,
-                                "businessType": this.specificUserBusinessTypeOthers,
-                                // "evaluationId": '',
-                                // "workFlows": []
-                            })
-                            .then(response => {
-                                var Notification = document.getElementById("failednotification");
-                                Notification.classList.add("hidden");
-                                this.showSuccessNoti();                        
-                            })
-                            .catch(error => {
-                                console.error(error);
-                            })
-                            
-                        }
-                    }
+                                    "userId": this.specificUserUserId,
+                                    "userType": this.specificUserUserType,
+                                    "userName": this.specificUserUserName,
+                                    "emailAddress": this.specificUserCompanyEmail,
+                                    "password": this.specificUserPassword,
+                                    "companyName": this.specificUserCompanyName,
+                                    "officeAddress": this.specificUserCompanyOfficeAddress,
+                                    "officeTel": this.specificUserCompanyTel,
+                                    "officeFax": this.specificUserCompanyFax,
+                                    "registrationNo": this.specificUserCompanyRegistrationNo,
+                                    "businessType": this.specificUserBusinessTypeOthers,
+                                    // "evaluationId": '',
+                                    // "workFlows": []
+                                })
+                                .then(response => {
+                                    var Notification = document.getElementById("failednotification");
+                                    Notification.classList.add("hidden");
+                                    this.showSuccessNoti();
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                })
 
-                    else {
+                        }
+                    } else {
 
                         this.errors = {};
                         this.hasErrors = false;
@@ -1716,7 +1782,8 @@
                             this.errors.companyEmail = 'Email is required';
                             this.hasErrors = true;
                         } else if (!this.validEmail(this.specificUserCompanyEmail)) {
-                            this.errors.companyEmail = 'Email is invalid (missing @ or information before/after)';
+                            this.errors.companyEmail =
+                                'Email is invalid (missing @ or information before/after)';
                             this.hasErrors = true;
                         }
 
@@ -1765,57 +1832,55 @@
                         if (this.specificUserBusinessType != "Others") {
 
                             axios.put(UPDATE_ACC_API_URL, {
-                                "userId": this.specificUserUserId,
-                                "userType": this.specificUserUserType,
-                                "userName": this.specificUserUserName,
-                                "emailAddress": this.specificUserCompanyEmail,
-                                "password": this.specificUserPassword,
-                                "companyName": this.specificUserCompanyName,
-                                "officeAddress": this.specificUserCompanyOfficeAddress,
-                                "officeTel": this.specificUserCompanyTel,
-                                "officeFax": this.specificUserCompanyFax,
-                                "registrationNo": this.specificUserCompanyRegistrationNo,
-                                "businessType": this.specificUserBusinessType,
-                                // "evaluationId": '',
-                                // "workFlows": []
-                            })
-                            .then(response => {
-                                var Notification = document.getElementById("failednotification");
-                                Notification.classList.add("hidden");
-                                this.showSuccessNoti();
-                            })
-                            .catch(error => {
-                                console.error(error);
-                            })
-                        }
-
-                        else {
+                                    "userId": this.specificUserUserId,
+                                    "userType": this.specificUserUserType,
+                                    "userName": this.specificUserUserName,
+                                    "emailAddress": this.specificUserCompanyEmail,
+                                    "password": this.specificUserPassword,
+                                    "companyName": this.specificUserCompanyName,
+                                    "officeAddress": this.specificUserCompanyOfficeAddress,
+                                    "officeTel": this.specificUserCompanyTel,
+                                    "officeFax": this.specificUserCompanyFax,
+                                    "registrationNo": this.specificUserCompanyRegistrationNo,
+                                    "businessType": this.specificUserBusinessType,
+                                    // "evaluationId": '',
+                                    // "workFlows": []
+                                })
+                                .then(response => {
+                                    var Notification = document.getElementById("failednotification");
+                                    Notification.classList.add("hidden");
+                                    this.showSuccessNoti();
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                })
+                        } else {
 
                             axios.put(UPDATE_ACC_API_URL, {
-                                "userId": this.specificUserUserId,
-                                "userType": this.specificUserUserType,
-                                "userName": this.specificUserUserName,
-                                "emailAddress": this.specificUserCompanyEmail,
-                                "password": this.specificUserPassword,
-                                "companyName": this.specificUserCompanyName,
-                                "officeAddress": this.specificUserCompanyOfficeAddress,
-                                "officeTel": this.specificUserCompanyTel,
-                                "officeFax": this.specificUserCompanyFax,
-                                "registrationNo": this.specificUserCompanyRegistrationNo,
-                                "businessType": this.specificUserBusinessTypeOthers,
-                                // "evaluationId": '',
-                                // "workFlows": []
-                            })
-                            .then(response => {
-                                var Notification = document.getElementById("failednotification");
-                                Notification.classList.add("hidden");
-                                this.showSuccessNoti();
-                            })
-                            .catch(error => {
-                                console.error(error);
-                            })
-                            
-                        }                        
+                                    "userId": this.specificUserUserId,
+                                    "userType": this.specificUserUserType,
+                                    "userName": this.specificUserUserName,
+                                    "emailAddress": this.specificUserCompanyEmail,
+                                    "password": this.specificUserPassword,
+                                    "companyName": this.specificUserCompanyName,
+                                    "officeAddress": this.specificUserCompanyOfficeAddress,
+                                    "officeTel": this.specificUserCompanyTel,
+                                    "officeFax": this.specificUserCompanyFax,
+                                    "registrationNo": this.specificUserCompanyRegistrationNo,
+                                    "businessType": this.specificUserBusinessTypeOthers,
+                                    // "evaluationId": '',
+                                    // "workFlows": []
+                                })
+                                .then(response => {
+                                    var Notification = document.getElementById("failednotification");
+                                    Notification.classList.add("hidden");
+                                    this.showSuccessNoti();
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                })
+
+                        }
                     }
 
                 }
@@ -1833,7 +1898,8 @@
                         this.errors.adminUserCompanyEmail = 'Email is required';
                         this.hasErrors = true;
                     } else if (!this.validEmail(this.specificUserCompanyEmail)) {
-                        this.errors.adminUserCompanyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.errors.adminUserCompanyEmail =
+                            'Email is invalid (missing @ or information before/after)';
                         this.hasErrors = true;
                     }
 
@@ -1858,7 +1924,7 @@
                         .then(response => {
                             var Notification = document.getElementById("failednotification");
                             Notification.classList.add("hidden");
-                            this.showSuccessNoti(); 
+                            this.showSuccessNoti();
                         })
                         .catch(error => {
                             console.error(error);
@@ -1879,7 +1945,8 @@
                         this.errors.approverUserCompanyEmail = 'Email is required';
                         this.hasErrors = true;
                     } else if (!this.validEmail(this.specificUserCompanyEmail)) {
-                        this.errors.approverUserCompanyEmail = 'Email is invalid (missing @ or information before/after)';
+                        this.errors.approverUserCompanyEmail =
+                            'Email is invalid (missing @ or information before/after)';
                         this.hasErrors = true;
                     }
 
@@ -1904,7 +1971,7 @@
                         .then(response => {
                             var Notification = document.getElementById("failednotification");
                             Notification.classList.add("hidden");
-                            this.showSuccessNoti(); 
+                            this.showSuccessNoti();
                         })
                         .catch(error => {
                             console.error(error);

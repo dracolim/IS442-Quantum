@@ -532,7 +532,7 @@
             ValidateToShow: "",
 
             //LOCALSTORAGE
-            user_id:"",
+            userId:"",
             userName: "",
             emailAddress: "",
 
@@ -544,7 +544,7 @@
 
             // const API_URL = this.localhost + "/workflows"+this.userId;
 
-            this.user_id = localStorage.userId;
+            this.userId = localStorage.userId;
 
             const API_URL = this.localhost + "/workflows";
             const API_URL2 = this.localhost + "/users/userType/VENDOR";
@@ -570,7 +570,7 @@
                     this.all_approvers = responseFour;
                     this.all_admins = responseThree;
                     for (each of responseFour) {
-                        if (each.userId == this.user_id) {
+                        if (each.userId == this.userId) {
                             this.userName = each.userName
                             this.emailAddress = each.emailAddress
                         }
