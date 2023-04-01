@@ -1066,184 +1066,16 @@
                         document.getElementById("updateLabelButton").disabled = false;
                     }
                 },
-                beforeUpdateLabel() {
-                    for (each of this.all_questions) {
-                        if (each.questionId == this.updateID) {
-                            console.log("You found me")
-
-                            var all_labels = []
-                            for (i in this.varLabels) { // going through all the options inside 
-                                if (this.varLabels[i].toLowerCase() == 'others' || this.varLabels[i]
-                                    .toLowerCase() == "other") {
-                                    //check whether exists already
-                                    var new_label = "(Others) " + each.inputLabel;
-                                    if (!(this.all_question_input_labels.includes(new_label))) {
-                                        console.log("does not exist")
-
-                                        // post a new question
-                                        var URL = this.localhost + '/question'
-                                        var new_label = "(Others) " + each.inputLabel;
-                                        var data2 = {
-                                            "inputType": "text",
-                                            "inputLabel": new_label,
-                                            "isRequired": false,
-                                        }
-                                        axios.post(URL, data2)
-                                            .then(response => {
-                                                var new_question = response.data // get the new question
-
-                                                // put to form ID
-                                                for (each of this.form_sections) {
-                                                    for (each_question of each.questions) {
-                                                        if (each_question.questionId == update_id) {
-                                                            each.questions.push(new_question)
-                                                        }
-                                                    }
-                                                }
-                                                // console.log(this.form_sections)
-
-                                                this.raw_form['sections'] = this.form_sections
-                                                var data3 = this.raw_form
-                                                console.log(data3)
-
-                                                var URL4 = this.localhost + "/form/" + this.form_id
-                                                axios.put(URL4, data3)
-                                                    .then(response => {
-                                                        console.log(response.data)
-                                                        count += 1
-
-                                                    })
-                                                    .catch(error => {
-                                                        console.log(error.message)
-                                                    })
-                                            })
-                                            .catch(error => {
-                                                console.log(error.message)
-                                            })
-                                    }
-                                }
-
-                                var label_list = {}
-                                label_list['label'] = this.varLabels[i]
-                                all_labels.push(label_list)
-
-                            }
-                            each['questionProperties'] = all_labels
-
-                            var data = each;
-                            console.log(data)
-
-
-                            var URL2 = this.localhost + '/question/' + this.updateID
-                            axios.put(URL2, data)
-                                .then(response => {
-                                    console.log(response.data)
-                                })
-                                .catch(error => {
-                                    console.log(error.message)
-                                })
-
-                        }
-                    }
+                async postQuestion(data3, URL4) {
+                    await axios.put(URL4, data3)
+                        .then(response => {
+                            console.log(response.data)
+                        })
+                        .catch(error => {
+                            console.log(error.message)
+                        })
                 },
-                // updateLabel() {
-                //     var update_id = this.updateID
-
-                //     var all_new_labels = []
-                //     for (i in this.varLabels) {
-                //         all_new_labels.push(this.varLabels[i].toLowerCase())
-                //     }
-
-                //     // check if there are any empty options
-                //     if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")) {
-                //         this.error_message = "Input Labels cannot be Empty!"
-                //         document.getElementById("updateLabelButton").disabled = true;
-                //     } else {
-                //         this.error_message = ""
-                //         document.getElementById("updateLabelButton").disabled = false;
-                //     }
-
-                //     if (this.error_message == "") {
-                //         for (each of this.all_questions) {
-                //             if (each.questionId == this.updateID) {
-                //                 console.log("You found me")
-
-                //                 var all_labels = []
-                //                 for (i in this.varLabels) { // going through all the options inside 
-                //                     if (this.varLabels[i].toLowerCase() == 'others' || this.varLabels[i]
-                //                         .toLowerCase() == "other") {
-                //                         //check whether exists already
-                //                         var new_label = "(Others) " + each.inputLabel;
-                //                         if (!(this.all_question_input_labels.includes(new_label))) {
-                //                             // post a new question
-                //                             var URL = this.localhost + '/question'
-                //                             var new_label = "(Others) " + each.inputLabel;
-                //                             var data2 = {
-                //                                 "inputType": "text",
-                //                                 "inputLabel": new_label,
-                //                                 "isRequired": false,
-                //                             }
-
-                //                             axios.post(URL, data2)
-                //                                 .then(response => {
-                //                                     var new_question = response
-                //                                         .data // get the new question
-
-                //                                     // put to form ID
-                //                                     for (each of this.form_sections) {
-                //                                         for (each_question of each.questions) {
-                //                                             if (each_question.questionId == update_id) {
-                //                                                 each.questions.push(new_question)
-                //                                             }
-                //                                         }
-                //                                     }
-
-                //                                     this.raw_form['sections'] = this.form_sections
-                //                                     var data3 = this.raw_form
-                //                                     console.log(data3)
-
-                //                                     var URL4 = this.localhost + "/form/" + this.form_id
-                //                                     axios.put(URL4, data3)
-                //                                         .then(response => {
-                //                                             console.log(response.data)
-                //                                         })
-                //                                         .catch(error => {
-                //                                             console.log(error.message)
-                //                                         })
-                //                                 })
-                //                                 .catch(error => {
-                //                                     console.log(error.message)
-                //                                 })
-                //                         }
-                //                     }
-
-                //                     var label_list = {}
-                //                     label_list['label'] = this.varLabels[i]
-                //                     all_labels.push(label_list)
-
-                //                 }
-
-                //                 each['questionProperties'] = all_labels
-
-                //                 var data = each;
-                //                 console.log(data)
-
-                //                 var URL2 = this.localhost + '/question/' + this.updateID
-                //                 axios.put(URL2, data)
-                //                     .then(response => {
-                //                         console.log(response.data)
-                //                     })
-                //                     .catch(error => {
-                //                         console.log(error.message)
-                //                     })
-                //             }
-                //         }
-
-                //         this.closeUpdateModal();
-                //         //document.location.reload();
-                //     }
-                // },
-                updateLabel() {
+                async updateLabel() {
                     var update_id = this.updateID
 
                     var all_new_labels = []
@@ -1274,75 +1106,28 @@
                                         var new_label = "(Others) " + each.inputLabel;
                                         if (!(this.all_question_input_labels.includes(new_label))) {
                                             // put to form ID (updateId is the questions Id)
-                                            for (each of this.form_sections) {
-                                                for (each_question of each.questions) {
+                                            for (each_fs of this.form_sections) {
+                                                for (each_question of each_fs.questions) {
                                                     if (each_question.questionId == update_id) {
                                                         var new_question = {
                                                             "inputType": "text",
                                                             "inputLabel": new_label,
                                                             "isRequired": false,
                                                         }
-                                                        each.questions.push(new_question)
+                                                        each_fs.questions.push(new_question)
                                                     }
                                                 }
                                             }
                                             var data3 = this.raw_form
                                             var URL4 = this.localhost + "/form/" + this.form_id
-                                            axios.put(URL4, data3)
-                                                .then(response => {
-                                                    console.log(response.data)
-                                                })
-                                                .catch(error => {
-                                                    console.log(error.message)
-                                                })
-                                            
-                                                // post a new question
-                                            // var URL = this.localhost + '/question'
-                                            // var new_label = "(Others) " + each.inputLabel;
-                                            // var data2 = {
-                                            //     "inputType": "text",
-                                            //     "inputLabel": new_label,
-                                            //     "isRequired": false,
-                                            // }
 
-                                            // axios.post(URL, data2)
-                                            //     .then(response => {
-                                            //         var new_question = response
-                                            //             .data // get the new question
-
-                                            //         // put to form ID
-                                            //         for (each of this.form_sections) {
-                                            //             for (each_question of each.questions) {
-                                            //                 if (each_question.questionId == update_id) {
-                                            //                     each.questions.push(new_question)
-                                            //                 }
-                                            //             }
-                                            //         }
-
-                                            //         this.raw_form['sections'] = this.form_sections
-                                            //         var data3 = this.raw_form
-                                            //         console.log(data3)
-
-                                            //         var URL4 = this.localhost + "/form/" + this.form_id
-                                            //         axios.put(URL4, data3)
-                                            //             .then(response => {
-                                            //                 console.log(response.data)
-                                            //             })
-                                            //             .catch(error => {
-                                            //                 console.log(error.message)
-                                            //             })
-                                            //     })
-                                            //     .catch(error => {
-                                            //         console.log(error.message)
-                                            //     })
+                                            await this.postQuestion(data3, URL4);
                                         }
                                     }
-                                    // CASE 2: "NON" 
 
                                     var label_list = {}
                                     label_list['label'] = this.varLabels[i]
                                     all_labels.push(label_list)
-
                                 }
 
                                 each['questionProperties'] = all_labels
@@ -1362,7 +1147,7 @@
                         }
 
                         this.closeUpdateModal();
-                        //document.location.reload();
+                        document.location.reload();
                     }
                 },
                 addNewField() {
