@@ -317,10 +317,10 @@
             all_section_ids: [],
             allAnswers: {},
             workflow_raw_data: "",
-            //user
-            user_id: "",
-            userName: "",
-            emailAddress: "",
+            // //user
+            // user_id: "",
+            // userName: "",
+            // emailAddress: "",
 
             //SIGNATURE
             signaturePad: {},
@@ -362,7 +362,7 @@
                 .then(response => {
 
                     for (each of response.data) {
-                        if (each.userId == this.user_id) {
+                        if (each.userId == this.userId) {
                             this.userName = each.userName
                             this.emailAddress = each.emailAddress
                             console.log(this.userName)

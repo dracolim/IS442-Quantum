@@ -496,7 +496,7 @@
         data: {
             localhost: "http://localhost:5000",
             AllWorkflow: "",
-            userId: "",
+            
 
             isValidated: false,
             formSequences: [],
@@ -530,11 +530,12 @@
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            user_id: "",
+            userId: "",
+            // user_id: "",
 
         },
         mounted: async function () {
-            this.user_id = localStorage.userId;
+            this.userId = localStorage.userId;
             // Fetch individual workflow
             // var query = window.location.search.substring(4);
             // this.userId = query;
@@ -565,7 +566,7 @@
                     this.all_admins = responseThree;
 
                     for (each of responseThree) {
-                        if (each.userId == this.user_id) {
+                        if (each.userId == this.userId) {
                             this.userName = each.userName
                             this.emailAddress = each.emailAddress
                         }

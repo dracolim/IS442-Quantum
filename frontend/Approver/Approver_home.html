@@ -243,11 +243,11 @@
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            user_id: "",
+            userId: "",
         },
         mounted: async function () {
             // LOCALSTORAGE
-            this.user_id = localStorage.userId;
+            this.userId = localStorage.userId;
 
             // const API_URL = this.localhost + "/workflows/pending"; // wf status with in_prorgress
             const API_URL2 = this.localhost + "/users/userType/" + "APPROVER"
@@ -256,7 +256,7 @@
             axios.get(API_URL2)
                 .then(response => {
                     for (each of response.data) {
-                        if (each.userId == this.user_id) {
+                        if (each.userId == this.userId) {
                             this.userName = each.userName
                             this.emailAddress = each.emailAddress
                         }
@@ -270,7 +270,7 @@
                 .then(response => {
                     this.all_workflows = response.data
                     for (each of this.all_workflows) {
-                        if (each.approver.userId == this.user_id) {
+                        if (each.approver.userId == this.userId) {
                             for (each_fs of each.formSequences) {
                                 if (each_fs.status == "VALIDATED" && !(this.all_validated_workflows
                                         .includes(each))) {
