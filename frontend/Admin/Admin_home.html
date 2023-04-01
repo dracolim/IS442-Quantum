@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <!-- Links -->
+    <!-- Links -->
     <!-- flowbite -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
     <!-- Tailwind -->
@@ -190,7 +190,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_pending_workflows"
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of show_pending_workflows"
                         @click="goToSinglepage(value.workFlowId)" style="cursor: pointer;">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.vendor.userId}}
@@ -213,7 +213,8 @@
                         <td class="px-6 py-4 text-red-600 font-medium" v-if="value.workFlowStatus == 'IN_PROGRESS'">
                             INCOMPLETE
                         </td>
-                        <td class="px-6 py-4 text-green-600 font-medium" v-else-if="value.workFlowStatus == 'COMPLETED'">
+                        <td class="px-6 py-4 text-green-600 font-medium"
+                            v-else-if="value.workFlowStatus == 'COMPLETED'">
                             COMPLETED
                         </td>
                         <td class="px-6 py-4 text-green-600 font-medium" v-else-if="value.workFlowStatus == 'REJECTED'">
@@ -232,11 +233,12 @@
         data: {
             localhost: "http://localhost:5000",
             all_pending_workflows: "",
+            show_pending_workflows: [],
 
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            userId:""
+            userId: ""
         },
         mounted: async function () {
             this.userId = localStorage.userId;
@@ -258,6 +260,12 @@
 
                     this.all_pending_workflows = responseOne
                     console.log(this.all_pending_workflows)
+                    for (i in this.all_pending_workflows){
+                        if (this.all_pending_workflows[i].admin.userId == this.userId){
+                            
+                            this.show_pending_workflows.push(this.all_pending_workflows[i])
+                        }
+                    }
 
                     for (each of responseTwo) {
                         if (each.userId == this.userId) {
@@ -265,32 +273,9 @@
                             this.emailAddress = each.emailAddress
                         }
                     }
-            })).catch(errors => {
+                })).catch(errors => {
                     console.log(errors)
                 })
-
-
-            // axios.get(API_URL)
-            //     .then(response => {
-            //         this.all_pending_workflows = response.data
-            //         console.log(this.all_pending_workflows)
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     })
-            
-            // axios.get(API_URL2)
-            //     .then(response => {
-            //         for (each of response.data){
-            //             if (each.userId == this.user_id){
-            //                 this.userName = each.userName 
-            //                 this.emailAddress = each.emailAddress
-            //             }
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     })
 
         },
         methods: {

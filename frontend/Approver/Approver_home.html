@@ -192,8 +192,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-white border-gray-200 hover:bg-gray-100" v-for="(value,idx) of all_validated_workflows"
-                        @click="goToSinglepage(value.workFlowId)" style="cursor: pointer;">
+                    <tr class="bg-white border-gray-200 hover:bg-gray-100"
+                        v-for="(value,idx) of all_validated_workflows" @click="goToSinglepage(value.workFlowId)"
+                        style="cursor: pointer;">
                         <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
                             {{value.vendor.userId}}
                         </td>
@@ -212,12 +213,13 @@
                         <td class="px-6 py-4">
                             {{value.wfLastSubmit}}
                         </td>
-                        
+
 
                         <td class="px-6 py-4 text-red-600 font-medium" v-if="value.workFlowStatus == 'IN_PROGRESS'">
                             INCOMPLETE
                         </td>
-                        <td class="px-6 py-4 text-green-600 font-medium" v-else-if="value.workFlowStatus == 'COMPLETED'">
+                        <td class="px-6 py-4 text-green-600 font-medium"
+                            v-else-if="value.workFlowStatus == 'COMPLETED'">
                             COMPLETED
                         </td>
                         <td class="px-6 py-4 text-green-600 font-medium" v-else-if="value.workFlowStatus == 'REJECTED'">
@@ -251,21 +253,6 @@
             const API_URL2 = this.localhost + "/users/userType/" + "APPROVER"
             const API_URL3 = this.localhost + "/workflows";
 
-            // axios.get(API_URL)
-            //     .then(response => {
-            //         this.all_pending_workflows = response.data
-            //         for (each of this.all_pending_workflows){
-            //             var form_seq = each.formSequences;
-            //             for (each_form_seq of form_seq){
-            //                 if (each_form_seq.status == "VALIDATED"){
-            //                     this.all_validated_workflows.push(each)
-            //                 }
-            //             }
-            //         }
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     })
             axios.get(API_URL2)
                 .then(response => {
                     for (each of response.data) {
@@ -282,10 +269,13 @@
             axios.get(API_URL3)
                 .then(response => {
                     this.all_workflows = response.data
-                    for (each of this.all_workflows){
-                        for (each_fs of each.formSequences){
-                            if (each_fs.status == "VALIDATED" && !(this.all_validated_workflows.includes(each))){
-                                this.all_validated_workflows.push(each)
+                    for (each of this.all_workflows) {
+                        if (each.approver.userId == this.user_id) {
+                            for (each_fs of each.formSequences) {
+                                if (each_fs.status == "VALIDATED" && !(this.all_validated_workflows
+                                        .includes(each))) {
+                                    this.all_validated_workflows.push(each)
+                                }
                             }
                         }
                     }

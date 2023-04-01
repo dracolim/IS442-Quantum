@@ -847,12 +847,22 @@ public class DataLoader implements ApplicationRunner {
         admin2.setEmailAddress("isalsamudra@gmail.com");
         admin2.setPassword("123456");
 
+        Admin admin3 = new Admin();
+        admin3.setUserName("Admin3");
+        admin3.setEmailAddress("wejustclimb@gmail.com");
+        admin3.setPassword("123456");
+
 
         // ------------------------------- Create Approver ------------------------------
         Approver approver1 = new Approver();
         approver1.setUserName("Approver1");
         approver1.setEmailAddress("isalsamudra@gmail.com");
         approver1.setPassword("123456");
+
+        Approver approver2 = new Approver();
+        approver2.setUserName("Approver2");
+        approver2.setEmailAddress("lancelimzuyong9@gmail.com");
+        approver2.setPassword("123456");
 
 
         // ------------------------------- Save Users to DB ------------------------------
