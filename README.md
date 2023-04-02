@@ -22,8 +22,9 @@
 1. Ensure that you have WAMP / MAMP installed and running
 2. Go to `backend/src/main/resources/application.properties` and edit the  credentials for `spring.datasource.username` and `spring.datasource.password` to your own credentials for your WAMP/MAMP server
 3. Create a database in the WAMP/MAMP server with the name `qlvmsdb`
-4. Once created, run the `build.bat` file in the terminal. The `build.bat` file will download apache-maven-3.9.1-bin.zip and set it to your local maven environment. The `mvn spring-boot:run` will also be executed and the Spring Boot application should load all the necessary data into the database. 
-
+4. Once created, run the `build.bat` file in the terminal. The `build.bat` file will download apache-maven-3.9.1-bin.zip and set it to your local maven environment variable. The `mvn spring-boot:run` command will also be executed and the Spring Boot application should load all the necessary data into the database. 
+<br>
+<img width="500" alt="Screenshot 2023-03-27 at 2 41 29 PM" src="https://user-images.githubusercontent.com/89119401/229340309-9540cbd6-7a99-4e6b-9c78-47cc0769e60c.png">
 ## Accessing the Front-End Pages
 - The front-end pages are located in the `frontend` folder, explanation for the respective pages are shown below:
 
