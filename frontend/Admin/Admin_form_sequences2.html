@@ -81,8 +81,8 @@
 
 <body>
     <div id='app'>
-         <!-- header -->
-         <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
+        <!-- header -->
+        <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
             <div class="container flex flex-wrap items-center justify-between mx-auto"
                 style="width: 100%; overflow: hidden;">
                 <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
@@ -321,7 +321,7 @@
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            userId:""
+            userId: ""
         },
         mounted: async function () {
             // this.userId = localStorage.userId;
@@ -378,9 +378,8 @@
 
                     var temp_form_sections = []
                     for (each of this.form.sections) {
-                        if (!(each.title.toLowerCase().includes("approver"))) {
-                            temp_form_sections.push(each)
-                        }
+                        temp_form_sections.push(each)
+
                     }
                     this.form_sections = temp_form_sections
                     this.form_name = this.form.formName
@@ -390,7 +389,6 @@
                         if (Object.keys(each_section.questions).length !== 0) {
                             return true;
                         }
-
                         return false;
                     });
                     this.form_sections = sections;
@@ -460,7 +458,8 @@
         methods: {
             goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("../Admin/Admin_workflow_sequences.html?id=" + this.workflow_id + "/userid=" + this.userId)
+                window.location.assign("../Admin/Admin_workflow_sequences.html?id=" + this.workflow_id +
+                    "/userid=" + this.userId)
             },
             exportForm() {
                 var divContents = document.getElementById("dvContainer")

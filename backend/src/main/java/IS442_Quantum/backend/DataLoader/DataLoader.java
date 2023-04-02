@@ -867,12 +867,12 @@ public class DataLoader implements ApplicationRunner {
 
         Approver approver2 = new Approver();
         approver2.setUserName("Approver2");
-        approver2.setEmailAddress("lancelimzuyong9@gmail.com");
+        approver2.setEmailAddress("lancelim@gmail.com");
         approver2.setPassword("123456");
 
 
         // ------------------------------- Save Users to DB ------------------------------
-        userRepository.saveAll(Arrays.asList(vendor1, vendor2, vendor3, admin1, admin2, approver1));
+        userRepository.saveAll(Arrays.asList(vendor1, vendor2, vendor3, admin1, admin2, admin3, approver1, approver2));
 
 
         // -------------------------------- WorkFlow ----------------------
@@ -882,20 +882,38 @@ public class DataLoader implements ApplicationRunner {
         workFlow1.setWfDateline(new Date(2020,1,1));
         workFlow1.setWfLastSubmit(new Date(2020,1,1));
         workFlow1.setWorkFlowStatus(IS442_Quantum.backend.Enums.WorkFlowStatus.IN_PROGRESS);
-        workFlow1.setVendor(vendor1);
-        workFlow1.setAdmin(admin1);
-        workFlow1.setApprover(approver1);
+        workFlow1.setVendor(vendor3);
+        workFlow1.setAdmin(admin3);
+        workFlow1.setApprover(approver2);
 
         WorkFlow workFlow2 = new WorkFlow();
         workFlow2.setWfName("workflow2");
         workFlow2.setWfDateline(new Date(2020,1,1));
         workFlow2.setWfLastSubmit(new Date(2020,1,1));
         workFlow2.setWorkFlowStatus(IS442_Quantum.backend.Enums.WorkFlowStatus.IN_PROGRESS);
-        workFlow2.setVendor(vendor2);
-        workFlow2.setAdmin(admin2);
-        workFlow2.setApprover(approver1);
+        workFlow2.setVendor(vendor3);
+        workFlow2.setAdmin(admin3);
+        workFlow2.setApprover(approver2);
 
-        workFlowRepository.saveAll(Arrays.asList(workFlow1, workFlow2));
+        WorkFlow workFlow3 = new WorkFlow();
+        workFlow3.setWfName("workflow3");
+        workFlow3.setWfDateline(new Date(2020,1,1));
+        workFlow3.setWfLastSubmit(new Date(2020,1,1));
+        workFlow3.setWorkFlowStatus(IS442_Quantum.backend.Enums.WorkFlowStatus.IN_PROGRESS);
+        workFlow3.setVendor(vendor3);
+        workFlow3.setAdmin(admin3);
+        workFlow3.setApprover(approver2);
+
+        WorkFlow workFlow4 = new WorkFlow();
+        workFlow4.setWfName("workflow4");
+        workFlow4.setWfDateline(new Date(2020,1,1));
+        workFlow4.setWfLastSubmit(new Date(2020,1,1));
+        workFlow4.setWorkFlowStatus(IS442_Quantum.backend.Enums.WorkFlowStatus.IN_PROGRESS);
+        workFlow4.setVendor(vendor3);
+        workFlow4.setAdmin(admin3);
+        workFlow4.setApprover(approver2);
+
+        workFlowRepository.saveAll(Arrays.asList(workFlow1, workFlow2, workFlow3, workFlow4));
 
         // ------------------------------- Create Form Sequence -------------------------------
         ArrayList<FormSequence> fs1List = new ArrayList<FormSequence>();
@@ -914,7 +932,23 @@ public class DataLoader implements ApplicationRunner {
         fs2.setWorkFlow(workFlow2);
         fs2List.add(fs2);
 
-        formSequenceRepository.saveAll(Arrays.asList(fs1, fs2));
+        ArrayList<FormSequence> fs3List = new ArrayList<FormSequence>();
+        FormSequence fs3 = new FormSequence();
+        fs3.setForm(newVendorAssessmentForm);
+        fs3.setSeqNo(3);
+        fs3.setStatus(FormSequenceStatus.REQUESTED);
+        fs3.setWorkFlow(workFlow3);
+        fs3List.add(fs3);
+
+        ArrayList<FormSequence> fs4List = new ArrayList<FormSequence>();
+        FormSequence fs4 = new FormSequence();
+        fs4.setForm(form_f05);
+        fs4.setSeqNo(3);
+        fs4.setStatus(FormSequenceStatus.REQUESTED);
+        fs4.setWorkFlow(workFlow4);
+        fs4List.add(fs4);
+
+        formSequenceRepository.saveAll(Arrays.asList(fs1, fs2, fs3, fs4));
     }
 
     public void addYesNoRadio(Question q){

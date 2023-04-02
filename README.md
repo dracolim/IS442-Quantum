@@ -27,8 +27,19 @@ https://github.com/dracolim/IS442-Quantum.git
 4. Once created, run the `build.bat` file in the terminal. The `build.bat` file will download apache-maven-3.9.1-bin.zip and set it to your local maven environment variable. The `mvn spring-boot:run` command will also be executed and the Spring Boot application should load all the necessary data into the database. 
 <br>
 <img width="500" alt="Screenshot 2023-03-27 at 2 41 29 PM" src="https://user-images.githubusercontent.com/89119401/229340309-9540cbd6-7a99-4e6b-9c78-47cc0769e60c.png">
+
 ## Accessing the Front-End Pages
 - The front-end pages are located in the `frontend` folder, explanation for the respective pages are shown below:
+1. To be able to use the pages, firstly Login in the Login page with the correct email and password
+    * For Vendor:
+        * Email: vendor.3@gmail.com
+        * Password: 123456
+    * For Admin:
+        * Email: 
+        * Password: 
+    * For Approver:
+        * Email: 
+        * Password: 
 
 ### Login Page
 <code>login_home.html</code>
