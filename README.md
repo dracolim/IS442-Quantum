@@ -34,12 +34,12 @@ https://github.com/dracolim/IS442-Quantum.git
     * For Vendor:
         * Email: vendor.3@gmail.com
         * Password: 123456
-    * For Admin:
-        * Email: 
-        * Password: 
+    * For Admin: 
+        * Email: wejustclimb@gmail.com
+        * Password: 123456
     * For Approver:
-        * Email: 
-        * Password: 
+        * Email: lancelim@gmail.com
+        * Password: 123456
 
 ### Login Page
 <code>login_home.html</code>
