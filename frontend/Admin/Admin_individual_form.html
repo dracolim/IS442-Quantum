@@ -1010,6 +1010,7 @@
                     axios.delete(URL, question_id)
                         .then(response => {
                             console.log(response.data)
+                            alert("Delete Successful !")
                             document.location.reload();
                         })
                         .catch(error => {

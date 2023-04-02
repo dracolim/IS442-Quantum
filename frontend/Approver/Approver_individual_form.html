@@ -147,12 +147,7 @@
                             <div class="font-bold">{{userName}}</div>
                             <div class="truncate">{{emailAddress}}</div>
                         </div>
-                        <ul class="py-2 text-sm text-gray-700 "
-                            aria-labelledby="dropdownInformdropdownAvatarNameButtonationButton">
-                            <li>
-                                <a href="#" class="block px-4 py-2 hover:bg-gray-100 ">Settings</a>
-                            </li>
-                        </ul>
+                       
                         <div class="py-2">
                             <a href="../login_home.html"
                                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 ">Sign
@@ -182,22 +177,22 @@
                 <ul
                     class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
-                        <a href="../Approver/Approver_home.html"
+                        <a :href="'../Approver/Approver_home.html?id=' + userId"
                             class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                            aria-current="page">Pending Workflows</a>
+                            aria-current="page">Validated Workflows</a>
                     </li>
                     <li>
-                        <a href="../Approver/Approver_workflow.html"
+                        <a :href="'../Approver/Approver_workflow.html?id=' + userId"
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
                             aria-current="page">Workflows</a>
                     </li>
                     <li>
-                        <a href="../Approver/Approver_accounts.html"
+                        <a  :href="'../Approver/Approver_accounts.html?id=' + userId"
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                             Accounts</a>
                     </li>
                     <li>
-                        <a href="../Approver/Approver_form.html"
+                        <a :href="'../Approver/Approver_form.html?id=' + userId"
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
                             Forms</a>
                     </li>
@@ -217,7 +212,7 @@
                             v-model="form_name" @change="updateFormName()"></span>
                     <!-- <span id="form_name">Form Name: {{form_name}}</span> -->
                     <p class="mt-1 text-sm font-normal text-gray-500">
-                        <a href="../Approver/Approver_form.html"><span class="underline hover:text-gray-800"> Forms
+                        <a :href="'../Approver/Approver_form.html?id=' + userId"><span class="underline hover:text-gray-800"> Forms
                             </span></a>
                         <span class='text-sky-600'>> Form ID: {{form_id}}</span>
                     </p>
@@ -705,10 +700,15 @@
                 userId: ""
             },
             mounted: async function () {
-                this.userId = localStorage.userId;
+                // this.userId = localStorage.userId;
 
                 var query = window.location.search.substring(4);
-                this.form_id = query;
+                console.log(query)
+
+                var slashidx = query.indexOf("/")
+                this.form_id = query.substring(0, slashidx);
+
+                this.userId = query.substring(slashidx + 8, );
 
                 const API_URL = this.localhost + "/form/" + this.form_id;
                 const API_URL2 = this.localhost + "/questions"
@@ -821,7 +821,8 @@
                     this.NewSectionId = biggest + 1
                 },
                 goToSinglepage: function () {
-                    window.location.assign("./Approver_overview_form.html?id=" + this.form_id)
+                    window.location.assign("./Approver_overview_form.html?id=" + this.form_id + "/userId=" + this
+                    .userId)
                 },
                 updateFormName() {
                     console.log(this.form_name)
@@ -1008,6 +1009,7 @@
                     axios.delete(URL, question_id)
                         .then(response => {
                             console.log(response.data)
+                            alert("Delete Successful !")
                             document.location.reload();
                         })
                         .catch(error => {
