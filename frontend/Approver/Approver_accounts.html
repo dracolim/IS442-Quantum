@@ -132,22 +132,22 @@
                 <ul
                     class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
-                        <a href="../Approver/Approver_home.html"
+                        <a :href="'../Approver/Approver_home.html?id=' + userId" 
                             class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
                             aria-current="page">Validated Workflows</a>
                     </li>
                     <li>
-                        <a href="../Approver/Approver_workflow.html"
+                        <a :href="'../Approver/Approver_workflow.html?id=' + userId" 
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
                             aria-current="page">Workflows</a>
                     </li>
                     <li>
-                        <a href="../Approver/Approver_accounts.html"
+                        <a :href="'../Approver/Approver_accounts.html?id=' + userId" 
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
                             Accounts</a>
                     </li>
                     <li>
-                        <a href="../Approver/Approver_form.html"
+                        <a  :href="'../Approver/Approver_form.html?id=' + userId" 
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                             Forms</a>
                     </li>
@@ -925,7 +925,7 @@
 
                                             <div class="md:col-span-5">
                                                 <label for="Approver_email"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Approver
                                                     Email</label>
                                                 <input v-model="approverEmail" type="text" name="Approver_email"
                                                     id="Approver_email"
@@ -1095,7 +1095,7 @@
                 class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden"
                 id="notification" style="position: fixed; top: 10px; right: 10px;">
                 <div
-                    class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                    class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-green-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg"
                         alt="check icon" />
                 </div>
@@ -1131,8 +1131,8 @@
                 </div>
                 <div
                     class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
-                    <a href="javascript:void(0)" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
-                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer"></span>
+                    <a href="" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
+                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
                     </a>
                 </div>
             </div>
@@ -1146,7 +1146,7 @@
                 class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden"
                 id="deletenotification" style="position: fixed; top: 10px; right: 10px;">
                 <div
-                    class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                    class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-green-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg"
                         alt="check icon" />
                 </div>
@@ -1166,8 +1166,8 @@
         </div>
     </div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tw-elements/dist/js/index.min.js"></script>
 </body>
 
 <script>
@@ -1222,7 +1222,9 @@
 
         },
         mounted: async function () {
-            this.userId = localStorage.userId;
+            // this.userId = localStorage.userId;
+            var query = window.location.search.substring(4);
+            this.userId = query;
 
             const API_URL = this.localhost + "/users/"
             const API_URL_LOCALSTORAGE = this.localhost + "/users/userType/" + "APPROVER"
@@ -1246,15 +1248,6 @@
                 })).catch(errors => {
                     console.log(errors)
                 })
-
-            // axios.get(API_URL)
-            //     .then(response => {
-            //         this.userList = response.data;
-            //         // console.log(this.userList)
-            //     })
-            //     .catch(error => {
-            //         console.error(error)
-            //     })
         },
         methods: {
             async createVendorAcc() {
