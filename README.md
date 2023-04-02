@@ -30,14 +30,14 @@ https://github.com/dracolim/IS442-Quantum.git
 
 ## Accessing the Front-End Pages
 - The front-end pages are located in the `frontend` folder, explanation for the respective pages are shown below:
-1. To be able to use the pages, firstly Login in the Login page with the correct email and password
-    * For Vendor:
+- To use the pages, firstly Login through the Login page (<code>login_home.html</code>) with the following correct email and password
+    * For **Vendor**:
         * Email: vendor.3@gmail.com
         * Password: 123456
-    * For Admin: 
+    * For **Admin**:: 
         * Email: wejustclimb@gmail.com
         * Password: 123456
-    * For Approver:
+    * For **Approver**::
         * Email: lancelim@gmail.com
         * Password: 123456
 
