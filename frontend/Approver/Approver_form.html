@@ -380,7 +380,7 @@
                 var URL = this.localhost + '/form/' + form_id
                 axios.delete(URL)
                     .then(response => {
-                        alert("Deletion is successful!")
+                        alert("Delete successful!")
                         document.location.reload();
                     })
                     .catch(error => {
