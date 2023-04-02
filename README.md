@@ -18,6 +18,15 @@
 2. Admin [ [link](#admin) ]
 3. Approver [ [link](#approver) ]
 
+## Setting Up The Project (Spring Boot Application)
+1. Ensure that you have WAMP / MAMP installed and running
+2. Go to `backend/src/main/resources/application.properties` and edit the  credentials for `spring.datasource.username` and `spring.datasource.password` to your own credentials for your WAMP/MAMP server
+3. Create a database in the WAMP/MAMP server with the name `qlvmsdb`
+4. Once created, run the `build.bat` file in the terminal. The `build.bat` file will download apache-maven-3.9.1-bin.zip and set it to your local maven environment. The `mvn spring-boot:run` will also be executed and the Spring Boot application should load all the necessary data into the database. 
+
+## Accessing the Front-End Pages
+- The front-end pages are located in the `frontend` folder, explanation for the respective pages are shown below:
+
 ### Login Page
 <code>login_home.html</code>
 * Users can login to their respective accounts with their email and password. There are total 3 user types (Approver, Admin, Vendor).
