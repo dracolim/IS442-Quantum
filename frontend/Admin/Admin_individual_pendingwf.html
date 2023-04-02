@@ -58,8 +58,8 @@
 
 <body>
     <div id="app">
-         <!-- header -->
-         <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
+        <!-- header -->
+        <div class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded ">
             <div class="container flex flex-wrap items-center justify-between mx-auto"
                 style="width: 100%; overflow: hidden;">
                 <img src="../Images/Quantum_Logo.jpg" class="mr-3 sm:h-15 ml-3 mt-2 mb-2"
@@ -263,7 +263,7 @@
                                                 viewBox="0 0 24 24">
                                                 <path fill="currentColor"
                                                     d="M5 21V6H4V4h5V3h6v1h5v2h-1v15Zm2-2h10V6H7Zm2-2h2V8H9Zm4 0h2V8h-2ZM7 6v13Z" />
-                                                </svg>
+                                            </svg>
                                             Delete
                                         </button>
                                     </p>
@@ -314,7 +314,7 @@
             //LOCALSTORAGE
             userName: "",
             emailAddress: "",
-            userId:""
+            userId: ""
         },
         mounted: async function () {
             this.userId = localStorage.userId;
@@ -347,23 +347,9 @@
                             this.emailAddress = each.emailAddress
                         }
                     }
-            })).catch(errors => {
+                })).catch(errors => {
                     console.log(errors)
                 })
-
-            // axios.get(API_URL)
-            //     .then(response => {
-            //         var result = response.data
-            //         this.workflow_raw_data = result;
-
-            //         this.all_form_sequences = result.formSequences
-
-            //         console.log(this.all_form_sequences)
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     })
-
         },
         methods: {
             goToSinglePage: function (id) {
