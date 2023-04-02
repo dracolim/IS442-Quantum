@@ -1,8 +1,10 @@
 # IS442 x Quantum Project by Team 8
-
 ![example workflow](https://img.shields.io/badge/Build%20In-HTML%2C%20CSS%20%2C%20Vue.js%2C%20Java-brightgreen)
 ![example workflow](https://img.shields.io/badge/Build%20With-Spring%20Boot-blue)
 ![example workflow](https://img.shields.io/badge/Database-SQL-red)
+
+#### Link to Github Repository
+https://github.com/dracolim/IS442-Quantum.git
 
 #### Group Memebers
 * Lim Bei Ling Cheryl
@@ -49,7 +51,7 @@
  3. **Form Status:** "COMPLETED" and "INCOMPLETE"
     * By Default, if Vendor have not submitted form, the staus will be "INCOMPLETE"
     * If Vendor Submits form, the status will be changed from "INCOMPLETE" to "COMPLETED"
-    * If Admin requests Vendor to submit/update form again, the status will be changed to "INCOMPLETE"
+    * If Admin requests Vendor to submit/update form again, the status will be changed to "INCOMPLETE" <br>
 <img width="500" height ="320" alt="Screenshot 2023-03-27 at 2 56 27 PM" src="https://user-images.githubusercontent.com/85498185/227863633-f3b29447-34a7-47e3-ac7c-1691238f3bed.png">
 
 #### Select individual form
@@ -121,7 +123,7 @@
 2. Edit the required fields and submit 
 3. Once submitted, the workflow will be updated with the new details
 4. **Error Handling**:
-    * Scenario 1: Empty Inputs
+    * Scenario 1: Empty Inputs <br>
 <img width="500" alt="Screenshot 2023-03-27 at 3 44 37 PM" src="https://user-images.githubusercontent.com/85498185/227874539-51851af3-650a-4930-958d-cecf6ae2202f.png">
 
 #### Delete Workflow
@@ -211,7 +213,7 @@
 <ins>Steps to Edit Form Name<ins><br>
 1. At <code>Admin_form.html</code>, either click on the icon in "FORM DOCUMENT" column or any table rows
 2. It will lead to <code>Admin_Individual_form.html</code>, where all the questions details (Eg: Field Type, Field Name) will be shown
-3. Click on the Input beside Form Name, and fill in the new form name. It will edit the form name accordinly
+3. Click on the Input beside Form Name, and fill in the new form name. It will edit the form name accordingly <br>
 <img width="500" alt="Screenshot 2023-03-27 at 4 49 28 PM" src="https://user-images.githubusercontent.com/85498185/227891252-1a8adf22-6962-448c-9351-aaf5402e2800.png">
 
 #### Edit Section Title, ID, Description
@@ -243,8 +245,8 @@
         5. **Error Handling**: 
             * Scenario 1: Input cannot be empty
             * Scenario 2: Input cannot be the same 
-        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) ____[Field Name]___ " question and added to the section that belongs to that question.
-<img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png">
+        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) ____[Field Name]___ " question and added to the section that belongs to that question. <br>
+<img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png"> <br>
 
 #### Delete Field
 <ins>Steps to Delete Field<ins><br>
@@ -279,7 +281,7 @@
 #### (EXTRA) Adjust Table Column Size
 <ins>Steps to Adjust Table Column Size<ins><br>
 1. At <code>Admin_Individual_form.html</code>, click and drag the lines in between the columns (applicable for table header and row 1 only)
-2. Once it is dragged, the table column will change its size accordingly
+2. Once it is dragged, the table column will change its size accordingly <br>
 <img width="500" alt="Screenshot 2023-03-27 at 6 10 38 PM" src="https://user-images.githubusercontent.com/85498185/227912594-1b4ba8eb-5f42-48a9-9a23-4422c46dadca.png">
 
 ## Approver
@@ -377,7 +379,7 @@
 1. From <code>Approver_workflow.html</code>, Approver can either click on the table rows or the document icon in the "check sequence" column
 2. At <code>Approver_workflow_sequences.html</code>, click on the any table rows. 
 3. At <code>Approver_form_sequences2.html</code>, click on "EXPORT" button
-4. The form PDF will be automatically downloaded to the desktop
+4. The form PDF will be automatically downloaded to the desktop <br>
 <img width="500" alt="Screenshot 2023-03-27 at 4 07 33 PM" src="https://user-images.githubusercontent.com/85498185/227880137-d8ac5024-c366-4836-ab93-221fee2512e7.png">
 
 ### Accounts Tab
@@ -435,7 +437,7 @@
 <ins>Steps to Edit Form Name<ins><br>
 1. At <code>Approver_form.html</code>, either click on the icon in "FORM DOCUMENT" column or any table rows
 2. It will lead to <code>Approver_individual_form.html</code>, where all the questions details (Eg: Field Type, Field Name) will be shown
-3. Click on the Input beside Form Name, and fill in the new form name. It will edit the form name accordinly
+3. Click on the Input beside Form Name, and fill in the new form name. It will edit the form name accordingly <br>
 <img width="500" alt="Screenshot 2023-03-27 at 4 49 28 PM" src="https://user-images.githubusercontent.com/85498185/227891252-1a8adf22-6962-448c-9351-aaf5402e2800.png">
 
 #### Edit Section Title, ID, Description
@@ -467,8 +469,8 @@
         5. **Error Handling**: 
             * Scenario 1: Input cannot be empty
             * Scenario 2: Input cannot be the same 
-        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) ____[Field Name]___ " question and added to the section that belongs to that question.
-<img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png">
+        6. (EXTRA) if "others" is added into the Input Options, it will automatically create a "(Others) ____[Field Name]___ " question and added to the section that belongs to that question. <br>
+<img width="500" alt="Screenshot 2023-03-27 at 4 52 19 PM" src="https://user-images.githubusercontent.com/85498185/227892044-e0620f7b-08d2-48f4-96cc-a497957170b0.png"> <br>
 
 #### Delete Field
 <ins>Steps to Delete Field<ins><br>
@@ -497,7 +499,7 @@
 1. At <code>Approver_form.html</code>, either click on the icon in "FORM DOCUMENT" column or any table rows
 2. It will lead to <code>Approver_Individual_form.html</code>, where all the questions details (Eg: Field Type, Field Name) will be shown
 3. At <code>Approver_Individual_form.html</code>, click on "VIEW FORM" button
-4. It will lead to <code>Approver_overview_form.html</code>, where Approver can get an overview of how the form will look like
+4. It will lead to <code>Approver_overview_form.html</code>, where Approver can get an overview of how the form will look like <br>
 <img width="500" alt="Screenshot 2023-03-27 at 5 10 38 PM" src="https://user-images.githubusercontent.com/85498185/227896652-bcec39b7-51ef-41e0-9a24-b646bc09a9f2.png">
 
 #### (EXTRA) Adjust Table Column Size
