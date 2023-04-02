@@ -138,12 +138,12 @@
                     </li>
                     <li>
                         <a href="../Admin/Admin_workflow.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
-                        aria-current="page">Workflows</a>
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
+                            aria-current="page">Workflows</a>
                     </li>
                     <li>
                         <a href="../Admin/Admin_accounts.html"
-                        class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
+                            class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0">
                             Accounts</a>
                     </li>
                     <li>
@@ -285,7 +285,7 @@
             </button>
         </div>
 
-        <div class = "pb-12"></div>
+        <div class="pb-12"></div>
 
         <!-- FORM MODAL FOR VENDOR -->
         <div data-te-modal-init
@@ -323,10 +323,12 @@
                                                 <label for="user_name"
                                                     class="mb-1 block text-sm font-medium text-gray-900 ">User
                                                     Name</label>
-                                                <input v-model="vendorUserName" type="text" name="user_name" id="user_name"
+                                                <input v-model="vendorUserName" type="text" name="user_name"
+                                                    id="user_name"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                     value="" />
-                                                <div v-if="createErrors.vendorUserName" class="mt-2 text-xs text-red-600">
+                                                <div v-if="createErrors.vendorUserName"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ createErrors.vendorUserName }}</div>
                                             </div>
 
@@ -369,7 +371,8 @@
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                     value="" placeholder="" />
                                                 <div v-if="createErrors.companyRegistrationNo"
-                                                    class="mt-2 text-xs text-red-600">{{ createErrors.companyRegistrationNo }}
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ createErrors.companyRegistrationNo }}
                                                 </div>
                                             </div>
 
@@ -394,7 +397,8 @@
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                     value="" placeholder="" />
                                                 <div v-if="createErrors.companyOfficeAddress"
-                                                    class="mt-2 text-xs text-red-600">{{ createErrors.companyOfficeAddress }}
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ createErrors.companyOfficeAddress }}
                                                 </div>
                                             </div>
 
@@ -440,7 +444,8 @@
                                                 <input type="text"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                     value="" v-model="businessTypeOthers" placeholder="" />
-                                                <div v-if="createErrors.businessTypeOthers" class="mt-2 text-xs text-red-600">
+                                                <div v-if="createErrors.businessTypeOthers"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ createErrors.businessTypeOthers }}</div>
                                             </div>
 
@@ -505,12 +510,14 @@
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
                                                 <label for="Update_user_name"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User Name</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User
+                                                    Name</label>
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_user_name" id="Update_user_name"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                     value="" />
-                                                <div v-if="updateErrors.vendorUserName" class="mt-2 text-xs text-red-600">
+                                                <div v-if="updateErrors.vendorUserName"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.vendorUserName }}</div>
                                             </div>
 
@@ -537,7 +544,8 @@
                                                     Name</label>
                                                 <input v-model="specificUserCompanyName" type="text"
                                                     name="Update_company_name" id="Update_company_name"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" />
                                                 <div v-if="updateErrors.companyName" class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.companyName }}</div>
                                             </div>
@@ -549,10 +557,11 @@
                                                     No</label>
                                                 <input v-model="specificUserCompanyRegistrationNo" type="text"
                                                     name="Update_Registration_no" id="Update_Registration_no"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
                                                 <div v-if="updateErrors.companyRegistrationNo"
-                                                    class="mt-2 text-xs text-red-600">{{ updateErrors.companyRegistrationNo }}
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ updateErrors.companyRegistrationNo }}
                                                 </div>
                                             </div>
 
@@ -562,8 +571,8 @@
                                                     Email</label>
                                                 <input v-model="specificUserCompanyEmail" type="text"
                                                     name="Update_Company_email" id="Update_Company_email"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
                                                 <div v-if="updateErrors.companyEmail" class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.companyEmail }}</div>
                                             </div>
@@ -574,10 +583,11 @@
                                                     Address</label>
                                                 <input v-model="specificUserCompanyOfficeAddress" type="text"
                                                     name="Update_address" id="Update_address"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
                                                 <div v-if="updateErrors.companyOfficeAddress"
-                                                    class="mt-2 text-xs text-red-600">{{ updateErrors.companyOfficeAddress }}
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ updateErrors.companyOfficeAddress }}
                                                 </div>
                                             </div>
 
@@ -586,8 +596,8 @@
                                                     class="mb-1 block text-sm font-medium text-gray-900 ">Tel</label>
                                                 <input v-model="specificUserCompanyTel" type="text" name="Update_tel"
                                                     id="Update_tel"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
                                                 <div v-if="updateErrors.companyTel" class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.companyTel }}</div>
                                             </div>
@@ -597,8 +607,8 @@
                                                     class="mb-1 block text-sm font-medium text-gray-900 ">Fax</label>
                                                 <input v-model="specificUserCompanyFax" type="text" name="Update_fax"
                                                     id="Update_fax"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
                                                 <div v-if="updateErrors.companyFax" class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.companyFax }}</div>
                                             </div>
@@ -606,7 +616,9 @@
                                             <div class="md:col-span-5">
                                                 <label class="mb-1 block text-sm font-medium text-gray-900 ">Type
                                                     of Business</label>
-                                                <span class="ml text-gray-400 appearance-none outline-none w-full bg-transparent">Business Type: {{specificUserBusinessType}}</span>
+                                                <span
+                                                    class="ml text-gray-400 appearance-none outline-none w-full bg-transparent">Business
+                                                    Type: {{specificUserBusinessType}}</span>
 
                                                 <!-- TYPE OF BUSINESS LICENSE menu -->
                                                 <select id="countries" v-model="specificUserBusinessType"
@@ -615,7 +627,7 @@
                                                     <option value="Partnership Agreement">Partnership Agreement</option>
                                                     <option value="Limited Company">Limited Company</option>
                                                     <option value="Others">Others</option>
-                                                    
+
                                                 </select>
                                                 <div v-if="updateErrors.businessType" class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.businessType }}</div>
@@ -627,7 +639,8 @@
                                                 <input type="text"
                                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                                     value="" v-model="specificUserBusinessTypeOthers" placeholder="" />
-                                                <div v-if="updateErrors.businessTypeOthers" class="mt-2 text-xs text-red-600">
+                                                <div v-if="updateErrors.businessTypeOthers"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.businessTypeOthers }}</div>
                                             </div>
 
@@ -694,21 +707,25 @@
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
                                                 <label for="Admin_user_name"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User Name</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User
+                                                    Name</label>
                                                 <input v-model="adminUserName" type="text" name="Admin_user_name"
                                                     id="Admin_user_name"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
-                                                <div v-if="createErrors.adminUserName" class="mt-2 text-xs text-red-600">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" />
+                                                <div v-if="createErrors.adminUserName"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ createErrors.adminUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label for="Admin_email"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin Email</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin
+                                                    Email</label>
                                                 <input v-model="adminEmail" type="text" name="Admin_email"
                                                     id="Admin_email"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
                                                 <div v-if="createErrors.adminEmail" class="mt-2 text-xs text-red-600">
                                                     {{ createErrors.adminEmail }}</div>
                                             </div>
@@ -718,9 +735,10 @@
                                                     class="mb-1 block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="adminPassword" type="password" name="password"
                                                     id="password"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="">
-                                                <div v-if="createErrors.adminPassword" class="mt-2 text-xs text-red-600">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="">
+                                                <div v-if="createErrors.adminPassword"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ createErrors.adminPassword }}</div>
                                             </div>
 
@@ -789,23 +807,28 @@
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
                                                 <label for="Update_Admin_user_name"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User Name</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User
+                                                    Name</label>
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_Admin_user_name" id="Update_Admin_user_name"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
-                                                <div v-if="updateErrors.adminUserUserName" class="mt-2 text-xs text-red-600">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" />
+                                                <div v-if="updateErrors.adminUserUserName"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.adminUserUserName }}</div>
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label for="Update_Admin_email"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin Email</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin
+                                                    Email</label>
                                                 <input v-model="specificUserCompanyEmail" type="text"
                                                     name="Update_Admin_email" id="Update_Admin_email"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
                                                 <div v-if="updateErrors.adminUserCompanyEmail"
-                                                    class="mt-2 text-xs text-red-600">{{ updateErrors.adminUserCompanyEmail }}
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ updateErrors.adminUserCompanyEmail }}
                                                 </div>
                                             </div>
 
@@ -814,9 +837,10 @@
                                                     class="mb-1 block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="specificUserPassword" type="password"
                                                     name="Update_password" id="Update_password"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="">
-                                                <div v-if="updateErrors.adminUserPassword" class="mt-2 text-xs text-red-600">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="">
+                                                <div v-if="updateErrors.adminUserPassword"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.adminUserPassword }}</div>
                                             </div>
 
@@ -888,23 +912,28 @@
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
                                                 <label for="Approver_user_name"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User Name</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User
+                                                    Name</label>
                                                 <input v-model="approverUserName" type="text" name="Approver_user_name"
                                                     id="Approver_user_name"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
-                                                <div v-if="createErrors.approverUserName" class="mt-2 text-xs text-red-600">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" />
+                                                <div v-if="createErrors.approverUserName"
+                                                    class="mt-2 text-xs text-red-600">
                                                     {{ createErrors.approverUserName }}</div>
 
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label for="Approver_email"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin Email</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin
+                                                    Email</label>
                                                 <input v-model="approverEmail" type="text" name="Approver_email"
                                                     id="Approver_email"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
-                                                <div v-if="createErrors.approverEmail">{{ createErrors.approverEmail }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
+                                                <div v-if="createErrors.approverEmail">{{ createErrors.approverEmail }}
+                                                </div>
 
                                             </div>
 
@@ -913,9 +942,10 @@
                                                     class="mb-1 block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="approverPassword" type="password"
                                                     name="Approver_password" id="Approver_password"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="">
-                                                <div v-if="createErrors.approverPassword">{{ createErrors.approverPassword }}</div>
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="">
+                                                <div v-if="createErrors.approverPassword">
+                                                    {{ createErrors.approverPassword }}</div>
 
                                             </div>
 
@@ -987,22 +1017,26 @@
                                         <div class="mb-6 mt-2 grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                                             <div class="md:col-span-5">
                                                 <label for="Update_Approver_user_name"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User Name</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">User
+                                                    Name</label>
                                                 <input v-model="specificUserUserName" type="text"
                                                     name="Update_Approver_user_name" id="Update_Approver_user_name"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" />
                                                 <div v-if="updateErrors.approverUserUserName"
-                                                    class="mt-2 text-xs text-red-600">{{ updateErrors.approverUserUserName }}
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ updateErrors.approverUserUserName }}
                                                 </div>
                                             </div>
 
                                             <div class="md:col-span-5">
                                                 <label for="Update_Approver_email"
-                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin Email</label>
+                                                    class="mb-1 block text-sm font-medium text-gray-900 ">Admin
+                                                    Email</label>
                                                 <input v-model="specificUserCompanyEmail" type="text"
                                                     name="Update_Approver_email" id="Update_Approver_email"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="" />
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="" />
                                                 <div v-if="updateErrors.approverUserCompanyEmail"
                                                     class="mt-2 text-xs text-red-600">
                                                     {{ updateErrors.approverUserCompanyEmail }}</div>
@@ -1013,10 +1047,11 @@
                                                     class="mb-1 block text-sm font-medium text-gray-900 ">Password</label>
                                                 <input v-model="specificUserPassword" type="password"
                                                     name="Update_approver_password" id="Update_approver_password"
-                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" value=""
-                                                    placeholder="">
+                                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                                    value="" placeholder="">
                                                 <div v-if="updateErrors.approverUserPassword"
-                                                    class="mt-2 text-xs text-red-600">{{ updateErrors.approverUserPassword }}
+                                                    class="mt-2 text-xs text-red-600">
+                                                    {{ updateErrors.approverUserPassword }}
                                                 </div>
                                             </div>
 
@@ -1061,7 +1096,7 @@
                 class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden"
                 id="notification" style="position: fixed; top: 10px; right: 10px;">
                 <div
-                    class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                    class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-green-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg"
                         alt="check icon" />
                 </div>
@@ -1073,8 +1108,7 @@
                 <div
                     class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
                     <a href="" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
-                        <span
-                            class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
+                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
                     </a>
                 </div>
             </div>
@@ -1098,8 +1132,8 @@
                 </div>
                 <div
                     class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
-                    <a href="javascript:void(0)" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
-                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer"></span>
+                    <a href="" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
+                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
                     </a>
                 </div>
             </div>
@@ -1113,7 +1147,7 @@
                 class="sm:mr-6 xl:w-5/12 mx-auto absolute left-0 sm:left-auto right-0 sm:w-6/12 md:w-3/5 justify-between w-11/12 bg-white light:bg-gray-800 shadow-lg rounded flex sm:flex-row flex-col transition duration-150 ease-in-out hidden"
                 id="deletenotification" style="position: fixed; top: 10px; right: 10px;">
                 <div
-                    class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-sky-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
+                    class="sm:px-6 p-2 flex mt-4 sm:mt-0 ml-4 sm:ml-0 items-center justify-center bg-green-600 sm:rounded-tl sm:rounded-bl w-12 h-12 sm:h-auto sm:w-auto text-white">
                     <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/coloured_multiple_with_separator-svg1.svg"
                         alt="check icon" />
                 </div>
@@ -1125,8 +1159,7 @@
                 <div
                     class="flex sm:flex-col sm:justify-center sm:border-l light:border-gray-700 items-center border-gray-300 sm:w-1/6 pl-4 sm:pl-0">
                     <a href="" class="sm:pt-4 pb-4 flex sm:justify-center w-full cursor-pointer">
-                        <span
-                            class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
+                        <span class="sm:text-sm text-xs text-gray-600 light:text-gray-400 cursor-pointer">Refresh</span>
                     </a>
                 </div>
             </div>
@@ -1360,7 +1393,8 @@
                     }
 
                     if (!this.businessTypeOthers) {
-                        this.createErrors.businessTypeOthers = 'Business Type is required under Please Specify';
+                        this.createErrors.businessTypeOthers =
+                            'Business Type is required under Please Specify';
                         this.hasErrors = true;
                     }
 
@@ -1408,7 +1442,8 @@
                     this.createErrors.adminEmail = 'Email is required';
                     this.hasErrors = true;
                 } else if (!this.validEmail(this.adminEmail)) {
-                    this.createErrors.adminEmail = 'Email is invalid (missing @ or information before/after)';
+                    this.createErrors.adminEmail =
+                        'Email is invalid (missing @ or information before/after)';
                     this.hasErrors = true;
                 }
 
@@ -1453,7 +1488,8 @@
                     this.createErrors.approverEmail = 'Email is required';
                     this.hasErrors = true;
                 } else if (!this.validEmail(this.approverEmail)) {
-                    this.createErrors.approverEmail = 'Email is invalid (missing @ or information before/after)';
+                    this.createErrors.approverEmail =
+                        'Email is invalid (missing @ or information before/after)';
                     this.hasErrors = true;
                 }
 
@@ -1695,7 +1731,8 @@
                         }
 
                         if (!this.businessTypeOthers) {
-                            this.updateErrors.businessTypeOthers = 'Business Type is required under Please Specify';
+                            this.updateErrors.businessTypeOthers =
+                                'Business Type is required under Please Specify';
                             this.hasErrors = true;
                         }
 
