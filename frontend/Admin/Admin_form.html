@@ -386,6 +386,7 @@
                         document.location.reload();
                     })
                     .catch(error => {
+                        alert("Form cannot be deleted, as the Form is already assigned to a workflow. \nDelete the workflow before deleting the form.")
                         console.log(error.message)
                     })
             },

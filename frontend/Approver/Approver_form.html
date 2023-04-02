@@ -354,15 +354,6 @@
             })).catch(errors => {
                     console.log(errors)
                 })
-
-            // axios.get(API_URL)
-            //     .then(response => {
-            //         this.all_forms = response.data;
-            //         console.log(this.all_forms)
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     })
         },
         methods: {
             goToSinglepage: function (id) {
@@ -395,6 +386,7 @@
                         document.location.reload();
                     })
                     .catch(error => {
+                        alert("Form cannot be deleted, as the Form is already assigned to a workflow. \nDelete the workflow before deleting the form.")
                         console.log(error.message)
                     })
             },

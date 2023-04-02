@@ -534,20 +534,6 @@
                                     required>
                             </div>
 
-                            <!-- ERROR HANDLING -->
-                            <!-- <div v-if="inputLabelError == true">
-                             <label for="NewFieldName" class="block mb-2 text-sm font-medium text-gray-900">Field
-                                 Name</label>
-                             <div class="relative">
-                                 <input type="NewFieldName" v-model="NewFieldName" name="NewFieldName"
-                                     id="NewFieldName" @change="checkFieldName()"
-                                     class="bg-gray-50 border border-red-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                     required>
-                             </div>
-                             <p id="filled_error_help" class="mt-2 text-xs text-red-600"><span
-                                     class="font-medium">Field Name already exist!</span></p>
-                         </div> -->
-
                             <!-- FIELD TYPE -->
                             <div>
                                 <label for="NewFieldType" class="block mb-2 text-sm font-medium text-gray-900">Field
@@ -558,7 +544,6 @@
                                     <option value="checkbox">Checkbox</option>
                                     <option value="radio">Radio</option>
                                     <option value="date">Date</option>
-                                    <option value="text">Text</option>
                                     <option value="textarea">Textarea</option>
                                     <option value="email">Email</option>
                                     <option value="file">File</option>
@@ -592,7 +577,8 @@
                                         class="block mb-2 mt-2 text-sm font-medium text-gray-900">Options</label>
 
                                     <div v-for="n in parseInt(totalOptions)">
-                                        <input type="text" name="text" id="text" v-model="NewOptions[n]"  @change="checkUpdateLabel2()"
+                                        <input type="text" name="text" id="text" v-model="NewOptions[n]"
+                                            @change="checkUpdateLabel2()"
                                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 mt-2"
                                             required>
                                     </div>
@@ -1091,7 +1077,7 @@
 
                     // disable until options all added
                     if (this.totalOptions > all_new_labels.length || all_new_labels.includes("")) {
-                        document.getElementById("updateLabelButton").disabled = false;
+                        document.getElementById("updateLabelButton").disabled = true;
                     }
 
                     //check for duplicates in the new label
@@ -1248,22 +1234,32 @@
                             }
                             console.log(this.form_sections)
                         } else { // does not exist, hence new secitonId
-                            var new_question = {
-                                "inputType": "text",
-                                "inputLabel": new_label,
-                                "isRequired": false,
+                            if (new_label != undefined) {
+                                var new_question = {
+                                    "inputType": "text",
+                                    "inputLabel": new_label,
+                                    "isRequired": false,
+                                }
+                                var question_list = []
+                                question_list.push(question)
+                                question_list.push(new_question)
+
+                                this.form_sections.push({
+                                    "sectionId": this.NewSectionId,
+                                    "title": this.NewSectionTitle,
+                                    "description": this.NewSectionDescription,
+                                    "questions": question_list
+                                })
+                            } else {
+                                this.form_sections.push({
+                                    "sectionId": this.NewSectionId,
+                                    "title": this.NewSectionTitle,
+                                    "description": this.NewSectionDescription,
+                                    "questions": [question]
+                                })
                             }
 
-                            var question_list = []
-                            question_list.push(question)
-                            question_list.push(new_question)
 
-                            this.form_sections.push({
-                                "sectionId": this.NewSectionId,
-                                "title": this.NewSectionTitle,
-                                "description": this.NewSectionDescription,
-                                "questions": question_list
-                            })
                         }
 
                         this.raw_form['sections'] = this.form_sections

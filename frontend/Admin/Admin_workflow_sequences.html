@@ -412,7 +412,7 @@
             async updateWorkflow(API_URL3) {
                 await axios.put(API_URL3, this.workflow_data)
                     .then(response => {
-                        alert("Loading...")
+                        // alert("Loading...")
                         document.location.reload();
                     })
                     .catch(error => {
