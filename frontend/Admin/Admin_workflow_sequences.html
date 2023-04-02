@@ -62,7 +62,7 @@
                     style="height: 80px ; width: 200px;" />
 
                 <div class="flex md:order-2">
-                    <a href="../Approver/Approver_home.html" style="margin-right: 10px;">
+                    <a v-bind:href="'../Approver/Approver_home.html?userId=' + userId" style="margin-right: 10px;">
                         <iconify-icon icon="ic:round-home" style="color: #0284c7;" width="40" height="40">
                         </iconify-icon>
                     </a>
@@ -128,22 +128,22 @@
                 <ul
                     class="md:divide-x md:divide-slate-200 flex flex-col p-2 border border-gray-100 rounded-lg bg-gray-50 md:flex-row  md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-gray-100">
                     <li>
-                        <a href="../Admin/Admin_home.html"
+                        <a v-bind:href="'../Admin/Admin_home.html?userId=' + userId"
                             class="lg:text-sm md:text-xs mr-2 ml-4 lg:ml-10 block py-2 pl-3 pr-2 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0"
                             aria-current="page">Pending Workflows</a>
                     </li>
                     <li>
-                        <a href="../Admin/Admin_workflow.html"
+                        <a v-bind:href="'../Admin/Admin_workflow.html?userId=' + userId"
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-white bg-sky-600 rounded md:bg-transparent md:text-sky-600 md:p-0"
                             aria-current="page">Workflows</a>
                     </li>
                     <li>
-                        <a href="../Admin/Admin_accounts.html"
+                        <a v-bind:href="'../Admin/Admin_accounts.html?userId=' + userId"
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                             Accounts</a>
                     </li>
                     <li>
-                        <a href="../Admin/Admin_form.html"
+                        <a v-bind:href="'../Admin/Admin_form.html?userId=' + userId"
                             class="lg:text-sm md:text-xs ml-5 mr-4 block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-sky-600 md:p-0">
                             Forms</a>
                     </li>
@@ -161,8 +161,8 @@
                     Workflow Sequence
                     <p class="mt-1 text-sm font-normal text-gray-500">
 
-                        <a href="../Admin/Admin_workflow.html"><span class="underline hover:text-gray-800"> Workflow
-                            </span></a><span onclick="document.location = 'Admin_workflow_sequences.html'"
+                        <a v-bind:href="'../Admin/Admin_workflow.html?userId=' + userId"><span class="underline hover:text-gray-800"> Workflow
+                            </span></a><span @click="document.location = 'Admin_workflow_sequences.html?userId=' + userId"
                             class='text-sky-600'>> Workflow
                             Sequence </span>
                     </p>
@@ -346,10 +346,14 @@
             userId: ""
         },
         mounted: async function () {
-            this.userId = localStorage.userId;
+            // this.userId = localStorage.userId;
 
             var query = window.location.search.substring(4);
-            this.workflow_id = query;
+            var first_dash_idx = query.indexOf("/")
+            this.workflow_id = query.substring(0, first_dash_idx);
+            this.userId = query.substring(first_dash_idx + 8)
+            console.log(this.userId)
+
             const API_URL = this.localhost + "/workflows/" + this.workflow_id;
             const API_URL2 = this.localhost + "/forms"
             const API_URL_LOCALSTORAGE = this.localhost + "/users/userType/" + "ADMIN"
@@ -407,7 +411,7 @@
         methods: {
             goToSinglePage: function (id) {
                 console.log(id)
-                window.location.assign("./Admin_form_sequences2.html?id=" + id + "/wf=" + this.workflow_id)
+                window.location.assign("./Admin_form_sequences2.html?id=" + id + "/wf=" + this.workflow_id + "/userid=" + this.userId)
             },
             async updateWorkflow(API_URL3) {
                 await axios.put(API_URL3, this.workflow_data)
