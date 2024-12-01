@@ -6,6 +6,9 @@
 #### Link to Github Repository
 https://github.com/dracolim/IS442-Quantum.git
 
+#### Grade
+Our team achieved an **A** grade for this project.
+
 #### Group Memebers
 * Lim Bei Ling Cheryl
 * Faisal Samudra
